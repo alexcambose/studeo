@@ -1,0 +1,5 @@
+nume, prenume -> maxlength 30
+username -> minlength 4, maxlength 16
+password -> minlength 6, maxlength 20
+
+SANDEL :)

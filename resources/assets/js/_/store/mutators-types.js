@@ -1,0 +1,4 @@
+export const USER_FETCH = "USER_FETCH";
+export const USER_FAILED = "USER_FAILED";
+export const USER_AUTH_SUCCESSFUL = "USER_AUTH_SUCCESSFUL";
+// const USER_ = "USER_FETCH";
