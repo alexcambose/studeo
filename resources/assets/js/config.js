@@ -1,5 +1,7 @@
-const ROOT = 'http://localhost:8000/';
+const SERVER = 'http://localhost:8000/';
 export default {
-    LOGIN: ROOT + 'login',
-    REGISTER: ROOT + 'register',
+    LOGIN: SERVER + 'login',
+    LOGOUT: SERVER + 'logout',
+    REGISTER: SERVER + 'register',
+    USER: SERVER + 'user',
 };

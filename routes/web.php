@@ -1,22 +1,17 @@
 <?php
+//Renuntam la pachetul standard de auth si il refacem manual
+//Auth::routes();
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// region Autentificare
 
+Route::post('login', 'AuthenticationController@login');
+Route::post('logout', 'AuthenticationController@logout');
 
+// endregion
 
-Auth::routes();
+Route::post('user', 'UserController@user');
+
 
 Route::get('/', function(){
     return view('index');
 });
-
-Route::get('/home', 'HomeController@index');

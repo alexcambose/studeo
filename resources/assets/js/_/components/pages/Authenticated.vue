@@ -1,6 +1,6 @@
 <template>
-    <card title="Login">
-       A MERS
+    <card :title="'SALUTARE DOMNULE ' + this.$store.state.user.user.name">
+       <button class="button" @click="makeLogout">Logout</button>
     </card>
 </template>
 
@@ -8,18 +8,12 @@
     import Card from '../includes/dumb/Card';
 
     export default {
-        data: function(){
-            return {
-                email: 'sandelultul@ba.lo',
-                password:'123456',
-                remember: '',
-            };
-        },
         methods: {
-            makeLogin(e){
-                e.preventDefault();
-                this.$store.dispatch('login', {email:this.email, password: this.password});
-                console.log(this.$store, this.password);
+            makeLogout(){
+                this.$store.dispatch('logout')
+                    .then(() => {
+                        this.$router.push({name: 'login'});
+                    });
             }
         },
         components:{

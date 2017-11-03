@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -25,6 +26,11 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+    function unauthenticated($request, AuthenticationException $exception)
+    {
+        //daca userul nu este autentificat
+        return response()->json(['success' => false]);
+    }
 
     /**
      * Report or log an exception.

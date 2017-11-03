@@ -33,7 +33,13 @@
         methods: {
             makeLogin(e){
                 e.preventDefault();
-                this.$store.dispatch('login', {email:this.email, password: this.password});
+                this.$store.dispatch('login', {email:this.email, password: this.password})
+                    .then(() => {
+                        this.$router.push({name:'root'});
+                    })
+                    .catch(err => {
+                        alert(err);
+                    });
                 console.log(this.$store, this.password);
             }
         },

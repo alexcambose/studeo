@@ -14,7 +14,7 @@
                         <span></span>
                     </button>
                 </div>
-                <div class="navbar-start" v-if="!isLogged">
+                <div class="navbar-start" v-if="logged">
                     <a href="#" class="navbar-item is-hoverable is-tab is-hidden-mobile">Acasa</a>
                     <a href="#" class="navbar-item is-hoverable is-tab is-hidden-mobile">Quiz</a>
                     <div class="navbar-link cp"><span class="icon"><i class="fa fa-bars"></i></span></div>
@@ -27,7 +27,7 @@
                     </b-field>
                 </div>
             </div>
-            <div class="navbar-end" v-if="isLogged">
+            <div class="navbar-end" v-if="!logged">
                 <router-link to="login" class="navbar-item is-tab">Autentificare</router-link>
                 <router-link to="register" class="navbar-item is-tab">Înregistrare</router-link>
             </div>
@@ -53,13 +53,12 @@
     </nav>
 </template>
 <script>
-    import { mapGetters } from 'vuex';
+    import { mapState } from 'vuex';
 
     export default {
-        mounted() {
-            console.log(this);
-        },
-        computed: mapGetters(['isLogged'])
+        computed: mapState({
+            logged: state => state.user.logged,
+        })
     };
 </script>
 <style>

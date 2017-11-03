@@ -6071,6 +6071,10 @@ vue@^2.1.10, vue@^2.4.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
 
+vuex-persistedstate@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-2.2.0.tgz#cfbfdebeb89ff5f56782b1245ea0546ad4ae0b0f"
+
 vuex@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
