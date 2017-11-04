@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="app">
-    <main1 logged="{{Auth::check()}}"></main1>
+    <main1></main1>
 </div>
 
 <!-- Scripts -->

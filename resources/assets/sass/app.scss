@@ -1,12 +1,12 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 @import "~font-awesome/css/font-awesome.css";
-// Variables
+
 @import "variables";
-@import "main.scss";
 @import "mixins";
 
-//Buefy
-@import '~buefy/lib/buefy.css';
+@import '~bulma/bulma.sass'; //importam bulma.sass ca sa putem sa utilizam variabilele, comenteaza ca sa te duci la stilurile clasice de la buefy
+@import '~buefy/lib/buefy.css';//Buefy
 
+
+@import "main.scss";

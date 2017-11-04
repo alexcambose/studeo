@@ -1,7 +1,7 @@
 <template>
-    <div class="columns">
+    <div class="columns mt-75">
         <div class="column is-one-third is-offset-one-third">
-            <div class="card mt-75">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-header-title">
                         {{ title }}

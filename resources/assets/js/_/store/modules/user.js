@@ -55,6 +55,7 @@ const mutations = {
         state.logged = true;
     },
     [USER_AUTH_LOGOUT] (state) {
+        // if(redirect) router.push({name: 'welcome'});
         state.logged = false;
         state.user = {};
 

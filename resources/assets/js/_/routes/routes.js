@@ -7,7 +7,7 @@ import config from '../../config';
 import VueRouter from 'vue-router';
 
 const router = new VueRouter({
-    linkActiveClass: 'is-active',
+    linkExactActiveClass: 'is-active',
     routes: [
         {
             path: '/',
