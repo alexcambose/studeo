@@ -1,5 +1,5 @@
 <template>
-    <card title="Inregistreaza-te">
+    <card title="Inregistrare" icon="user-plus">
         <form @submit="makeRegister">
             <b-field label="Nume">
                 <b-input
@@ -41,7 +41,6 @@
                     v-model="email"
                 ></b-input>
             </b-field>
-
             <div class="columns">
                 <div class="column">
                     <b-field label="Parola">
@@ -80,7 +79,7 @@
 </template>
 
 <script>
-    import Card from '../includes/dumb/Card';
+    import Card from '../../includes/dumb/Card';
 
     export default {
         data: function(){

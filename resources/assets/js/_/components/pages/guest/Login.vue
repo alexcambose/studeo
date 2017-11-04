@@ -1,12 +1,26 @@
 <template>
-    <card title="Login">
+    <card title="Login" icon="sign-in">
         <form @submit="makeLogin">
             <b-field label="Email">
-                <b-input type="email" v-model="email"></b-input>
+                <b-input
+                        type="email"
+                        icon-pack="fa"
+                        icon="envelope"
+                        v-model="email"
+                        required
+                ></b-input>
             </b-field>
 
             <b-field label="Parola">
-                <b-input type="password" v-model="password" password-reveal></b-input>
+                <b-input
+                        type="password"
+                        v-model="password"
+                        icon-pack="fa"
+                        icon="key"
+                        :has-counter="false"
+                        password-reveal
+                        required
+                ></b-input>
             </b-field>
 
             <div class="checkbox mb-10">
@@ -20,7 +34,7 @@
 
 <script>
 //    import { mapActions } from 'vuex';
-    import Card from '../includes/dumb/Card';
+    import Card from '../../includes/dumb/Card';
 
     export default {
         data: function(){
@@ -38,7 +52,7 @@
                         this.$router.push({name:'root'});
                     })
                     .catch(err => {
-                        alert(err);
+                        console.log(err);
                     });
                 console.log(this.$store, this.password);
             }

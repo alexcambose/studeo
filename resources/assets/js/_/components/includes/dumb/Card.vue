@@ -2,9 +2,12 @@
     <div class="columns">
         <div class="column is-one-third is-offset-one-third">
             <div class="card mt-75">
-                <div class="card-header-title">
-                    <div class="title">
+                <div class="card-header">
+                    <div class="card-header-title">
                         {{ title }}
+                    </div>
+                    <div class="card-header-icon ca">
+                        <i :class="'fa fa-' + icon"></i>
                     </div>
                 </div>
                 <div class="card-content">
@@ -16,7 +19,7 @@
 </template>
 <script>
     export default {
-        props: ['title']
+        props: ['title', 'icon']
     };
 </script>
 <style>

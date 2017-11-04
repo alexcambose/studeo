@@ -10,5 +10,13 @@ html {
   padding: 10px 25px;
 }
 .cp {
-  cursor: pointer;
+  cursor: pointer !important;
 }
+
+.ca{
+  cursor: auto !important;
+}
+.rounded-full{
+  border-radius: 100%;
+}
+
