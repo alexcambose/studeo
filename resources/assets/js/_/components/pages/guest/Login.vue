@@ -26,8 +26,8 @@
             <div class="checkbox mb-10">
                 <b-checkbox v-model="remember">Reține parola</b-checkbox>
             </div>
-
-            <button class="button is-primary is-fullwidth">Autentificare</button>
+            <div class="has-text-danger">{{error}}</div>
+            <button :class="['button','is-primary','is-fullwidth',(fetching ? 'is-loading' : '')]">Autentificare</button>
         </form>
     </card>
 </template>
@@ -39,22 +39,27 @@
     export default {
         data: function(){
             return {
-                email: 'sandelultul@ba.lo',
+                email: 'sandel@sandica.com',
                 password:'123456',
                 remember: '',
+                fetching: false,
+                error: '',
             };
         },
         methods: {
             makeLogin(e){
+                this.fetching = true;
                 e.preventDefault();
                 this.$store.dispatch('login', {email:this.email, password: this.password})
                     .then(() => {
                         this.$router.push({name:'root'});
+
+                        this.fetching = false;
                     })
                     .catch(err => {
-                        console.log(err);
+                        this.error = err;
+                        this.fetching = false;
                     });
-                console.log(this.$store, this.password);
             }
         },
         components:{

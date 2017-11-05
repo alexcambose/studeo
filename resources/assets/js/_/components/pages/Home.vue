@@ -1,6 +1,6 @@
 <template>
     <div>
-        <card :title="'SALUTARE DOMNULE ' + this.$store.state.user.user.name">
+        <card :title="'SALUTARE DOMNULE, ' + this.$store.state.user.user.first_name">
             Tu:
            <pre>{{this.$store.state.user.user}}</pre>
         </card>

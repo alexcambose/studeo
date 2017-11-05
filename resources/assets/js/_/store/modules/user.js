@@ -7,25 +7,22 @@ const state = {
     logged: false,
 };
 
-const getters = {
-
-};
+const getters = {};
 
 const actions = {
-    setuser({ commit }, payload){
+    setuser({ commit }, payload) {
         commit(USER_AUTH_LOGIN, payload);
     },
-    login({commit}, {email, password}) {
+    login({ commit }, { email, password }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.LOGIN, {
-                email, password
-            })
-                .then(({data}) => {
-                    if(data.success){
+            axios.post(config.LOGIN, { email, password })
+                .then(({ data }) => {
+                    if (data.success) {
                         commit(USER_AUTH_LOGIN, data.user);
                         resolve();
-                    }else reject(data);
-
+                    } else {
+                        reject(data.message);
+                    }
                 })
                 .catch(err => {
                     reject(err);
@@ -47,14 +44,14 @@ const actions = {
 };
 
 const mutations = {
-    [USER_FETCH](state, payload){
+    [USER_FETCH](state, payload) {
         state.fetching = payload;
     },
-    [USER_AUTH_LOGIN] (state, payload) {
+    [USER_AUTH_LOGIN](state, payload) {
         state.user = payload;
         state.logged = true;
     },
-    [USER_AUTH_LOGOUT] (state) {
+    [USER_AUTH_LOGOUT](state) {
         // if(redirect) router.push({name: 'welcome'});
         state.logged = false;
         state.user = {};

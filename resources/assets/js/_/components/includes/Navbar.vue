@@ -24,7 +24,7 @@
                         </a>
 
                         <div class="navbar-dropdown">
-                            :>  I'm watching you
+
                         </div>
                     </div>
                     <!--navbar secundar -->
@@ -42,7 +42,7 @@
             </div>
             <div class="navbar-end" v-else>
                 <div class="navbar-item is-hoverable has-dropdown">
-                    <a href="#" class="navbar-link">User</a>
+                    <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
                         <router-link to="/profile" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profile</router-link>
                         <router-link to="/notifications" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notifications</router-link>
@@ -66,6 +66,7 @@
 
     export default {
         computed: mapState({
+            user: state => state.user.user,
             logged: state => state.user.logged,
         }),
         methods: {

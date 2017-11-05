@@ -17,9 +17,29 @@ $factory->define(App\User::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'username' => $faker->userName,
+        'age' => $faker->numberBetween(6, 100),
+        'is_male' => $faker->numberBetween(0, 1),
+        'city' => $faker->numberBetween(0, 41),
+        'school' => 'Scoala "' . $faker->firstNameMale . ' ' .  $faker->firstNameFemale . '" judeteana',
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+        'description' => $faker->paragraph(4),
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'image_id' => function(){
+            return factory(App\Image::class)->create()->id;
+        },
+        'is_teacher' => 0,
+        'points' => $faker->numberBetween(0, 1000),
+        'password' => $password ?: $password = bcrypt('123456'),
         'remember_token' => str_random(10),
+    ];
+});
+$factory->define(App\Image::class, function (Faker $faker) {
+    return [
+        'filename' => $faker->image('public/userdata/images', 200, 200, 'cats', false),
+        'type' => 0,
     ];
 });

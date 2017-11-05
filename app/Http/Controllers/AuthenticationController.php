@@ -17,7 +17,7 @@ class AuthenticationController extends Controller
         if ($validator->fails())
             return response()->json([
                 'success' => false,
-                'error' => $validator->errors()
+                'message' => $validator->errors()
             ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
 
         return response()->json([
             'success' => false,
-            'error' => trans('auth.failed')
+            'message' => trans('auth.failed')
         ]);
     }
 
