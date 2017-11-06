@@ -1,7 +1,8 @@
 import Login from '../components/pages/guest/Login';
 import Register from '../components/pages/guest/Register';
 import Welcome from '../components/pages/guest/Welcome';
-import Authenticated from '../components/pages/Home';
+import Home from '../components/pages/Home';
+import Profile from '../components/pages/user/Profile';
 import store from '../store/index';
 import config from '../../config';
 import VueRouter from 'vue-router';
@@ -11,8 +12,14 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: Authenticated,
+            component: Home,
             name: 'root',
+            meta: { onlyAuth: true }
+        },
+        {
+            path: '/profile',
+            component: Profile,
+            name: 'profile',
             meta: { onlyAuth: true }
         },
         {
@@ -20,6 +27,7 @@ const router = new VueRouter({
             name: 'welcome',
             component: Welcome,
             meta: { onlyGuest: true }
+
         },
         {
             path: '/login',

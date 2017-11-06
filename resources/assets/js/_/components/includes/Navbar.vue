@@ -23,8 +23,8 @@
                             <i class="material-icons">grid_on</i>
                         </a>
 
-                        <div class="navbar-dropdown">
-
+                        <div class="navbar-dropdown navbar-classes">
+                            <catmenu></catmenu>
                         </div>
                     </div>
                     <!--navbar secundar -->
@@ -62,6 +62,7 @@
     </nav>
 </template>
 <script>
+    import CatMenu from './dumb/CatMenu';
     import { mapState, mapActions } from 'vuex';
 
     export default {
@@ -73,6 +74,9 @@
             logout() {
                 this.$store.dispatch('logout').then(() => this.$router.push({name: 'login'}));
             }
+        },
+        components: {
+            'catmenu': CatMenu,
         }
     };
 </script>

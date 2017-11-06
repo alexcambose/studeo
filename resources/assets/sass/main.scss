@@ -20,3 +20,43 @@ html {
   border-radius: 100%;
 }
 
+/*region navmenu-classes */
+.navbar-classes{
+  padding: 0;
+}
+.school-classes{
+  $width: 160px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  &:hover{
+    width: $width * 2;
+  }
+  li{
+    width: $width;
+
+    a{
+      display: block;
+      padding: 6px 14px;
+    }
+    &:not(:last-child) a{
+      border-bottom: 1px solid lightblue;
+    }
+  }
+  & li:hover{
+    background-color: #7957d5;
+    & > .class-years {
+      display: block;
+    }
+  }
+  .class-years{
+    position: absolute;
+    top: 0;
+    left: calc(100% - 160px);//use $width TODO
+    display:none;
+    width: $width;
+    a:hover{color: white}
+  }
+
+}
+/* endregion */
