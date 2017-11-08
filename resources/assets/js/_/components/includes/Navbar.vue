@@ -15,7 +15,7 @@
                     </button>
                 </div>
                 <div class="navbar-start" v-if="logged">
-                    <router-link to="/" class="navbar-item is-hoverable is-tab is-hidden-mobile">Acasa</router-link>
+                    <!--<router-link to="/" class="navbar-item is-hoverable is-tab is-hidden-mobile">Acasa</router-link>-->
                     <router-link to="/quiz" class="navbar-item is-hoverable is-tab is-hidden-mobile">Quiz</router-link>
 
                     <div class="navbar-item is-hoverable has-dropdown">

@@ -3,12 +3,16 @@ import Register from '../components/pages/guest/Register';
 import Welcome from '../components/pages/guest/Welcome';
 import Home from '../components/pages/Home';
 import Profile from '../components/pages/user/Profile';
+import Account from '../components/pages/user/settings/Account';
+import Security from '../components/pages/user/settings/Security';
+import Settings from '../components/pages/user/settings/_index.vue';
 import store from '../store/index';
 import config from '../../config';
 import VueRouter from 'vue-router';
 
 const router = new VueRouter({
     linkExactActiveClass: 'is-active',
+    linkActiveClass: 'is-active',
     routes: [
         {
             path: '/',
@@ -21,6 +25,27 @@ const router = new VueRouter({
             component: Profile,
             name: 'profile',
             meta: { onlyAuth: true }
+        },
+        {
+            path: '/settings',
+            component: Settings,
+            name: 'settings',
+            redirect: '/settings/account',
+            meta: { onlyAuth: true },
+            children: [
+                {
+                    path: 'account',
+                    component: Account,
+                    name: 'account',
+                    meta: { onlyAuth: true }
+                },
+                {
+                    path: 'security',
+                    component: Security,
+                    name: 'security',
+                    meta: { onlyAuth: true }
+                }
+            ],
         },
         {
             path: '/welcome',

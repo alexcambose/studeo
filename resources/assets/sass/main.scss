@@ -6,19 +6,13 @@ html {
   box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
 }
 
-.flex-container {
-  padding: 10px 25px;
-}
-.cp {
-  cursor: pointer !important;
-}
+//.flex-container {
+//  padding: 10px 25px;
+//}
+.cp { cursor: pointer !important }
 
-.ca{
-  cursor: auto !important;
-}
-.rounded-full{
-  border-radius: 100%;
-}
+.ca{ cursor: auto !important }
+.rounded-full{ border-radius: 100% }
 
 /*region navmenu-classes */
 .navbar-classes{
@@ -60,3 +54,19 @@ html {
 
 }
 /* endregion */
+
+/* region dumb/Collapse.vue */
+
+.collapse {
+  &.collapse-trigger {
+    background-color: white;
+    padding: 10px;
+
+  }
+}
+
+/* endregion */
+
+.columns.margin-columns {
+  margin-top: 30px;
+}
