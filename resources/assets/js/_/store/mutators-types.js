@@ -1,4 +1,5 @@
 export const USER_FETCH = "USER_FETCH";
 export const USER_AUTH_LOGIN = "USER_AUTH_LOGIN";
 export const USER_AUTH_LOGOUT = "USER_AUTH_LOGOUT";
+export const USER_AUTH_REGISTER = "USER_AUTH_REGISTER";
 // const USER_ = "USER_FETCH";

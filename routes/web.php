@@ -5,6 +5,7 @@
 // region Autentificare
 
 Route::post('login', 'AuthenticationController@login');
+Route::post('register', 'AuthenticationController@register');
 Route::post('logout', 'AuthenticationController@logout');
 
 // endregion

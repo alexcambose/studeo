@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'username' => $faker->userName,
-        'age' => $faker->numberBetween(6, 100),
+        'birth_date' => $faker->dateTime($max = 'now'),
         'is_male' => $faker->numberBetween(0, 1),
         'city' => $faker->numberBetween(0, 41),
         'school' => 'Scoala "' . $faker->firstNameMale . ' ' .  $faker->firstNameFemale . '" judeteana',
@@ -39,7 +39,8 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 $factory->define(App\Image::class, function (Faker $faker) {
     return [
-        'filename' => $faker->image('public/userdata/images', 200, 200, 'cats', false),
+//        'filename' => $faker->image('public/userdata/images/', 200, 200, 'cats'),
         'type' => 0,
+        'filename' => '',
     ];
 });

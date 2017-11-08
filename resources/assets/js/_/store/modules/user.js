@@ -1,6 +1,6 @@
 import config from '../../../config';
 import router from '../../routes/routes';
-import { USER_FETCH, USER_AUTH_LOGIN, USER_AUTH_LOGOUT } from '../mutators-types';
+import { USER_FETCH, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER } from '../mutators-types';
 
 const state = {
     user: {},
@@ -16,10 +16,26 @@ const actions = {
     login({ commit }, { email, password }) {
         return new Promise((resolve, reject) => {
             axios.post(config.LOGIN, { email, password })
-                .then(({ data }) => {
+                .then(({data}) => {
                     if (data.success) {
                         commit(USER_AUTH_LOGIN, data.user);
                         resolve();
+                    } else {
+                        reject(data.message);
+                    }
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    register({ commit }, { first_name, last_name, username, email, password, cpassword }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.REGISTER, { first_name, last_name, username, email, password, cpassword })
+                .then(({data}) => {
+                    if (data.success) {
+                        commit(USER_AUTH_REGISTER, data.user);
+                        resolve(data);
                     } else {
                         reject(data.message);
                     }
@@ -48,6 +64,10 @@ const mutations = {
         state.fetching = payload;
     },
     [USER_AUTH_LOGIN](state, payload) {
+        state.user = payload;
+        state.logged = true;
+    },
+    [USER_AUTH_REGISTER](state, payload) {
         state.user = payload;
         state.logged = true;
     },
