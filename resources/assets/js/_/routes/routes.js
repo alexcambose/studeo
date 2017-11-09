@@ -21,26 +21,26 @@ const router = new VueRouter({
             meta: { onlyAuth: true }
         },
         {
-            path: '/profile',
+            path: '/profil',
             component: Profile,
             name: 'profile',
             meta: { onlyAuth: true }
         },
         {
-            path: '/settings',
+            path: '/setari',
             component: Settings,
             name: 'settings',
-            redirect: '/settings/account',
+            redirect: '/setari/cont',
             meta: { onlyAuth: true },
             children: [
                 {
-                    path: 'account',
+                    path: 'cont',
                     component: Account,
                     name: 'account',
                     meta: { onlyAuth: true }
                 },
                 {
-                    path: 'security',
+                    path: 'securitate',
                     component: Security,
                     name: 'security',
                     meta: { onlyAuth: true }

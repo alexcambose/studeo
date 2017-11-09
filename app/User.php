@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public $rules =  [
+        'first_name' => 'required|string|max:30',
+        'last_name' => 'required|string|max:30',
+        'username' => 'required|string|max:16|min:4',
+        'email' => 'required|string|email', //username-ul
+        'password' => 'required|string|max:16|min:6',
+    ];
+
 }

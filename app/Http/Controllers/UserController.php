@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -18,4 +20,29 @@ class UserController extends Controller
             'user' => Auth::user()
         ]);
     }
+
+    function updateData(Request $request) {
+
+    }
+
+    function updatePassword(Request $request) {
+        $user = Auth::user();
+        if(Hash::check($request->current_password, $user->password)) {
+            $validation = Validator::make($request->all(), [
+                'password' => $user->rules['password'],
+            ]);
+            if($validation->fails()) return response()->json(['success' => false]);
+
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return response()->json(['success' => true]);
+        }
+
+
+        return response()->json([
+            'success' => false,
+            'message' => trans('auth.failed'),
+        ]);
+    }
+
 }

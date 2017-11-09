@@ -1,0 +1,48 @@
+.profilPage {
+  background-color: whitesmoke;
+  height: 100vh;
+  .banner {
+    height: 300px;
+    background: #e9ecee;
+  }
+  .profileNav {
+    position: relative;
+    .profileImage {
+      width: $height-image;
+      height: $height-image;
+      border-radius: $margin-image;
+      position: absolute;
+      border:5px solid white;
+      top: - $margin-image;
+      background-color: #1ca64c;
+    }
+    .avatarImage {
+      @extend .profileImage;
+      right: 0;
+    }
+
+
+  }
+  .mainUser {
+    margin-top: $margin-image + 20px;
+    .fullname {
+      font-size: 21px;
+      font-weight: 500;
+      margin-left: 2%;
+    }
+    .shortDescription {
+      font-family: $roboto-slab;
+      font-size: 14px;
+      line-height: 20px;
+      word-wrap: break-word;
+      margin-top: 5px;
+    }
+    .dataNastere, .oras, .scoala, .dataAlaturare {
+      font-family: $roboto-slab;
+      font-size: 14px !important;
+      line-height: 20px;
+      color: #657786;
+      margin-top:1px;
+    }
+  }
+}

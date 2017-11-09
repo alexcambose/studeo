@@ -44,9 +44,9 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
-                        <router-link to="/profile" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profile</router-link>
-                        <router-link to="/notifications" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notifications</router-link>
-                        <router-link to="/settings" class="navbar-item"><span class="icon"><i class="fa fa-cog"></i></span>&nbsp; Settings</router-link>
+                        <router-link :to="{name: 'profile'}" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profile</router-link>
+                        <router-link to="/aa" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notifications</router-link>
+                        <router-link :to="{name: 'settings'}" class="navbar-item"><span class="icon"><i class="fa fa-cog"></i></span>&nbsp; Settings</router-link>
 
                         <router-link to="/admin" class="navbar-item"><span class="icon"><i class="fa fa-lock"></i></span>&nbsp; Admin Panel</router-link>
 

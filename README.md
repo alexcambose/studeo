@@ -2,7 +2,7 @@
 A platform to help students learn faster and easier for the baccalaureate exam
 
 
-## Installation
+## Installation:
 ```bash
 ~ composer install && npm install
 ```

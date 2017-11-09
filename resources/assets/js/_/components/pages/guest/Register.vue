@@ -8,6 +8,7 @@
                     maxlength="30"
                     icon="face"
                     :has-counter="true"
+                    required
                 ></b-input>
             </b-field>
 
@@ -18,10 +19,11 @@
                     icon="face"
                     maxlength="30"
                     :has-counter="true"
+                    required
                 ></b-input>
             </b-field>
 
-            <b-field label="Username">
+            <b-field label="Nume utilizator">
                 <b-input
                     type="text"
                      v-model="username"
@@ -30,6 +32,7 @@
                      minlength="4"
                      maxlength="16"
                      :has-counter="false"
+                    required
                 ></b-input>
             </b-field>
 
@@ -39,6 +42,7 @@
                     icon-pack="fa"
                     icon="envelope"
                     v-model="email"
+                    required
                 ></b-input>
             </b-field>
             <div class="columns">
@@ -49,11 +53,12 @@
                             v-model="password"
                             class="is-half"
                             icon-pack="fa"
-                            icon="key"
+                            icon="lock"
                             minlength="6"
                             maxlength="20"
                             :has-counter="false"
                             password-reveal
+                            required
                         ></b-input>
                     </b-field>
                 </div>
@@ -63,17 +68,18 @@
                             type="password"
                             v-model="rpassword"
                             icon-pack="fa"
-                            icon="key"
+                            icon="lock"
                             minlength="6"
                             maxlength="20"
                             :has-counter="false"
                             password-reveal
+                            required
                         ></b-input>
                     </b-field>
                 </div>
             </div>
-
-            <button class="button is-primary is-fullwidth">Inregistreaza-te</button>
+            <div class="has-text-danger">{{error}}</div>
+            <button :class="['button','is-primary','is-fullwidth',(fetching ? 'is-loading' : '')]">Inregistrare</button>
         </form>
     </card>
 </template>
@@ -84,18 +90,29 @@
     export default {
         data: function(){
             return {
-                first_name: '',
-                last_name: '',
-                email: '',
-                password:'',
-                rpassword:'',
-                username: '',
+                first_name: 'Prenume',
+                last_name: 'Nume',
+                username: 'pre.nume',
+                email: 'email@email.com',
+                password:'123456',
+                rpassword:'123456',
+                error: '',
+                fetching: false,
             };
         },
         methods: {
             makeRegister(e){
                 e.preventDefault();
-                console.log(this.$store.state.email);
+                this.fetching = true;
+                this.$store.dispatch('register', this)
+                    .then(() => {
+                        this.fetching = false;
+                        this.$router.push({name: 'home'});
+                    })
+                    .catch(err => {
+                        this.error = err;
+                        this.fetching = false;
+                    });
             }
         },
         components: {

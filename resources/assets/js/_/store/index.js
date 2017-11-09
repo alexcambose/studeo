@@ -4,6 +4,7 @@ import user from './modules/user';
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
+    strict: true,
     modules: {
         user,
     }
