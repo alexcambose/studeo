@@ -19,7 +19,7 @@ const actions = {
     },
     updateUserPassword({ commit }, { current_password, password }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.USERUPDATEPASSWORD, { current_password, password })
+            axios.post(config.url.USERUPDATEPASSWORD, { current_password, password })
                 .then(({data}) => {
                     console.log(data);
                     if (data.success) {
@@ -36,7 +36,7 @@ const actions = {
     },
     login({ commit }, { email, password }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.LOGIN, { email, password })
+            axios.post(config.url.LOGIN, { email, password })
                 .then(({data}) => {
                     if (data.success) {
                         commit(USER_AUTH_LOGIN, data.user);
@@ -52,7 +52,7 @@ const actions = {
     },
     register({ commit }, { first_name, last_name, username, email, password, cpassword }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.REGISTER, { first_name, last_name, username, email, password, cpassword })
+            axios.post(config.url.REGISTER, { first_name, last_name, username, email, password, cpassword })
                 .then(({data}) => {
                     if (data.success) {
                         commit(USER_AUTH_REGISTER, data.user);
@@ -68,7 +68,7 @@ const actions = {
     },
     logout({ commit }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.LOGOUT)
+            axios.post(config.url.LOGOUT)
                 .then(() => {
                     commit(USER_AUTH_LOGOUT);
                     resolve();

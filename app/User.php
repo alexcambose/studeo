@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public $rules =  [
+    public static $rules =  [
         'first_name' => 'required|string|max:30',
         'last_name' => 'required|string|max:30',
         'username' => 'required|string|max:16|min:4',

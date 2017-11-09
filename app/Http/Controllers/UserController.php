@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = Auth::user();
         if(Hash::check($request->current_password, $user->password)) {
             $validation = Validator::make($request->all(), [
-                'password' => $user->rules['password'],
+                'password' => User::$rules['password'],
             ]);
             if($validation->fails()) return response()->json(['success' => false]);
 

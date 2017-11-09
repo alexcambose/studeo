@@ -55,6 +55,18 @@ html {
 
 /* endregion */
 
+/* region navmenu-notifications */
+
+.navbar-notifications{
+  padding: 0;
+  width: 300px;
+  .search-container{
+    padding: 10px;
+  }
+}
+
+/* endregion */
+
 /* region dumb/Collapse.vue (unfinished) */
 
 .collapse {

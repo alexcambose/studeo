@@ -43,13 +43,13 @@
                         required
                 ></b-input>
             </b-field>
-            <div class="has-text-danger">{{error}}</div>
-            <button type="submit" :class="['button','is-primary','is-fullwidth',(fetching ? 'is-loading' : '')]">Actualizeaza parola</button>
+            <submit :error="error" :success="success" :fetching="fetching">Actualizeaza Parola</submit>
         </form>
     </div>
 </template>
 
 <script>
+    import Submit from '../../../../components/includes/dumb/Submit';
     export default {
         data: function() {
             return {
@@ -66,7 +66,7 @@
                 e.preventDefault();
 
                 if(this.password !== this.cpassword) {
-                    this.error = 'Parolele nu se potrivesc';
+                    this.error = 'Parolele nu se potrivesc!';
                     return;
                 }
 
@@ -75,7 +75,7 @@
                     .then(() => {
                         this.fetching = false;
                         this.error = '';
-                        this.success = 'Parola a fost schimbata';
+                        this.success = 'Parola a fost schimbata!';
                         this.current_password = '';
                         this.password = '';
                         this.cpassword = '';
@@ -85,6 +85,9 @@
                         this.error = err;
                     });
             }
-        }
+        },
+        components: {
+            'submit': Submit,
+        },
     }
 </script>

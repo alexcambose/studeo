@@ -83,7 +83,7 @@ router.beforeEach((to, from, next) => {
     if(store.state.user.logged){
         check();
     } else {
-        axios.post(config.USER).then(({ data }) => {
+        axios.post(config.url.USER).then(({ data }) => {
             if(data.success) store.dispatch('setuser', data.user);
             else store.dispatch('logout');
             check();

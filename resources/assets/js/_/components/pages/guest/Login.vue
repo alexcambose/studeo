@@ -26,8 +26,7 @@
             <div class="checkbox mb-10">
                 <b-checkbox v-model="remember">Reține parola</b-checkbox>
             </div>
-            <div class="has-text-danger">{{error}}</div>
-            <button :class="['button','is-primary','is-fullwidth',(fetching ? 'is-loading' : '')]">Autentificare</button>
+            <submit :error="error" :fetching="fetching">Autentificare</submit>
         </form>
     </card>
 </template>
@@ -35,6 +34,7 @@
 <script>
 //    import { mapActions } from 'vuex';
     import Card from '../../includes/dumb/Card';
+    import Submit from '../../includes/dumb/Submit';
 
     export default {
         data: function(){
@@ -64,6 +64,7 @@
         },
         components:{
             'card': Card,
+            'submit': Submit,
         },
     }
 </script>

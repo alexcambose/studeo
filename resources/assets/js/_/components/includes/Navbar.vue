@@ -34,6 +34,8 @@
                                  icon="search">
                         </b-input>
                     </b-field>
+
+
                 </div>
             </div>
             <div class="navbar-end" v-if="!logged">
@@ -41,6 +43,17 @@
                 <router-link to="register" class="navbar-item is-tab">Înregistrare</router-link>
             </div>
             <div class="navbar-end" v-else>
+
+                <div class="navbar-item is-hoverable has-dropdown">
+                    <a class="navbar-link">
+                        <i class="material-icons">notifications</i>
+                    </a>
+
+                    <div class="navbar-dropdown navbar-notifications">
+                        <notifmenu></notifmenu>
+                    </div>
+                </div>
+
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
@@ -62,7 +75,8 @@
     </nav>
 </template>
 <script>
-    import CatMenu from './dumb/CatMenu';
+    import CatMenu from './navbar/CatMenu';
+    import NotifMenu from './navbar/NotifMenu';
     import { mapState, mapActions } from 'vuex';
 
     export default {
@@ -77,6 +91,7 @@
         },
         components: {
             'catmenu': CatMenu,
+            'notifmenu': NotifMenu,
         }
     };
 </script>

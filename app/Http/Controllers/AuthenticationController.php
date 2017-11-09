@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\PasswordChanged;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class AuthenticationController extends Controller
                 'user' => Auth::user()
             ]);
         }
-
+        Auth::user()->notify(new PasswordChanged());
         return response()->json([
             'success' => false,
             'message' => trans('auth.failed')
@@ -35,13 +36,7 @@ class AuthenticationController extends Controller
     }
 
     function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
-            'username' => 'required|string|max:16|min:4',
-            'email' => 'required|string', //username-ul
-            'password' => 'required|string',
-        ]);
+        $validator = Validator::make($request->all(), User::$rules);
         if ($validator->fails())
             return response()->json([
                 'success' => false,
