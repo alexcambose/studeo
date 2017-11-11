@@ -17,7 +17,7 @@
                 <div class="column" v-for="(t, index) in testimonials" :key="index">
                     <article class="media">
                         <figure class="media-left">
-                            <img :src="t.image" class="image is-64x64 rounded-full">
+                            <img :src="t.image" class="image is-64x64 is-rounded">
                         </figure>
                         <div class="media-content">
                             <div class="content">

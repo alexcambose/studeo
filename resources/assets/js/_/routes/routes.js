@@ -3,6 +3,7 @@ import Register from '../components/pages/guest/Register';
 import Welcome from '../components/pages/guest/Welcome';
 import Home from '../components/pages/Home';
 import Profile from '../components/pages/user/Profile';
+import Notifications from '../components/pages/user/Notifications';
 import Account from '../components/pages/user/settings/Account';
 import Security from '../components/pages/user/settings/Security';
 import Settings from '../components/pages/user/settings/_index.vue';
@@ -24,6 +25,12 @@ const router = new VueRouter({
             path: '/profil',
             component: Profile,
             name: 'profile',
+            meta: { onlyAuth: true }
+        },
+        {
+            path: '/notificari',
+            component: Notifications,
+            name: 'notifications',
             meta: { onlyAuth: true }
         },
         {
@@ -79,14 +86,14 @@ router.beforeEach((to, from, next) => {
 
         else next();
     };
-
+    store.dispatch('getNotification');
     if(store.state.user.logged){
         check();
     } else {
         axios.post(config.url.USER).then(({ data }) => {
             if(data.success){
                 store.dispatch('setUser', data);
-                store.dispatch('setNotification', data);
+                store.dispatch('setNotification', data.user); //user has a notifications[] property
             }
             else store.dispatch('logout');
             check();

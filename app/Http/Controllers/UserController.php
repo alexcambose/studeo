@@ -16,10 +16,12 @@ class UserController extends Controller
     }
 
     function user() {
+        $user = Auth::user();
+        $user->notifications;
+
         return response()->json([
-            'success' => !!Auth::user(),
-            'user' => Auth::user(),
-            'notifications' => Auth::user()->notifications,
+            'success' => !!$user,
+            'user' => $user,
         ]);
     }
 

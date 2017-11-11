@@ -34,8 +34,6 @@
                                  icon="search">
                         </b-input>
                     </b-field>
-
-
                 </div>
             </div>
             <div class="navbar-end" v-if="!logged">
@@ -59,10 +57,14 @@
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
                         <router-link :to="{name: 'profile'}" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profil</router-link>
-                        <router-link to="/aa" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notificări</router-link>
+                        <router-link :to="{name: 'notifications'}" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notificări</router-link>
                         <router-link :to="{name: 'settings'}" class="navbar-item"><span class="icon"><i class="fa fa-cog"></i></span>&nbsp; Setări</router-link>
 
                         <router-link to="/admin" class="navbar-item"><span class="icon"><i class="fa fa-lock"></i></span>&nbsp; Panou admin</router-link>
+
+                        <hr class="navbar-divider">
+
+                        <router-link to="/asd" class="navbar-item"><span class="icon"><i class="fa fa-question-circle"></i></span>&nbsp; Ajutor</router-link>
 
                         <hr class="navbar-divider">
 
@@ -90,7 +92,7 @@
         },
         methods: {
             logout() {
-                this.$store.dispatch('logout').then(() => this.$router.push({name: 'login'}));
+                this.$store.dispatch('logout').then(() => this.$router.push({name: 'welcome'}));
             }
         },
         components: {

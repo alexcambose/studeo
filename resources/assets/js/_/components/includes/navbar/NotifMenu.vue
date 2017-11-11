@@ -4,36 +4,20 @@
             <b-switch v-model="onlyUnread">
                 Doar notficările necitite
             </b-switch>
+            <refresh @click.native="refresh" size="is-small" :loading="refreshing" class="is-rounded is-pulled-right"/>
         </div>
         <div v-if="!notifications.length" class="notification-item">
             Nicio notificare
         </div>
-        <ul v-else>
-            <li v-for="(notification, index) in notifications" :key="index" class="notification-item">
-                <div class="data">
-                    <div class="title">
-                        {{notification.data.title}}
-                    </div>
-                    <span class="description">
-                        {{notification.data.message}}
-                    </span>
-                </div>
-                <div class="actions">
-                    <div class="buttons">
-                        <span @click="toggleReadNotification(notification.id)"
-                              :class="['button', 'is-small', (fetchingToggleRead ? 'is-loading' : ''), (notification.read_at ? ['is-info', 'is-outlined'] : 'is-success')]"
-                              title="Marcheaza ca citit">
-                            <i class="fa fa-times" v-if="notification.read_at"></i>
-                            <i class="fa fa-check" v-else></i>
-                        </span>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <div class="notification-container" v-else>
+            <notifications :notifications="notifications"></notifications>
+        </div>
     </div>
 </template>
 <script>
     import { mapGetters, mapActions } from 'vuex';
+    import Notifications from './notification/Notifications';
+    import Refresh from '../dumb/Refresh';
     export default {
         computed: {
             ...mapGetters(['notifications']),
@@ -46,22 +30,23 @@
                 }
             }
         },
-        data: function (){
+        data() {
             return {
-                fetchingToggleRead: false,
+                refreshing: false,
             };
         },
         methods: {
-            toggleReadNotification(id){
-                this.fetchingToggleRead = true;
-                this.$store.dispatch('toggleReadNotification', id)
-                    .then(() => {
-                        this.fetchingToggleRead = false;
-                    })
-                    .catch(() => {
-                        this.fetchingToggleRead = false;
-                    });
+            ...mapActions(['getNotification']),
+            refresh() {
+                this.refreshing = true;
+                this.getNotification()
+                    .then(() => this.refreshing = false)
+                    .catch(() => this.refreshing = false);
             }
-        }
+        },
+        components: {
+            Notifications,
+            Refresh,
+        },
     }
 </script>

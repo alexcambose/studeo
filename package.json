@@ -24,6 +24,7 @@
         "material-design-icons": "^3.0.1",
         "moment": "^2.19.1",
         "vue": "^2.1.10",
+        "vue-infinite-loading": "^2.2.1",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.0",
         "vuex-router-sync": "^5.0.0"

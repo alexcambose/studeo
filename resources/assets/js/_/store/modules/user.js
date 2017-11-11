@@ -1,5 +1,5 @@
 import config from '../../../config';
-import { USER_FETCH, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
+import { USER_FETCH,NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
 
 const state = {
     user: {},
@@ -21,7 +21,7 @@ const actions = {
     },
     updateUserPassword({ commit }, { current_password, password }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.url.USERUPDATEPASSWORD, { current_password, password })
+            axios.post(config.url.USER_UPDATE_PASSWORD, { current_password, password })
                 .then(({data}) => {
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_PASSWORD);
@@ -41,6 +41,7 @@ const actions = {
                 .then(({data}) => {
                     if (data.success) {
                         commit(USER_AUTH_LOGIN, data);
+                        commit(NOTIFICATION_SET, data);
                         resolve();
                     } else {
                         reject(data.message);
@@ -85,9 +86,8 @@ const mutations = {
     [USER_FETCH](state, payload) {
         state.fetching = payload;
     },
-    [USER_AUTH_LOGIN](state, { user, notifications }) {
+    [USER_AUTH_LOGIN](state, { user }) {
         state.user = user;
-        state.notifications = notifications;
         state.logged = true;
     },
     [USER_AUTH_LOGOUT](state) {

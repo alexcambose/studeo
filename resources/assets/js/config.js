@@ -5,14 +5,16 @@ export default {
         LOGOUT: SERVER + 'logout',
         REGISTER: SERVER + 'register',
         USER: SERVER + 'user',
-        USERUPDATE: SERVER + 'user/update',
-        USERUPDATEPASSWORD: SERVER + 'user/update/password',
-        NOTIFICATIONTOGGLEREAD: SERVER + 'notification',
+        USER_UPDATE: SERVER + 'user/update',
+        USER_UPDATE_PASSWORD: SERVER + 'user/update/password',
+        NOTIFICATION: SERVER + 'notification/get',
+        NOTIFICATION_TOGGLE_READ: SERVER + 'notification',
+        NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll',
     },
     notifications: {
         PASSWORD_CHANGED: {
             title: 'Parola schimbata',
-            message: ({ f_created_at }) => 'Parola a fost schimbata cu ' + f_created_at,
+            message: ({ f_created_at }) => 'Parola a fost schimbata cu ' + f_created_at + '.',
         },
     },
 };

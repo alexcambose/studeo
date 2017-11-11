@@ -18,82 +18,9 @@ html {
   cursor: auto !important;
 }
 
-.rounded-full {
-  border-radius: 100%;
+.is-rounded {
+  border-radius: 9999px !important;
 }
-
-/*region navmenu-classes */
-.navbar-classes {
-  padding: 0;
-}
-
-.school-classes {
-  $width: 160px;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  li {
-    width: $width;
-    a {
-      display: block;
-      padding: 6px 14px;
-      transition: all ease .2s;
-      border-left: 0 solid $primary;
-      &.is-active {
-        border-left: 5px solid darken($primary, 10);
-      }
-      &:hover {
-        border-left: 5px solid darken($primary, 10);
-        color: gray !important;
-      }
-    }
-    &:not(:last-child) a {
-      border-bottom: 1px solid lightblue;
-    }
-  }
-}
-
-/* endregion */
-
-/* region navmenu-notifications */
-
-.navbar-notifications{
-  padding: 0;
-  width: 300px;
-  .search-container{
-    padding: 10px;
-  }
-  .notification-item{
-    padding: 0 10px;
-    height: 80px;
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    &:hover{
-      background-color: $dropdown-item-hover-background-color;
-    }
-    .data{
-      flex: 3;
-      .title{
-        margin-bottom: 4px;
-        font-weight: 700;
-        font-size: 1.2em;
-      }
-      .description{
-        font-size:.9em;
-      }
-    }
-    .actions{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-    }
-
-  }
-}
-
-/* endregion */
 
 /* region dumb/Collapse.vue (unfinished) */
 

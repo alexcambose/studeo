@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,4 @@ class User extends Authenticatable
         'email' => 'required|string|email', //username-ul
         'password' => 'required|string|max:16|min:6',
     ];
-
 }

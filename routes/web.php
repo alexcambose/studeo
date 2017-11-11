@@ -1,5 +1,4 @@
 <?php
-//Renuntam la pachetul standard de auth si il refacem manual
 //Auth::routes();
 
 // region Autentificare
@@ -11,8 +10,9 @@ Route::post('logout', 'AuthenticationController@logout');
 // endregion
 
 /* region Notification */
-
+Route::post('notification/get', 'NotificationController@notifications');
 Route::post('notification', 'NotificationController@toggle');
+Route::post('notification/toggleReadAll', 'NotificationController@toggleReadAll');
 
 /* endregion */
 
