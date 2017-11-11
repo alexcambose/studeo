@@ -47,6 +47,7 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a class="navbar-link">
                         <i class="material-icons">notifications</i>
+                        <span v-if="unreadNotificationsCount" class="tag is-rounded is-primary">{{unreadNotificationsCount}}</span>
                     </a>
 
                     <div class="navbar-dropdown navbar-notifications">
@@ -57,16 +58,16 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
-                        <router-link :to="{name: 'profile'}" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profile</router-link>
-                        <router-link to="/aa" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notifications</router-link>
-                        <router-link :to="{name: 'settings'}" class="navbar-item"><span class="icon"><i class="fa fa-cog"></i></span>&nbsp; Settings</router-link>
+                        <router-link :to="{name: 'profile'}" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profil</router-link>
+                        <router-link to="/aa" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notificări</router-link>
+                        <router-link :to="{name: 'settings'}" class="navbar-item"><span class="icon"><i class="fa fa-cog"></i></span>&nbsp; Setări</router-link>
 
-                        <router-link to="/admin" class="navbar-item"><span class="icon"><i class="fa fa-lock"></i></span>&nbsp; Admin Panel</router-link>
+                        <router-link to="/admin" class="navbar-item"><span class="icon"><i class="fa fa-lock"></i></span>&nbsp; Panou admin</router-link>
 
                         <hr class="navbar-divider">
 
                         <a class="navbar-item" @click="logout">
-                            <span class="icon"><i class="fa fa-sign-out"></i></span>&nbsp; Log out
+                            <span class="icon"><i class="fa fa-sign-out"></i></span>&nbsp; Deautentificare
                         </a>
                     </div>
                 </div>
@@ -77,13 +78,16 @@
 <script>
     import CatMenu from './navbar/CatMenu';
     import NotifMenu from './navbar/NotifMenu';
-    import { mapState, mapActions } from 'vuex';
+    import { mapState, mapActions, mapGetters } from 'vuex';
 
     export default {
-        computed: mapState({
-            user: state => state.user.user,
-            logged: state => state.user.logged,
-        }),
+        computed: {
+            ...mapState({
+                user: state => state.user.user,
+                logged: state => state.user.logged,
+            }),
+            ...mapGetters(['unreadNotificationsCount']),
+        },
         methods: {
             logout() {
                 this.$store.dispatch('logout').then(() => this.$router.push({name: 'login'}));

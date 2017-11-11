@@ -26,6 +26,7 @@ module.exports = {
     },
     "globals": {
         "axios": false,
-        "var2": false
+        "var2": false,
+        "moment": false,
     }
 };

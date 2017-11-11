@@ -1,16 +1,18 @@
 import config from '../../../config';
-import { USER_FETCH, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_DATA, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
+import { USER_FETCH, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
 
 const state = {
     user: {},
     logged: false,
 };
 
-const getters = {};
+const getters = {
+
+};
 
 const actions = {
-    setuser({ commit }, payload) {
-        commit(USER_AUTH_LOGIN, payload);
+    setUser({ commit }, user) {
+        commit(USER_AUTH_LOGIN, user);
     },
     updateUserData({ commit }, payload) {
         return new Promise((resolve, reject) => {
@@ -21,7 +23,6 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USERUPDATEPASSWORD, { current_password, password })
                 .then(({data}) => {
-                    console.log(data);
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_PASSWORD);
                         resolve();
@@ -39,7 +40,7 @@ const actions = {
             axios.post(config.url.LOGIN, { email, password })
                 .then(({data}) => {
                     if (data.success) {
-                        commit(USER_AUTH_LOGIN, data.user);
+                        commit(USER_AUTH_LOGIN, data);
                         resolve();
                     } else {
                         reject(data.message);
@@ -55,7 +56,7 @@ const actions = {
             axios.post(config.url.REGISTER, { first_name, last_name, username, email, password, cpassword })
                 .then(({data}) => {
                     if (data.success) {
-                        commit(USER_AUTH_REGISTER, data.user);
+                        commit(USER_AUTH_LOGIN, data);
                         resolve(data);
                     } else {
                         reject(data.message);
@@ -84,19 +85,17 @@ const mutations = {
     [USER_FETCH](state, payload) {
         state.fetching = payload;
     },
-    [USER_AUTH_LOGIN](state, payload) {
-        state.user = payload;
+    [USER_AUTH_LOGIN](state, { user, notifications }) {
+        state.user = user;
+        state.notifications = notifications;
         state.logged = true;
     },
-    [USER_AUTH_REGISTER](state, payload) {
-        state.user = payload;
-        state.logged = true;
-    },
-    [USER_AUTH_UPDATE_PASSWORD] () {},
     [USER_AUTH_LOGOUT](state) {
         state.logged = false;
         state.user = {};
-    }
+    },
+    [USER_AUTH_REGISTER] () {},
+    [USER_AUTH_UPDATE_PASSWORD] () {},
 };
 
 export default {

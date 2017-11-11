@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Notifications\PasswordChanged;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class UserController extends Controller
     function user() {
         return response()->json([
             'success' => !!Auth::user(),
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'notifications' => Auth::user()->notifications,
         ]);
     }
 
@@ -35,6 +37,7 @@ class UserController extends Controller
 
             $user->password = Hash::make($request->password);
             $user->save();
+            Auth::user()->notify(new PasswordChanged());
             return response()->json(['success' => true]);
         }
 

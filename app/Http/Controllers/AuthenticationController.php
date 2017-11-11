@@ -25,10 +25,10 @@ class AuthenticationController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json([
                 'success' => true,
-                'user' => Auth::user()
+                'user' => Auth::user(),
+                'notifications' => Auth::user()->notifications,
             ]);
         }
-        Auth::user()->notify(new PasswordChanged());
         return response()->json([
             'success' => false,
             'message' => trans('auth.failed')

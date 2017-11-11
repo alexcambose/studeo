@@ -14423,7 +14423,7 @@ router.beforeEach(function (to, from, next) {
         axios.post(__WEBPACK_IMPORTED_MODULE_9__config__["a" /* default */].USER).then(function (_ref) {
             var data = _ref.data;
 
-            if (data.success) __WEBPACK_IMPORTED_MODULE_8__store_index__["a" /* default */].dispatch('setuser', data.user);else __WEBPACK_IMPORTED_MODULE_8__store_index__["a" /* default */].dispatch('logout');
+            if (data.success) __WEBPACK_IMPORTED_MODULE_8__store_index__["a" /* default */].dispatch('setUser', data.user);else __WEBPACK_IMPORTED_MODULE_8__store_index__["a" /* default */].dispatch('logout');
             check();
         });
     }
@@ -46369,7 +46369,7 @@ var state = {
 var getters = {};
 
 var actions = {
-    setuser: function setuser(_ref, payload) {
+    setUser: function setuser(_ref, payload) {
         var commit = _ref.commit;
 
         commit(__WEBPACK_IMPORTED_MODULE_2__mutators_types__["a" /* USER_AUTH_LOGIN */], payload);

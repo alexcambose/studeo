@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('username')->unique();
-            $table->string('birth_date')->nullable();
             $table->integer('is_male')->nullable();
             $table->integer('city')->nullable(); // https://gist.github.com/alexcambose/9343b66746e65ba592fc5b219f89631d
             $table->string('school')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
+            $table->date('birthday')->nullable();
             $table->text('description')->nullable();
             $table->string('email')->unique();
             $table->integer('image_id')->nullable();

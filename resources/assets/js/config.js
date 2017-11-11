@@ -7,11 +7,12 @@ export default {
         USER: SERVER + 'user',
         USERUPDATE: SERVER + 'user/update',
         USERUPDATEPASSWORD: SERVER + 'user/update/password',
+        NOTIFICATIONTOGGLEREAD: SERVER + 'notification',
     },
     notifications: {
-        PASSWORD_CHANGED: 'Parola ta a fost schimbata!',
+        PASSWORD_CHANGED: {
+            title: 'Parola schimbata',
+            message: ({ f_created_at }) => 'Parola a fost schimbata cu ' + f_created_at,
+        },
     },
-
-
-
 };

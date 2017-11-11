@@ -57,8 +57,8 @@
                 error: '',
                 success: '',
                 current_password: '123456',
-                password: '1234566',
-                cpassword: '1234566',
+                password: '123456',
+                cpassword: '123456',
             };
         },
         methods: {

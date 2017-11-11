@@ -36,8 +36,7 @@ class PasswordChanged extends Notification
     public function toArray($notifiable)
     {
         return [
-            'invoice_id' => '86786',
-            'amount' => 'jhk',
+            'type' => 'PASSWORD_CHANGED',
         ];
     }
 }

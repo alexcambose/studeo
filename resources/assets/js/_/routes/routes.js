@@ -84,7 +84,10 @@ router.beforeEach((to, from, next) => {
         check();
     } else {
         axios.post(config.url.USER).then(({ data }) => {
-            if(data.success) store.dispatch('setuser', data.user);
+            if(data.success){
+                store.dispatch('setUser', data);
+                store.dispatch('setNotification', data);
+            }
             else store.dispatch('logout');
             check();
         });

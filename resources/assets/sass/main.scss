@@ -63,6 +63,34 @@ html {
   .search-container{
     padding: 10px;
   }
+  .notification-item{
+    padding: 0 10px;
+    height: 80px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    &:hover{
+      background-color: $dropdown-item-hover-background-color;
+    }
+    .data{
+      flex: 3;
+      .title{
+        margin-bottom: 4px;
+        font-weight: 700;
+        font-size: 1.2em;
+      }
+      .description{
+        font-size:.9em;
+      }
+    }
+    .actions{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+  }
 }
 
 /* endregion */
