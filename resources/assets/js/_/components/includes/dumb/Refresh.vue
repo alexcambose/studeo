@@ -8,6 +8,6 @@
 
 <script>
     export default {
-        props: ['loading', 'size'],
+        props: ['fetching', 'size'],
     }
 </script>

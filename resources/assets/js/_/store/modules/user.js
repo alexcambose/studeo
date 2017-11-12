@@ -1,6 +1,5 @@
 import config from '../../../config';
-import { USER_FETCH,NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
-
+import { USER_AUTH_UPDATE_DATA ,NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
 const state = {
     user: {},
     logged: false,
@@ -8,7 +7,7 @@ const state = {
 
 const getters = {
     fullname: state => {
-        return state.user.first_name + state.user.last_name;
+        return state.user.first_name + ' ' + state.user.last_name;
     },
 };
 
@@ -18,9 +17,16 @@ const actions = {
     setUser({ commit }, user) {
         commit(USER_AUTH_LOGIN, user);
     },
-    updateUserData({ commit }, payload) {
+    updateUserData({ commit }, { first_name, last_name, username, email }) {
         return new Promise((resolve, reject) => {
-
+            axios.post(config.url.USER_UPDATE, { first_name, last_name, username, email })
+                .then(({data}) => {
+                    if(data.success) {
+                        commit(USER_AUTH_UPDATE_DATA, data);
+                        resolve();
+                    } else reject(data.message);
+                })
+                .catch(err => reject(err));
         });
     },
     updateUserPassword({ commit }, { current_password, password }) {
@@ -87,8 +93,8 @@ const actions = {
 };
 
 const mutations = {
-    [USER_FETCH](state, payload) {
-        state.fetching = payload;
+    [USER_AUTH_UPDATE_DATA](state, { user }){
+        state.user = user;
     },
     [USER_AUTH_LOGIN](state, { user }) {
         state.user = user;

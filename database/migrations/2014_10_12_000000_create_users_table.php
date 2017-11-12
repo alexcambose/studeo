@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('username')->unique();
-            $table->integer('is_male')->nullable();
+            $table->string('nickname')->nullable();
+            $table->integer('sex')->nullable();
             $table->integer('city')->nullable(); // https://gist.github.com/alexcambose/9343b66746e65ba592fc5b219f89631d
             $table->string('school')->nullable();
             $table->string('address')->nullable();
@@ -30,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->integer('is_teacher')->nullable();
             $table->string('cover_color')->default("#");
             $table->integer('points')->default(0);
+            $table->string('social')->default("{}");
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

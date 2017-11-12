@@ -7,8 +7,9 @@
                 </b-switch>
             </div>
             <div class="actions">
-                <refresh @click.native="refresh" :loading="refreshing" class="is-rounded mr-10"/>
+                <refresh @click.native="refresh" :fetching="refreshing" class="is-rounded mr-10"/>
                 <span @click="readAll"
+                      v-if="notifications.length"
                       :class="['button', (fetchingToggleReadAll ? 'is-loading' : ''), (!unreadNotificationsCount ? 'is-success' : ['is-info', 'is-outlined'])]" >
                     Marchează toate ca {{!unreadNotificationsCount ? 'ne' : ''}}citite &nbsp; <i class="fa fa-check"></i>
                 </span>

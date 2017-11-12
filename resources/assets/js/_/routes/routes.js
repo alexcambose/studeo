@@ -5,6 +5,7 @@ import Home from '../components/pages/Home';
 import Profile from '../components/pages/user/Profile';
 import Notifications from '../components/pages/user/Notifications';
 import Account from '../components/pages/user/settings/Account';
+import ProfileSettings from '../components/pages/user/settings/Profile';
 import Security from '../components/pages/user/settings/Security';
 import Settings from '../components/pages/user/settings/_index.vue';
 import store from '../store/index';
@@ -37,19 +38,25 @@ const router = new VueRouter({
             path: '/setari',
             component: Settings,
             name: 'settings',
-            redirect: '/setari/cont',
+            redirect: '/setari/profil',
             meta: { onlyAuth: true },
             children: [
                 {
+                    path: 'profil',
+                    component: ProfileSettings,
+                    name: 'settings-profile',
+                    meta: { onlyAuth: true }
+                },
+                {
                     path: 'cont',
                     component: Account,
-                    name: 'account',
+                    name: 'settings-account',
                     meta: { onlyAuth: true }
                 },
                 {
                     path: 'securitate',
                     component: Security,
-                    name: 'security',
+                    name: 'settings-security',
                     meta: { onlyAuth: true }
                 }
             ],

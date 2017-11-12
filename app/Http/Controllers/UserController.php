@@ -26,7 +26,25 @@ class UserController extends Controller
     }
 
     function updateData(Request $request) {
+        $user = Auth::user();
+        $validation = Validator::make($request->all(), [
+            'first_name' => User::$rules['first_name'],
+            'last_name' => User::$rules['last_name'],
+            'username' => User::$rules['username'],
+            'email' => User::$rules['email'],
+        ]);
+        if($validation->fails()) return response()->json(['success' => false]);
 
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+        ]);
     }
 
     function updatePassword(Request $request) {

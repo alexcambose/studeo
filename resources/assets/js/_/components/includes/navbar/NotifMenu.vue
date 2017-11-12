@@ -4,7 +4,7 @@
             <b-switch v-model="onlyUnread">
                 Doar notficările necitite
             </b-switch>
-            <refresh @click.native="refresh" size="is-small" :loading="refreshing" class="is-rounded is-pulled-right"/>
+            <refresh @click.native="refresh" size="is-small" :fetching="refreshing" class="is-rounded is-pulled-right"/>
         </div>
         <div v-if="!notifications.length" class="notification-item">
             Nicio notificare

@@ -6,13 +6,19 @@
                     <p class="panel-heading">
                         <i class="fa fa-cog"></i> Setari
                     </p>
-                    <router-link :to="{name:'account'}" class="panel-block">
+                    <router-link :to="{name: 'settings-profile'}" class="panel-block">
+                        <span class="panel-icon">
+                          <i class="fa fa-address-card"></i>
+                        </span>
+                        Profil
+                    </router-link>
+                    <router-link :to="{name:'settings-account'}" class="panel-block">
                         <span class="panel-icon">
                           <i class="fa fa-user"></i>
                         </span>
                         Cont
                     </router-link>
-                    <router-link :to="{name:'security'}" class="panel-block">
+                    <router-link :to="{name:'settings-security'}" class="panel-block">
                         <span class="panel-icon">
                           <i class="fa fa-shield"></i>
                         </span>
