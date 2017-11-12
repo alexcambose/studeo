@@ -2,6 +2,7 @@
     <div class="profilPage">
         <div class="banner" :style="{backgroundColor: bannerColor}"></div>
         <div class="profileNav">
+            <navbar-profile></navbar-profile>
             <div class="container">
                 <div class="profileImage" style="background: url('http://3.bp.blogspot.com/_d70o0QbCQYg/ShA41KQQn1I/AAAAAAAABf8/-tffws7CMjc/s400/Internet_man+slave+of+computer+3.bmp')"></div>
                 <div class="avatarImage"></div>
@@ -11,7 +12,7 @@
             <div class="columns">
                 <div class="column is-one-quarter">
                     <div class="userDetails">
-                        <h3 class="fullname">{{ fullname(user.first_name, user.last_name) }}</h3>
+                        <h3 class="fullname">{{ this.fullname }}</h3>
                         <router-link :to="{ name: 'profile', params: {username: user.username}}">&nbsp; @{{ user.username }}</router-link>
                         <div class="shortDescription">
                             &nbsp; {{ user.description }}
@@ -20,10 +21,10 @@
                             <i class="fa fa-building fa-lg"></i>
                             {{ user.city }}
                         </div>
-                        <div class="dataNastere" v-if="user.birth_date">
+                        <div class="dataNastere" v-if="user.birthday">
                             <p>
                                 <i class="fa fa-birthday-cake fa-lg"></i>
-                            Născut la {{ displayDate(user.birth_date) }}
+                            Născut la {{ displayDate(user.birthday) }}
                             </p>
                         </div>
                         <div class="scoala">
@@ -36,33 +37,62 @@
                         </div>
                     </div>
                 </div>
-                <div class="column">b</div>
-                <div class="column is-one-quarter">c</div>
+                <div class="column">
+                    <curs></curs>
+                    <curs></curs>
+                    <curs></curs>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Recompense
+                            </p>
+                            <a href="#" class="card-header-icon">
+                          <span class="icon">
+                            <i class="fa fa-trophy" aria-hidden="true"></i>
+                          </span>
+                            </a>
+                        </header>
+                        <div class="card-content">
+                           <item></item>
+                           <item></item>
+                           <item></item>
+                           <item></item>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 </template>
 <script>
-    export default { //n-am vazut nimic :>
+    import Curs from '../../includes/dumb/Curs.vue'
+    import Item from '../../includes/dumb/Item.vue'
+    import NavbarProfile from '../../includes/ProfileNavbar.vue'
+    import { mapState, mapActions, mapGetters } from 'vuex'
+    export default {
+        components: {
+            'curs': Curs,
+            'item': Item,
+            'navbar-profile': NavbarProfile,
+        },
         computed: {
-            bannerColor() {
-                return this.$store.state.user.user.cover_color;
-            },
-            user() {
-                return this.$store.state.user.user;
-            }
+            ...mapState({
+                bannerColor: state => state.user.user.cover_color,
+                user: state => state.user.user,
+            }),
+
+            ...mapGetters([
+               'fullname',
+            ]),
+
         },
         methods: {
-            fullname(firstname, lastname) {
-                var fullname = firstname + ' ' + lastname;
-                return fullname
-            },
-
-            displayDate(date) {
-                var shortDate = date.slice(0, 10);
-                return shortDate;
+            displayDate: function(e) {
+                return e.slice(0, 10);
             }
-        }
+        },
     }
 </script>

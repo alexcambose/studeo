@@ -1,4 +1,5 @@
 .profilPage {
+  /* region Images (avatar&imgProfil&Banner) */
   background-color: whitesmoke;
   height: 100vh;
   .banner {
@@ -13,16 +14,17 @@
       border-radius: $margin-image;
       position: absolute;
       border:5px solid white;
-      top: - $margin-image;
+      top: - (3/2 * $margin-image);
       background-color: #1ca64c;
     }
     .avatarImage {
       @extend .profileImage;
       right: 0;
     }
-
-
   }
+  /* endregion */
+
+  /* region User Description (Left side) */
   .mainUser {
     margin-top: $margin-image + 20px;
     .fullname {
@@ -45,4 +47,90 @@
       margin-top:1px;
     }
   }
+  /* endregion */
 }
+
+.cursCard {
+  margin: 30px 50px;
+}
+
+/* region Recompense */
+.customBox {
+  margin: 5px;
+  position: relative;
+  width: 94px;
+  height: 92px;
+  border-radius: 2px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 2px 0 rgba(26, 24, 29, 0.15), 0 1px 4px 0 rgba(26, 24, 29, 0.1);
+  border: 1px solid transparent;
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 rgba(26, 24, 29, 0.16), 0 1px 8px 0 rgba(26, 24, 29, 0.12);
+    border-color: $primary;
+  }
+
+
+}
+/* endregion */
+
+/* region Tooltip Recompense */
+.tooltipCustom {
+  position: relative;
+  display: inline-block;
+
+  .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+  }
+
+  .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+  }
+  &:hover .tooltiptext {
+    visibility: visible;
+  }
+}
+
+/* endregion */
+
+
+/* region Navbar Secundar */
+.navbar {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
+  box-sizing: border-box;
+
+  .profile-navbar-container {
+    margin: 0px 300px;
+  }
+
+  p .textProfileNav {
+    display: block;
+  }
+
+  .nrCursuri {
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .navbar-item:hover .nrCursuri {
+    color: $primary;
+  }
+}
+/* endregion */

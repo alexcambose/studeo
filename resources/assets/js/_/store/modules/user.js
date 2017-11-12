@@ -7,10 +7,14 @@ const state = {
 };
 
 const getters = {
-
+    fullname: state => {
+        return state.user.first_name + state.user.last_name;
+    },
 };
 
 const actions = {
+
+
     setUser({ commit }, user) {
         commit(USER_AUTH_LOGIN, user);
     },
