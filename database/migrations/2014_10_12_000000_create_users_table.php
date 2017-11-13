@@ -11,6 +11,10 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
+
+    /**
+     * + money,exp,lvl, dar si astea mai trebuie gandite deci mai bine la facem si pe astea in clasa.
+     */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -35,6 +39,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 
