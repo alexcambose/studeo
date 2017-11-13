@@ -1,7 +1,7 @@
 <template>
-    <span :class="['button', size]" :disabled="loading">
+    <span :class="['button', size]" :disabled="fetching">
         <span :class="['icon' ,size]">
-            <i :class="['fa','fa-refresh',(loading ? 'fa-spin' : '')]"></i>
+            <i :class="['fa','fa-refresh',(fetching ? 'fa-spin' : '')]"></i>
         </span>
     </span>
 </template>

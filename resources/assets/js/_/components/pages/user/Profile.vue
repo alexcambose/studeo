@@ -4,7 +4,7 @@
         <div class="profileNav">
             <navbar-profile></navbar-profile>
             <div class="container">
-                <div class="profileImage" style="background: url('http://3.bp.blogspot.com/_d70o0QbCQYg/ShA41KQQn1I/AAAAAAAABf8/-tffws7CMjc/s400/Internet_man+slave+of+computer+3.bmp')"></div>
+                <div class="profileImage" style="background: url('http://www.jocuri-kids.ro/files/img/Locomotiva-Thomas-in-Mexic_1405782948.jpg')"></div>
                 <div class="avatarImage"></div>
             </div>
         </div>

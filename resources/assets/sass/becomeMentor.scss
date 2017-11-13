@@ -1,0 +1,46 @@
+.section{
+  height: 400px;
+  margin-bottom: 20px;
+  background-image: url(http://s3.amazonaws.com/digitaltrends-uploads-prod/2016/09/group-of-school-kids-with-teacher-sitting-in-classroom-and-raising-hands.jpg);
+  background-attachment: fixed;
+  display: flex;
+  .container-section{
+    @extend .container;
+    display: flex;
+  }
+  .section-left, .section-right {
+    img{
+      width: 200px;
+      height: 200px;
+      border-radius: 9999px;
+    }
+  }
+  .section-left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .section-right{
+    @extend .section-left;
+  }
+  .section-title{
+    font-size: 2.1em;
+    font-weight: 600;
+  }
+  .section-subtitle {
+    font-size: 1.3em;
+  }
+}
+
+
+.section1{
+  .section-left{
+    flex: 2;
+  }
+  .button {
+    margin-top: 10px;
+    width: 300px;
+  }
+}

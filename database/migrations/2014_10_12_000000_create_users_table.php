@@ -33,13 +33,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('image_id')->nullable();
             $table->integer('is_teacher')->nullable();
+            $table->integer('is_mentor')->nullable();
             $table->string('cover_color')->default("#");
             $table->integer('points')->default(0);
             $table->string('social')->default("{}");
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-
         });
     }
 

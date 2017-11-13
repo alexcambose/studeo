@@ -7,6 +7,7 @@ import Notifications from '../components/pages/user/Notifications';
 import Account from '../components/pages/user/settings/Account';
 import ProfileSettings from '../components/pages/user/settings/Profile';
 import Security from '../components/pages/user/settings/Security';
+import BecomeMentor from '../components/pages/user/BecomeMentor';
 import Settings from '../components/pages/user/settings/_index.vue';
 import store from '../store/index';
 import config from '../../config';
@@ -32,6 +33,12 @@ const router = new VueRouter({
             path: '/notificari',
             component: Notifications,
             name: 'notifications',
+            meta: { onlyAuth: true }
+        },
+        {
+            path: '/inscriere-mentor',
+            component: BecomeMentor,
+            name: 'becomeMentor',
             meta: { onlyAuth: true }
         },
         {
