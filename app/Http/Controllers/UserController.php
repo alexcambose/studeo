@@ -25,6 +25,25 @@ class UserController extends Controller
         ]);
     }
 
+    public function updateProfile(Request $request) {
+        $user = Auth::user();
+        $validation = Validator::make($request->all(), [
+           'nickname' => User::$rules['nickname'],
+           'sex' => User::$rules['sex'],
+        ]);
+
+        if ($validation->fails()) return response()->json(['success' => false]);
+
+        $user->nickname = $request->nickname;
+        $user->sex = $request->sex;
+        $user->save();
+
+        return response()->json([
+           'success' => true,
+           'user' => $user,
+        ]);
+    }
+
     function updateData(Request $request) {
         $user = Auth::user();
         $validation = Validator::make($request->all(), [

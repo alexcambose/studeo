@@ -33,6 +33,8 @@ class User extends Authenticatable
         'first_name' => 'required|string|max:30',
         'last_name' => 'required|string|max:30',
         'username' => 'required|string|max:16|min:4',
+        'nickname' => 'required|string|max:20|min:1',
+        'sex' => 'required',
         'email' => 'required|string|email', //username-ul
         'password' => 'required|string|max:16|min:6',
     ];

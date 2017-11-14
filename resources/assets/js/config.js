@@ -7,6 +7,7 @@ export default {
         USER: SERVER + 'user',
         USER_UPDATE: SERVER + 'user/update',
         USER_UPDATE_PASSWORD: SERVER + 'user/update/password',
+        USER_UPDATE_PROFILE: SERVER + 'user/update/profile',
         NOTIFICATION: SERVER + 'notification/get',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll',

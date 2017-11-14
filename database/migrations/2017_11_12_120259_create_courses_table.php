@@ -21,8 +21,6 @@ class CreateCoursesTable extends Migration
             $table->integer('author_id')->unsigned();
             $table->integer('views'); //posibil sa fie scos
 
-            $table->foreign('image_id')->references('id')->on('media');
-            $table->foreign('author_id')->references('id')->on('users');
         });
 
         /*
@@ -39,9 +37,6 @@ class CreateCoursesTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->integer('current_lesson_id')->unsigned();
             $table->integer('progress');
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('course_id')->references('id')->on('courses');
 
         });
     }

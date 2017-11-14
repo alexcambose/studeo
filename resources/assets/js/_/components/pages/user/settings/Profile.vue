@@ -4,10 +4,14 @@
         </div>
         <form @submit="submit">
             <b-field label="Poreclă">
-                <b-input v-model="nickname" maxlength="20"></b-input>
+                <b-input
+                        v-model="nickname"
+                        maxlength="20"
+                        required
+                ></b-input>
             </b-field>
             <b-field label="Sex">
-                <b-select expanded v-model="sex">
+                <b-select expanded v-model="sex" required>
                     <option value="0">Masculin</option>
                     <option value="1">Feminin</option>
                     <option value="2">Altceva</option>
@@ -36,7 +40,13 @@
             submit(e) {
                 e.preventDefault();
                 this.fetching = true;
-//..
+
+                this.$store.dispatch('updateUserProfile', this)
+                    .then(() => {
+                        this.fetching = false;
+                        this.success = "Datele au fost salvate";
+                    })
+                    .catch(() => this.fetching = true);
             }
         },
         components: {

@@ -1,5 +1,8 @@
 import config from '../../../config';
-import { USER_AUTH_UPDATE_DATA ,NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER, USER_AUTH_UPDATE_PASSWORD } from '../mutators-types';
+import {
+    USER_AUTH_UPDATE_DATA, NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER,
+    USER_AUTH_UPDATE_PASSWORD, USER_AUTH_UPDATE_PROFILE
+} from '../mutators-types';
 const state = {
     user: {},
     logged: false,
@@ -17,6 +20,22 @@ const actions = {
     setUser({ commit }, user) {
         commit(USER_AUTH_LOGIN, user);
     },
+
+    updateUserProfile({ commit }, { nickname, sex }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex })
+                .then(({data}) => {
+                    if (data.success) {
+                        commit(USER_AUTH_UPDATE_PROFILE, data);
+                        resolve();
+                    } else {
+                        reject(data.message);
+                    }
+                })
+                .catch(err => reject(err));
+        });
+    },
+
     updateUserData({ commit }, { first_name, last_name, username, email }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USER_UPDATE, { first_name, last_name, username, email })
@@ -106,6 +125,7 @@ const mutations = {
     },
     [USER_AUTH_REGISTER] () {},
     [USER_AUTH_UPDATE_PASSWORD] () {},
+    [USER_AUTH_UPDATE_PROFILE] () {},
 };
 
 export default {

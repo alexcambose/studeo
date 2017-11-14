@@ -19,6 +19,7 @@ Route::post('notification/toggleReadAll', 'NotificationController@toggleReadAll'
 Route::post('user', 'UserController@user');
 Route::post('user/update', 'UserController@updateData');
 Route::post('user/update/password', 'UserController@updatePassword');
+Route::post('user/update/profile', 'UserController@updateProfile');
 
 
 Route::get('/', function(){
