@@ -7,7 +7,8 @@ import Notifications from '../components/pages/user/Notifications';
 import Account from '../components/pages/user/settings/Account';
 import ProfileSettings from '../components/pages/user/settings/Profile';
 import Security from '../components/pages/user/settings/Security';
-import BecomeMentor from '../components/pages/user/BecomeMentor';
+import BecomeMentor from '../components/pages/user/mentor/BecomeMentor';
+import Dashboard from '../components/pages/user/mentor/Dashboard';
 import Settings from '../components/pages/user/settings/_index.vue';
 import store from '../store/index';
 import config from '../../config';
@@ -40,6 +41,12 @@ const router = new VueRouter({
             component: BecomeMentor,
             name: 'becomeMentor',
             meta: { onlyAuth: true }
+        },
+        {
+            path: '/administrare-cursuri',
+            component: Dashboard,
+            name: 'dashboard',
+            meta: { onlyMentor: true }
         },
         {
             path: '/setari',
@@ -91,23 +98,27 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    store.dispatch('getNotification');
+    const user = store.state.user;
+
     const check = () => {
         if (to.matched.some(record => record.meta.onlyAuth))
-            if (!store.state.user.logged) next({name: 'welcome'}); else next();
+            if (!user.logged) next({name: 'welcome'}); else next();
 
         else if(to.matched.some(record => record.meta.onlyGuest))
-            if (store.state.user.logged) next({name: 'root'}); else next();
+            if (user.logged) next({name: 'root'}); else next();
 
+        else if(to.matched.some(record => record.meta.onlyMentor))
+            if (user.logged && user.user.role < 2) next({name: 'becomeMentor'}); else next();
         else next();
     };
-    store.dispatch('getNotification');
-    if(store.state.user.logged){
+    if(user.logged){
         check();
     } else {
         axios.post(config.url.USER).then(({ data }) => {
             if(data.success){
                 store.dispatch('setUser', data);
-                store.dispatch('setNotification', data.user); //user has a notifications[] property
+                store.dispatch('setNotification', data.user); //the user {}, has a notifications[] property
             }
             else store.dispatch('logout');
             check();

@@ -41,7 +41,9 @@
                 <router-link to="register" class="navbar-item is-tab">Înregistrare</router-link>
             </div>
             <div class="navbar-end" v-else>
-
+                <router-link :to="{name: 'dashboard'}" class="navbar-item is-tab">
+                    Cursurile mele
+                </router-link>
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a class="navbar-link">
                         <i class="material-icons">notifications</i>
@@ -87,6 +89,7 @@
             ...mapState({
                 user: state => state.user.user,
                 logged: state => state.user.logged,
+                isMentor: state => state.user.logged && state.user.user.role === 2
             }),
             ...mapGetters(['unreadNotificationsCount']),
         },

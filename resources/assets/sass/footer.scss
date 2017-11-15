@@ -1,0 +1,15 @@
+/* region footer */
+.footer {
+  position: absolute;
+  bottom: -12px; //wired space
+  left: 0;
+  right: 0;
+  padding: 0;
+  height: $footer-height;
+  background-color: #dfdfdf;
+  .footer-bottom{
+    font-size: .9em;
+    text-align: center;
+  }
+}
+/* endregion */

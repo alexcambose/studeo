@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'description' => $faker->paragraph(4),
         'email' => $faker->unique()->safeEmail,
         'image_id' => function(){
-            return factory(App\Image::class)->create()->id;
+            return factory(App\Media::class)->create()->id;
         },
         'is_teacher' => 0,
         'points' => $faker->numberBetween(0, 1000),
@@ -41,10 +41,10 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 
 });
-$factory->define(App\Image::class, function (Faker $faker) {
+$factory->define(App\Media::class, function (Faker $faker) {
     return [
-//        'filename' => $faker->image('public/userdata/images/', 200, 200, 'cats'),
+//        'filename' => $faker->image('public/userdata/images/', 200, 200, 'people'),
         'type' => 0,
-        'filename' => '',
+        'filename' => 'public/userdata/images/' . $faker->numberBetween(0, 10) . '.jpg',
     ];
 });

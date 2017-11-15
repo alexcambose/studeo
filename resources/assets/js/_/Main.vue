@@ -1,9 +1,7 @@
 <template>
-    <div>
+    <div class="afterApp">
         <navbar></navbar>
-        <div class="wrapper">
-            <router-view></router-view>
-        </div>
+        <router-view></router-view>
         <_footer></_footer>
     </div>
 </template>

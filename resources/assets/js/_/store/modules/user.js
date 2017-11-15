@@ -1,7 +1,7 @@
 import config from '../../../config';
 import {
-    USER_AUTH_UPDATE_DATA, NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER,
-    USER_AUTH_UPDATE_PASSWORD, USER_AUTH_UPDATE_PROFILE
+    USER_AUTH_UPDATE_DATA, USER_REGISTER_MENTOR, NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER,
+    USER_AUTH_UPDATE_PASSWORD, USER_AUTH_UPDATE_PROFILE,
 } from '../mutators-types';
 const state = {
     user: {},
@@ -15,10 +15,23 @@ const getters = {
 };
 
 const actions = {
-
-
     setUser({ commit }, user) {
         commit(USER_AUTH_LOGIN, user);
+    },
+
+    registerMentor({ commit }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.USER_MENTOR)
+                .then(({data}) => {
+                    if (data.success) {
+                        commit(USER_REGISTER_MENTOR);
+                        resolve();
+                    } else {
+                        reject(data.message);
+                    }
+                })
+                .catch(err => reject(err));
+        });
     },
 
     updateUserProfile({ commit }, { nickname, sex }) {
@@ -126,6 +139,9 @@ const mutations = {
     [USER_AUTH_REGISTER] () {},
     [USER_AUTH_UPDATE_PASSWORD] () {},
     [USER_AUTH_UPDATE_PROFILE] () {},
+    [USER_REGISTER_MENTOR] (state) {
+        state.user.role = 2; //mentor
+    },
 };
 
 export default {

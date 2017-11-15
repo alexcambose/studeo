@@ -14,7 +14,6 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-
     function user() {
         $user = Auth::user();
         $user->notifications;
