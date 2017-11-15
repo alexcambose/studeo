@@ -4,9 +4,16 @@ module.exports = {
         "node": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "plugins": [
+        "html"
+    ],
+    "extends": "google",
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
     },
     "rules": {
         "indent": [
@@ -22,7 +29,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "object-curly-spacing": ["error", "always"],
+        "arrow-parens": ["error", "as-needed"],
     },
     "globals": {
         "axios": false,

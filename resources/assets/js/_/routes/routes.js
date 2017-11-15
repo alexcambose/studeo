@@ -22,31 +22,31 @@ const router = new VueRouter({
             path: '/',
             component: Home,
             name: 'root',
-            meta: { onlyAuth: true }
+            meta: { onlyAuth: true },
         },
         {
             path: '/profil',
             component: Profile,
             name: 'profile',
-            meta: { onlyAuth: true }
+            meta: { onlyAuth: true },
         },
         {
             path: '/notificari',
             component: Notifications,
             name: 'notifications',
-            meta: { onlyAuth: true }
+            meta: { onlyAuth: true },
         },
         {
             path: '/inscriere-mentor',
             component: BecomeMentor,
             name: 'becomeMentor',
-            meta: { onlyAuth: true }
+            meta: { onlyAuth: true },
         },
         {
             path: '/administrare-cursuri',
             component: Dashboard,
             name: 'dashboard',
-            meta: { onlyMentor: true }
+            meta: { onlyMentor: true },
         },
         {
             path: '/setari',
@@ -59,42 +59,42 @@ const router = new VueRouter({
                     path: 'profil',
                     component: ProfileSettings,
                     name: 'settings-profile',
-                    meta: { onlyAuth: true }
+                    meta: { onlyAuth: true },
                 },
                 {
                     path: 'cont',
                     component: Account,
                     name: 'settings-account',
-                    meta: { onlyAuth: true }
+                    meta: { onlyAuth: true },
                 },
                 {
                     path: 'securitate',
                     component: Security,
                     name: 'settings-security',
-                    meta: { onlyAuth: true }
-                }
+                    meta: { onlyAuth: true },
+                },
             ],
         },
         {
             path: '/welcome',
             name: 'welcome',
             component: Welcome,
-            meta: { onlyGuest: true }
+            meta: { onlyGuest: true },
 
         },
         {
             path: '/login',
             name: 'login',
             component: Login,
-            meta: { onlyGuest: true }
+            meta: { onlyGuest: true },
         },
         {
             path: '/register',
             name: 'register',
             component: Register,
-            meta: { onlyGuest: true }
-        }
-    ]
+            meta: { onlyGuest: true },
+        },
+    ],
 });
 
 router.beforeEach((to, from, next) => {
@@ -102,23 +102,28 @@ router.beforeEach((to, from, next) => {
     const user = store.state.user;
 
     const check = () => {
-        if (to.matched.some(record => record.meta.onlyAuth))
-            if (!user.logged) next({name: 'welcome'}); else next();
-
-        else if(to.matched.some(record => record.meta.onlyGuest))
-            if (user.logged) next({name: 'root'}); else next();
-
-        else if(to.matched.some(record => record.meta.onlyMentor))
-            if (user.logged && user.user.role < 2) next({name: 'becomeMentor'}); else next();
+        if (to.matched.some(record => record.meta.onlyAuth)) {
+            if (!user.logged) next({ name: 'welcome' });
+            else next();
+        }
+        if (to.matched.some(record => record.meta.onlyGuest)) {
+            if (user.logged) next({ name: 'root' });
+            else next();
+        }
+        if (to.matched.some(record => record.meta.onlyMentor)) {
+            if (user.logged && user.user.role < 2) next({ name: 'becomeMentor' });
+            else next();
+        }
         else next();
     };
-    if(user.logged){
+    if (user.logged) {
         check();
     } else {
         axios.post(config.url.USER).then(({ data }) => {
-            if(data.success){
+            if (data.success) {
                 store.dispatch('setUser', data);
-                store.dispatch('setNotification', data.user); //the user {}, has a notifications[] property
+                // the user {}, has a notifications[] property
+                store.dispatch('setNotification', data.user);
             }
             else store.dispatch('logout');
             check();

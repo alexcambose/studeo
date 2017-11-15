@@ -43,9 +43,11 @@
     export default {
         methods: {
             registerMentor(){
+                const loading = this.$loading.open();
                 this.$store.dispatch('registerMentor')
                     .then(() => {
-                        alert('Salut !');
+                        this.$router.push({ name: 'dashboard' });
+                        loading.close();
                     });
             },
         },

@@ -1,9 +1,11 @@
 <template>
     <div class="footer">
-        <div class="container">
+        <div class="footer-content">
             <router-link v-if="isMentor"  :to="{name: 'dashboard'}">Adaugă un curs</router-link>
             <router-link v-else :to="{name: 'becomeMentor'}">Adaugă cursuri</router-link>
         </div>
+
+
         <div class="footer-bottom">© {{year}}</div>
     </div>
 </template>

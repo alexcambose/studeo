@@ -17,10 +17,10 @@ Vue.component('main1', require('./Main.vue'));
 
 window.vue = new Vue({
     mounted() {
-        axios.interceptors.response.use(function (response) {
+        axios.interceptors.response.use(function(response) {
             return response;
-        }, function (error) {
-            if(error.response.status === 419) {
+        }, function(error) {
+            if (error.response.status === 419) {
                 location.reload();
             }
 

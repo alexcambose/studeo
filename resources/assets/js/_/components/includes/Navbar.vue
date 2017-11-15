@@ -41,7 +41,7 @@
                 <router-link to="register" class="navbar-item is-tab">Înregistrare</router-link>
             </div>
             <div class="navbar-end" v-else>
-                <router-link :to="{name: 'dashboard'}" class="navbar-item is-tab">
+                <router-link v-if="isMentor" :to="{name: 'dashboard'}" class="navbar-item is-tab">
                     Cursurile mele
                 </router-link>
                 <div class="navbar-item is-hoverable has-dropdown">
@@ -89,19 +89,20 @@
             ...mapState({
                 user: state => state.user.user,
                 logged: state => state.user.logged,
-                isMentor: state => state.user.logged && state.user.user.role === 2
+                isMentor: state => state.user.logged && state.user.user.role === 2,
             }),
             ...mapGetters(['unreadNotificationsCount']),
         },
         methods: {
             logout() {
-                this.$store.dispatch('logout').then(() => this.$router.push({name: 'welcome'}));
-            }
+                this.$store.dispatch('logout')
+                    .then(() => this.$router.push({ name: 'welcome' }));
+            },
         },
         components: {
             'catmenu': CatMenu,
             'notifmenu': NotifMenu,
-        }
+        },
     };
 </script>
 <style>
