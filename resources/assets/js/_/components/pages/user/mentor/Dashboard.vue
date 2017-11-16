@@ -1,12 +1,11 @@
 <template>
     <div class="container container-lower">
-        <h1 class="title">Salut sunt un mentor</h1>
+        <span class="title">Salut sunt un mentor</span>
+        <router-link :to="{ name: 'dashboard-add-course' }" class="button is-info is-pulled-right">Adaugă curs</router-link>
         <hr>
     </div>
 </template>
 
 <script>
-    export default {
-
-    };
+    export default {};
 </script>

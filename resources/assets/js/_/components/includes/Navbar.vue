@@ -5,7 +5,7 @@
             <div class="navbar-start">
                 <div class="navbar-brand">
                     <router-link class="navbar-item" to="/">
-                        <img src="http://www.bibleadvocacy.org/plugins/templates/ibac/images/IBAC_logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="50">
+                        <img src="http://www.studeo.academy/wp-content/uploads/2016/12/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="60">
                     </router-link>
 
                     <button class="button navbar-burger">

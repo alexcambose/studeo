@@ -1,12 +1,17 @@
 <template>
-    <div class="footer">
+    <div class="footer" v-if="logged">
         <div class="footer-content">
-            <router-link v-if="isMentor"  :to="{name: 'dashboard'}">Adaugă un curs</router-link>
+            <router-link v-if="isMentor" :to="{name: 'dashboard'}">Cursurile mele</router-link>
             <router-link v-else :to="{name: 'becomeMentor'}">Adaugă cursuri</router-link>
         </div>
 
 
         <div class="footer-bottom">© {{year}}</div>
+    </div>
+    <div v-else class="footer">
+        <div class="footer-content">
+            <router-link :to="{name: 'legal'}">Termeni si conditii</router-link>
+        </div>
     </div>
 </template>
 
@@ -20,8 +25,9 @@
                 isMentor: state => state.user.user.role === 2,
             }),
             year() {
-                return (new Date).getFullYear(); //in caz ca se schimba anul in timp ce userul este pe site :)
-            }
-        }
+                // in caz ca se schimba anul in timp ce userul este pe site :)
+                return (new Date).getFullYear();
+            },
+        },
     };
 </script>
