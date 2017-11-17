@@ -20,7 +20,7 @@
 
                     <div class="navbar-item is-hoverable has-dropdown">
                         <a class="navbar-link">
-                            <i class="material-icons">grid_on</i>
+                            <b-icon icon="grid"></b-icon>
                         </a>
 
                         <div class="navbar-dropdown navbar-classes">
@@ -46,7 +46,7 @@
                 </router-link>
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a class="navbar-link">
-                        <i class="material-icons">notifications</i>
+                        <b-icon icon="bell"></b-icon>
                         <span v-if="unreadNotificationsCount" class="tag is-rounded is-primary">{{unreadNotificationsCount}}</span>
                     </a>
 
@@ -58,20 +58,20 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
-                        <router-link :to="{name: 'profile'}" class="navbar-item"><span class="icon"><i class="fa fa-user"></i> </span>&nbsp; Profil</router-link>
-                        <router-link :to="{name: 'notifications'}" class="navbar-item"><span class="icon"><i class="fa fa-comment"></i></span>&nbsp; Notificări</router-link>
-                        <router-link :to="{name: 'settings'}" class="navbar-item"><span class="icon"><i class="fa fa-cog"></i></span>&nbsp; Setări</router-link>
+                        <router-link :to="{name: 'profile'}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon> Profil</router-link>
+                        <router-link :to="{name: 'notifications'}" class="navbar-item"><b-icon pack="fa" icon="comment"></b-icon> Notificări</router-link>
+                        <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon> Setări</router-link>
 
-                        <router-link to="/admin" class="navbar-item"><span class="icon"><i class="fa fa-lock"></i></span>&nbsp; Panou admin</router-link>
+                        <router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon> Panou admin</router-link>
 
                         <hr class="navbar-divider">
 
-                        <router-link to="/asd" class="navbar-item"><span class="icon"><i class="fa fa-question-circle"></i></span>&nbsp; Ajutor</router-link>
+                        <router-link to="/asd" class="navbar-item"><b-icon pack="fa" icon="question-circle"></b-icon> Ajutor</router-link>
 
                         <hr class="navbar-divider">
 
                         <a class="navbar-item" @click="logout">
-                            <span class="icon"><i class="fa fa-sign-out"></i></span>&nbsp; Deautentificare
+                            <b-icon pack="fa" icon="sign-out"></b-icon> Deautentificare
                         </a>
                     </div>
                 </div>

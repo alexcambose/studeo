@@ -22,7 +22,7 @@ Route::post('user/update/profile', 'UserController@updateProfile');
 
 
 // region mentor sutff
-Route::post('user/mentor/register', 'MentorController@becomeMentor');
+Route::post('user/mentor/register', 'UserController@becomeMentor');
 // endregion
 
 Route::get('/', function(){

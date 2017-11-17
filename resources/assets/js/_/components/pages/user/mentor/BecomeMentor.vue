@@ -42,13 +42,14 @@
 <script>
     export default {
         methods: {
-            registerMentor(){
+            registerMentor() {
                 const loading = this.$loading.open();
                 this.$store.dispatch('registerMentor')
                     .then(() => {
                         this.$router.push({ name: 'dashboard' });
                         loading.close();
-                    });
+                    })
+                    .error(() => loading.close());
             },
         },
     };

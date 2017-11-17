@@ -5,9 +5,7 @@ import { sync } from 'vuex-router-sync';
 import VueRouter from 'vue-router';
 import router from './routes/routes';
 import store from './store/index';
-
 sync(store, router);
-
 Vue.use(Buefy);
 Vue.use(VueRouter);
 

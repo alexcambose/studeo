@@ -16,7 +16,13 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->text('short_description');
             $table->text('description');
+            $table->text('target_class');
+            $table->text('target_isForStudents');
+            $table->text('prerequisites');
+            $table->text('difficulty');
+            $table->text('is_private');
             $table->integer('image_id')->unsigned();
             $table->integer('author_id')->unsigned();
             $table->integer('views'); //posibil sa fie scos
@@ -36,7 +42,7 @@ class CreateCoursesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('course_id')->unsigned();
             $table->integer('current_lesson_id')->unsigned();
-            $table->integer('progress');
+            $table->integer('progress'); // useless daca folosim formula... sterge tu
 
         });
     }

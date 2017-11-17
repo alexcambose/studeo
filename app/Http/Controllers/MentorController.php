@@ -7,13 +7,5 @@ use Illuminate\Support\Facades\Auth;
 
 class MentorController extends Controller
 {
-    function becomeMentor(){
-        $user = Auth::user();
 
-        $user->role = 2;
-        $user->save();
-        return response()->json([
-            'success' => true,
-        ]);
-    }
 }

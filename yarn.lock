@@ -1121,8 +1121,8 @@ bulma@^0.5.3:
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.5.3.tgz#be93afb6246192505c30df3f9c1c29a97d319a13"
 
 bulma@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.0.tgz#4f5c5de582810d11aa0cfb1f30aec8a792d0d92c"
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.1.tgz#5f21a77c0c06f7d80051c06628c23516081bd649"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -6579,8 +6579,8 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
 vue@^2.1.10, vue@^2.4.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.5.tgz#cc3cd9b2a4f1d7356861ae0f71da0e6beb091910"
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"

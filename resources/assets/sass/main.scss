@@ -47,9 +47,7 @@ html {
 .container.container-lower { //container margin-top
   margin: $container-margin;
 }
-
-/* region Left side settings panel */
-.panel-settings, .panel-settings *{
-  background: #fff !important;
+.is-fullwidth{
+  display: block;
+  width: 100%;
 }
-/* endregion */

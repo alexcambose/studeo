@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Notifications\PasswordChanged;
+use App\Notifications\BecameMentor;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -14,6 +15,20 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
+
+    function becomeMentor(){
+        $user = Auth::user();
+
+        $user->role = 2;
+        $user->save();
+        Auth::user()->notify(new BecameMentor());
+
+
+        return response()->json([
+            'success' => true,
+        ]);
+    }
+
     function user() {
         $user = Auth::user();
         $user->notifications;

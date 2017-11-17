@@ -2,7 +2,7 @@
     <div class="container container-lower">
         <div class="columns">
             <div class="column is-4">
-                <nav class="panel panel-settings">
+                <nav class="panel">
                     <p class="panel-heading">
                         <i class="fa fa-cog"></i> Setari
                     </p>

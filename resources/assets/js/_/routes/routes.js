@@ -50,10 +50,10 @@ router.beforeEach((to, from, next) => {
             else next();
         }
         if (to.matched.some(record => record.meta.onlyMentor)) {
-            if (user.logged && user.user.role < 2) next({ name: 'becomeMentor' });
+            if (user.user.role < 2) next({ name: 'becomeMentor' });
+            else if (!user.logged) next({ name: 'welcome' });
             else next();
-        }
-        else next();
+        } else next();
     };
     if (user.logged) {
         check();

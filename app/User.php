@@ -38,4 +38,9 @@ class User extends Authenticatable
         'email' => 'required|string|email', //username-ul
         'password' => 'required|string|max:16|min:6',
     ];
+
+    public function getSocialAttribute($value)
+    {
+        return json_decode($value); //convert "{}" to {}
+    }
 }

@@ -15,8 +15,12 @@ export default {
     },
     notifications: {
         PASSWORD_CHANGED: {
-            title: 'Parola schimbata',
-            message: ({ f_created_at }) => 'Parola a fost schimbata cu ' + f_created_at + '.',
+            title: 'Parola schimbată',
+            message: ({ f_created_at }) => 'Parola a fost schimbată cu ' + f_created_at + '.',
+        },
+        BECAME_MENTOR: {
+            title: 'Ai devenit mentor',
+            message: () => 'Tocmai ai devenit mentor! Contribuie și tu la succesul altora!',
         },
     },
 };

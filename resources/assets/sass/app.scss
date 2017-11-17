@@ -6,9 +6,13 @@
 @import "variables";
 @import "mixins";
 
-@import '~bulma/bulma.sass'; //importam bulma.sass ca sa putem sa utilizam variabilele, comenteaza ca sa te duci la stilurile clasice de la buefy
-@import '~buefy/lib/buefy.css';//Buefy
+//@import '~bulma/bulma.sass'; //importam bulma.sass ca sa putem sa utilizam variabilele, comenteaza ca sa te duci la stilurile clasice de la buefy
+//@import '~buefy/lib/buefy.css';//Buefy
 
+
+@import "~bulma/bulma.sass";
+@import "~buefy/src/scss/buefy";
+@import "~mdi/scss/materialdesignicons";
 
 @import "main.scss";
 @import "profile.scss";

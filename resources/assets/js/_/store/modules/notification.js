@@ -14,13 +14,13 @@ const getters = {
         // add diffForHumans time
         notifications = notifications.map(e => {
             e.f_created_at = moment(e.created_at).fromNow();
-            if(e.read_at) e.f_read_at = moment(e.read_at).fromNow();
+            if (e.read_at) e.f_read_at = moment(e.read_at).fromNow();
             e.data.title = config.notifications[e.data.type].title;
             e.data.message = config.notifications[e.data.type].message(e);
             return e;
         });
 
-        if(state.onlyUnread)
+        if (state.onlyUnread)
             notifications = notifications.filter(e => !e.read_at);
 
         return notifications;
