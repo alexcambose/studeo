@@ -21,7 +21,7 @@ Route::post('user/update/password', 'UserController@updatePassword');
 Route::post('user/update/profile', 'UserController@updateProfile');
 
 
-// region mentor sutff
+// region mentor stuff
 Route::post('user/mentor/register', 'UserController@becomeMentor');
 // endregion
 

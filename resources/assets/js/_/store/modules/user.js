@@ -34,9 +34,9 @@ const actions = {
         });
     },
 
-    updateUserProfile({ commit }, { nickname, sex }) {
+    updateUserProfile({ commit }, { nickname, sex, description, school, school_level, phone, birthday }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex })
+            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, school, school_level, phone, birthday })
                 .then(({data}) => {
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_PROFILE, data);

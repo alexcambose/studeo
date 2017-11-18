@@ -31,7 +31,9 @@
                     <b-field style="padding-top: 12px">
                         <b-input placeholder="Search..."
                                  type="search"
-                                 icon="search">
+                                 icon-pack="fa"
+                                 icon="search"
+                        >
                         </b-input>
                     </b-field>
                 </div>

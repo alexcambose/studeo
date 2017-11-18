@@ -44,12 +44,21 @@ class UserController extends Controller
         $validation = Validator::make($request->all(), [
            'nickname' => User::$rules['nickname'],
            'sex' => User::$rules['sex'],
+           'description' => User::$rules['description'],
+           'school' => User::$rules['school'],
+           'school_level' => User::$rules['school_level'],
+           'phone' => User::$rules['phone'],
         ]);
 
         if ($validation->fails()) return response()->json(['success' => false]);
 
         $user->nickname = $request->nickname;
         $user->sex = $request->sex;
+        $user->description = $request->description;
+        $user->birthday = $request->birthday;
+        $user->school = $request->school;
+        $user->school_level = $request->school_level;
+        $user->phone = $request->phone;
         $user->save();
 
         return response()->json([

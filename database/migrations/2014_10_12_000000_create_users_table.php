@@ -26,9 +26,10 @@ class CreateUsersTable extends Migration
             $table->integer('sex')->nullable();
             $table->integer('city')->nullable(); // https://gist.github.com/alexcambose/9343b66746e65ba592fc5b219f89631d
             $table->string('school')->nullable();
+            $table->string('school_level')->nullable(); // 1 - generala 2 - gimnaziu 3 - liceu 4 - facultate 0 - altceva
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->date('birthday')->nullable();
+            $table->string('birthday')->nullable();
             $table->text('description')->nullable();
             $table->string('email')->unique();
             $table->integer('image_id')->nullable();
