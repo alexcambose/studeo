@@ -23,6 +23,7 @@ export default [
         path: '/administrare-cursuri/adauga',
         component: AddCourse,
         name: 'dashboard-add-course',
+        redirect: '/administrare-cursuri/adauga/informatii/general',
         meta: { onlyMentor: true },
         children: [
             {

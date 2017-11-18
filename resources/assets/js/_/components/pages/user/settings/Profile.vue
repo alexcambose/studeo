@@ -27,24 +27,23 @@
                           icon-pack="fa"
                           icon="university"
                 >
-                    <option value="0">Altceva</option>
-                    <option value="1">Scoala generala</option>
-                    <option value="2">Gimnaziu</option>
-                    <option value="3">Liceu</option>
-                    <option value="4">Facultate</option>
+                    <option v-for="(level, index) in classLevels" :value="index">{{level}}</option>
                 </b-select>
             </b-field>
 
             <b-field label="Zi de naștere">
                 <b-datepicker
                          v-model="birthday"
-                         placeholder="Apasa pentru a selecta ziua de nastere"
+                         :max-date="new Date(2006, 0, 0)"
+                         :month-names="['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie']"
+                         :day-names="['Lu','Ma','Mi','Jo','Vi','Sb','D']"
+                         placeholder="Apasă pentru a selecta ziua de naștere"
                          icon="calendar-today"
                 >
                 </b-datepicker>
             </b-field>
 
-            <b-field label="Numar de telefon">
+            <b-field label="Număr de telefon">
                 <b-input
                         v-model="phone"
                         type="number"
@@ -82,9 +81,10 @@
 
 <script>
     import Submit from '../../../../components/includes/dumb/Submit';
+    import config from '../../../../../config';
 
     export default {
-        data(){
+        data() {
             const user = this.$store.state.user.user;
             return {
                 nickname: user.nickname,
@@ -96,25 +96,23 @@
                 school_level: user.school_level,
                 fetching: false,
                 success: '',
+                classLevels: config.classLevels,
             };
         },
         methods: {
-            makeDate(e) {
-                return new Date(e);
-            },
             submit(e) {
                 e.preventDefault();
                 this.fetching = true;
                 this.$store.dispatch('updateUserProfile', this)
                     .then(() => {
                         this.fetching = false;
-                        this.success = "Datele au fost salvate";
+                        this.success = 'Datele au fost salvate';
                     })
-                    .catch(() => this.fetching = true);
-            }
+                    .catch(() => this.fetching = false);
+            },
         },
         components: {
             Submit,
         },
-    }
+    };
 </script>

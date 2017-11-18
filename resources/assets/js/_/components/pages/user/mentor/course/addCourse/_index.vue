@@ -20,7 +20,7 @@
                         Scopul cursului
                     </router-link>
                     <router-link :to="{name:'dashboard-add-course-informations-target'}" class="panel-block">
-                        <span class="panel-icon">
+                      <span class="panel-icon">
                           <i class="fa fa-bullseye"></i>
                         </span>
                         Publicul țintă
@@ -29,14 +29,15 @@
 
                 <nav class="panel">
                     <p class="panel-heading">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <i class="fa fa-columns"></i>
                         Lecții
                     </p>
-                    <router-link v-for="lesson in lessons" :key="lesson.id" :to="{name:'dashboard-add-course-lesson', params: {id: lesson.id}}" class="panel-block">
-                        <span class="panel-icon">
-                          <i class="fa fa-bullseye"></i>
-                        </span>
-                        {{lesson.title}}
+                    <router-link v-for="lesson in newLessons" :key="lesson.id" :to="{name:'dashboard-add-course-lesson', params: {id: lesson.id}}" class="panel-block">
+                        <div style="flex: 1;">{{lesson.title}}</div>
+                        <div>
+                            <UpDownArrows :lesson_id="lesson.id" class="mr-5"></UpDownArrows>
+                        </div>
+                       <button @click="deleteLesson($event, lesson.id)" class="button is-small is-danger"><b-icon pack="fa" icon="trash"></b-icon></button>
                     </router-link>
                     <div class="panel-block">
                         <form @submit="addNewLesson" class="is-fullwidth">
@@ -62,17 +63,16 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
+    import UpDownArrows from './components/UpDownArrows';
 
     export default {
         computed: {
-            ...mapState({
-                lessons: state => state.newCourse.lessons,
-            }),
+            ...mapGetters(['newLessons']),
         },
         data() {
             return {
-                newLessonTitle: '',
+                newLessonTitle: 'Prima lectie',
             };
         },
         methods: {
@@ -82,6 +82,30 @@
                 });
                 this.newLessonTitle = '';
             },
+            deleteLesson(e, id) {
+                e.preventDefault();
+                const index = this.newLessons.findIndex(e => e.id === id);
+                console.log(this.newLessons[index - 1]);
+                if (this.newLessons[index - 1]) {
+                    this.$router.push({
+                        name: 'dashboard-add-course-lesson',
+                        params: { id: this.newLessons[index - 1].id },
+                    });
+                } else if (this.newLessons[index + 1]) {
+                    this.$router.push({
+                        name: 'dashboard-add-course-lesson',
+                        params: { id: this.newLessons[index + 1].id },
+                    });
+                } else {
+                    this.$router.push({
+                        name: 'dashboard-add-course-informations-general',
+                    });
+                }
+                this.$store.dispatch('deleteLesson', id);
+            },
+        },
+        components: {
+            UpDownArrows,
         },
     };
 </script>

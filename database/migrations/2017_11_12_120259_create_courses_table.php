@@ -18,15 +18,14 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->text('short_description');
             $table->text('description');
-            $table->text('target_class');
-            $table->text('target_isForStudents');
+            $table->text('target_classLevel');
+            $table->text('purpose');
             $table->text('prerequisites');
             $table->text('difficulty');
             $table->text('is_private');
             $table->integer('image_id')->unsigned();
             $table->integer('author_id')->unsigned();
-            $table->integer('views'); //posibil sa fie scos
-
+            $table->integer('views'); // posibil sa fie scos
         });
 
         /*

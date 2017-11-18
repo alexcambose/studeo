@@ -1,6 +1,8 @@
 <template>
     <div>
-        {{lesson.title}}
+        <pre>
+{{lesson}}
+        </pre>
     </div>
 </template>
 
@@ -8,7 +10,7 @@
 export default {
     computed: {
         lesson() {
-            return this.$store.getters.getNewLessonById(this.$route.params.id);
+            return this.$store.getters.newLessonById(this.$route.params.id);
         },
     },
 };

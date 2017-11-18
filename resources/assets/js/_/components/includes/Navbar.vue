@@ -73,7 +73,7 @@
                         <hr class="navbar-divider">
 
                         <a class="navbar-item" @click="logout">
-                            <b-icon pack="fa" icon="sign-out"></b-icon> Deautentificare
+                            <b-icon pack="fa" icon="sign-out"></b-icon> Deconectare
                         </a>
                     </div>
                 </div>

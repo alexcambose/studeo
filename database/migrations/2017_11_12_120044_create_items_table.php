@@ -40,7 +40,7 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
         Schema::dropIfExists('users_items');
+        Schema::dropIfExists('items');
     }
 }

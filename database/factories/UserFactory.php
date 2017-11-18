@@ -19,15 +19,15 @@ $factory->define(App\User::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'username' => $faker->userName,
-        'nickname' => 'Castronelul ' . $faker->userName,
-        'birthday' => $faker->date($format = 'd.m.Y', $max = 'now'),
+        'nickname' => $faker->userName,
+        'birthday' => $faker->iso8601($max = '-10 years'),
         'sex' => $faker->numberBetween(0, 2),
         'city' => $faker->numberBetween(0, 41),
         'school' => 'Scoala judeteana "' . $faker->firstNameMale . ' ' .  $faker->firstNameFemale . '"',
         'school_level' => $faker->numberBetween(0, 4),
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
-        'description' => $faker->paragraph(4),
+        'description' => $faker->text($maxNbChars = 250),
         'email' => $faker->unique()->safeEmail,
         'image_id' => function(){
             return factory(App\Media::class)->create()->id;
@@ -37,10 +37,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => $password ?: $password = bcrypt('123456'),
         'remember_token' => str_random(10),
     ];
-
-
-
-
 });
 $factory->define(App\Media::class, function (Faker $faker) {
     return [

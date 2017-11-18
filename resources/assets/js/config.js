@@ -23,4 +23,5 @@ export default {
             message: () => 'Tocmai ai devenit mentor! Contribuie și tu la succesul altora!',
         },
     },
+    classLevels: ['Altceva', 'Școala generală', 'Gimnaziu', 'Liceu', 'Facultate'],
 };
