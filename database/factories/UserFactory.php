@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'username' => $faker->userName,
         'nickname' => $faker->userName,
-        'birthday' => $faker->iso8601($max = '-10 years'),
+        'birthday' => $faker->iso8601($max = '-8 years'),
         'sex' => $faker->numberBetween(0, 2),
         'city' => $faker->numberBetween(0, 41),
         'school' => 'Scoala judeteana "' . $faker->firstNameMale . ' ' .  $faker->firstNameFemale . '"',

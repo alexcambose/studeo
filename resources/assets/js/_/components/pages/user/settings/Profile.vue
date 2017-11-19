@@ -34,7 +34,7 @@
             <b-field label="Zi de naștere">
                 <b-datepicker
                          v-model="birthday"
-                         :max-date="new Date(2006, 0, 0)"
+                         :max-date="new Date(2009, 0, 0)"
                          :month-names="['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie']"
                          :day-names="['Lu','Ma','Mi','Jo','Vi','Sb','D']"
                          placeholder="Apasă pentru a selecta ziua de naștere"

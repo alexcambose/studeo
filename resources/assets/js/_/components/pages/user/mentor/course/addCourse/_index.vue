@@ -30,7 +30,7 @@
                 <nav class="panel">
                     <p class="panel-heading">
                         <i class="fa fa-columns"></i>
-                        Lecții
+                        Lecții - {{newLessons.length}}
                     </p>
                     <router-link v-for="lesson in newLessons" :key="lesson.id" :to="{name:'dashboard-add-course-lesson', params: {id: lesson.id}}" class="panel-block">
                         <div style="flex: 1;">{{lesson.title}}</div>
@@ -72,7 +72,7 @@
         },
         data() {
             return {
-                newLessonTitle: 'Prima lectie',
+                newLessonTitle: '',
             };
         },
         methods: {
