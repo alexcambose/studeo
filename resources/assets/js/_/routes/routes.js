@@ -1,6 +1,7 @@
 import Home from '../components/pages/Home';
 import Profile from '../components/pages/user/Profile';
 import Notifications from '../components/pages/user/Notifications';
+import Help from '../components/pages/Help';
 import guestRoutes from './guest';
 import mentorRoutes from './mentor';
 import settingsRoutes from './settings';
@@ -28,6 +29,12 @@ const router = new VueRouter({
             path: '/notificari',
             component: Notifications,
             name: 'notifications',
+            meta: { onlyAuth: true },
+        },
+        {
+            path: '/ajutor',
+            component: Help,
+            name: 'help',
             meta: { onlyAuth: true },
         },
         ...guestRoutes,

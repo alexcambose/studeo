@@ -1,9 +1,46 @@
 <template>
-    <div>
-        UploadVideo
-    </div>
+        <b-upload multiple
+                  v-model="file"
+                  drag-drop
+                  accept=".mp4">
+            <section class="section">
+                <div class="content has-text-centered">
+                    <p>
+                        <b-icon
+                                icon="upload"
+                                size="is-large">
+                        </b-icon>
+                    </p>
+                    <div v-if="file[0]">
+                        <p>{{file[0].name}}</p>
+                        <small>{{file[0].size}}</small>
+                        <div>
+                            <button @click="file = []" class="button is-danger is-small"><b-icon pack="fa" icon="times"></b-icon></button>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <p>{{title}}</p>
+                        <small>{{subtitle}}</small>
+                    </div>
+
+                </div>
+            </section>
+        </b-upload>
 </template>
 
 <script>
-    export default {};
+    export default {
+        props: ['title', 'subtitle'],
+        data() {
+            return {
+                file: [],
+            };
+        },
+        watch: {
+            file(value) {
+                console.log(value);
+                this.$emit('input', value);
+            },
+        },
+    };
 </script>

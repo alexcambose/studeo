@@ -54,6 +54,7 @@
                         </form>
                     </div>
                 </nav>
+                <router-link :to="{name: 'dashboard-add-course-final'}" class="button is-info is-fullwidth">Finalizează</router-link>
             </div>
             <div class="column is-8">
                 <router-view></router-view>

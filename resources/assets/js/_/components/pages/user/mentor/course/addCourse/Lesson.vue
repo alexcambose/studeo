@@ -1,6 +1,5 @@
 <template>
     <div>
-        <upload-video></upload-video>
         <b-field label="Titlu">
             <b-input
                     v-model="title"
@@ -27,6 +26,8 @@
                     @blur="setContent"
             ></b-input>
         </b-field>
+        <upload-video title="Adaugă fișierul video" subtitle="(.mp4, max 500 MB)"></upload-video>
+
     </div>
 </template>
 

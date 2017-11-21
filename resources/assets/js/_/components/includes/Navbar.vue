@@ -68,7 +68,7 @@
 
                         <hr class="navbar-divider">
 
-                        <router-link to="/asd" class="navbar-item"><b-icon pack="fa" icon="question-circle"></b-icon> Ajutor</router-link>
+                        <router-link :to="{name: 'help'}" class="navbar-item"><b-icon pack="fa" icon="question-circle"></b-icon> Ajutor</router-link>
 
                         <hr class="navbar-divider">
 

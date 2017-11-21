@@ -5,6 +5,7 @@ import GeneralInformations from '../components/pages/user/mentor/course/addCours
 import Purpose from '../components/pages/user/mentor/course/addCourse/Purpose';
 import TargetAudience from '../components/pages/user/mentor/course/addCourse/TargetAudience';
 import Lesson from '../components/pages/user/mentor/course/addCourse/Lesson';
+import Final from '../components/pages/user/mentor/course/addCourse/Final';
 
 export default [
     {
@@ -48,6 +49,12 @@ export default [
                 path: '/administrare-cursuri/adauga/lectie/:id',
                 component: Lesson,
                 name: 'dashboard-add-course-lesson',
+                meta: { onlyMentor: true },
+            },
+            {
+                path: '/administrare-cursuri/adauga/finalizare',
+                component: Final,
+                name: 'dashboard-add-course-final',
                 meta: { onlyMentor: true },
             },
         ],

@@ -3,7 +3,7 @@ body {
   height: 100%;
 }
 #app{
-  padding-bottom: $footer-height;
+  padding-bottom: $footer-height + 10px;
 }
 html {
   position: relative;
@@ -32,17 +32,6 @@ html {
   border-radius: 9999px !important;
 }
 
-/* region dumb/Collapse.vue (unfinished) */
-
-.collapse {
-  &.collapse-trigger {
-    background-color: white;
-    padding: 10px;
-
-  }
-}
-
-/* endregion */
 
 .container.container-lower { //container margin-top
   margin: $container-margin;
@@ -50,4 +39,11 @@ html {
 .is-fullwidth{
   display: block;
   width: 100%;
+}
+
+.upload-draggable{
+  display: block !important;
+  .section{
+    padding: 1rem;
+  }
 }
