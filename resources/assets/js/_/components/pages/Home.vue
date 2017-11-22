@@ -1,19 +1,23 @@
 <template>
     <div>
-        <card :title="'SALUTARE DOMNULE, ' + this.$store.state.user.user.first_name">
+
+        <card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">
+            <upload-image title="Imamamama"></upload-image>
             Tu:
-           <pre>{{this.$store.state.user.user}}</pre>
+           <pre>{{$store.state.user.user}}</pre>
         </card>
     </div>
 
 </template>
 
 <script>
-    import Card from '../includes/dumb/Card';
+    import Card from '../includes/dumb/Card.vue';
+    import UploadImage from '../includes/dumb/UploadImage.vue';
 
     export default {
-        components:{
-            'card': Card,
+        components: {
+            Card,
+            UploadImage,
         },
-    }
+    };
 </script>

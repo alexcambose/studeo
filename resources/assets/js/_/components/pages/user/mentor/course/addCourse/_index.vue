@@ -33,7 +33,10 @@
                         Lecții - {{newLessons.length}}
                     </p>
                     <router-link v-for="lesson in newLessons" :key="lesson.id" :to="{name:'dashboard-add-course-lesson', params: {id: lesson.id}}" class="panel-block">
-                        <div style="flex: 1;">{{lesson.title}}</div>
+                        <div style="flex: 1;">
+                            <span v-if="lesson.title">{{lesson.title}}</span>
+                            <span v-else class="has-text-danger has-text-weight-semibold"><em>Fără titlu</em></span>
+                        </div>
                         <div>
                             <UpDownArrows :lesson_id="lesson.id" class="mr-5"></UpDownArrows>
                         </div>

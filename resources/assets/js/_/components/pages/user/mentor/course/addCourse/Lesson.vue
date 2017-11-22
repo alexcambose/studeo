@@ -26,7 +26,7 @@
                     @blur="setContent"
             ></b-input>
         </b-field>
-        <upload-video title="Adaugă fișierul video" subtitle="(.mp4, max 500 MB)"></upload-video>
+        <upload-video title="Adaugă fișierul video" v-model="video"></upload-video>
 
     </div>
 </template>
@@ -48,6 +48,12 @@
                 },
                 set (value) {
                     this.$store.dispatch('updateLesson', { id: this.lessonId, data: { title: value } });
+                },
+            },
+            video: {
+                get() {},
+                set (value) {
+                    this.$store.dispatch('updateLesson', { id: this.lessonId, data: { video: value } });
                 },
             },
         },

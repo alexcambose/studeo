@@ -1,8 +1,26 @@
 <template>
     <div>
-        <div class="image-change">
-        </div>
-        <form @submit="submit" class="mb-30">
+
+        <form @submit="submit" class="mb-30 mt-15">
+            <div class="columns">
+                <div class="column">
+                    <b-field label="Copertă">
+                        <input
+                                type="color"
+                                class="is-fullwidth"
+                                v-model="cover_color"
+                        >
+                    </b-field>
+                </div>
+                <div class="column" style="text-align:center">
+                    <img src="http://www.jocuri-kids.ro/files/img/Locomotiva-Thomas-in-Mexic_1405782948.jpg" class="settings_img" height="200" width="200" alt="">
+                    <div class="image-change">
+                        <upload-image-modal title="Adaugă fotografie"></upload-image-modal>
+                    </div>
+                </div>
+            </div>
+
+
             <b-field label="Descriere">
                 <b-input
                         v-model="description"
@@ -81,6 +99,7 @@
 
 <script>
     import Submit from '../../../../components/includes/dumb/Submit';
+    import UploadImageModal from '../../../../components/includes/dumb/UploadImageModal';
     import config from '../../../../../config';
 
     export default {
@@ -95,6 +114,7 @@
                 school: user.school,
                 school_level: user.school_level,
                 fetching: false,
+                cover_color: user.cover_color,
                 success: '',
                 classLevels: config.classLevels,
             };
@@ -113,6 +133,7 @@
         },
         components: {
             Submit,
+            UploadImageModal,
         },
     };
 </script>

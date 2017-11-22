@@ -20,7 +20,7 @@
                     </div>
                     <div v-else>
                         <p>{{title}}</p>
-                        <small>{{subtitle}}</small>
+                        <small>(.mp4, max 500 MB)</small>
                     </div>
 
                 </div>
@@ -30,7 +30,7 @@
 
 <script>
     export default {
-        props: ['title', 'subtitle'],
+        props: ['title'],
         data() {
             return {
                 file: [],
@@ -38,8 +38,7 @@
         },
         watch: {
             file(value) {
-                console.log(value);
-                this.$emit('input', value);
+                this.$emit('input', value[0]);
             },
         },
     };

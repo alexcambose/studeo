@@ -13,13 +13,4 @@ $factory->define(Item::class, function (Faker $faker) {
     ];
 });
 
-//$factory->define(Model::class, function (Faker $faker) {
-//    return [
-//        'title' => $faker->sentence(3),
-//        'description' => $faker->text(200),
-//        'price' => $faker->numberBetween(5, 99),
-//        'image_id' => $faker->numberBetween(1, 10)
-//    ];
-//});
-
 

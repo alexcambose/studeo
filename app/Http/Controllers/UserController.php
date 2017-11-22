@@ -59,6 +59,7 @@ class UserController extends Controller
         $user->school = $request->school;
         $user->school_level = $request->school_level;
         $user->phone = $request->phone;
+        $user->cover_color = $request->cover_color;
         $user->save();
 
         return response()->json([

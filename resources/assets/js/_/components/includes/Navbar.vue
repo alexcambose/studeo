@@ -29,7 +29,7 @@
                     </div>
                     <!--navbar secundar -->
                     <b-field style="padding-top: 12px">
-                        <b-input placeholder="Search..."
+                        <b-input placeholder="Caută"
                                  type="search"
                                  icon-pack="fa"
                                  icon="search"

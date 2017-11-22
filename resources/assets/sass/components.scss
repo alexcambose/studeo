@@ -1,0 +1,10 @@
+.preview-image-container{
+  text-align: center;
+  .preview-image{
+    display: inline-block;
+    background-position: center;
+    background-size: cover;
+    height: $preview-image-height;
+    width: $preview-image-width;
+  }
+}

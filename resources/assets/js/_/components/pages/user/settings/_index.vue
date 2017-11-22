@@ -24,7 +24,7 @@
                         </span>
                         Securitate
                     </router-link>
-                </nav>fd
+                </nav>
             </div>
             <div class="column is-8">
                 <router-view></router-view>

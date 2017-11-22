@@ -13,4 +13,4 @@ let mix = require('laravel-mix');
 mix.disableSuccessNotifications();
 mix.js('resources/assets/js/_/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
-    .sourceMaps();
+    // .sourceMaps();
