@@ -64,7 +64,7 @@ class UserController extends Controller
 
         return response()->json([
            'success' => true,
-           'user' => Auth::user(),
+           'user' => $user,
         ]);
     }
 

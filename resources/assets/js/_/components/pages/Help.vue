@@ -1,5 +1,5 @@
 <template>
-    <div class="container container-lower">
+    <div class="container content-lower">
         <div class="columns">
             <div class="column is-6 is-offset-3">
                 <b-field>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container container-lower">
+    <div class="container content-lower">
         <span class="title">Salut sunt un mentor</span>
         <router-link :to="{ name: 'dashboard-add-course' }" class="button is-info is-pulled-right">Adaugă curs</router-link>
         <hr>

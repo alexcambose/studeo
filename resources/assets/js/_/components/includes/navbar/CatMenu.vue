@@ -10,7 +10,7 @@
 <script>
     import { MATERII } from '../../../../utils';
     export default {
-        data: function(){
+        data: function() {
             return {
                 classes: MATERII,
             };

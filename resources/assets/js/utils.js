@@ -1,7 +1,7 @@
 export const MATERII = [
     {
         name: 'Matematică',
-        slug: 'mate'
+        slug: 'mate',
     },
     {
         name: 'Informatica',
@@ -30,7 +30,7 @@ export const MATERII = [
     {
         name: 'Limbi straine',
         slug: 'lbs',
-    }
+    },
 ];
 
 export const cities = ['Abrud', 'Adjud', 'Agnita', 'Aiud', 'Alba Iulia', 'Aleșd', 'Alexandria', 'Amara', 'Anina', 'Aninoasa', 'Arad', 'Ardud', 'Avrig', 'Azuga', 'Babadag', 'Băbeni', 'Bacău', 'Baia de Aramă',
@@ -54,5 +54,14 @@ export const cities = ['Abrud', 'Adjud', 'Agnita', 'Aiud', 'Alba Iulia', 'Aleșd
     'Târgu Bujor', 'Târgu Cărbunești', 'Târgu Frumos', 'Târgu Jiu', 'Târgu Lăpuș', 'Târgu Mureș', 'Târgu Neamț', 'Târgu Ocna', 'Târgu Secuiesc', 'Târnăveni', 'Tășnad', 'Tăuții-Măgherăuș',
     'Techirghiol', 'Tecuci', 'Teiuș', 'Țicleni', 'Timișoara', 'Tismana', 'Titu', 'Toplița', 'Topoloveni', 'Tulcea', 'Turceni', 'Turda', 'Turnu Măgurele','Ulmeni', 'Ungheni', 'Uricani',
     'Urlați', 'Urziceni', 'Valea lui Mihai', 'Vălenii de Munte', 'Vânju Mare', 'Vașcău', 'Vaslui', 'Vatra Dornei', 'Vicovu de Sus', 'Victoria', 'Videle', 'Vișeu de Sus', 'Vlăhița', 'Voluntari',
-    'Vulcan', 'Zalău', 'Zărnești', 'Zimnicea', 'Zlatna'
+    'Vulcan', 'Zalău', 'Zărnești', 'Zimnicea', 'Zlatna',
 ];
+
+export const convertFileSizeToHuman = size => {
+    if (size > 1000000) return '1 GB';
+    // megabytes
+    if (size > 1000000) return (size/1000000).toFixed(1) + ' MB';
+    // kilobytes
+    if (size > 1000) return (size/1000).toFixed(1) + ' KB';
+
+};

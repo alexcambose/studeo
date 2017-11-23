@@ -16,7 +16,7 @@
                 </div>
                 <div v-if="file[0]">
                     <p>{{file[0].name}}</p>
-                    <small>{{file[0].size}} *to MB*</small>
+                    <small>{{fileSize}}</small>
                     <div>
                         <button @click="file = []" class="button is-danger is-small"><b-icon pack="fa" icon="times"></b-icon></button>
                     </div>
@@ -32,8 +32,17 @@
 </template>
 
 <script>
+    import { convertFileSizeToHuman } from '../../../../utils';
+
     export default {
         props: ['title'],
+        computed: {
+            fileSize() {
+                if (this.file[0]) {
+                    return convertFileSizeToHuman(this.file[0].size);
+                }
+            },
+        },
         data() {
             return {
                 file: [],

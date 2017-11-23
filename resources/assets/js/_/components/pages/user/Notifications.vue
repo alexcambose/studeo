@@ -1,5 +1,5 @@
 <template>
-    <div class="container container-lower">
+    <div class="container content-lower">
         <div class="notification-action-header">
             <div class="data">
                 <b-switch v-model="onlyUnread" size="is-medium">

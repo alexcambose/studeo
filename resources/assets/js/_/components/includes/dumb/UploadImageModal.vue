@@ -18,8 +18,7 @@
     </div>
 </template>
 <script>
-    import UploadImage from './UploadImage';
-
+    import UploadImage from './UploadImage.vue';
     export default {
         props: {
             buttonLabel: {

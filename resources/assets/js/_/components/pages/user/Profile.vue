@@ -4,7 +4,7 @@
         <div class="profileNav">
             <navbar-profile></navbar-profile>
             <div class="container">
-                <div class="profileImage" :style="{'background-image': `url(${config.url.SERVER + user._image.filename})`}"></div>
+                <image-container class="profileImage" :image="user._image.filename"></image-container>
                 <div class="avatarImage"></div>
             </div>
         </div>
@@ -68,9 +68,9 @@
     </div>
 </template>
 <script>
-    import config from '../../../../config';
     import Curs from '../../includes/dumb/Curs.vue';
     import Item from '../../includes/dumb/Item.vue';
+    import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import NavbarProfile from '../../includes/NavbarProfile.vue';
     import { mapState, mapGetters } from 'vuex';
 
@@ -84,9 +84,6 @@
                 'fullname',
             ]),
         },
-        data() {
-            return { config };
-        },
         methods: {
             displayDate: function(e) {
                 return e.slice(0, 10);
@@ -96,6 +93,7 @@
             Curs,
             Item,
             NavbarProfile,
+            ImageContainer,
         },
     };
 </script>
