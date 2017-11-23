@@ -38,10 +38,3 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
-$factory->define(App\Media::class, function (Faker $faker) {
-    return [
-//        'filename' => $faker->image('public/userdata/images/', 200, 200, 'people'),
-        'type' => 0,
-        'filename' => 'public/userdata/images/' . $faker->numberBetween(0, 10) . '.jpg',
-    ];
-});

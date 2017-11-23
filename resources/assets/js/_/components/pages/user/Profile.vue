@@ -4,7 +4,7 @@
         <div class="profileNav">
             <navbar-profile></navbar-profile>
             <div class="container">
-                <div class="profileImage" style="background: url('http://www.jocuri-kids.ro/files/img/Locomotiva-Thomas-in-Mexic_1405782948.jpg')"></div>
+                <div class="profileImage" :style="{'background-image': `url(${config.url.SERVER + user._image.filename})`}"></div>
                 <div class="avatarImage"></div>
             </div>
         </div>
@@ -12,7 +12,7 @@
             <div class="columns">
                 <div class="column is-one-quarter">
                     <div class="userDetails">
-                        <h3 class="fullname">{{ this.fullname }}</h3>
+                        <h3 class="fullname">{{ fullname }}</h3>
                         <router-link :to="{ name: 'profile', params: {username: user.username}}">&nbsp; @{{ user.username }}</router-link>
                         <div class="shortDescription">
                             &nbsp; {{ user.description }}
@@ -68,31 +68,34 @@
     </div>
 </template>
 <script>
-    import Curs from '../../includes/dumb/Curs.vue'
-    import Item from '../../includes/dumb/Item.vue'
-    import NavbarProfile from '../../includes/ProfileNavbar.vue'
-    import { mapState, mapActions, mapGetters } from 'vuex'
+    import config from '../../../../config';
+    import Curs from '../../includes/dumb/Curs.vue';
+    import Item from '../../includes/dumb/Item.vue';
+    import NavbarProfile from '../../includes/NavbarProfile.vue';
+    import { mapState, mapGetters } from 'vuex';
+
     export default {
-        components: {
-            'curs': Curs,
-            'item': Item,
-            'navbar-profile': NavbarProfile,
-        },
         computed: {
             ...mapState({
                 bannerColor: state => state.user.user.cover_color,
                 user: state => state.user.user,
             }),
-
             ...mapGetters([
-               'fullname',
+                'fullname',
             ]),
-
+        },
+        data() {
+            return { config };
         },
         methods: {
             displayDate: function(e) {
                 return e.slice(0, 10);
-            }
+            },
         },
-    }
+        components: {
+            Curs,
+            Item,
+            NavbarProfile,
+        },
+    };
 </script>

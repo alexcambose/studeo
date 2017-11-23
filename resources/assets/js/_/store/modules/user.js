@@ -22,7 +22,7 @@ const actions = {
     registerMentor({ commit }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USER_MENTOR)
-                .then(({data}) => {
+                .then(({ data }) => {
                     if (data.success) {
                         commit(USER_REGISTER_MENTOR);
                         resolve();
@@ -37,7 +37,7 @@ const actions = {
     updateUserProfile({ commit }, { nickname, sex, description, school, school_level, phone, birthday, cover_color }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, school, school_level, phone, birthday, cover_color })
-                .then(({data}) => {
+                .then(({ data }) => {
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_PROFILE, data);
                         resolve();
@@ -52,8 +52,8 @@ const actions = {
     updateUserData({ commit }, { first_name, last_name, username, email }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USER_UPDATE, { first_name, last_name, username, email })
-                .then(({data}) => {
-                    if(data.success) {
+                .then(({ data }) => {
+                    if (data.success) {
                         commit(USER_AUTH_UPDATE_DATA, data);
                         resolve();
                     } else reject(data.message);
@@ -64,7 +64,7 @@ const actions = {
     updateUserPassword({ commit }, { current_password, password }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USER_UPDATE_PASSWORD, { current_password, password })
-                .then(({data}) => {
+                .then(({ data }) => {
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_PASSWORD);
                         resolve();
@@ -80,7 +80,7 @@ const actions = {
     login({ commit }, { email, password }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.LOGIN, { email, password })
-                .then(({data}) => {
+                .then(({ data }) => {
                     if (data.success) {
                         commit(USER_AUTH_LOGIN, data);
                         commit(NOTIFICATION_SET, data);
@@ -97,7 +97,7 @@ const actions = {
     register({ commit }, { first_name, last_name, username, email, password, cpassword }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.REGISTER, { first_name, last_name, username, email, password, cpassword })
-                .then(({data}) => {
+                .then(({ data }) => {
                     if (data.success) {
                         commit(USER_AUTH_LOGIN, data);
                         resolve(data);
@@ -125,7 +125,7 @@ const actions = {
 };
 
 const mutations = {
-    [USER_AUTH_UPDATE_DATA](state, { user }){
+    [USER_AUTH_UPDATE_DATA](state, { user }) {
         state.user = user;
     },
     [USER_AUTH_LOGIN](state, { user }) {

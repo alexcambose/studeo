@@ -12,7 +12,7 @@
                         >
                     </b-field>
                 </div>
-                <div class="column" style="text-align:center">
+                <div class="column has-text-centered">
                     <img src="http://www.jocuri-kids.ro/files/img/Locomotiva-Thomas-in-Mexic_1405782948.jpg" class="settings_img" height="200" width="200" alt="">
                     <div class="image-change">
                         <upload-image-modal title="Adaugă fotografie"></upload-image-modal>

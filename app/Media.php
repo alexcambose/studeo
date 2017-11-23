@@ -8,4 +8,9 @@ class Media extends Model
 {
     //
    protected $table = 'media';
+
+//    public function user()
+//    {
+//        return $this->hasOne(User::class);
+//    }
 }

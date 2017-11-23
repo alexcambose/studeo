@@ -29,6 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['_image'];
+
     public static $rules =  [
         'first_name' => 'required|string|max:30',
         'last_name' => 'required|string|max:30',
@@ -43,8 +45,14 @@ class User extends Authenticatable
         'password' => 'required|string|max:16|min:6',
     ];
 
-    public function getSocialAttribute($value)
-    {
+    public function getSocialAttribute($value){
         return json_decode($value); //convert "{}" to {}
+    }
+    public function getImageAttribute(){
+        return $this->image();
+    }
+
+    public function image(){
+        return Media::where('id', $this->image_id)->first();
     }
 }

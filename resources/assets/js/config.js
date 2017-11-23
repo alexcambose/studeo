@@ -1,6 +1,7 @@
 const SERVER = 'http://localhost:8000/';
 export default {
     url: {
+        SERVER,
         LOGIN: SERVER + 'login',
         LOGOUT: SERVER + 'logout',
         REGISTER: SERVER + 'register',
