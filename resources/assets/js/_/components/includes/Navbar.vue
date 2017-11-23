@@ -60,20 +60,21 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
-                        <router-link :to="{name: 'profile'}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon> Profil</router-link>
-                        <router-link :to="{name: 'notifications'}" class="navbar-item"><b-icon pack="fa" icon="comment"></b-icon> Notificări</router-link>
-                        <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon> Setări</router-link>
+                        <router-link :to="{name: 'profile'}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon>&nbsp; Profil</router-link>
+                        <router-link :to="{name: 'notifications'}" class="navbar-item"><b-icon pack="fa" icon="comment"></b-icon>&nbsp; Notificări</router-link>
+                        <router-link :to="{name: 'playlists'}" class="navbar-item"><b-icon pack="fa" icon="book"></b-icon>&nbsp; Bibliotecă</router-link>
+                        <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon>&nbsp;&nbsp; Setări</router-link>
 
-                        <router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon> Panou admin</router-link>
+                        <router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon>&nbsp; Panou admin</router-link>
 
                         <hr class="navbar-divider">
 
-                        <router-link :to="{name: 'help'}" class="navbar-item"><b-icon pack="fa" icon="question-circle"></b-icon> Ajutor</router-link>
+                        <router-link :to="{name: 'help'}" class="navbar-item"><b-icon pack="fa" icon="question-circle"></b-icon>&nbsp; Ajutor</router-link>
 
                         <hr class="navbar-divider">
 
                         <a class="navbar-item" @click="logout">
-                            <b-icon pack="fa" icon="sign-out"></b-icon> Deconectare
+                            <b-icon pack="fa" icon="sign-out"></b-icon>&nbsp; Deconectare
                         </a>
                     </div>
                 </div>

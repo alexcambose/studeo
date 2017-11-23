@@ -39,7 +39,7 @@ const actions = {
             axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, school, school_level, phone, birthday, cover_color })
                 .then(({ data }) => {
                     if (data.success) {
-                        commit(USER_AUTH_UPDATE_PROFILE, data);
+                        commit(USER_AUTH_UPDATE_DATA, data);
                         resolve();
                     } else {
                         reject(data.message);

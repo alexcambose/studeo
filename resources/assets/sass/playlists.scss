@@ -1,0 +1,38 @@
+.playlists {
+  background-color: white;
+  box-shadow: 0 0 8px rgba(119,119,119,.5);
+  .menu-label {
+    text-align: center;
+    padding: 10px !important;
+  }
+  .leftside_playlists {
+    box-shadow: 4px 0 4px 0 rgba(204,204,204,.75);
+    .playlists-bar {
+      color: black;
+      line-height: 18px;
+      display: block;
+      padding: 0 !important;
+      margin: 0 !important;
+
+      a {
+        color: black;
+        transition: all ease .3s;
+        border-left: 5px solid white;
+        border-top: 1px solid #eee;
+        font-weight: 200;
+        font-size: 15px;
+        &.is-active {
+          border-left: 5px solid darken($primary, 10);
+        }
+        &:hover {
+          border-left: 5px solid darken($primary, 10);
+          color: gray !important;
+          background-color: white;
+        }
+      }
+    }
+  }
+  .rightside_playlists {
+
+  }
+}

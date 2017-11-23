@@ -51,8 +51,8 @@ class User extends Authenticatable
     public function getImageAttribute(){
         return $this->image();
     }
-
     public function image(){
+        // has one
         return Media::where('id', $this->image_id)->first();
     }
 }
