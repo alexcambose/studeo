@@ -14,26 +14,16 @@
                     <div class="userDetails">
                         <h3 class="fullname">{{ fullname }}</h3>
                         <router-link :to="{ name: 'profile', params: {username: user.username}}">&nbsp; @{{ user.username }}</router-link>
-                        <div class="shortDescription">
+
+                        <div class="description" v-if="user.description">
                             &nbsp; {{ user.description }}
                         </div>
-                        <div class="oras" v-if="user.city">
-                            <i class="fa fa-building fa-lg"></i>
-                            {{ user.city }}
-                        </div>
-                        <div class="dataNastere" v-if="user.birthday">
-                            <p>
-                                <i class="fa fa-birthday-cake fa-lg"></i>
-                            Născut la {{ displayDate(user.birthday) }}
-                            </p>
-                        </div>
-                        <div class="scoala">
-                            <i class="fa fa-graduation-cap fa-lg"></i>
-                            {{ user.school }}
-                        </div>
-                        <div class="dataAlaturare">
-                            <i class="fa fa-calendar-check-o fa-lg"></i>
-                            S-a alăturat în {{ displayDate(user.created_at) }}
+
+                        <div v-for="item in userInfo">
+                            <div :class="item.name">
+                                <i :class="item.icon"></i>
+                                {{ item.content }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,10 +45,10 @@
                             </a>
                         </header>
                         <div class="card-content">
-                           <item></item>
-                           <item></item>
-                           <item></item>
-                           <item></item>
+                            <item></item>
+                            <item></item>
+                            <item></item>
+                            <item></item>
                         </div>
                     </div>
                 </div>
@@ -77,12 +67,20 @@
     export default {
         computed: {
             ...mapState({
-                bannerColor: state => state.user.user.cover_color,
                 user: state => state.user.user,
             }),
             ...mapGetters([
                 'fullname',
             ]),
+            userInfo() {
+                const { city, birthday, school, created_at } = this.user;
+                return [
+                    { 'name': 'city', 'icon': 'fa fa-building fa-lg', 'content': city },
+                    { 'name': 'birthday', 'icon': 'fa fa-birthday-cake fa-lg', 'content': `Născut la ${this.displayDate(birthday)}`},
+                    { 'name': 'school', 'icon': 'fa fa-graduation-cap fa-lg', 'content': school },
+                    { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat în ${created_at}` },
+                ];
+            },
         },
         methods: {
             displayDate: function(e) {

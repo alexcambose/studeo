@@ -26,13 +26,15 @@
                     @blur="setContent"
             ></b-input>
         </b-field>
+        <questions></questions>
         <upload-video title="Adaugă fișierul video" v-model="video"></upload-video>
 
     </div>
 </template>
 
 <script>
-    import UploadVideo from '../../../../../includes/dumb/UploadVideo';
+    import UploadVideo from '../../../../../includes/dumb/UploadVideo.vue';
+    import Questions from './components/Questions.vue';
 
     export default {
         computed: {
@@ -67,6 +69,7 @@
         },
         components: {
             UploadVideo,
+            Questions,
         },
     };
 </script>

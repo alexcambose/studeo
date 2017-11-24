@@ -33,19 +33,18 @@
                 <option value="3">Greu</option>
             </b-select>
         </b-field>
-        <b-field label="Cerințe preliminare">
-            <b-input
-                    maxlength="1000"
-                    type="textarea"
-                    :value="newCourse.prerequisites"
-                    @blur="setPrerequisites"
-            ></b-input>
-        </b-field>
+        <multiple-fields
+                :value="newCourse.prerequisites"
+                label="Cerințe preliminare"
+                addFieldLabel="Adaugă cerință nouă"
+                @change="setPrerequisites"
+        ></multiple-fields>
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex';
+    import MultipleFields from '../../../../../../components/includes/dumb/MultipleFields.vue';
 
     export default {
         methods: {
@@ -61,14 +60,17 @@
             setDifficulty(e) {
                 this.$store.dispatch('updateNewCourseData', { difficulty: e.target.value });
             },
-            setPrerequisites(e) {
-                this.$store.dispatch('updateNewCourseData', { prerequisites: e.target.value });
+            setPrerequisites(values) {
+                this.$store.dispatch('updateNewCourseData', { prerequisites: values });
             },
         },
         computed: {
             ...mapState({
                 newCourse: state => state.newCourse,
             }),
+        },
+        components: {
+            MultipleFields,
         },
     };
 </script>

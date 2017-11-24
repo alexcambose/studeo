@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('birthday')->nullable();
             $table->text('description')->nullable();
             $table->string('email')->unique();
-            $table->integer('image_id')->nullable();
+            $table->integer('image_id')->unsigned();;
             $table->integer('is_teacher')->nullable();
             $table->integer('role')->default(1);  // 1 - user  2 - mentor  3 - administrator
             $table->string('cover_color')->default("#fff");
@@ -42,7 +42,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-//            $table->foreign('image_id')->references('id')->on('media');
+            $table->foreign('image_id')->references('id')->on('media');
         });
     }
 
