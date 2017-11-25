@@ -1,6 +1,8 @@
 .playlists {
   background-color: white;
+  height: 100% !important;
   box-shadow: 0 0 8px rgba(119,119,119,.5);
+  min-height: 70vh !important;
   .menu-label {
     text-align: center;
     padding: 10px !important;
@@ -18,9 +20,12 @@
         color: black;
         transition: all ease .3s;
         border-left: 5px solid white;
-        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
         font-weight: 200;
         font-size: 15px;
+        &.first {
+          border-top: 1px solid #eee;
+        }
         &.is-active {
           border-left: 5px solid darken($primary, 10);
         }
@@ -33,6 +38,25 @@
     }
   }
   .rightside_playlists {
+    margin: 0 20px;
+    .header {
+      height: auto;
+      .playlist_title {
+        font-size: 25px;
+        font-weight: 500;
+        padding: 10px;
+      }
+      .playlist_description {
+        margin-top: 10px;
+        font-weight: 300;
+      }
+    }
+    .content {
 
+    }
   }
+}
+
+.course_box {
+  border-radius: 0 !important;
 }

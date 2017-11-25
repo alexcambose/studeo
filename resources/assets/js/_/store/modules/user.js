@@ -33,6 +33,7 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
+
     updateUserProfileImage({ commit }, { file, progressCallback }) {
         return new Promise((resolve, reject) => {
             const fd = new FormData();
@@ -54,9 +55,10 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
-    updateUserProfile({ commit }, { nickname, sex, description, school, school_level, phone, birthday, cover_color }) {
+
+    updateUserProfile({ commit }, { nickname, sex, description, city, school, school_level, phone, birthday, cover_color }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, school, school_level, phone, birthday, cover_color })
+            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, city, school, school_level, phone, birthday, cover_color })
                 .then(({ data }) => {
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_DATA, data);

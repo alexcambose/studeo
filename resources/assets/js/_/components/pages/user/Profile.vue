@@ -1,6 +1,6 @@
 <template>
     <div class="profilPage">
-        <div class="banner" :style="{backgroundColor: bannerColor}"></div>
+        <div class="banner" :style="{backgroundColor: user.cover_color}"></div>
         <div class="profileNav">
             <navbar-profile></navbar-profile>
             <div class="container">
@@ -28,9 +28,9 @@
                     </div>
                 </div>
                 <div class="column">
-                    <curs></curs>
-                    <curs></curs>
-                    <curs></curs>
+                    <course></course>
+                    <course></course>
+                    <course></course>
                 </div>
                 <div class="column is-one-quarter">
                     <div class="card">
@@ -58,11 +58,12 @@
     </div>
 </template>
 <script>
-    import Curs from '../../includes/dumb/Curs.vue';
+    import Course from '../../includes/dumb/Course.vue';
     import Item from '../../includes/dumb/Item.vue';
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import NavbarProfile from '../../includes/NavbarProfile.vue';
     import { mapState, mapGetters } from 'vuex';
+    import { cities } from '../../../../utils';
 
     export default {
         computed: {
@@ -75,10 +76,10 @@
             userInfo() {
                 const { city, birthday, school, created_at } = this.user;
                 return [
-                    { 'name': 'city', 'icon': 'fa fa-building fa-lg', 'content': city },
+                    { 'name': 'city', 'icon': 'fa fa-building fa-lg', 'content': cities[city] },
                     { 'name': 'birthday', 'icon': 'fa fa-birthday-cake fa-lg', 'content': `Născut la ${this.displayDate(birthday)}`},
                     { 'name': 'school', 'icon': 'fa fa-graduation-cap fa-lg', 'content': school },
-                    { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat în ${created_at}` },
+                    { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat în ${this.displayDate(created_at)}` },
                 ];
             },
         },
@@ -88,7 +89,7 @@
             },
         },
         components: {
-            Curs,
+            Course,
             Item,
             NavbarProfile,
             ImageContainer,

@@ -65,6 +65,17 @@
             </b-datepicker>
         </b-field>
 
+        <b-field label="Oraș">
+            <b-select
+                    expanded
+                    v-model="city"
+                    icon-pack="fa"
+                    icon="building"
+            >
+                <option v-for="(item, index) in cities" :value="index">{{ item }}</option>
+            </b-select>
+        </b-field>
+
         <b-field label="Număr de telefon">
             <b-input
                     v-model="phone"
@@ -105,6 +116,7 @@
     import Submit from '../../../../components/includes/dumb/Submit.vue';
     import UploadImageModal from '../../../../components/includes/dumb/UploadImageModal.vue';
     import config from '../../../../../config';
+    import { cities } from '../../../../../utils'
 
     export default {
         computed: {
@@ -115,7 +127,10 @@
         data() {
             const user = this.$store.state.user.user;
             return {
+                cities: cities,
+                image: user._image.filename,
                 nickname: user.nickname,
+                city: user.city,
                 sex: user.sex,
                 phone: user.phone,
                 birthday: new Date(user.birthday),
@@ -135,6 +150,7 @@
                 this.$store.dispatch('updateUserProfile', this)
                     .then(() => {
                         this.fetching = false;
+                        console.log(this);
                         this.success = 'Datele au fost salvate';
                     })
                     .catch(() => this.fetching = false);

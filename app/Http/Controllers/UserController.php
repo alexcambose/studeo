@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Media;
 use App\Notifications\PasswordChanged;
@@ -17,24 +16,18 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-
     function becomeMentor(){
         $user = Auth::user();
-
         $user->role = 2;
         $user->save();
         Auth::user()->notify(new BecameMentor());
-
-
         return response()->json([
             'success' => true,
         ]);
     }
-
     function user() {
         $user = Auth::user();
         $user->notifications;
-
         return response()->json([
             'success' => !!$user,
             'user' => $user,
@@ -73,16 +66,15 @@ class UserController extends Controller
     public function updateProfile(Request $request) {
         $user = Auth::user();
         $validation = Validator::make($request->all(), [
-           'nickname' => User::$rules['nickname'],
-           'sex' => User::$rules['sex'],
-           'description' => User::$rules['description'],
-           'school' => User::$rules['school'],
-           'school_level' => User::$rules['school_level'],
-           'phone' => User::$rules['phone'],
+            'nickname' => User::$rules['nickname'],
+            'sex' => User::$rules['sex'],
+            'description' => User::$rules['description'],
+            'school' => User::$rules['school'],
+            'school_level' => User::$rules['school_level'],
+            'phone' => User::$rules['phone'],
+            'city' => User::$rules['city'],
         ]);
-
         if ($validation->fails()) return response()->json(['success' => false]);
-
         $user->nickname = $request->nickname;
         $user->sex = $request->sex;
         $user->description = $request->description;
@@ -91,14 +83,13 @@ class UserController extends Controller
         $user->school_level = $request->school_level;
         $user->phone = $request->phone;
         $user->cover_color = $request->cover_color;
+        $user->city = $request->city;
         $user->save();
-
         return response()->json([
-           'success' => true,
-           'user' => $user,
+            'success' => true,
+            'user' => $user,
         ]);
     }
-
     function updateData(Request $request) {
         $user = Auth::user();
         $validation = Validator::make($request->all(), [
@@ -108,19 +99,16 @@ class UserController extends Controller
             'email' => User::$rules['email'],
         ]);
         if($validation->fails()) return response()->json(['success' => false]);
-
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->save();
-
         return response()->json([
             'success' => true,
             'user' => $user,
         ]);
     }
-
     function updatePassword(Request $request) {
         $user = Auth::user();
         if(Hash::check($request->current_password, $user->password)) {
@@ -128,18 +116,14 @@ class UserController extends Controller
                 'password' => User::$rules['password'],
             ]);
             if($validation->fails()) return response()->json(['success' => false]);
-
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::user()->notify(new PasswordChanged());
             return response()->json(['success' => true]);
         }
-
-
         return response()->json([
             'success' => false,
             'message' => trans('auth.failed'),
         ]);
     }
-
 }

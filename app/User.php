@@ -43,7 +43,8 @@ class User extends Authenticatable
         'phone' => 'numeric',
         'email' => 'required|string|email', //username-ul
         'password' => 'required|string|max:16|min:6',
-        'image' => 'required|image|mimes:jpeg,png,jpg'
+        'image' => 'required|image|mimes:jpeg,png,jpg',
+        'city' => 'numeric',
     ];
 
     public function getSocialAttribute($value){
