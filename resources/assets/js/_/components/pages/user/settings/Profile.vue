@@ -13,7 +13,13 @@
             <div class="column is-4 has-text-centered">
                 <image-container class="settings_img" :image="image"></image-container>
                 <div class="image-change">
-                    <upload-image-modal title="Adaugă fotografie"></upload-image-modal>
+                    <upload-image-modal
+                            title="Adaugă fotografie"
+                            maxsize="10000000"
+                            @submit="updateImage"
+                            ref="updateImageModal"
+                    ></upload-image-modal>
+                    <button @click="$refs.updateImageModal.show()" class="button is-primary is-fullwidth">Schimbă imaginea</button>
                 </div>
             </div>
         </div>
@@ -101,10 +107,14 @@
     import config from '../../../../../config';
 
     export default {
+        computed: {
+            image() {
+                return this.$store.state.user.user._image.filename;
+            },
+        },
         data() {
             const user = this.$store.state.user.user;
             return {
-                image: user._image.filename,
                 nickname: user.nickname,
                 sex: user.sex,
                 phone: user.phone,
@@ -128,6 +138,13 @@
                         this.success = 'Datele au fost salvate';
                     })
                     .catch(() => this.fetching = false);
+            },
+            updateImage(file) {
+                this.$refs.updateImageModal.setProgress(12);
+                this.$store.dispatch('updateUserProfileImage', { file, progressCallback: value => this.$refs.updateImageModal.setProgress(value) })
+                    .then(() => {
+                        this.$refs.updateImageModal.hide();
+                    });
             },
         },
         components: {

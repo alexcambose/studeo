@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Media;
 use App\Notifications\PasswordChanged;
 use App\Notifications\BecameMentor;
 use App\User;
+use Illuminate\Support\Facades\Log;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,35 @@ class UserController extends Controller
             'success' => !!$user,
             'user' => $user,
         ]);
+    }
+
+    public function updateProfileImage(Request $request) {
+        $user = Auth::user();
+        $validation = Validator::make($request->all(), [
+            'image' => User::$rules['image'],
+        ]);
+        if ($validation->fails()) return response()->json(['success' => false]);
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            //image manipulation stuff
+            $image = $request->file('image');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('userdata/images/'), $filename);
+
+            //add new media row
+            $media = new Media();
+            $media->filename = 'userdata/images/' . $filename;
+            $media->save();
+
+            //update user with the media id
+            $user->image_id = $media->id;
+            $user->save();
+
+            //enjoy
+            return response()->json(['success' => true, 'user'=>$user]);
+        }
+        return response()->json(['success' => false]); // :c
     }
 
     public function updateProfile(Request $request) {

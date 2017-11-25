@@ -33,7 +33,27 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
-
+    updateUserProfileImage({ commit }, { file, progressCallback }) {
+        return new Promise((resolve, reject) => {
+            const fd = new FormData();
+            fd.append('image', file);
+            axios.post(config.url.USER_UPDATE_PROFILE_IMAGE, fd, {
+                onUploadProgress: progressEvent => {
+                    const percent = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
+                    if (progressCallback) progressCallback(percent);
+                },
+            })
+                .then(({ data }) => {
+                    if (data.success) {
+                        commit(USER_AUTH_UPDATE_DATA, data);
+                        resolve();
+                    } else {
+                        reject(data.message);
+                    }
+                })
+                .catch(err => reject(err));
+        });
+    },
     updateUserProfile({ commit }, { nickname, sex, description, school, school_level, phone, birthday, cover_color }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, school, school_level, phone, birthday, cover_color })

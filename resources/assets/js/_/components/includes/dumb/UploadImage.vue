@@ -15,17 +15,18 @@
                     <span class="preview-image" :style="{'background': `url(${preview})`}"></span>
                 </div>
                 <div v-if="file[0]">
-                    <p>{{file[0].name}}</p>
+                    <div>{{file[0].name}}</div>
                     <small>{{fileSize}}</small>
                     <div>
                         <button @click="file = []" class="button is-danger is-small"><b-icon pack="fa" icon="times"></b-icon></button>
                     </div>
+                    <progress v-if="progress" class="progress is-success mt-10" :value="progress" max="100">{{progress}}%</progress>
                 </div>
                 <div v-else>
                     <p>{{title}}</p>
-                    <small>(.png, .jpg, .jpeg, max 10 MB)</small>
+                    <small>(.png, .jpg, .jpeg{{maxsize ? `, max ${convertFileSizeToHuman(maxsize)}` : ''}})</small>
+                    <p v-if="this.error" class="has-text-danger">{{error}}</p>
                 </div>
-
             </div>
         </section>
     </b-upload>
@@ -35,30 +36,45 @@
     import { convertFileSizeToHuman } from '../../../../utils';
 
     export default {
-        props: ['title'],
+        props: ['title', 'maxsize'],
         computed: {
             fileSize() {
                 if (this.file[0]) {
-                    return convertFileSizeToHuman(this.file[0].size);
+                    return this.convertFileSizeToHuman(this.file[0].size);
                 }
             },
         },
         data() {
             return {
                 file: [],
+                progress: 0,
+                error: '',
                 preview: '',
             };
         },
         watch: {
             file(value) {
-                this.$emit('input', value[0]);
-                if (value[0]) {
+                const file = value[0];
+                if (this.maxsize && file && file.size > this.maxsize) {
+                    this.error = 'Imaginea este prea mare!';
+                    this.file = [];
+                    return 0;
+                }
+                this.$emit('input', file);
+                if (file) {
+                    this.error = '';
                     const reader = new FileReader();
-                    reader.readAsDataURL(value[0]);
+                    reader.readAsDataURL(file);
                     reader.onload = () => {
                         this.preview = reader.result;
                     };
                 }
+            },
+        },
+        methods: {
+            convertFileSizeToHuman,
+            setProgress(value) {
+                this.progress = value;
             },
         },
     };

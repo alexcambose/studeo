@@ -1,17 +1,16 @@
 <template>
     <div>
-        <button @click="isComponentModalActive = true" class="button is-info">{{buttonLabel}}</button>
-        <b-modal :active.sync="isComponentModalActive" has-modal-card>
+        <b-modal :active.sync="showModal" has-modal-card>
             <div class="modal-card">
                 <header class="modal-card-head">
                     <p class="modal-card-title">{{modalTitle}}</p>
                 </header>
                 <section class="modal-card-body">
-                    <upload-image v-bind="$attrs" v-model="file"></upload-image>
+                    <upload-image ref="uploadImage" v-bind="$attrs" v-model="file"></upload-image>
                 </section>
                 <footer class="modal-card-foot">
-                    <button class="button" type="button" @click="isComponentModalActive = false">{{closeLabel}}</button>
-                    <button class="button is-primary" @click="submit">{{submitLabel}}</button>
+                    <button class="button" type="button" @click="hide">{{closeLabel}}</button>
+                    <button class="button is-success" @click="submit" :disabled="!file">{{submitLabel}}</button>
                 </footer>
             </div>
         </b-modal>
@@ -21,9 +20,6 @@
     import UploadImage from './UploadImage.vue';
     export default {
         props: {
-            buttonLabel: {
-                default: 'Adaugă imagine',
-            },
             modalTitle: {
                 default: 'Incarcă imagine',
             },
@@ -36,13 +32,22 @@
         },
         data() {
             return {
-                isComponentModalActive: false,
-                file: [],
+                showModal: false,
+                file: null,
             };
         },
         methods: {
             submit() {
-                console.log(this.file);
+                this.$emit('submit', this.file);
+            },
+            show() {
+                this.showModal = true;
+            },
+            hide() {
+                this.showModal = false;
+            },
+            setProgress(value) {
+                this.$refs.uploadImage.setProgress(value);
             },
         },
         components: {

@@ -2,9 +2,15 @@
   text-align: center;
   .preview-image{
     display: inline-block;
-    background-position: center;
-    background-size: cover;
+    background-position: center !important;
+    background-size: cover !important;
     height: $preview-image-height;
     width: $preview-image-width;
+  }
+}
+.upload-draggable{
+  display: block !important;
+  .section{
+    padding: 1rem;
   }
 }

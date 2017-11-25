@@ -10,6 +10,7 @@ export default {
         USER_UPDATE_PASSWORD: SERVER + 'user/update/password',
         USER_MENTOR: SERVER + 'user/mentor/register',
         USER_UPDATE_PROFILE: SERVER + 'user/update/profile',
+        USER_UPDATE_PROFILE_IMAGE: SERVER + 'user/update/profileImage',
         NOTIFICATION: SERVER + 'notification/get',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll',

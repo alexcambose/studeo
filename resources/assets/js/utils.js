@@ -58,10 +58,9 @@ export const cities = ['Abrud', 'Adjud', 'Agnita', 'Aiud', 'Alba Iulia', 'Aleșd
 ];
 
 export const convertFileSizeToHuman = size => {
-    if (size > 1000000) return '1 GB';
+    if (size >= 1000000000) return '1 GB';
     // megabytes
-    if (size > 1000000) return (size/1000000).toFixed(1) + ' MB';
+    if (size >= 1000000) return (size/1000000).toFixed(1).replace(/[.,]0$/, '') + ' MB';
     // kilobytes
-    if (size > 1000) return (size/1000).toFixed(1) + ' KB';
-
+    if (size >= 1000) return (size/1000).toFixed(1).replace(/[.,]0$/, '') + ' KB';
 };
