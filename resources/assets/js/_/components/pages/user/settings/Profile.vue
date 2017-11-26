@@ -116,7 +116,7 @@
     import Submit from '../../../../components/includes/dumb/Submit.vue';
     import UploadImageModal from '../../../../components/includes/dumb/UploadImageModal.vue';
     import config from '../../../../../config';
-    import { cities } from '../../../../../utils'
+    import { cities } from '../../../../../utils';
 
     export default {
         computed: {
@@ -128,7 +128,6 @@
             const user = this.$store.state.user.user;
             return {
                 cities: cities,
-                image: user._image.filename,
                 nickname: user.nickname,
                 city: user.city,
                 sex: user.sex,

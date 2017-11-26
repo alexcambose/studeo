@@ -58,9 +58,10 @@
 
 <script>
     import PlaylistCourse from './components/Playlist_courses.vue';
+
     export default {
         components: {
             'playlist_course': PlaylistCourse,
         },
-    }
+    };
 </script>

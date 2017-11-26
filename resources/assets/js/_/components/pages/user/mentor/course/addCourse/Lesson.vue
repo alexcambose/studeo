@@ -26,7 +26,7 @@
                     @blur="setContent"
             ></b-input>
         </b-field>
-        <questions></questions>
+        <questions :lesson_id="this.lesson_id"></questions>
         <upload-video title="Adaugă fișierul video" v-model="video"></upload-video>
 
     </div>
@@ -34,37 +34,37 @@
 
 <script>
     import UploadVideo from '../../../../../includes/dumb/UploadVideo.vue';
-    import Questions from './components/Questions.vue';
+    import Questions from './components/questions/Questions.vue';
 
     export default {
         computed: {
-            lessonId() {
+            lesson_id() {
                 return parseInt(this.$route.params.id);
             },
             lesson() {
-                return this.$store.getters.newLessonById(this.lessonId);
+                return this.$store.getters.newLessonById(this.lesson_id);
             },
             title: {
                 get () {
                     return this.lesson.title;
                 },
                 set (value) {
-                    this.$store.dispatch('updateLesson', { id: this.lessonId, data: { title: value } });
+                    this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { title: value } });
                 },
             },
             video: {
                 get() {},
                 set (value) {
-                    this.$store.dispatch('updateLesson', { id: this.lessonId, data: { video: value } });
+                    this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { video: value } });
                 },
             },
         },
         methods: {
             setShortDescription(e) {
-                this.$store.dispatch('updateLesson', { id: this.lessonId, data: { shortDescription: e.target.value } });
+                this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { shortDescription: e.target.value } });
             },
             setContent(e) {
-                this.$store.dispatch('updateLesson', { id: this.lessonId, data: { content: e.target.value } });
+                this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { content: e.target.value } });
             },
         },
         components: {

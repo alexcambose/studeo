@@ -13,7 +13,12 @@
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
-        props: ['lesson_id'],
+        props: {
+            lesson_id: {
+                type: Number,
+                required: true,
+            },
+        },
         computed: {
             ...mapGetters(['newLessons', 'newLessonById']),
             isFirst() {
