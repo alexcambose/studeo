@@ -194,7 +194,14 @@ const mutations = {
         state.lessons[index] = Object.assign(oldLesson, data); // https://vuejs.org/v2/guide/list.html#Caveats
     },
     [NEW_COURSE_UPDATE_DATA] (state, data) {
-        state = Object.assign(state, data);
+        // Update prerequisites array index by index, TODO *How to update whole vuex array*
+        if (data.prerequisites) { // if data has prerequisites
+            data.prerequisites.forEach((e, i) => { // loop through each item
+                state.prerequisites[i] = e; // and update the prerequisites store object index by index
+            });
+            delete data.prerequisites; // and delete the key
+        }
+        Object.assign(state, data); // update anything left
     },
     [NEW_COURSE_LESSON_ORDER_UP] (state, lesson_id) {
         const indexA = state.lessons.findIndex(e => e.id === lesson_id); // elementul pe care am apasat
@@ -219,7 +226,7 @@ const mutations = {
     },
     [NEW_COURSE_LESSON_QUESTION_UPDATE] (state, { lesson_index, question_index, data }) {
         let question = state.lessons[lesson_index].questions[question_index];
-        question = Object.assign(question, data);
+        question = Object.assign(question, data); //no
     },
     // answers
     [NEW_COURSE_LESSON_QUESTION_ANSWER_ADD] (state, { lesson_index, question_index }) {
@@ -231,7 +238,8 @@ const mutations = {
     },
     [NEW_COURSE_LESSON_QUESTION_ANSWER_UPDATE] (state, { lesson_index, question_index, answer_index, data }) {
         let answer = state.lessons[lesson_index].questions[question_index].answers[answer_index];
-        answer = Object.assign(answer, data);
+        answer = Object.assign(answer, data); //no
+
     },
 };
 

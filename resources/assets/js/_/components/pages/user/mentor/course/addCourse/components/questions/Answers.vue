@@ -23,7 +23,7 @@
         <button
                 @click="addAnswer({lesson_id, question_index})"
                 class="button is-info"
-                :disabled="!answers[answers.length-1]"
+                :disabled="!!answers.length && !answers[answers.length-1]"
         ><b-icon pack="fa" icon="plus" size="is-small"></b-icon> &nbsp; Adaugă răspuns</button>
 
     </div>
@@ -43,6 +43,7 @@
                 required: true,
             },
         },
+        watch: {answers(){console.log(this.answers);},},
         computed: {
             ...mapGetters(['newLessonById', 'questionByIndex']),
             answers() {

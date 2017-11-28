@@ -15,11 +15,11 @@
     export default {
         props: ['notifications'],
         computed: {
-            _notifications(){
+            _notifications() {
                 return this.notifications.slice(0, this.end);
             },
         },
-        data: function(){
+        data: function() {
             return {
                 end: 10,
             };
@@ -27,11 +27,11 @@
         methods: {
             infiniteHandler() {
                 this.end += 10;
-            }
+            },
         },
         components: {
             NotificationItem,
-            InfiniteLoading
-        }
-    }
+            InfiniteLoading,
+        },
+    };
 </script>

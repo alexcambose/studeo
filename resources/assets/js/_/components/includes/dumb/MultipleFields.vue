@@ -7,7 +7,7 @@
                     <b-input
                             :value="fields[index]"
                             @input.native="setData($event, index)"
-                            v-bind="$attrs" expanded
+                            expanded
                     ></b-input>
                     <p class="control" v-if="fields.length > 1">
                         <button @click="deleteField(index)" class="button is-danger"><b-icon pack="fa" icon="trash" size="is-small"></b-icon></button>
@@ -39,14 +39,14 @@
         },
         methods: {
             addField() {
-                this.fields = [...this.fields, ''];
+                this.fields.push('');
             },
             deleteField(index) {
-                this.fields = this.fields.filter((e, i) => i !== index);
+                this.fields.splice(index, 1);
                 this.emit();
             },
             setData(e, index) {
-                this.fields[index] = e.target.value;
+                this.fields.splice(index, 1, e.target.value);
                 this.emit();
             },
             emit() {
