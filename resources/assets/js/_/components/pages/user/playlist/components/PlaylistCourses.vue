@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="box course_box">
+        <div class="box courseBox">
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-64x64">

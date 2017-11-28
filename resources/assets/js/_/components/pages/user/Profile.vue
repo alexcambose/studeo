@@ -19,8 +19,8 @@
                             &nbsp; {{ user.description }}
                         </div>
 
-                        <div v-for="item in userInfo">
-                            <div :class="item.name">
+                        <div v-for="item in userInfo" class="userInfo">
+                            <div>
                                 <i :class="item.icon"></i>
                                 {{ item.content }}
                             </div>
@@ -85,7 +85,9 @@
         },
         methods: {
             displayDate: function(e) {
-                return e.slice(0, 10);
+                const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie'];
+                let date = new Date(e);
+                return date.getDay() + ' ' +  monthNames[date.getMonth()] + ' ' +  date.getFullYear();
             },
         },
         components: {
