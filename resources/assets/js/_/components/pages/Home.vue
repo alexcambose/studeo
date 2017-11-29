@@ -2,7 +2,6 @@
     <div>
 
         <card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">
-            <upload-image title="Imamamama"></upload-image>
             Tu:
            <pre>{{$store.state.user.user}}</pre>
         </card>

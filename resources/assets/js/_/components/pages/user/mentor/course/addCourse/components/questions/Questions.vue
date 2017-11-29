@@ -1,10 +1,10 @@
 <template>
     <div>
         <div v-if="questions.length" >
-            <question v-for="(question, index) in questions":key="index" :question_index="index" :lesson_id="lesson_id"></question>
+            <question v-for="(question, index) in questions" :key="index" :question_index="index" :lesson_id="lesson_id"></question>
         </div>
         <div v-else class="has-text-centered">
-            Nu există întrebari
+            Nu există întrebari, <span @click="$refs.addQuestionInput.focus()" class="has-text-link cp">adaugă</span> una pentru a verifica cunoștințele la sfârșitul cursului!
         </div>
         <form @submit="addQuestion">
             <b-field class="mt-10">
@@ -13,6 +13,7 @@
                     maxlength="120"
                     placeholder="Apasă enter pentru a adauga o întrebare"
                     minlength="10"
+                    ref="addQuestionInput"
                     required
                 ></b-input>
             </b-field>
@@ -38,13 +39,14 @@
         },
         data() {
             return {
-                newQuestionContent: 'What is the best askalalaf here ?',
+                newQuestionContent: '',
             };
         },
         methods: {
             addQuestion() {
                 const { lesson_id, newQuestionContent } = this;
                 this.$store.dispatch('addQuestion', { lesson_id, content: newQuestionContent });
+                this.newQuestionContent = '';
             },
         },
         components: {

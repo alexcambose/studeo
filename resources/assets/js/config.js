@@ -14,6 +14,7 @@ export default {
         NOTIFICATION: SERVER + 'notification/get',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll',
+        COURSE_ADD: SERVER + 'course/add',
     },
     notifications: {
         PASSWORD_CHANGED: {

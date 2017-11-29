@@ -10,6 +10,11 @@
                                 icon="upload"
                                 size="is-large">
                         </b-icon>
+                        <b-icon
+                                pack="fa"
+                                icon="video-camera"
+                                size="is-small">
+                        </b-icon>
                     </p>
                     <div v-if="file[0]">
                         <p>{{file[0].name}}</p>

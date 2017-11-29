@@ -4,7 +4,7 @@
         <b-field v-for="(answer, index) in answers" :key="index">
             <b-input
                     :value="answer.content"
-                    @blur="updateAnswer({ lesson_id, question_index, answer_index: index, data: {content: $event.target.value}})"
+                    @input="value => updateAnswer({ lesson_id, question_index, answer_index: index, data: {content: value}})"
                     expanded
             ></b-input>
             <p class="control">
@@ -23,8 +23,8 @@
         <button
                 @click="addAnswer({lesson_id, question_index})"
                 class="button is-info"
-                :disabled="!!answers.length && !answers[answers.length-1]"
-        ><b-icon pack="fa" icon="plus" size="is-small"></b-icon> &nbsp; Adaugă răspuns</button>
+                :disabled="answers.length !== 0 && !answers[answers.length-1].content"
+        ><b-icon pack="fa" icon="plus" size="is-small"></b-icon> &nbsp; Adaugă răspuns posibil</button>
 
     </div>
 </template>
@@ -43,7 +43,6 @@
                 required: true,
             },
         },
-        watch: {answers(){console.log(this.answers);},},
         computed: {
             ...mapGetters(['newLessonById', 'questionByIndex']),
             answers() {
@@ -52,16 +51,6 @@
         },
         methods: {
             ...mapActions(['addAnswer', 'deleteAnswer', 'updateAnswer']),
-            setAnswerTrue(answer_index, value) {
-                const { lesson_id, question_index } = this;
-
-                this.$store.dispatch('updateAnswer', {
-                    lesson_id,
-                    question_index,
-                    answer_index,
-                    data: { isTrue: value },
-                });
-            },
         },
     };
 </script>

@@ -15,16 +15,24 @@ Route::post('notification', 'NotificationController@toggle');
 Route::post('notification/toggleReadAll', 'NotificationController@toggleReadAll');
 // endregion
 
-Route::post('user', 'UserController@user');
+// region Setttings
 Route::post('user/update', 'UserController@updateData');
 Route::post('user/update/password', 'UserController@updatePassword');
 Route::post('user/update/profile', 'UserController@updateProfile');
 Route::post('user/update/profileImage', 'UserController@updateProfileImage');
+// endregion
 
-
-// region mentor stuff
+// region Mentor stuff
 Route::post('user/mentor/register', 'UserController@becomeMentor');
 // endregion
+
+Route::post('user', 'UserController@user');
+
+// region Course
+Route::post('course/add', 'CourseController@add');
+// endregion
+
+
 
 Route::get('/', function(){
     return view('index');

@@ -42,7 +42,7 @@
         },
         methods: {
             sendCourse() {
-                alert('Mori in chinuri');
+                this.$store.dispatch('courseAdd');
             },
         },
     };

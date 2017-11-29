@@ -15,7 +15,6 @@
                 <div class="image-change">
                     <upload-image-modal
                             title="Adaugă fotografie"
-                            maxsize="10000000"
                             @submit="updateImage"
                             ref="updateImageModal"
                     ></upload-image-modal>

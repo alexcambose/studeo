@@ -10,6 +10,11 @@
                             icon="upload"
                             size="is-large">
                     </b-icon>
+                    <b-icon
+                            pack="fa"
+                            icon="picture-o"
+                            size="is-small">
+                    </b-icon>
                 </p>
                 <div v-else class="preview-image-container">
                     <span class="preview-image" :style="{'background': `url(${preview})`}"></span>
@@ -36,7 +41,13 @@
     import { convertFileSizeToHuman } from '../../../../utils';
 
     export default {
-        props: ['title', 'maxsize'],
+        props: {
+            title: String,
+            maxsize: {
+                type: Number,
+                default: 10000000,
+            },
+        },
         computed: {
             fileSize() {
                 if (this.file[0]) {

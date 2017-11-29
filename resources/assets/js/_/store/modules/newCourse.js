@@ -1,3 +1,5 @@
+import config from '../../../config';
+import Vue from 'vue';
 import { NEW_COURSE_LESSON_QUESTION_ANSWER_ADD, NEW_COURSE_LESSON_QUESTION_ANSWER_DELETE, NEW_COURSE_LESSON_QUESTION_ANSWER_UPDATE, NEW_COURSE_LESSON_QUESTION_ADD, NEW_COURSE_LESSON_QUESTION_DELETE, NEW_COURSE_LESSON_QUESTION_UPDATE, NEW_COURSE_UPDATE_LESSON_DATA, NEW_COURSE_ADD_LESSON, NEW_COURSE_DELETE_LESSON, NEW_COURSE_UPDATE_DATA, NEW_COURSE_LESSON_ORDER_UP, NEW_COURSE_LESSON_ORDER_DOWN } from '../mutators-types';
 
 const state = {
@@ -112,6 +114,13 @@ const getters = {
 };
 
 const actions = {
+    courseAdd({ state }) {
+        axios.post(config.url.COURSE_ADD, state)
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => console.log(err));
+    },
     addNewLesson ({ commit, state }, { title, description }) {
         const lastId = state.lessons[state.lessons.length - 1].id;
         commit(NEW_COURSE_ADD_LESSON, {
@@ -219,7 +228,7 @@ const mutations = {
     },
     // questions
     [NEW_COURSE_LESSON_QUESTION_ADD] (state, { lesson_index, content }) {
-        state.lessons[lesson_index].questions.push({ content, answers: [] });
+        state.lessons[lesson_index].questions.push({ content: content.trim(), answers: [] });
     },
     [NEW_COURSE_LESSON_QUESTION_DELETE] (state, { lesson_index, question_index }) {
         state.lessons[lesson_index].questions.splice(question_index, 1);
@@ -237,9 +246,8 @@ const mutations = {
         state.lessons[lesson_index].questions[question_index].answers.splice(answer_index, 1);
     },
     [NEW_COURSE_LESSON_QUESTION_ANSWER_UPDATE] (state, { lesson_index, question_index, answer_index, data }) {
-        let answer = state.lessons[lesson_index].questions[question_index].answers[answer_index];
-        answer = Object.assign(answer, data); //no
-
+        let answers = state.lessons[lesson_index].questions[question_index].answers;
+        Vue.set(answers, answer_index, {...answers[answer_index], ...data});
     },
 };
 
@@ -248,4 +256,4 @@ export default {
     getters,
     actions,
     mutations,
-}
+};

@@ -81,7 +81,7 @@
         data() {
             return {
                 showModal: false,
-            }
-        }
+            };
+        },
     };
 </script>

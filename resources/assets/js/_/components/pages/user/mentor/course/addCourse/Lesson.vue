@@ -27,13 +27,21 @@
             ></b-input>
         </b-field>
         <questions :lesson_id="this.lesson_id"></questions>
-        <upload-video title="Adaugă fișierul video" v-model="video"></upload-video>
+        <div class="columns">
+            <div class="column">
+                <upload-video title="Adaugă fișierul video" v-model="video"></upload-video>
+            </div>
+            <div class="column">
+                <upload-image title="Adaugă miniatură"></upload-image>
+            </div>
+        </div>
 
     </div>
 </template>
 
 <script>
     import UploadVideo from '../../../../../includes/dumb/UploadVideo.vue';
+    import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
     import Questions from './components/questions/Questions.vue';
 
     export default {
@@ -69,6 +77,7 @@
         },
         components: {
             UploadVideo,
+            UploadImage,
             Questions,
         },
     };
