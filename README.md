@@ -6,6 +6,14 @@ A platform to help students learn faster and easier for the baccalaureate exam
 ```bash
 ~ composer install && npm install
 ```
+##### php.ini configuration
+In order to be able to upload large files you should edit your `php.ini` file and set:
+```apacheconfig
+memory_limit = 32M
+upload_max_filesize = 24M
+post_max_size = 32M
+```
+You will also need to restart apache after that.
 
 ## Database seeding
 After you have `php atisan migrate`d the database run the database seed command

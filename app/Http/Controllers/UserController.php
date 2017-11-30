@@ -49,9 +49,7 @@ class UserController extends Controller
             $image->move(public_path('userdata/images/'), $filename);
 
             //add new media row
-            $media = new Media();
-            $media->filename = 'userdata/images/' . $filename;
-            $media->save();
+            $media = Media::add('userdata/images/' . $filename);
 
             //update user with the media id
             $user->image_id = $media->id;

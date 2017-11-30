@@ -51,11 +51,11 @@
                     <div class="content mt-20">
                         <hr>
                         <div class="playlistsCourses">
-                            <playlist_course></playlist_course>
-                            <playlist_course></playlist_course>
-                            <playlist_course></playlist_course>
-                            <playlist_course></playlist_course>
-                            <playlist_course></playlist_course>
+                            <playlist-course></playlist-course>
+                            <playlist-course></playlist-course>
+                            <playlist-course></playlist-course>
+                            <playlist-course></playlist-course>
+                            <playlist-course></playlist-course>
                         </div>
                     </div>
                 </div>
@@ -70,10 +70,6 @@
     import { mapState } from 'vuex';
 
     export default {
-        components: {
-            'playlist_course': PlaylistCourse,
-            AddPlaylist,
-        },
         data() {
             return {
                 showModal: false,
@@ -95,6 +91,10 @@
                 });
                 this.playlist = playlist;
             },
+        },
+        components: {
+            PlaylistCourse,
+            AddPlaylist,
         },
     };
 </script>

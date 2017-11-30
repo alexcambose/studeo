@@ -12,6 +12,6 @@
 
 <script>
     export default {
-        props: ['error', 'success', 'fetching']
-    }
+        props: ['error', 'success', 'fetching'],
+    };
 </script>

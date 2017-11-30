@@ -16,16 +16,22 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('short_description');
+            $table->text('shortDescription');
             $table->text('description');
-            $table->text('target_classLevel');
+            $table->text('targetClassLevel');
             $table->text('purpose');
+            $table->text('purposeWhatWillLearn');
             $table->text('prerequisites');
             $table->text('difficulty');
-            $table->text('is_private');
+            $table->boolean('is_private')->default(0);
             $table->integer('image_id')->unsigned();
-            $table->integer('author_id')->unsigned();
-            $table->integer('views'); // posibil sa fie scos
+            $table->integer('user_id')->unsigned();
+            $table->integer('views')->default(0); // posibil sa fie scos
+            $table->timestamps();
+
+            $table->foreign('image_id')->references('id')->on('media');
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
 
         /*
@@ -42,7 +48,10 @@ class CreateCoursesTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->integer('current_lesson_id')->unsigned();
             $table->integer('progress'); // useless daca folosim formula... sterge tu
+            $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 
@@ -53,7 +62,7 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
         Schema::dropIfExists('courses_users');
+        Schema::dropIfExists('courses');
     }
 }

@@ -4,7 +4,7 @@ import { NEW_COURSE_LESSON_QUESTION_ANSWER_ADD, NEW_COURSE_LESSON_QUESTION_ANSWE
 
 const state = {
     title: 'Titlu curs',
-    shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget rhoncus diam sollicitudin in. Aenean dapibus aliquet pulvinar. Suspendisse potenti. ',
+    shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac ',
     description: ' Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst.  Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst.  Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst. v Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst. ',
     difficulty: 3,
     prerequisites: [
@@ -18,20 +18,23 @@ const state = {
         '2. Lorem ipsum dolor sit amet',
         '3. Lorem ipsum dolor sit amet',
     ],
-    target_classLevel: 2,
+    targetClassLevel: 2,
+    image: null,
     lessons: [
         {
             id: 1,
             title: 'Lecția numărul 1',
-            shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [],
+            thumbnail: null,
+            video: null,
             order_index: 0,
         },
         {
             id: 2,
             title: 'Lecția numărul 2',
-            shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [
                 {
@@ -55,12 +58,14 @@ const state = {
                     ],
                 },
             ],
+            thumbnail: null,
+            video: null,
             order_index: 1,
         },
         {
             id: 3,
             title: 'Lecția numărul 3',
-            shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [
                 {
@@ -74,12 +79,14 @@ const state = {
                     ],
                 },
             ],
+            thumbnail: null,
+            video: null,
             order_index: 2,
         },
         {
             id: 4,
             title: 'Lecția numărul 4',
-            shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [
                 {
@@ -93,6 +100,8 @@ const state = {
                     ],
                 },
             ],
+            thumbnail: null,
+            video: null,
             order_index: 3,
         },
     ],
@@ -114,12 +123,30 @@ const getters = {
 };
 
 const actions = {
-    courseAdd({ state }) {
-        axios.post(config.url.COURSE_ADD, state)
-            .then(data => {
-                console.log(data);
+    courseAdd({ state }, progressCallback) {
+        const fd = new FormData();
+        state.lessons.forEach((lesson, i)=> {
+            if (lesson.thumbnail) fd.append(`thumbnails[${i}]`, lesson.thumbnail);
+            if (lesson.video) fd.append(`videos[${i}]`, lesson.video);
+        });
+        fd.append('image', state.image);
+        fd.append('content', JSON.stringify(state));
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.COURSE_ADD, fd, {
+                onUploadProgress: progressEvent => {
+                    const percent = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
+                    if (progressCallback) progressCallback(percent);
+                },
             })
-            .catch(err => console.log(err));
+                .then(({ data }) => {
+                    if (data.success) {
+                        resolve();
+                    } else reject(data.messages);
+                    console.log(data);
+                })
+                .catch(err => reject(err));
+        });
+
     },
     addNewLesson ({ commit, state }, { title, description }) {
         const lastId = state.lessons[state.lessons.length - 1].id;
@@ -199,8 +226,7 @@ const mutations = {
     },
     [NEW_COURSE_UPDATE_LESSON_DATA] (state, { id, data }) {
         const index = state.lessons.findIndex(e => e.id === id);
-        const oldLesson = state.lessons[index];
-        state.lessons[index] = Object.assign(oldLesson, data); // https://vuejs.org/v2/guide/list.html#Caveats
+        Vue.set(state.lessons, index, { ...state.lessons[index], ...data });
     },
     [NEW_COURSE_UPDATE_DATA] (state, data) {
         // Update prerequisites array index by index, TODO *How to update whole vuex array*

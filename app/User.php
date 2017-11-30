@@ -41,7 +41,7 @@ class User extends Authenticatable
         'school_level' => 'numeric',
         'sex' => 'numeric',
         'phone' => 'numeric',
-        'email' => 'required|string|email', //username-ul
+        'email' => 'required|string|email',
         'password' => 'required|string|max:16|min:6',
         'image' => 'required|image|mimes:jpeg,png,jpg',
         'city' => 'numeric',

@@ -49,7 +49,7 @@
                         this.$router.push({ name: 'dashboard' });
                         loading.close();
                     })
-                    .error(() => loading.close());
+                    .catch(() => loading.close());
             },
         },
     };

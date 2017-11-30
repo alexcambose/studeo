@@ -32,7 +32,7 @@
                 <upload-video title="Adaugă fișierul video" v-model="video"></upload-video>
             </div>
             <div class="column">
-                <upload-image title="Adaugă miniatură"></upload-image>
+                <upload-image title="Adaugă miniatură" v-model="thumbnail"></upload-image>
             </div>
         </div>
 
@@ -61,9 +61,19 @@
                 },
             },
             video: {
-                get() {},
+                get() {
+                    return this.lesson.video;
+                },
                 set (value) {
                     this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { video: value } });
+                },
+            },
+            thumbnail: {
+                get() {
+                    return this.lesson.thumbnail;
+                },
+                set (value) {
+                    this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { thumbnail: value } });
                 },
             },
         },

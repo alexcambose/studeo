@@ -2,7 +2,7 @@
     <div>
         <b-field label="Nivel de studii">
             <b-select expanded
-                      :value="newCourse.target_classLevel"
+                      :value="newCourse.targetClassLevel"
                       @blur="setTargetClassLevel"
                       placeholder="Selectează o treaptă de studiu in care se situează cursul"
                       icon-pack="fa"
@@ -31,7 +31,7 @@
         },
         methods: {
             setTargetClassLevel(e) {
-                this.$store.dispatch('updateNewCourseData', { target_classLevel: parseInt(e.target.value) });
+                this.$store.dispatch('updateNewCourseData', { targetClassLevel: parseInt(e.target.value) });
             },
         },
 

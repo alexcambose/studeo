@@ -1,6 +1,5 @@
 <template>
-    <b-upload multiple
-              v-model="file"
+    <b-upload v-model="file"
               drag-drop
               accept=".png, .jpg, .jpeg">
         <section class="section">
@@ -43,6 +42,7 @@
     export default {
         props: {
             title: String,
+            value: File,
             maxsize: {
                 type: Number,
                 default: 10000000,
@@ -56,16 +56,30 @@
             },
         },
         data() {
+            const file = this.value ? [this.value] : [];
+            this.changed(file);
             return {
-                file: [],
+                file,
                 progress: 0,
                 error: '',
                 preview: '',
             };
         },
         watch: {
+            value(value) {
+                this.file = value ? [value] : [];
+            },
             file(value) {
-                const file = value[0];
+                this.changed(value);
+            },
+        },
+        methods: {
+            convertFileSizeToHuman,
+            setProgress(value) {
+                this.progress = value;
+            },
+            changed(newVal) {
+                const file = newVal[0];
                 if (this.maxsize && file && file.size > this.maxsize) {
                     this.error = 'Imaginea este prea mare!';
                     this.file = [];
@@ -80,12 +94,6 @@
                         this.preview = reader.result;
                     };
                 }
-            },
-        },
-        methods: {
-            convertFileSizeToHuman,
-            setProgress(value) {
-                this.progress = value;
             },
         },
     };

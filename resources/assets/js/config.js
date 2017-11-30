@@ -21,7 +21,7 @@ export default {
     notifications: {
         PASSWORD_CHANGED: {
             title: 'Parola schimbată',
-            message: ({ f_created_at }) => 'Parola a fost schimbată cu ' + f_created_at + '.',
+            message: ({ f_created_at }) => `Parola a fost schimbată cu ${f_created_at}.`,
         },
         BECAME_MENTOR: {
             title: 'Ai devenit mentor',

@@ -21,7 +21,6 @@ const actions = {
                     } else {
                         reject(data.message);
                     }
-
                 })
                 .catch(err => reject(err));
         });

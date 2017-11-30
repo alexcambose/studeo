@@ -5,6 +5,7 @@
             <b-input
                     :value="answer.content"
                     @input="value => updateAnswer({ lesson_id, question_index, answer_index: index, data: {content: value}})"
+                    maxlength="120"
                     expanded
             ></b-input>
             <p class="control">

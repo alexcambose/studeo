@@ -46,8 +46,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    store.dispatch('getNotification');
     const user = store.state.user;
+    if (user.logged) store.dispatch('getNotification');
 
     const check = () => {
         if (to.matched.some(record => record.meta.onlyAuth)) {

@@ -6,7 +6,6 @@ const state = {
     onlyUnread: false,
 };
 
-
 const getters = {
     notifications (state) {
         let notifications = state.notifications;
@@ -32,7 +31,6 @@ const getters = {
         return state.notifications.length;
     },
 };
-
 
 const actions = {
     getNotification({ commit }){
@@ -78,9 +76,8 @@ const actions = {
                     reject(err);
                 });
         });
-    }
+    },
 };
-
 
 const mutations = {
     [NOTIFICATION_SET](state, { notifications }) {
@@ -95,10 +92,8 @@ const mutations = {
             if(e.id === id) e = data;
             return e;
         });
-    }
+    },
 };
-
-
 
 export default {
     state,

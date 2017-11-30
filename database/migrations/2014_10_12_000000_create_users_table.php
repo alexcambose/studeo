@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('sex')->nullable();
             $table->integer('city')->nullable(); // https://gist.github.com/alexcambose/9343b66746e65ba592fc5b219f89631d
             $table->string('school')->nullable();
-            $table->string('school_level')->nullable(); // 0 - altceva 1 - generala 2 - gimnaziu 3 - liceu 4 - facultate
+            $table->string('school_level')->nullable()->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('birthday')->nullable();
@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('image_id')->unsigned();;
             $table->integer('is_teacher')->nullable();
-            $table->integer('role')->default(1);  // 1 - user  2 - mentor  3 - administrator
+            $table->integer('role')->default(1)->comment("1 - user, 2 - mentor, 3 - administrator");
             $table->string('cover_color')->default("#fff");
             $table->integer('points')->default(0);
             $table->string('social')->default("{}");

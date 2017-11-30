@@ -4,6 +4,8 @@
             <b-input
                     :value="newCourse.title"
                     @blur="setTitle"
+                    maxlength="100"
+                    minlength="4"
                     required
             ></b-input>
         </b-field>
@@ -39,12 +41,16 @@
                 addFieldLabel="Adaugă cerință nouă"
                 @change="setPrerequisites"
         ></multiple-fields>
+        <div class="mt-10">
+            <upload-image title="Imaginea cursului" v-model="image"></upload-image>
+        </div>
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex';
     import MultipleFields from '../../../../../../components/includes/dumb/MultipleFields.vue';
+    import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
 
     export default {
         methods: {
@@ -68,9 +74,18 @@
             ...mapState({
                 newCourse: state => state.newCourse,
             }),
+            image: {
+                get() {
+                    return this.newCourse.image;
+                },
+                set (value) {
+                    this.$store.dispatch('updateNewCourseData', { image: value });
+                },
+            },
         },
         components: {
             MultipleFields,
+            UploadImage,
         },
     };
 </script>
