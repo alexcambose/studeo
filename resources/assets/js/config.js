@@ -15,6 +15,8 @@ export default {
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll',
         COURSE_ADD: SERVER + 'course/add',
+        PLAYLISTS: SERVER + 'playlists',
+        PLAYLIST_CREATE: SERVER + 'playlists/create',
     },
     notifications: {
         PASSWORD_CHANGED: {

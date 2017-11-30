@@ -1,6 +1,7 @@
 <template>
     <div>
-        <add-course v-if="showModal" :active="showModal"></add-course>
+        {{ getCurrentPlaylist }}
+        <add-playlist v-if="showModal" :active="showModal" @close="showModal = false"></add-playlist>
         <div class="container mt-30 mb-30">
             <div class="columns playlists">
                 <div class="column is-one-fifth leftsidePlaylists" style="margin: 0; padding: 0">
@@ -10,13 +11,7 @@
                         </p>
                         <ul class="menu-list playlistsBar">
                             <li @click="showModal = true "><a class="first"><i class="fa fa-plus"></i>&nbsp; Creeaza un nou playlist</a></li>
-                            <li><a>Customers</a></li>
-                            <li><a>Customers</a></li>
-                            <li><a>Customers</a></li>
-                            <li><a>Customers</a></li>
-                            <li><a>Customers</a></li>
-                            <li><a>Customers</a></li>
-                            <li><a>Customers</a></li>
+                            <li v-for="item in playlists"><router-link :to="{ name: 'playlist', params: { id: item.id } }">{{ item.title }}</router-link></li>
                         </ul>
                     </aside>
                 </div>
@@ -26,7 +21,7 @@
                             <div class="columns">
                                 <div class="column">
                                     <div class="playlistTitle">
-                                        Pregatire mate
+                                        {{ this.playlist.title }}
                                     </div>
                                     <div class="nrCoursesLessons">
                                         Cursuri: <strong>50</strong> &#149; Lectii: <strong>134</strong>
@@ -46,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="playlistDescription">
-                                &nbsp; Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aspernatur aut commodi corporis dicta distinctio impedit, inventore laudantium nam nemo non officiis provident quae, quas rem repellat rerum sunt tempora, temporibus totam veritatis voluptate? Aperiam deserunt facere, ipsum molestiae nihil pariatur quidem sint vitae. Aut corporis nostrum sint tempore.
+                               {{ this.playlist.description }}
                             </div>
                             <div class="playlistProgress mt-15">
                                 <progress class="progress is-primary" value="15" max="100">30%</progress>
@@ -71,17 +66,35 @@
 
 <script>
     import PlaylistCourse from './components/PlaylistCourses.vue';
-    import AddCourse from './components/AddCourse.vue';
+    import AddPlaylist from './components/AddPlaylist.vue';
+    import { mapState } from 'vuex';
 
     export default {
         components: {
             'playlist_course': PlaylistCourse,
-            'add-course': AddCourse,
+            AddPlaylist,
         },
         data() {
             return {
                 showModal: false,
+                playlist: '',
             };
+        },
+        computed: {
+            ...mapState({
+                playlists: state => state.playlist.playlists,
+            }),
+            getCurrentPlaylist() {
+                let arr = this.playlists;
+                let id = this.$route.params.id;
+                let playlist = '';
+                Object.keys(arr).forEach(function(x) {
+                    if (arr[x].id == id) {
+                        playlist = arr[x];
+                    }
+                });
+                this.playlist = playlist;
+            },
         },
     };
 </script>

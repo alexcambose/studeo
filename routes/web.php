@@ -15,7 +15,7 @@ Route::post('notification', 'NotificationController@toggle');
 Route::post('notification/toggleReadAll', 'NotificationController@toggleReadAll');
 // endregion
 
-// region Setttings
+// region Settings
 Route::post('user/update', 'UserController@updateData');
 Route::post('user/update/password', 'UserController@updatePassword');
 Route::post('user/update/profile', 'UserController@updateProfile');
@@ -26,12 +26,18 @@ Route::post('user/update/profileImage', 'UserController@updateProfileImage');
 Route::post('user/mentor/register', 'UserController@becomeMentor');
 // endregion
 
+
 Route::post('user', 'UserController@user');
 
 // region Course
 Route::post('course/add', 'CourseController@add');
 // endregion
 
+
+// region Playlist
+Route::post('playlists', 'PlaylistController@getAllPlaylists');
+Route::post('playlists/create', 'PlaylistController@createPlaylist');
+//endregion
 
 
 Route::get('/', function(){

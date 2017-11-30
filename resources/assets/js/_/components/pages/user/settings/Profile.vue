@@ -148,7 +148,6 @@
                 this.$store.dispatch('updateUserProfile', this)
                     .then(() => {
                         this.fetching = false;
-                        console.log(this);
                         this.success = 'Datele au fost salvate';
                     })
                     .catch(() => this.fetching = false);

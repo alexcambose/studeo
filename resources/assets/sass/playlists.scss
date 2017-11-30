@@ -29,6 +29,7 @@
         }
         &.is-active {
           border-left: 5px solid darken($primary, 10);
+          background-color: white !important;
         }
         &:hover {
           border-left: 5px solid darken($primary, 10);

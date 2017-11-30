@@ -7,4 +7,10 @@ export default [
         name: 'playlists',
         meta: { onlyAuth: true },
     },
+    {
+        path: '/playlists/:id',
+        component: Playlist,
+        name: 'playlist',
+        meta: { onlyAuth: true },
+    }
 ];

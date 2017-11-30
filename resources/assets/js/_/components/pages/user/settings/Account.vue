@@ -76,7 +76,7 @@
                         this.fetching = false;
                         this.success = 'Datele au fost salvate!';
                     })
-                    .catch(() => this.fetching = true);
+                    .catch(() => this.fetching = false);
             }
         },
         components: {
