@@ -6,18 +6,22 @@
                     <router-link :to="{ name: 'dashboard-add-course' }" class="button is-light is-outlined is-pulled-right">Adaugă curs</router-link>
                     <h1 class="title">
                         Salut sunt un mentor
-
                     </h1>
                 </div>
             </div>
         </section>
         <div class="container content-lower">
-            content
+            <courses></courses>
         </div>
     </div>
 
 </template>
 
 <script>
-    export default {};
+    import Courses from '../../../includes/course/Courses.vue';
+    export default {
+        components: {
+            Courses,
+        },
+    };
 </script>

@@ -17,4 +17,10 @@ class Course extends Model
         'targetClassLevel' => 'required|numeric',
         'image' => 'image|mimes:jpeg,png,jpg|max:10000000',
     ];
+    protected $appends = [
+        '_image'
+    ];
+    public function getImageAttribute(){
+        return Media::find($this->image_id);
+    }
 }

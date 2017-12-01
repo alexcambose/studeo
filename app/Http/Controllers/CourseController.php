@@ -14,9 +14,16 @@ use Validator;
 
 class CourseController extends Controller
 {
-    /** Cancer pe paine
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+    function all($userId = null) {
+        $courses = Course::all();
+        if($userId) $courses = Course::where('user_id', $userId)->get();
+        return response()->json([
+            'success' => true,
+            'courses' => $courses,
+        ]);
+    }
+    /**
+     * Cancer pe paine
      */
     function add(Request $request)
     {

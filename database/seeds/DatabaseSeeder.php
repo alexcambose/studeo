@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
             'username' => 'sandilica293',
             'email' => 'sandel@sandica.com'
         ]);
+
+        factory(\App\Course::class, 5)->create();
+        factory(\App\Lesson::class, 20)->create();
+        factory(\App\Question::class, 10)->create();
+        factory(\App\Answer::class, 20)->create();
+
     }
 }

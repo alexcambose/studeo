@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'description' => $faker->text($maxNbChars = 250),
         'email' => $faker->unique()->safeEmail,
-        'image_id' => function(){
+        'image_id' => function() {
             return factory(App\Media::class)->create()->id;
         },
         'is_teacher' => 0,

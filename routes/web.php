@@ -1,6 +1,8 @@
 <?php
 //Auth::routes();
 
+Route::post('user', 'UserController@user');
+
 // region Autentificare
 
 Route::post('login', 'AuthenticationController@login');
@@ -10,8 +12,8 @@ Route::post('logout', 'AuthenticationController@logout');
 // endregion
 
 // region Notification
-Route::post('notification/get', 'NotificationController@notifications');
-Route::post('notification', 'NotificationController@toggle');
+Route::post('notification', 'NotificationController@notifications');
+Route::post('notification/toggle', 'NotificationController@toggle');
 Route::post('notification/toggleReadAll', 'NotificationController@toggleReadAll');
 // endregion
 
@@ -26,10 +28,8 @@ Route::post('user/update/profileImage', 'UserController@updateProfileImage');
 Route::post('user/mentor/register', 'UserController@becomeMentor');
 // endregion
 
-
-Route::post('user', 'UserController@user');
-
 // region Course
+Route::get('course/all/{userId?}', 'CourseController@all');
 Route::post('course/add', 'CourseController@add');
 // endregion
 

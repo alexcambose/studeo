@@ -18,11 +18,11 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->text('shortDescription');
             $table->text('description');
-            $table->text('targetClassLevel');
+            $table->text('targetClassLevel')->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");;
             $table->text('purpose');
             $table->text('purposeWhatWillLearn');
             $table->text('prerequisites');
-            $table->text('difficulty');
+            $table->text('difficulty')->comment("1 - Usor, 2 - Mediu, 3 - Greu");
             $table->boolean('is_private')->default(0);
             $table->integer('image_id')->unsigned();
             $table->integer('user_id')->unsigned();
