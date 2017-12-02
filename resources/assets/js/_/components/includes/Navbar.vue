@@ -60,10 +60,10 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
-                        <router-link :to="{name: 'profile'}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon>&nbsp; Profil</router-link>
+                        <router-link :to="{name: 'profile', params: {username: user.username}}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon>&nbsp; Profil</router-link>
                         <router-link :to="{name: 'notifications'}" class="navbar-item"><b-icon pack="fa" icon="comment"></b-icon>&nbsp; Notificări</router-link>
                         <router-link :to="{name: 'playlists'}" class="navbar-item"><b-icon pack="fa" icon="book"></b-icon>&nbsp; Bibliotecă</router-link>
-                        <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon>&nbsp;&nbsp; Setări</router-link>
+                        <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon>&nbsp; Setări</router-link>
 
                         <router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon>&nbsp; Panou admin</router-link>
 

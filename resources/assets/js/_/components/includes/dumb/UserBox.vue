@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{name: 'profile',  params: { username: user.username }}">
-        <div class="user-box">
+        <div :class="['user-box', size]">
             <image-container class="user-image" :image="user._image.filename"></image-container>
             <div class="user-info">
                 <div class="user-name">{{user.first_name}} {{user.last_name}}</div>
@@ -16,6 +16,9 @@
             user: {
                 type: Object,
                 required: true,
+            },
+            size: {
+                type: String,
             },
         },
         components: {
@@ -40,5 +43,12 @@
     }
     .user-box .user-info .user-name{
         margin-left: 10px;
+    }
+    .user-box.is-small .user-image{
+        height: 24px;
+        width: 24px;
+    }
+    .user-box.is-small .user-info .user-name{
+        font-size: .9em;
     }
 </style>

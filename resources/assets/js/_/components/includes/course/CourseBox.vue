@@ -5,13 +5,13 @@
         </div>
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: this.course.slug } }" >
-                <span class="course-title">{{course.title}}</span>
+                <span class="course-title">{{course.id}} - {{course.title}}</span>
 
                 <div class="course-content">
                     {{course.shortDescription}}
                 </div>
 
-                <user-box :user="course._user"></user-box>
+                <user-box :user="course._user" size="is-small"></user-box>
             </router-link>
         </div>
     </div>
@@ -24,11 +24,6 @@
             course: {
                 type: Object,
                 required: true,
-            },
-        },
-        methods: {
-            goto() {
-                this.$router.push({ name: 'courseWelcome', params: { slug: this.course.slug } });
             },
         },
         components: {

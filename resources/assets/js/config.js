@@ -31,4 +31,7 @@ export default {
         },
     },
     classLevels: ['Altceva', 'Școala generală', 'Gimnaziu', 'Liceu', 'Facultate'],
+    course: {
+        loadAmount: 10,
+    },
 };

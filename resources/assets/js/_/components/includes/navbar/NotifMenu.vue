@@ -16,8 +16,8 @@
 </template>
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import Notifications from './notification/Notifications';
-    import Refresh from '../dumb/Refresh';
+    import Notifications from './notification/Notifications.vue';
+    import Refresh from '../dumb/Refresh.vue';
     export default {
         computed: {
             ...mapGetters(['notifications']),
@@ -26,9 +26,9 @@
                     return this.$store.state.notification.onlyUnread;
                 },
                 set (value) {
-                    this.$store.dispatch('setOnlyUnreadNotification', value)
-                }
-            }
+                    this.$store.dispatch('setOnlyUnreadNotification', value);
+                },
+            },
         },
         data() {
             return {
@@ -42,11 +42,11 @@
                 this.getNotification()
                     .then(() => this.refreshing = false)
                     .catch(() => this.refreshing = false);
-            }
+            },
         },
         components: {
             Notifications,
             Refresh,
         },
-    }
+    };
 </script>

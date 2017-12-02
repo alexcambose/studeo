@@ -26,29 +26,46 @@
                 </div>
             </div>
         </section>
-        <div class="container">
-            {{course.description}}
+        <div class="container mt-20">
+            <div class="columns">
+                <div class="column is-8">
+                    {{course.description}}
+                </div>
+                <div class="column is-4">
+                    <div class="card">
+                        <user-card :user="user"></user-card>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 </template>
 <script>
     import config from '../../../../../config';
+    import UserCard from '../../../../components/includes/dumb/UserCard.vue';
     export default {
         mounted() {
             const loadingComponent = this.$loading.open();
             axios.get(config.url.COURSE + this.$route.params.slug)
-                .then(({ data }) => {
+                .then(({ data }) => { // get course data
+                    this.course = data.course;
+                    return axios.post(config.url.USER + data.course.user_id);
+                }).then(({ data }) => { // get couse user data
+                    this.user = data.user;
                     loadingComponent.close();
                     this.loaded = true;
-                    this.course = data.course;
                 });
         },
         data() {
             return {
                 course: {},
+                user: {},
                 loaded: false,
             };
+        },
+        components: {
+            UserCard,
         },
     };
 </script>

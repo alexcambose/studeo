@@ -28,13 +28,13 @@
 <script>
     export default {
         props: ['notification'],
-        data: function (){
+        data: function () {
             return {
                 fetchingToggleRead: false,
             };
         },
         methods: {
-            toggleReadNotification(id){
+            toggleReadNotification(id) {
                 this.fetchingToggleRead = true;
                 this.$store.dispatch('toggleReadNotification', id)
                     .then(() => {
@@ -43,7 +43,7 @@
                     .catch(() => {
                         this.fetchingToggleRead = false;
                     });
-            }
+            },
         },
-    }
+    };
 </script>

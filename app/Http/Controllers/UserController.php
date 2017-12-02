@@ -25,8 +25,9 @@ class UserController extends Controller
             'success' => true,
         ]);
     }
-    function user() {
+    function user($id = null) {
         $user = Auth::user();
+        if($id) $user = User::find($id);
         $user->notifications;
         return response()->json([
             'success' => !!$user,

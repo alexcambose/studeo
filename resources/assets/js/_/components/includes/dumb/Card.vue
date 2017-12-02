@@ -19,7 +19,7 @@
 </template>
 <script>
     export default {
-        props: ['title', 'icon']
+        props: ['title', 'icon'],
     };
 </script>
 <style>

@@ -21,9 +21,11 @@ class CourseController extends Controller
             'course' => $course,
         ]);
     }
-    function all($userId = null) {
+    function all($userId = null, Request $r) {
         $courses = Course::orderBy('created_at', 'DESC');
         if($userId) $courses = $courses->where('user_id', $userId);
+
+        if($r->start !== null && $r->end !== null) $courses->skip((int)$r->start)->take((int)$r->end);
         return response()->json([
             'success' => true,
             'courses' => $courses->get(),

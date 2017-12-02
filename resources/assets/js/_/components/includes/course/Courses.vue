@@ -5,29 +5,49 @@
                 <course-box :course="course"></course-box>
             </div>
         </div>
+        <infinite-loading @infinite="infiniteHandler">
+            <span slot="no-more">Nu mai sunt cursuri de încărcat! :)</span>
+        </infinite-loading>
     </div>
 </template>
 <script>
     import config from '../../../../config';
     import { chunkArray } from '../../../../utils';
     import CourseBox from './CourseBox.vue';
+    import InfiniteLoading from 'vue-infinite-loading';
+
     export default {
-        mounted() {
-            axios.get(config.url.COURSE_ALL + this.$store.state.user.user.id)
-                .then(({ data }) => {
-                    this.courses = data.courses;
-                });
-        },
         data: function() {
             return {
                 courses: [],
+                loadIndex: 0,
             };
         },
         methods: {
             chunkArray,
+            infiniteHandler($state) {
+                axios.get(config.url.COURSE_ALL + this.$store.state.user.user.id, {
+                    params: {
+                        start: this.loadIndex,
+                        end: config.course.loadAmount,
+                    },
+                }).then(({ data }) => {
+                    if (data.courses.length) {
+                        this.loadIndex += config.course.loadAmount;
+                        data.courses.forEach(course => {
+                            this.courses.push(course);
+                        });
+                        $state.loaded();
+                    } else {
+                        $state.complete();
+                    }
+                });
+                console.log($state);
+            },
         },
         components: {
             CourseBox,
+            InfiniteLoading,
         },
     };
 </script>

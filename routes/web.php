@@ -1,7 +1,7 @@
 <?php
 //Auth::routes();
 
-Route::post('user', 'UserController@user');
+Route::post('user/{id?}', 'UserController@user');
 
 // region Autentificare
 
