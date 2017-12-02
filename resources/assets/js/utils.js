@@ -64,3 +64,25 @@ export const convertFileSizeToHuman = size => {
     // kilobytes
     if (size >= 1000) return (size/1000).toFixed(1).replace(/[.,]0$/, '') + ' KB';
 };
+
+export const chunkArray = (array, length) => {
+    if (length) {
+        let newArr = [];
+        let temp = [];
+
+        for (let i = 0; i < array.length; i++){
+            temp.push(array[i]);
+            if ((i+1)%length === 0){
+                newArr.push(temp);
+                temp = [];
+            }
+        }
+        if (temp.length) newArr.push(temp);
+        return newArr;
+    } else {
+        for (let i = 2;i < array.length - 1;i++) {
+            if (array.length%i === 0) return chunkArray(array, i);
+        }
+        return chunkArray(array, 1);
+    }
+};

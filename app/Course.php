@@ -18,9 +18,15 @@ class Course extends Model
         'image' => 'image|mimes:jpeg,png,jpg|max:10000000',
     ];
     protected $appends = [
-        '_image'
+        '_image',
+        '_user',
     ];
     public function getImageAttribute(){
         return Media::find($this->image_id);
     }
+    public function getUserAttribute(){
+        return User::find($this->user_id);
+    }
+
+
 }

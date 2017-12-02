@@ -1,5 +1,5 @@
 <template>
-    <div class="becomeMentor">
+    <div class="become-mentor">
         <div class="section section1">
             <div class="container-section">
                 <div class="section-left">

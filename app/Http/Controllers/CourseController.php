@@ -144,19 +144,19 @@ class CourseController extends Controller
         foreach ($request->file('thumbnails') as $key => $thumbnail) { // miniaturile de la lectii
             $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
             $thumbnail->move(public_path('userdata/courses/thumbnails'), $filename);
-            $thumbnailsId[$key] = Media::add('userdata/courses/thumbnails' . $filename);
+            $thumbnailsId[$key] = Media::add('userdata/courses/thumbnails/' . $filename);
         }
 
         foreach ($request->file('videos') as $key => $video) { // videoclipuri de la lectii
             $filename = time() . '.' . $video->getClientOriginalExtension();
             $video->move(public_path('userdata/courses/videos'), $filename);
-            $videosId[$key] = Media::add('userdata/courses/videos' . $filename, 1);
+            $videosId[$key] = Media::add('userdata/courses/videos/' . $filename, 1);
         }
 
         //imaginea cursului
         $filename = time() . '.' . $courseImage->getClientOriginalExtension();
         $courseImage->move(public_path('userdata/courses/images'), $filename);
-        $courseImageId = Media::add('userdata/courses/images' . $filename);
+        $courseImageId = Media::add('userdata/courses/images/' . $filename);
         // endregion
 
         // region Continut

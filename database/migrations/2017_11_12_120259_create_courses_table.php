@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->text('shortDescription');
             $table->text('description');
+            $table->integer('rating');
             $table->text('targetClassLevel')->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");;
             $table->text('purpose');
             $table->text('purposeWhatWillLearn');

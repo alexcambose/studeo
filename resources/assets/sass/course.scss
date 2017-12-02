@@ -1,0 +1,23 @@
+.course-box{
+  transition: box-shadow 150ms ease;
+  &:hover{
+    box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  }
+  .course-image{
+    height: $course-box-image-height;
+  }
+  .course-user-image{
+    width: $course-box-user-image-width;
+    height: $course-box-user-image-height;
+  }
+  .course-title{
+    @include clampText;
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 80px;
+  }
+  .course-content{
+    height: 170px;
+    overflow: hidden;
+  }
+}

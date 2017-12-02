@@ -12,5 +12,5 @@ export default [
         component: Playlist,
         name: 'playlist',
         meta: { onlyAuth: true },
-    }
+    },
 ];

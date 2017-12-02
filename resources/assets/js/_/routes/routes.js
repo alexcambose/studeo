@@ -21,7 +21,7 @@ const router = new VueRouter({
             meta: { onlyAuth: true },
         },
         {
-            path: '/profil',
+            path: '/profil/:username',
             component: Profile,
             name: 'profile',
             meta: { onlyAuth: true },
