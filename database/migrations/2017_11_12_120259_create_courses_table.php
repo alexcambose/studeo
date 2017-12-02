@@ -16,9 +16,9 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->text('slug');
             $table->text('shortDescription');
             $table->text('description');
-            $table->integer('rating');
             $table->text('targetClassLevel')->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");;
             $table->text('purpose');
             $table->text('purposeWhatWillLearn');

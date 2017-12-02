@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'Sandel',
             'last_name' => 'Sandica',
             'username' => 'sandilica293',
-            'email' => 'sandel@sandica.com'
+            'email' => 'sandel@sandica.com',
+            'role' => 2,
         ]);
 
         factory(\App\Course::class, 5)->create();

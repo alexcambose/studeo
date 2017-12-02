@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="columns" v-for="(courseGroup, index) in chunkArray(courses, 4)" :key="index">
+        <div v-for="(courseGroup, index) in chunkArray(courses, 4)" :key="index" class="columns">
             <div class="column is-3" v-for="(course, index) in courseGroup" :key="index">
                 <course-box :course="course"></course-box>
             </div>
@@ -13,7 +13,7 @@
     import CourseBox from './CourseBox.vue';
     export default {
         mounted() {
-            axios.get(config.url.COURSE)
+            axios.get(config.url.COURSE_ALL + this.$store.state.user.user.id)
                 .then(({ data }) => {
                     this.courses = data.courses;
                 });

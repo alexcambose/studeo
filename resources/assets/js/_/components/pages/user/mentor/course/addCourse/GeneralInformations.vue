@@ -9,6 +9,16 @@
                     required
             ></b-input>
         </b-field>
+        <b-field label="Legătură permanentă" :message="`Link-ul cursului tău va fi <em>${courseLink}</em>`">
+            <b-input
+                    :value="newCourse.slug"
+                    @input.native="setSlug"
+                    maxlength="100"
+                    minlength="4"
+                    required
+            ></b-input>
+        </b-field>
+        <span></span>
         <b-field label="Scurtă descriere">
             <b-input
                     maxlength="240"
@@ -57,6 +67,9 @@
             setTitle(e) {
                 this.$store.dispatch('updateNewCourseData', { title: e.target.value });
             },
+            setSlug(e) {
+                this.$store.dispatch('updateNewCourseData', { slug: e.target.value });
+            },
             setShortDescription(e) {
                 this.$store.dispatch('updateNewCourseData', { shortDescription: e.target.value });
             },
@@ -81,6 +94,9 @@
                 set (value) {
                     this.$store.dispatch('updateNewCourseData', { image: value });
                 },
+            },
+            courseLink() {
+                return `${window.location.host}/curs/<b>${encodeURIComponent(this.newCourse.slug)}</b>`;
             },
         },
         components: {

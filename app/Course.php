@@ -8,6 +8,7 @@ class Course extends Model
 {
     public static $rules = [
         'title' => 'required|string|max:100|min:4',
+        'slug' => 'required|string|max:100|min:4',
         'shortDescription' => 'required|string|max:240',
         'description' => 'required|string|max:4000',
         'difficulty' => 'required|numeric',

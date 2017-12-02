@@ -20,4 +20,50 @@
     height: 170px;
     overflow: hidden;
   }
+  .card-content > a{
+    color:inherit;
+    text-decoration: none;
+  }
+}
+
+.course-welcome{
+  .course-hero {
+    position: relative;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    .background-filter{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,.5);
+    }
+    .hero-body{
+      padding: 0;
+      height: 400px;
+      display: flex;
+      .container{
+        display: flex;
+        .columns{
+          .column{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+          }
+        }
+        .title, .subtitle{
+          color: $light;
+        }
+        button.apply{
+          width: 200px;
+        }
+        .apply-container{
+          margin-top: 12px;
+          text-align: center;
+        }
+      }
+    }
+  }
 }

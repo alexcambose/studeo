@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Course::class, function (Faker $faker) {
     return [
         'title' => $faker->text($maxNbChars = 100),
+        'slug' => $faker->slug,
         'shortDescription' => $faker->text($maxNbChars = 240),
         'description' => $faker->text($maxNbChars = 4000),
         'difficulty' => $faker->numberBetween(1,3),

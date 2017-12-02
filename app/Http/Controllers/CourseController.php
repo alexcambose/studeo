@@ -14,19 +14,25 @@ use Validator;
 
 class CourseController extends Controller
 {
-    function all($userId = null) {
-        $courses = Course::all();
-        if($userId) $courses = Course::where('user_id', $userId)->get();
+    function one($slug) {
+        $course = Course::where('slug', $slug)->first();
         return response()->json([
             'success' => true,
-            'courses' => $courses,
+            'course' => $course,
+        ]);
+    }
+    function all($userId = null) {
+        $courses = Course::orderBy('created_at', 'DESC');
+        if($userId) $courses = $courses->where('user_id', $userId);
+        return response()->json([
+            'success' => true,
+            'courses' => $courses->get(),
         ]);
     }
     /**
      * Cancer pe paine
      */
-    function add(Request $request)
-    {
+    function add(Request $request) {
         $course = json_decode($request->input('content'), true); // tot cursul in forma []
 
         /*
@@ -88,6 +94,7 @@ class CourseController extends Controller
         // region Continut curs
         $validation = Validator::make($course, [
             'title' => Course::$rules['title'],
+            'slug' => Course::$rules['slug'],
             'shortDescription' => Course::$rules['shortDescription'],
             'description' => Course::$rules['description'],
             'difficulty' => Course::$rules['difficulty'],
@@ -162,6 +169,7 @@ class CourseController extends Controller
         // region Continut
         $newCourse = new Course();
         $newCourse->title = $course['title'];
+        $newCourse->slug = $course['slug'];
         $newCourse->shortDescription = $course['shortDescription'];
         $newCourse->description = $course['description'];
         $newCourse->difficulty = $course['difficulty'];

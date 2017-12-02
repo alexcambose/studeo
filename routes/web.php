@@ -30,6 +30,7 @@ Route::post('user/mentor/register', 'UserController@becomeMentor');
 
 // region Course
 Route::get('course/all/{userId?}', 'CourseController@all');
+Route::get('course/slug/{slug}', 'CourseController@one');
 Route::post('course/add', 'CourseController@add');
 // endregion
 

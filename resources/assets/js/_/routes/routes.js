@@ -6,6 +6,7 @@ import guestRoutes from './guest';
 import mentorRoutes from './mentor';
 import settingsRoutes from './settings';
 import playlistsRoutes from './playlists';
+import courseRoutes from './course';
 import store from '../store/index';
 import config from '../../config';
 import VueRouter from 'vue-router';
@@ -42,6 +43,7 @@ const router = new VueRouter({
         ...mentorRoutes,
         ...settingsRoutes,
         ...playlistsRoutes,
+        ...courseRoutes,
     ],
 });
 

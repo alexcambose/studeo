@@ -22,7 +22,7 @@
             ></b-input>
         </b-field>
 
-        <b-field label="Nume utilizator" :message="`Link-ul profilului tau va fi <em>${profileLink}</em>`">
+        <b-field label="Nume utilizator" :message="`Link-ul profilului tău va fi <em>${profileLink}</em>`">
             <b-input
                     type="text"
                     v-model="username"
@@ -63,8 +63,8 @@
         },
         computed: {
             profileLink() {
-                return `${window.location.host}/profil/<b>${this.username.split(' ').join('-')}</b>`;
-            }
+                return `${window.location.host}/profil/<b>${encodeURIComponent(this.username)}</b>`;
+            },
         },
         methods: {
             updateUser(e) {

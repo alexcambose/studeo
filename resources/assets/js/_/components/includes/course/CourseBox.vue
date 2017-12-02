@@ -1,17 +1,18 @@
 <template>
-
     <div class="card course-box">
         <div class="card-image">
             <image-container class="course-image" :image="course._image.filename"></image-container>
         </div>
-        <div class="card-content cp" @click="goto">
-            <span class="course-title">{{course.title}}</span>
+        <div class="card-content cp">
+            <router-link :to="{ name: 'courseWelcome', params: { slug: this.course.slug } }" >
+                <span class="course-title">{{course.title}}</span>
 
-            <div class="course-content">
-               {{course.shortDescription}}
-            </div>
+                <div class="course-content">
+                    {{course.shortDescription}}
+                </div>
 
-            <user-box :user="course._user"></user-box>
+                <user-box :user="course._user"></user-box>
+            </router-link>
         </div>
     </div>
 </template>
@@ -27,7 +28,7 @@
         },
         methods: {
             goto() {
-                this.$router.push({});
+                this.$router.push({ name: 'courseWelcome', params: { slug: this.course.slug } });
             },
         },
         components: {
