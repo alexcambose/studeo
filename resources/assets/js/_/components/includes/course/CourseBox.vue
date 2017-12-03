@@ -8,7 +8,7 @@
                 <span class="course-title">{{course.id}} - {{course.title}}</span>
 
                 <div class="course-content">
-                    {{course.shortDescription}}
+                    {{course.short_description}}
                 </div>
 
                 <user-box :user="course._user" size="is-small"></user-box>
@@ -19,6 +19,7 @@
 <script>
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import UserBox from '../../includes/dumb/UserBox.vue';
+
     export default {
         props: {
             course: {

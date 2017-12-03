@@ -34,6 +34,7 @@
     .user-box .user-image{
         height: 36px;
         width: 36px;
+        align-self: center;
         border-radius: 100%;
     }
     .user-box .user-info{

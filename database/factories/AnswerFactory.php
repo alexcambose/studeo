@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Answer::class, function (Faker $faker) {
     return [
         'content' => $faker->text($maxNbChars = 120),
-        'isTrue' => $faker->boolean,
+        'is_true' => $faker->boolean,
         'question_id' => App\Question::all()->random()->id,
     ];
 });

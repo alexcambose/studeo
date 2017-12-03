@@ -17,11 +17,11 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('slug');
-            $table->text('shortDescription');
+            $table->text('short_description');
             $table->text('description');
-            $table->text('targetClassLevel')->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");;
+            $table->text('target_class_level')->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");;
             $table->text('purpose');
-            $table->text('purposeWhatWillLearn');
+            $table->text('purpose_what_will_learn');
             $table->text('prerequisites');
             $table->text('difficulty')->comment("1 - Usor, 2 - Mediu, 3 - Greu");
             $table->boolean('is_private')->default(0);

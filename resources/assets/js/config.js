@@ -17,6 +17,7 @@ export default {
         COURSE: SERVER + 'course/slug/',
         COURSE_ALL: SERVER + 'course/all/',
         COURSE_ADD: SERVER + 'course/add/',
+        LESSON_ALL: SERVER + 'lesson/all/',
         PLAYLISTS: SERVER + 'playlists/',
         PLAYLIST_CREATE: SERVER + 'playlists/create/',
     },

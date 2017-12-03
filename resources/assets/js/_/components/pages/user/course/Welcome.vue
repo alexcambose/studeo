@@ -29,21 +29,40 @@
         <div class="container mt-20">
             <div class="columns">
                 <div class="column is-8">
+                    <div class="notification is-warning">
+                        <div class="title is-4">Cerințe preliminare</div>
+                        <div v-for="(skill, index) in course.prerequisites" :key="index">
+                            <b-icon pack="fa" icon="check"></b-icon> &nbsp; {{skill}}
+                        </div>
+                    </div>
+                    <div class="title is-2">Descriere</div>
+                    <hr>
                     {{course.description}}
+                    <hr>
+                    <div class="title is-2">Lecții - {{lessons.length}}</div>
+                    <lesson-box v-for="(lesson, index) in lessons" :key="index" :lesson="lesson"></lesson-box>
                 </div>
                 <div class="column is-4">
-                    <div class="card">
-                        <user-card :user="user"></user-card>
+
+                    <div class="notification is-link">
+                        <div class="title is-4">Ce vei învăța ?</div>
+                        <div v-for="(skill, index) in course.purpose_what_will_learn" :key="index">
+                            <b-icon pack="fa" icon="check"></b-icon> &nbsp; {{skill}}
+                        </div>
                     </div>
+
+                    <user-card :user="user"></user-card>
+                    <!--<button class="button is-success is-fullwidth mt-10">Înscriere</button>-->
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 <script>
     import config from '../../../../../config';
     import UserCard from '../../../../components/includes/dumb/UserCard.vue';
+    import LessonBox from '../../../../components/includes/dumb/LessonBox.vue';
+
     export default {
         mounted() {
             const loadingComponent = this.$loading.open();
@@ -53,6 +72,9 @@
                     return axios.post(config.url.USER + data.course.user_id);
                 }).then(({ data }) => { // get couse user data
                     this.user = data.user;
+                    return axios.get(config.url.LESSON_ALL + this.course.id);
+                }).then(({ data }) => {
+                    this.lessons = data.lessons;
                     loadingComponent.close();
                     this.loaded = true;
                 });
@@ -61,11 +83,13 @@
             return {
                 course: {},
                 user: {},
+                lessons: [],
                 loaded: false,
             };
         },
         components: {
             UserCard,
+            LessonBox,
         },
     };
 </script>

@@ -9,13 +9,13 @@ class Course extends Model
     public static $rules = [
         'title' => 'required|string|max:100|min:4',
         'slug' => 'required|string|max:100|min:4',
-        'shortDescription' => 'required|string|max:240',
+        'short_description' => 'required|string|max:240',
         'description' => 'required|string|max:4000',
         'difficulty' => 'required|numeric',
         'prerequisites' => 'array',
         'purpose' => 'required|string|max:2000',
-        'purposeWhatWillLearn' => 'array',
-        'targetClassLevel' => 'required|numeric',
+        'purpose_what_will_learn' => 'array',
+        'target_class_level' => 'required|numeric',
         'image' => 'image|mimes:jpeg,png,jpg|max:10000000',
     ];
     protected $appends = [
@@ -28,6 +28,13 @@ class Course extends Model
     public function getUserAttribute(){
         return User::find($this->user_id);
     }
-
-
+    public function getPrerequisitesAttribute($value) {
+        return json_decode($value);
+    }
+    public function getPurposeWhatWillLearnAttribute($value) {
+        return json_decode($value);
+    }
+    public function lessons() {
+        return $this->hasMany(Lesson::class);
+    }
 }

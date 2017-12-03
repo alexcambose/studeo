@@ -8,6 +8,6 @@ class Answer extends Model
 {
     public static $rules = [
         'content' => 'required|string|max:120',
-        'isTrue' => 'required|boolean'
+        'is_true' => 'required|boolean'
     ];
 }

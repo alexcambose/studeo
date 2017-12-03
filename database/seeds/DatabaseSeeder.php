@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
 //        factory(\App\Lesson::class, 20)->create();
 //        factory(\App\Question::class, 10)->create();
 //        factory(\App\Answer::class, 20)->create();
-        factory(\App\Course::class, 50)->create();
-        factory(\App\Lesson::class, 80)->create();
-        factory(\App\Question::class, 40)->create();
-        factory(\App\Answer::class, 20)->create();
+        factory(\App\Course::class, 20)->create();
+        factory(\App\Lesson::class, 100)->create();
+        factory(\App\Question::class, 90)->create();
+        factory(\App\Answer::class, 100)->create();
     }
 }

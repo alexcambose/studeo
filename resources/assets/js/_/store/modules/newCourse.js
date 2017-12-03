@@ -147,7 +147,6 @@ const actions = {
                 })
                 .catch(err => reject(err));
         });
-
     },
     addNewLesson ({ commit, state }, { title, description }) {
         const lastId = state.lessons[state.lessons.length - 1].id;
@@ -214,7 +213,13 @@ const actions = {
 
 const mutations = {
     [NEW_COURSE_ADD_LESSON] (state, payload) {
-        state.lessons.push({ ...payload, order_index: state.lessons.length });
+        state.lessons.push({
+            ...payload,
+            thumbnail: null,
+            video: null,
+            questions: [],
+            order_index: state.lessons.length,
+        });
     },
     [NEW_COURSE_DELETE_LESSON] (state, id) {
         const index = state.lessons.findIndex(e => e.id === id);
