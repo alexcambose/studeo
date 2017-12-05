@@ -42,7 +42,6 @@
                         $state.complete();
                     }
                 });
-                console.log($state);
             },
         },
         components: {

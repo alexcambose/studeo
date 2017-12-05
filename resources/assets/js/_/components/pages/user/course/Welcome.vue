@@ -1,9 +1,9 @@
 <template>
-    <div v-if="loaded" class="course-welcome">
+    <div v-if="!fetching" class="course-welcome">
         <section class="hero course-hero is-medium" :style="{backgroundImage: `url(${course._image.filename})`}">
             <div class="background-filter"></div>
             <div class="hero-body">
-                <div class="container">
+                <div class="container content-lower">
                     <div class="columns">
                         <div class="column is-5">
                             <video controls>
@@ -51,6 +51,17 @@
                         </div>
                     </div>
 
+                    <div class="card margin-bottom">
+                        <div class="card-header">
+                            <p class="card-header-title">Dificultate</p>
+                        </div>
+                        <div class="card-content has-text-centered">
+                            <b-tag v-if="course.difficulty == 1" type="is-success" size="is-large">Ușor</b-tag>
+                            <b-tag v-else-if="course.difficulty == 2" type="is-info" size="is-large">Mediu</b-tag>
+                            <b-tag v-else type="is-danger" size="is-large">Greu</b-tag>
+                        </div>
+                    </div>
+
                     <user-card :user="user"></user-card>
                     <!--<button class="button is-success is-fullwidth mt-10">Înscriere</button>-->
                 </div>
@@ -69,14 +80,21 @@
             axios.get(config.url.COURSE + this.$route.params.slug)
                 .then(({ data }) => { // get course data
                     this.course = data.course;
-                    return axios.post(config.url.USER + data.course.user_id);
-                }).then(({ data }) => { // get couse user data
-                    this.user = data.user;
-                    return axios.get(config.url.LESSON_ALL + this.course.id);
-                }).then(({ data }) => {
-                    this.lessons = data.lessons;
-                    loadingComponent.close();
-                    this.loaded = true;
+                    if (!data.course) {
+                        loadingComponent.close();
+                        this.fetching = false;
+                        this.$router.push({ name: '404' });
+                    } else { // if the course was found
+                        return axios.post(config.url.USER + data.course.user_id)
+                            .then(({ data }) => { // get course user data
+                                this.user = data.user;
+                                return axios.get(config.url.LESSON_ALL + this.course.id);
+                            }).then(({ data }) => {
+                                this.lessons = data.lessons;
+                                loadingComponent.close();
+                                this.fetching = false;
+                            });
+                    }
                 });
         },
         data() {
@@ -84,7 +102,7 @@
                 course: {},
                 user: {},
                 lessons: [],
-                loaded: false,
+                fetching: true,
             };
         },
         components: {

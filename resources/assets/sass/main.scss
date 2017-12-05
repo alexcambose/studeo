@@ -16,9 +16,9 @@ html {
   box-shadow: 0 0 1px 1px rgba(20, 23, 28, .1), 0 3px 1px 0 rgba(20, 23, 28, .1);
 }
 
-.flex-container {
-  padding: 10px 25px;
-}
+//.flex-container {
+//  padding: 10px 25px;
+//}
 
 .cp {
   cursor: pointer !important;
@@ -34,10 +34,19 @@ html {
 
 
 .content-lower { //container margin-top
-  margin: $container-margin;
+  margin-top: 30px;
 }
 .is-fullwidth{
   display: block;
   width: 100%;
 }
 
+.margin-bottom { // standard bulma mb height
+  margin-bottom: 1.5rem;
+}
+
+.flex-center{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}

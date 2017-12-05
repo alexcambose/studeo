@@ -109,6 +109,7 @@
                 let arr = this.playlists;
                 let id = this.$route.params.id;
                 let playlist = '';
+                console.log(arr);
                 Object.keys(arr).forEach(function (x) {
                     if (arr[x].id == id) {
                         playlist = arr[x];

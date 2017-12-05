@@ -48,7 +48,7 @@
                 description: '',
                 fetching: false,
                 success: '',
-            }
+            };
         },
         methods: {
             submit(e) {
@@ -62,7 +62,7 @@
                         this.isComponentModalActive = false;
                         this.$toast.open({
                             message: 'Ati adaugat un playlist',
-                            type: 'is-success'
+                            type: 'is-success',
                         });
                         this.$router.push({ name: 'playlists' });
                     })
@@ -70,7 +70,7 @@
                         this.$toast.open({
                             message: 'A aparut o eroare..',
                             type: 'is-danger',
-                        })
+                        });
                         this.fetching = false;
                         this.error = err;
                     });
@@ -79,5 +79,5 @@
         components: {
             Submit,
         },
-    }
+    };
 </script>

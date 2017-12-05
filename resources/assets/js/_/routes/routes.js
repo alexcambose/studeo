@@ -1,7 +1,8 @@
-import Home from '../components/pages/Home';
-import Profile from '../components/pages/user/Profile';
-import Notifications from '../components/pages/user/Notifications';
-import Help from '../components/pages/Help';
+import Home from '../components/pages/Home.vue';
+import Profile from '../components/pages/user/Profile.vue';
+import Notifications from '../components/pages/user/Notifications.vue';
+import Help from '../components/pages/Help.vue';
+import NotFound404 from '../components/pages/404.vue';
 import guestRoutes from './guest';
 import mentorRoutes from './mentor';
 import settingsRoutes from './settings';
@@ -44,6 +45,11 @@ const router = new VueRouter({
         ...settingsRoutes,
         ...playlistsRoutes,
         ...courseRoutes,
+        {
+            path: '/404',
+            component: NotFound404,
+            name: '404',
+        },
     ],
 });
 

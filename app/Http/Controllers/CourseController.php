@@ -77,7 +77,7 @@ class CourseController extends Controller
                     ], [
                         'thumbnail' => Lesson::$rules['thumbnail'],
                     ]);
-                    if ($validation->fails()) $errors[] = 'Miniatura de la lecția numărul ' . $key . ' nu este validă!';
+                    if ($validation->fails()) $errors[] = 'Miniatura de la lecția <b>' . $course['lessons'][$key]['title'] . '</b> nu este validă!';
                 } else $errors[] = 'Lectia numărul ' . $key . 'nu conține miniatură!';
             }
             foreach ($request->file('videos') as $key => $video) {
@@ -87,7 +87,7 @@ class CourseController extends Controller
                     ], [
                         'video' => Lesson::$rules['video'],
                     ]);
-                    if ($validation->fails()) $errors[] = 'Videoclipul de la lectia numărul ' . $key . ' nu este valid!';
+                    if ($validation->fails()) $errors[] = 'Videoclipul de la lectia <b>' . $course['lessons'][$key]['title'] . '</b> nu este valid!';
                 } else $errors[] = 'Lectia numărul ' . $key . 'nu conține videoclip!';
             }
         }
@@ -106,6 +106,7 @@ class CourseController extends Controller
             'targetClassLevel' => Course::$rules['target_class_level'],
         ]);
         if ($validation->fails()) $errors[] = 'Cursul conține date invalide!';
+        if(Course::where('slug', Course::$rules['slug'])->count()) $errors[] = 'Legătura permanentă a cursului există deja!';
         // endregion
         // region Continut course->lessons
         foreach ($course['lessons'] as $key => $lesson) {
@@ -212,6 +213,17 @@ class CourseController extends Controller
 
         return response()->json([
             'success' => true, // :D :D :D see ya'
+        ]);
+    }
+
+    public function bestSlug($currentSlug){
+        $someNumber = 0;
+        while(Course::where('slug', $currentSlug)->count()){ //while there is a database course with the same slug
+            $currentSlug .= ++$someNumber;
+        }
+        return response()->json([
+            'success' => true,
+            'slug' => $currentSlug,
         ]);
     }
 }

@@ -9,16 +9,17 @@
                     required
             ></b-input>
         </b-field>
+        <button @click="fetchBestSlug" :class="['button', 'is-small', 'is-pulled-right', (fetchingSlug ? 'is-loading': '')]">Alege cea mai bună variantă</button>
         <b-field label="Legătură permanentă" :message="`Link-ul cursului tău va fi <em>${courseLink}</em>`">
-            <b-input
-                    :value="newCourse.slug"
-                    @input.native="setSlug"
-                    maxlength="100"
-                    minlength="4"
-                    required
-            ></b-input>
+                <b-input
+                        :value="decodeURIComponent(newCourse.slug)"
+                        @input.native="setSlug"
+                        maxlength="100"
+                        minlength="4"
+                        expanded
+                        required
+                ></b-input>
         </b-field>
-        <span></span>
         <b-field label="Scurtă descriere">
             <b-input
                     maxlength="240"
@@ -59,6 +60,7 @@
 
 <script>
     import { mapState } from 'vuex';
+    import config from '../../../../../../../config';
     import MultipleFields from '../../../../../../components/includes/dumb/MultipleFields.vue';
     import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
 
@@ -66,9 +68,12 @@
         methods: {
             setTitle(e) {
                 this.$store.dispatch('updateNewCourseData', { title: e.target.value });
+                if (this.newCourse.slug.trim() === '') {
+                    this.$store.dispatch('updateNewCourseData', { slug: e.target.value.replace(' ', '-').toLowerCase() });
+                }
             },
             setSlug(e) {
-                this.$store.dispatch('updateNewCourseData', { slug: e.target.value });
+                this.$store.dispatch('updateNewCourseData', { slug: encodeURIComponent(e.target.value) });
             },
             setShortDescription(e) {
                 this.$store.dispatch('updateNewCourseData', { shortDescription: e.target.value });
@@ -81,6 +86,14 @@
             },
             setPrerequisites(values) {
                 this.$store.dispatch('updateNewCourseData', { prerequisites: values });
+            },
+            fetchBestSlug() {
+                this.fetchingSlug = true;
+                axios.get(config.url.COURSE_BEST_SLUG + this.newCourse.slug)
+                    .then(({ data }) => {
+                        this.fetchingSlug = false;
+                        this.$store.dispatch('updateNewCourseData', { slug: encodeURIComponent(data.slug) });
+                    });
             },
         },
         computed: {
@@ -98,6 +111,11 @@
             courseLink() {
                 return `${window.location.host}/curs/<b>${encodeURIComponent(this.newCourse.slug)}</b>`;
             },
+        },
+        data() {
+            return {
+                fetchingSlug: false,
+            };
         },
         components: {
             MultipleFields,
