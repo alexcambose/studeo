@@ -37,4 +37,8 @@ class Course extends Model
     public function lessons() {
         return $this->hasMany(Lesson::class);
     }
+    public function playlists() {
+        return $this->belongsToMany(Playlist::class);
+    }
+
 }

@@ -22,6 +22,7 @@ class CreatePlaylistsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('user_id');
+            $table->integer('image_id');
             $table->timestamps();
         });
     }

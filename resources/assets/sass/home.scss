@@ -1,0 +1,25 @@
+.continueWatching {
+  font-size: 20px;
+  font-weight: 700;
+}
+.courses img {
+  width:100%;
+  height:auto;
+}
+a.course {
+  float: left;
+  position: relative;
+}
+a.course span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url("http://www.bornmusiconline.com/wp-content/uploads/2017/06/play-button.png") no-repeat;
+  background-position: 50% 50%;
+  background-size: 60%;
+}
+@media screen and (max-width: 480px) {
+  a.video span {
+    background-size: 400%;
+  }
+}

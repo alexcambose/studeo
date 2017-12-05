@@ -18,6 +18,12 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function all($playlistId) {
+        return response()->json([
+           'playlists' => Course::find($playlistId)->courses
+        ]);
+    }
+
     public function createPlaylist(Request $request){
         $playlist = new Playlist();
         $user = Auth::user();
@@ -30,6 +36,7 @@ class PlaylistController extends Controller
         $playlist->title = $request->title;
         $playlist->description = $request->description;
         $playlist->user_id = $user->id;
+        $playlist->image_id = 1;
 
         $playlist->save();
 

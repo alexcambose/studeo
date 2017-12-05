@@ -1,48 +1,49 @@
 <template>
     <div>
-        <div :class="{ 'modal': true, 'is-active': true }">
-            <div class="modal-background"></div>
+        <form @submit="submit">
             <div class="modal-card">
-                <form @submit="submit">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Creeaza un playlist</p>
-                        <button class="delete" aria-label="close"@click="$emit('close')"></button>
-                    </header>
-                    <section class="modal-card-body">
-                            <b-field label="Titlu">
-                                <b-input
-                                    type="text"
-                                    v-model="title"
-                                    maxlength="30"
-                                    required
-                                >
-                                </b-input>
-                            </b-field>
-                            <b-field label="Descriere">
-                                <b-input
-                                        type="textarea"
-                                        v-model="description"
-                                        maxlength="500"
-                                        required
-                                >
-                                </b-input>
-                            </b-field>
-                    </section><footer class="modal-card-foot">
-                        <button class="button" @click="$emit('close')">Cancel</button>
-                        <submit :fetching="fetching" :success="success">Salvează</submit>
-                    </footer>
-                </form>
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Adauga un playlist</p>
+                </header>
+                <section class="modal-card-body">
+                    <b-field label="Titlu">
+                        <b-input
+                                type="text"
+                                v-model="title"
+                                maxlength="30"
+                                required
+                        >
+                        </b-input>
+                    </b-field>
+
+                    <b-field label="Descriere">
+                        <b-input
+                                type="textarea"
+                                v-model="description"
+                                maxlength="500"
+                                required
+                        >
+                        </b-input>
+                    </b-field>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button" type="button" @click="$parent.close()">Close</button>
+                    <submit :fetching="fetching" :success="success">Salvează</submit>
+                </footer>
             </div>
-        </div>
+        </form>
     </div>
 </template>
-
 <script>
     import Submit from '../../../../includes/dumb/Submit.vue';
     export default {
-        props: ['active'],
         data() {
             return {
+                fromProps: {
+                    title: '',
+                    description: '',
+                },
+                isComponentModalActive: false,
                 title: '',
                 description: '',
                 fetching: false,
@@ -58,10 +59,12 @@
                         this.fetching = false;
                         this.title = '';
                         this.description = '';
+                        this.isComponentModalActive = false;
                         this.$toast.open({
                             message: 'Ati adaugat un playlist',
                             type: 'is-success'
-                        })
+                        });
+                        this.$router.push({ name: 'playlists' });
                     })
                     .catch(err => {
                         this.$toast.open({

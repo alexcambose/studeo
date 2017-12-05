@@ -3,7 +3,7 @@ import config from '../../../config';
 import { PLAYLIST_CREATE, PLAYLIST_ALL } from '../mutators-types';
 const state = {
     playlist: {},
-    playlists: '',
+    playlists: {},
 };
 
 const getters = {

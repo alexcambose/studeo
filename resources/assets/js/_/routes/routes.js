@@ -79,11 +79,6 @@ router.beforeEach((to, from, next) => {
             check();
         });
     }
-
-    axios.post(config.url.PLAYLISTS)
-        .then(({ data }) => {
-            store.dispatch('getAllPlaylists', data);
-        });
 });
 
 export default router;

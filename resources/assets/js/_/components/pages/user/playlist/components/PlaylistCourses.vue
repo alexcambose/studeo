@@ -3,16 +3,16 @@
         <div class="box courseBox">
             <article class="media">
                 <div class="media-left">
-                    <figure class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                    <figure class="image is-96x96">
+                        <img :src="course._image.filename" :alt="course._image.comment">
                     </figure>
                 </div>
                 <div class="media-content">
                     <div class="content">
                         <p>
-                            <strong>John Smith</strong> <small>@johnsmith</small> <small>5o 30m</small>
+                            <strong>{{ course._user.first_name }} {{ course._user.last_name }}</strong> <router-link :to="{name: 'profile', params: { username: course._user.username }}">@{{ course._user.username }}</router-link><small></small> <small>5o 30m</small>
                             <br>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+                            {{ course.short_description }}
                         </p>
                     </div>
                     <nav class="level is-mobile">
@@ -27,7 +27,9 @@
 </template>
 
 <script>
-    export default {
+    import { fullname } from '../../../../../../utils';
 
+    export default {
+        props:['course'],
     }
 </script>

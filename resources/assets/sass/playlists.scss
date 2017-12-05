@@ -41,16 +41,32 @@
   }
   .rightsidePlaylists {
     margin: 0 20px;
+    .noId {
+      position: absolute;
+      top: 35%;
+      .noIdBox {
+        &:hover {
+          background-color: whitesmoke !important;
+        }
+        .add {
+          text-align: center;
+        }
+      }
+    }
     .header {
       height: auto;
       .playlistTitle {
         font-size: 25px;
         font-weight: 500;
-
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
       }
       .playlistDescription {
         margin-top: 10px;
         font-weight: 300;
+        word-break: break-all;
+        overflow: hidden;
       }
       .playlistActions {
         li {
@@ -62,9 +78,6 @@
           }
         }
       }
-    }
-    .content {
-
     }
   }
 }

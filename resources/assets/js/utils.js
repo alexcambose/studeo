@@ -86,3 +86,10 @@ export const chunkArray = (array, length) => {
         return chunkArray(array, 1);
     }
 };
+
+export const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie'];
+export const displayDate = e => {
+    let date = new Date(e);
+    return date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
+};
+

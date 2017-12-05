@@ -63,7 +63,7 @@
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import NavbarProfile from '../../includes/NavbarProfile.vue';
     import { mapState, mapGetters } from 'vuex';
-    import { cities } from '../../../../utils';
+    import { cities, displayDate } from '../../../../utils';
 
     export default {
         computed: {
@@ -77,17 +77,10 @@
                 const { city, birthday, school, created_at } = this.user;
                 return [
                     { 'name': 'city', 'icon': 'fa fa-building fa-lg', 'content': cities[city] },
-                    { 'name': 'birthday', 'icon': 'fa fa-birthday-cake fa-lg', 'content': `Născut la ${this.displayDate(birthday)}`},
+                    { 'name': 'birthday', 'icon': 'fa fa-birthday-cake fa-lg', 'content': `Născut la ${displayDate(birthday)}`},
                     { 'name': 'school', 'icon': 'fa fa-graduation-cap fa-lg', 'content': school },
-                    { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat în ${this.displayDate(created_at)}` },
+                    { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat în ${displayDate(created_at)}` },
                 ];
-            },
-        },
-        methods: {
-            displayDate: function(e) {
-                const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie'];
-                let date = new Date(e);
-                return date.getDay() + ' ' +  monthNames[date.getMonth()] + ' ' +  date.getFullYear();
             },
         },
         components: {
