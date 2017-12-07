@@ -33,8 +33,9 @@ Route::get('course/all/{userId?}', 'CourseController@all');
 Route::get('course/slug/{slug}', 'CourseController@one');
 Route::get('course/slug/best/{slug}', 'CourseController@bestSlug');
 Route::post('course/add', 'CourseController@add');
+Route::post('course/user/join/', 'CourseController@userJoin');
 
-Route::get('lesson/all/{courseId}', 'LessonController@all');
+Route::get('lesson/all/{course}', 'LessonController@all');
 // endregion
 
 

@@ -34,26 +34,8 @@ class CreateCoursesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
         });
-
-        /*
-         *   #courses_users
-         * cursurile incepute de un anumit user + progresul + lectia la care a ramas
-         *
-         * PS: Am pus-o aici ca are legatura cumva cu prima si e mai bine sa le vezi pe aman2
-         * functie progress:current/max * 100 = %
-         *
-         */
-        Schema::create('courses_users', function (Blueprint $table ) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('course_id')->unsigned();
-            $table->integer('current_lesson_id')->unsigned();
-            $table->integer('progress'); // useless daca folosim formula... sterge tu
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('course_id')->references('id')->on('courses');
-        });
+        // PS: Am pus-o aici ca are legatura cumva cu prima si e mai bine sa le vezi pe aman2
+        // S-a mutat in migratie separata :>
     }
 
     /**
@@ -63,7 +45,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses_users');
         Schema::dropIfExists('courses');
     }
 }

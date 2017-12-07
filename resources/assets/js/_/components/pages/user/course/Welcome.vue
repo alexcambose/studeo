@@ -18,7 +18,7 @@
                             <div class="subtitle">
                                 {{course.shortDescription}}
                                 <div class="apply-container">
-                                    <button class="button is-outlined is-success apply">Înscriere</button>
+                                    <button @click="join" class="button is-outlined is-success apply">Înscriere</button>
                                 </div>
                             </div>
                         </div>
@@ -104,6 +104,14 @@
                 lessons: [],
                 fetching: true,
             };
+        },
+        methods: {
+            join() {
+                axios.post(config.url.COURSE_USER_JOIN, { courseId: this.course.id })
+                    .then(({ data }) => {
+                        alert('Te-ai inscris!', JSON.stringify(data));
+                    });
+            },
         },
         components: {
             UserCard,

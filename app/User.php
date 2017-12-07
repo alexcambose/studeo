@@ -53,8 +53,17 @@ class User extends Authenticatable
     public function getImageAttribute(){
         return $this->image();
     }
-    public function image(){
+    public function image() {
         // has one
         return Media::where('id', $this->image_id)->first();
+    }
+    public function courses() {
+        return $this->hasMany(Course::class);
+    }
+    public function joinedLessons() {
+        return $this->belongsToMany(Lesson::class);
+    }
+    public function joinedCourses() {
+        return $this->belongsToMany(Lesson::class);
     }
 }

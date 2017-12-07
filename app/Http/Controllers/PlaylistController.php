@@ -20,7 +20,7 @@ class PlaylistController extends Controller
 
     public function all($playlistId) {
         return response()->json([
-           'playlists' => Course::find($playlistId)->courses
+           'playlists' => Course::find($playlistId)->courses,
         ]);
     }
 

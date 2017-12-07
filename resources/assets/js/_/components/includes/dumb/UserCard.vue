@@ -1,15 +1,19 @@
 <template>
     <div class="card user-card">
         <div class="card-content">
-            <div class="media">
+            <router-link :to="{name: 'profile', params: {username: user.username}}" class="media">
                 <div class="media-left">
                     <image-container class="profileImage" :image="user._image.filename"></image-container>
                 </div>
                 <div class="media-content">
-                    <p class="title is-4">{{user.first_name}} {{user.last_name}}</p>
+                    <p class="title is-4">
+
+                        {{user.first_name}} {{user.last_name}}
+
+                    </p>
                     <p class="subtitle is-6">{{user.username}}</p>
                 </div>
-            </div>
+            </router-link>
             <div class="content">
                 {{user.description}}
 

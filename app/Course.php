@@ -34,6 +34,9 @@ class Course extends Model
     public function getPurposeWhatWillLearnAttribute($value) {
         return json_decode($value);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function lessons() {
         return $this->hasMany(Lesson::class);
     }

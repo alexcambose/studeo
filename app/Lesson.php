@@ -33,9 +33,16 @@ class Lesson extends Model
         return Media::find($this->thumbnail_id);
     }
     public function getVideoAttribute(){
-        return User::find($this->video_id);
+        return Media::find($this->video_id);
     }
     public function questions(){
         return $this->hasMany(Question::class);
     }
+    public function course() {
+        return $this->belongsTo(Course::class);
+    }
+    public function joinedUsers() {
+        return $this->belongsToMany(User::class);
+    }
+
 }

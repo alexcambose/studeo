@@ -21,14 +21,39 @@ class CourseController extends Controller
             'course' => $course,
         ]);
     }
-    function all($userId = null, Request $r) {
-        $courses = Course::orderBy('created_at', 'DESC');
+    function all($userId = null, Request $request) {
+        if($request->sort) {
+            $field = explode('-', $request->sort)[0];
+            $order = explode('-', $request->sort)[1];
+            $courses = Course::orderBy(($field === 'date' ? 'created_at' : 'title'), ($order === 'desc' ? 'DESC' : 'ASC'));
+        } else {
+            $courses = Course::orderBy('created_at', 'DESC');
+        }
         if($userId) $courses = $courses->where('user_id', $userId);
 
-        if($r->start !== null && $r->end !== null) $courses->skip((int)$r->start)->take((int)$r->end);
+        if($request->start !== null && $request->end !== null) $courses->skip((int)$request->start)->take((int)$request->end);
         return response()->json([
             'success' => true,
             'courses' => $courses->get(),
+        ]);
+    }
+
+    public function bestSlug($currentSlug){
+        $someNumber = 0;
+        while(Course::where('slug', $currentSlug)->count()){ //while there is a database course with the same slug
+            $currentSlug .= ++$someNumber;
+        }
+        return response()->json([
+            'success' => true,
+            'slug' => $currentSlug,
+        ]);
+    }
+
+    public function userJoin(Request $request) {
+        // todo validare sa nu se inscrie de mai multe ori
+        Course::find($request->courseId)->lessons()->first()->joinedUsers()->attach(Auth::user()->id);
+        return response()->json([
+            'success' => true,
         ]);
     }
     /**
@@ -213,17 +238,6 @@ class CourseController extends Controller
 
         return response()->json([
             'success' => true, // :D :D :D see ya'
-        ]);
-    }
-
-    public function bestSlug($currentSlug){
-        $someNumber = 0;
-        while(Course::where('slug', $currentSlug)->count()){ //while there is a database course with the same slug
-            $currentSlug .= ++$someNumber;
-        }
-        return response()->json([
-            'success' => true,
-            'slug' => $currentSlug,
         ]);
     }
 }

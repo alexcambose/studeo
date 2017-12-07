@@ -5,7 +5,7 @@
         </div>
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: this.course.slug } }" >
-                <span class="course-title">{{course.id}} - {{course.title}}</span>
+                <span class="course-title">{{course.title}}</span>
 
                 <div class="course-content">
                     {{course.short_description}}

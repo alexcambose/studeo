@@ -5,7 +5,7 @@
                 <div class="container">
                     <router-link :to="{ name: 'dashboard-add-course' }" class="button is-light is-outlined is-pulled-right">Adaugă curs</router-link>
                     <h1 class="title">
-                        Salut sunt un mentor
+                        Administrare cursuri
                     </h1>
                 </div>
             </div>

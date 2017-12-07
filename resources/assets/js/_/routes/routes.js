@@ -40,6 +40,11 @@ const router = new VueRouter({
             name: 'help',
             meta: { onlyAuth: true },
         },
+        {
+            path: '/legal',
+            // component: Help,
+            name: 'legal',
+        },
         ...guestRoutes,
         ...mentorRoutes,
         ...settingsRoutes,
