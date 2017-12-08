@@ -50,7 +50,6 @@ class CourseController extends Controller
     }
 
     public function userJoin(Request $request) {
-        // todo validare sa nu se inscrie de mai multe ori
         Course::find($request->courseId)->lessons()->first()->joinedUsers()->attach(Auth::user()->id);
         return response()->json([
             'success' => true,
@@ -119,10 +118,12 @@ class CourseController extends Controller
 
         // endregion
         // region Continut curs
+        if(Course::where('slug', Course::$rules['slug'])->count()) $errors[] = 'Legătura permanentă a cursului există deja!';
+
         $validation = Validator::make($course, [
             'title' => Course::$rules['title'],
             'slug' => Course::$rules['slug'],
-            'shortDescription' => Course::$rules['short_description'],
+            'short_description' => Course::$rules['short_description'],
             'description' => Course::$rules['description'],
             'difficulty' => Course::$rules['difficulty'],
             'prerequisites' => Course::$rules['prerequisites'],
@@ -131,13 +132,12 @@ class CourseController extends Controller
             'targetClassLevel' => Course::$rules['target_class_level'],
         ]);
         if ($validation->fails()) $errors[] = 'Cursul conține date invalide!';
-        if(Course::where('slug', Course::$rules['slug'])->count()) $errors[] = 'Legătura permanentă a cursului există deja!';
         // endregion
         // region Continut course->lessons
         foreach ($course['lessons'] as $key => $lesson) {
             $validation = Validator::make($course['lessons'][$key], [
                 'title' => Lesson::$rules['title'],
-                'shortDescription' => Lesson::$rules['short_description'],
+                'short_description' => Lesson::$rules['short_description'],
                 'content' => Lesson::$rules['content'],
                 'order_index' => Lesson::$rules['order_index'],
             ]);
@@ -153,7 +153,7 @@ class CourseController extends Controller
                 foreach($course['lessons'][$key]['questions'][$questionKey]['answers'] as $answerKey => $answer) {
                     $validation = Validator::make($course['lessons'][$key]['questions'][$questionKey]['answers'][$answerKey], [
                         'content' => Answer::$rules['content'],
-                        'isTrue' => Answer::$rules['is_true'],
+                        'is_true' => Answer::$rules['is_true'],
                     ]);
                     if ($validation->fails()) $errors[] = 'Răspunsul la întrebarea <b><em>' . $question['content'] . '</em></b> de la lecția <b><em>' . $lesson['title'] . '</em></b> conține date invalide!';
                 }
@@ -198,7 +198,7 @@ class CourseController extends Controller
         $newCourse = new Course();
         $newCourse->title = $course['title'];
         $newCourse->slug = $course['slug'];
-        $newCourse->short_description = $course['shortDescription'];
+        $newCourse->short_description = $course['short_description'];
         $newCourse->description = $course['description'];
         $newCourse->difficulty = $course['difficulty'];
         $newCourse->prerequisites = json_encode($course['prerequisites']);
@@ -206,13 +206,12 @@ class CourseController extends Controller
         $newCourse->purpose_what_will_learn = json_encode($course['purposeWhatWillLearn']);
         $newCourse->target_class_level = $course['targetClassLevel'];
         $newCourse->image_id = $courseImageId;
-        $newCourse->user_id = Auth::id();
-        $newCourse->save();
+        Auth::user()->courses()->save($newCourse);
 
         foreach ($course['lessons'] as $key => $lesson) {
             $newLesson = new Lesson();
             $newLesson->title = $lesson['title'];
-            $newLesson->short_description = $lesson['shortDescription'];
+            $newLesson->short_description = $lesson['short_description'];
             $newLesson->content = $lesson['content'];
             $newLesson->order_index = $lesson['order_index'];
             $newLesson->thumbnail_id = $thumbnailsId[$key];

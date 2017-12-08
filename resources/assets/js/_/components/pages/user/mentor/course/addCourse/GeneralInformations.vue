@@ -25,8 +25,8 @@
                     maxlength="240"
                     required
                     type="textarea"
-                    :value="newCourse.shortDescription"
-                    @blur="setShortDescription"
+                    :value="newCourse.short_description"
+                    @blur="setshort_description"
             ></b-input>
         </b-field>
         <b-field label="Descriere completă">
@@ -75,8 +75,8 @@
             setSlug(e) {
                 this.$store.dispatch('updateNewCourseData', { slug: encodeURIComponent(e.target.value) });
             },
-            setShortDescription(e) {
-                this.$store.dispatch('updateNewCourseData', { shortDescription: e.target.value });
+            setshort_description(e) {
+                this.$store.dispatch('updateNewCourseData', { short_description: e.target.value });
             },
             setDescription(e) {
                 this.$store.dispatch('updateNewCourseData', { description: e.target.value });

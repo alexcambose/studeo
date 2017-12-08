@@ -4,7 +4,7 @@
             <image-container class="course-image" :image="course._image.filename"></image-container>
         </div>
         <div class="card-content cp">
-            <router-link :to="{ name: 'courseWelcome', params: { slug: this.course.slug } }" >
+            <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
                 <span class="course-title">{{course.title}}</span>
 
                 <div class="course-content">

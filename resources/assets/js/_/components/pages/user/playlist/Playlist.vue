@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="playlistDescription">
-                                   {{ this.playlist.description }}
+                                    {{ this.playlist.description }}
                                 </div>
                                 <div class="playlistProgress mt-15">
                                     <progress class="progress is-primary" value="15" max="100">30%</progress>
@@ -63,7 +63,7 @@
                             <div class="box noIdBox" @click="isComponentModalActive = true">
                                 <div class="add">
                                     <b-tooltip
-                                        label="Adaugă un curs"
+                                            label="Adaugă un curs"
                                     >
                                         <i class="fa fa-plus fa-3x"></i>
                                     </b-tooltip>
@@ -83,7 +83,6 @@
     import { mapState } from 'vuex';
     import store from '../../../../store/index';
     import config from '../../../../../config';
-
     export default {
         data() {
             return {

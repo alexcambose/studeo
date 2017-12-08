@@ -10,8 +10,8 @@
             ></b-input>
             <p class="control">
                 <button
-                        @click="updateAnswer({ lesson_id, question_index, answer_index: index, data: {isTrue: !answer.isTrue}})"
-                        :class="['button', 'is-' + (answer.isTrue ? 'success' : 'default')]"
+                        @click="updateAnswer({ lesson_id, question_index, answer_index: index, data: {is_true: !answer.is_true}})"
+                        :class="['button', 'is-' + (answer.is_true ? 'success' : 'default')]"
                 >Corect</button>
             </p>
             <p class="control">

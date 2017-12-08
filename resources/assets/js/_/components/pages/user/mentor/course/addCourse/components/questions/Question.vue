@@ -7,9 +7,9 @@
             </p>
             <a class="card-header-icon">
                 <span class="mr-10">
-                    <b-tag v-if="question.answers.filter(e => e.isTrue).length === 0" type="is-danger">Fără răspuns</b-tag>
-                    <b-tag v-if="question.answers.length && question.answers.filter(e => e.isTrue).length === question.answers.length" type="is-danger">Toate variantele sunt corecte</b-tag>
-                    <b-tag v-else-if="question.answers.filter(e => e.isTrue).length > 1" type="is-dark">Variante multiple</b-tag>
+                    <b-tag v-if="question.answers.filter(e => e.is_true).length === 0" type="is-danger">Fără răspuns</b-tag>
+                    <b-tag v-if="question.answers.length && question.answers.filter(e => e.is_true).length === question.answers.length" type="is-danger">Toate variantele sunt corecte</b-tag>
+                    <b-tag v-else-if="question.answers.filter(e => e.is_true).length > 1" type="is-dark">Variante multiple</b-tag>
                 </span>
 
                 <button @click="deleteQuestion({ lesson_id, question_index }); $event.stopPropagation()" class="button is-danger is-small"><b-icon pack="fa" icon="trash" size="is-small"></b-icon></button>

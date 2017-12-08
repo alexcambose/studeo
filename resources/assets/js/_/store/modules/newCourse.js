@@ -5,7 +5,7 @@ import { NEW_COURSE_LESSON_QUESTION_ANSWER_ADD, NEW_COURSE_LESSON_QUESTION_ANSWE
 const state = {
     title: 'Titlu curs',
     slug: 'titlu-curs',
-    shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac ',
+    short_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac ',
     description: ' Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst.  Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst.  Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst. v Sed eu ex sapien. In scelerisque massa diam, vel luctus dolor tincidunt vel. Etiam rhoncus mi nec rutrum tincidunt. Donec commodo nisl ante, at efficitur lorem semper et. Nunc eget aliquet augue. Phasellus ultrices est non metus aliquet fringilla. Fusce nec blandit justo. Suspendisse hendrerit, nunc et consectetur sagittis, ante mauris sollicitudin odio, nec ornare diam dolor at felis. Integer ut facilisis odio, sit amet congue orci. Curabitur feugiat convallis mauris in auctor. In hac habitasse platea dictumst. ',
     difficulty: 3,
     prerequisites: [
@@ -25,7 +25,7 @@ const state = {
         {
             id: 1,
             title: 'Lecția numărul 1',
-            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            short_description: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [],
             thumbnail: null,
@@ -35,27 +35,27 @@ const state = {
         {
             id: 2,
             title: 'Lecția numărul 2',
-            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            short_description: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [
                 {
                     content: 'What is the fastest animal in the world ?',
                     answers: [
-                        { content: 'Peregrine falcon', isTrue: true },
-                        { content: 'Cheetah', isTrue: false },
-                        { content: 'Lion', isTrue: false },
-                        { content: 'Turtle', isTrue: false },
-                        { content: 'The happy little frog :)', isTrue: false },
+                        { content: 'Peregrine falcon', is_true: true },
+                        { content: 'Cheetah', is_true: false },
+                        { content: 'Lion', is_true: false },
+                        { content: 'Turtle', is_true: false },
+                        { content: 'The happy little frog :)', is_true: false },
                     ],
                 },
                 {
                     content: 'What is the tallest building in the world ?',
                     answers: [
-                        { content: 'Shanghai Tower', isTrue: false },
-                        { content: 'Abraj Al-Bait Clock Tower', isTrue: false },
-                        { content: 'Burj Khalifa', isTrue: true },
-                        { content: 'Ping An Finance Centre', isTrue: false },
-                        { content: 'Taipei 101', isTrue: false },
+                        { content: 'Shanghai Tower', is_true: false },
+                        { content: 'Abraj Al-Bait Clock Tower', is_true: false },
+                        { content: 'Burj Khalifa', is_true: true },
+                        { content: 'Ping An Finance Centre', is_true: false },
+                        { content: 'Taipei 101', is_true: false },
                     ],
                 },
             ],
@@ -66,17 +66,17 @@ const state = {
         {
             id: 3,
             title: 'Lecția numărul 3',
-            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            short_description: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [
                 {
                     content: 'What is the fastest animal in the world ?',
                     answers: [
-                        { content: 'Peregrine falcon', isTrue: true },
-                        { content: 'Cheetah', isTrue: false },
-                        { content: 'Lion', isTrue: false },
-                        { content: 'Turtle', isTrue: false },
-                        { content: 'The happy little frog :)', isTrue: false },
+                        { content: 'Peregrine falcon', is_true: true },
+                        { content: 'Cheetah', is_true: false },
+                        { content: 'Lion', is_true: false },
+                        { content: 'Turtle', is_true: false },
+                        { content: 'The happy little frog :)', is_true: false },
                     ],
                 },
             ],
@@ -87,17 +87,17 @@ const state = {
         {
             id: 4,
             title: 'Lecția numărul 4',
-            shortDescription: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
+            short_description: 'Lorem ipsum dolor  dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,',
             content: 'Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget Aenean eget mauris et sem rhoncus iaculis. Duis elementum neque eros, non feugiat tellus sagittis vitae. Ut tristique ultricies nunc a semper. Cras urna leo, blandit ac egestas ut, consequat vel felis. Duis iaculis tincidunt lobortis. Donec porta turpis mi, eget ',
             questions: [
                 {
                     content: 'What is the fastest animal in the world ?',
                     answers: [
-                        { content: 'Peregrine falcon', isTrue: true },
-                        { content: 'Cheetah', isTrue: false },
-                        { content: 'Lion', isTrue: false },
-                        { content: 'Turtle', isTrue: false },
-                        { content: 'The happy little frog :)', isTrue: false },
+                        { content: 'Peregrine falcon', is_true: true },
+                        { content: 'Cheetah', is_true: false },
+                        { content: 'Lion', is_true: false },
+                        { content: 'Turtle', is_true: false },
+                        { content: 'The happy little frog :)', is_true: false },
                     ],
                 },
             ],
@@ -115,8 +115,7 @@ const getters = {
         return lessons;
     },
     newLessonById: state => id => {
-        const lesson_index = state.lessons.findIndex(e => e.id === id);
-        return state.lessons[lesson_index];
+        return state.lessons.find(e => e.id === id);
     },
     questionByIndex: (state, getters) => (lesson_id, question_index) => {
         return getters.newLessonById(lesson_id).questions[question_index];
@@ -167,9 +166,8 @@ const actions = {
             commit(NEW_COURSE_LESSON_ORDER_UP, id);
         }
     },
-    lessonOrderDown({ commit, state }, id) {
-        const index = state.lessons.findIndex(e => e.id === id);
-        if (state.lessons[index].order_index < state.lessons.length-1) {
+    lessonOrderDown({ commit, getters, state }, id) {
+        if (getters.newLessonById(id).order_index < state.lessons.length - 1) {
             commit(NEW_COURSE_LESSON_ORDER_DOWN, id);
         }
     },
@@ -272,7 +270,7 @@ const mutations = {
     // answers
     [NEW_COURSE_LESSON_QUESTION_ANSWER_ADD] (state, { lesson_index, question_index }) {
 
-        state.lessons[lesson_index].questions[question_index].answers.push({ content: '', isTrue: false });
+        state.lessons[lesson_index].questions[question_index].answers.push({ content: '', is_true: false });
     },
     [NEW_COURSE_LESSON_QUESTION_ANSWER_DELETE] (state, { lesson_index, question_index, answer_index }) {
         state.lessons[lesson_index].questions[question_index].answers.splice(answer_index, 1);

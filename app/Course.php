@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
@@ -20,6 +21,7 @@ class Course extends Model
     ];
     protected $appends = [
         '_image',
+        '_joined',
         '_user',
     ];
     public function getImageAttribute(){
@@ -28,12 +30,36 @@ class Course extends Model
     public function getUserAttribute(){
         return User::find($this->user_id);
     }
+    public function getJoinedAttribute(){
+        if($this->isUserJoined(Auth::user())){
+            return [];
+        }
+        return false;
+    }
     public function getPrerequisitesAttribute($value) {
         return json_decode($value);
     }
     public function getPurposeWhatWillLearnAttribute($value) {
         return json_decode($value);
     }
+    public function joinedUsersArray() {
+        $lessons = $this->lessons;
+        $users = [];
+        foreach ($lessons as $lesson){
+            $joinedUsers = $lesson->joinedUsers;
+            foreach ($joinedUsers as $joinedUser) $users[] = $joinedUser;
+        }
+        return $users;
+    }
+    public function isUserJoined(User $user) {
+        $usersJoined = $this->joinedUsersArray();
+        foreach ($usersJoined as $userJoined) {
+            if($userJoined['id'] === $user->id) return true;
+        }
+        return false;
+    }
+
+    // Relationships
     public function user(){
         return $this->belongsTo(User::class);
     }

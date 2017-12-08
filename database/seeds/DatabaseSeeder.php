@@ -23,10 +23,6 @@ class DatabaseSeeder extends Seeder
             'role' => 2,
         ]);
 
-//        factory(\App\Course::class, 5)->create();
-//        factory(\App\Lesson::class, 20)->create();
-//        factory(\App\Question::class, 10)->create();
-//        factory(\App\Answer::class, 20)->create();
         factory(\App\Course::class, 20)->create();
         factory(\App\Lesson::class, 100)->create();
         factory(\App\Question::class, 90)->create();

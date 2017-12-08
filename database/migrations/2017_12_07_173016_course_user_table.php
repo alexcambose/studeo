@@ -21,11 +21,10 @@ class CourseUserTable extends Migration
          *
          */
         Schema::create('lesson_user', function (Blueprint $table ) {
-            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('lesson_id')->unsigned(); // daca am id-ul lectiei la care este am toate
             $table->timestamps();
-
+            $table->primary(['user_id', 'lesson_id']);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('lesson_id')->references('id')->on('lessons');
         });
@@ -38,6 +37,6 @@ class CourseUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_user');
+        Schema::dropIfExists('lesson_user');
     }
 }

@@ -47,12 +47,14 @@ class User extends Authenticatable
         'city' => 'numeric',
     ];
 
-    public function getSocialAttribute($value){
+    public function getSocialAttribute($value) {
         return json_decode($value); //convert "{}" to {}
     }
-    public function getImageAttribute(){
+    public function getImageAttribute() {
         return $this->image();
     }
+
+    // Relationships
     public function image() {
         // has one
         return Media::where('id', $this->image_id)->first();
@@ -61,9 +63,11 @@ class User extends Authenticatable
         return $this->hasMany(Course::class);
     }
     public function joinedLessons() {
-        return $this->belongsToMany(Lesson::class);
+        return $this->belongsToMany(Lesson::class)->withTimestamps();
     }
     public function joinedCourses() {
-        return $this->belongsToMany(Lesson::class);
+        return $this->joinedLessons->map(function($lesson){
+            return $lesson->course;
+        });
     }
 }

@@ -11,5 +11,4 @@ npm-debug.log
 yarn-error.log
 yarn.lock
 public/mix-manifest.json
-/public/mix-manifest.json
 .env

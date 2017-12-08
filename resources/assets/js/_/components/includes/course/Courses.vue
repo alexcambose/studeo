@@ -49,7 +49,7 @@
             return {
                 courses: [],
                 loadIndex: 0,
-                sorting: 'date-asc',
+                sorting: 'date-desc',
             };
         },
         methods: {

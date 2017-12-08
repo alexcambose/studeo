@@ -10,7 +10,10 @@ class Playlist extends Model
     protected $fillable = [
         'title', 'description',
     ];
-
+    public static $rules = [
+        'title' => 'required|max:30',
+        'description' => 'required|max:500'
+    ];
     protected $appends = [
         '_courses',
     ];
@@ -23,11 +26,7 @@ class Playlist extends Model
         return $this->courses()->get();
     }
 
-    public static $rules = [
-        'title' => 'required|max:30',
-        'description' => 'required|max:500'
-    ];
-
+    // Relationships
     public function courses() {
         return $this->belongsToMany(Course::class);
     }

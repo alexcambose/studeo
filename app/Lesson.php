@@ -14,7 +14,7 @@ class Lesson extends Model
             'content' => 'required|string|max:120|min:10',
             'answers' => [
                 'content' => 'required|string|max:120|min:10',
-                'isTrue' => 'required|boolean',
+                'is_true' => 'required|boolean',
             ],
         ],
         'order_index' => 'required|numeric',
@@ -35,6 +35,12 @@ class Lesson extends Model
     public function getVideoAttribute(){
         return Media::find($this->video_id);
     }
+
+    public function isUserJoined($id) {
+        return $this->joinedUsers()->where('id', $id)->exists();
+    }
+    
+    // Relationships
     public function questions(){
         return $this->hasMany(Question::class);
     }
@@ -42,7 +48,6 @@ class Lesson extends Model
         return $this->belongsTo(Course::class);
     }
     public function joinedUsers() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
-
 }

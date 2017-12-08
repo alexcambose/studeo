@@ -16,9 +16,12 @@
                                 {{course.title}}
                             </div>
                             <div class="subtitle">
-                                {{course.shortDescription}}
+                                {{course.short_description}}
                                 <div class="apply-container">
-                                    <button @click="join" class="button is-outlined is-success apply">Înscriere</button>
+                                    <button v-if="!course._joined" @click="join" class="button is-outlined is-success apply">Înscriere</button>
+                                    <router-link v-else :to="{ name: 'courseLesson', params: { slug: course.slug, lessonIndex: 1 } }">
+                                        <button class="button is-outlined is-primary apply">Desc</button>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -107,9 +110,12 @@
         },
         methods: {
             join() {
+                this.fetching = false;
+
                 axios.post(config.url.COURSE_USER_JOIN, { courseId: this.course.id })
                     .then(({ data }) => {
-                        alert('Te-ai inscris!', JSON.stringify(data));
+                        this.fetching = true;
+                        this.$router.push({ name: 'courseLesson', params: { slug: this.course.slug, lessonIndex: 1 } });
                     });
             },
         },

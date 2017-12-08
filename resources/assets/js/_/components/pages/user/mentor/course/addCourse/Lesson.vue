@@ -13,7 +13,7 @@
                     maxlength="240"
                     required
                     type="textarea"
-                    :value="lesson.shortDescription"
+                    :value="lesson.short_description"
                     @blur="setShortDescription"
             ></b-input>
         </b-field>
@@ -79,7 +79,7 @@
         },
         methods: {
             setShortDescription(e) {
-                this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { shortDescription: e.target.value } });
+                this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { short_description: e.target.value } });
             },
             setContent(e) {
                 this.$store.dispatch('updateLesson', { id: this.lesson_id, data: { content: e.target.value } });
