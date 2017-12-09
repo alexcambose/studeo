@@ -47,5 +47,10 @@ class DatabaseSeeder extends Seeder
         factory(\App\Lesson::class, 10)->create();
         factory(\App\Question::class, 10)->create();
         factory(\App\Answer::class, 40)->create();
+        factory(\App\Playlist::class, 50)->create()->each(function($playlist) {
+            $playlist->courses()->sync(
+                \App\Course::all()->random(1)
+            );
+        });
     }
 }

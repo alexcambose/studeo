@@ -41,15 +41,16 @@
   }
   .rightsidePlaylists {
     margin: 0 20px;
-    .noId {
-      position: absolute;
-      top: 35%;
-      .noIdBox {
-        &:hover {
-          background-color: whitesmoke !important;
-        }
-        .add {
-          text-align: center;
+    .is-centered {
+      .noId {
+        .noIdBox {
+          &:hover {
+            cursor: pointer;
+            background-color: whitesmoke !important;
+          }
+          .add {
+            text-align: center;
+          }
         }
       }
     }
@@ -84,4 +85,40 @@
 
 .courseBox {
   border-radius: 0 !important;
+  margin: 10px;
+  .thumbnail {
+    -webkit-background-size: 100% 100%!important;
+    background-position: 50% 50%!important;
+    background-size: 100%!important;
+    border-radius: 3px;
+  }
+  .contentMediaPlaylist {
+    font-weight: 300;
+    font-size: 13px;
+    word-break: break-all;
+    overflow: hidden;
+  }
+  .actionsPlaylistCourse {
+    display: none;
+  }
+  .progressBox {
+    width: 50%; height: 5px
+  }
+  &:hover {
+    background-color: whitesmoke;
+    .actionsPlaylistCourse {
+      display: block;
+    }
+    .thumbnail {
+      -webkit-filter: brightness(50%);
+      -webkit-transition: all .4s ease;
+      -moz-transition: all .4s  ease;
+      -o-transition: all .4s  ease;
+      -ms-transition: all .4s ease;
+      transition: all .4s  ease;
+    }
+    .customMediaRight {
+      display: block;
+    }
+  }
 }

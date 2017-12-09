@@ -3,7 +3,7 @@
         <form @submit="submit">
             <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-title">Adauga un playlist</p>
+                    <p class="modal-card-title">Adaugă un playlist</p>
                 </header>
                 <section class="modal-card-body">
                     <b-field label="Titlu">
@@ -27,7 +27,7 @@
                     </b-field>
                 </section>
                 <footer class="modal-card-foot">
-                    <button class="button" type="button" @click="$parent.close()">Close</button>
+                    <button class="button" type="button" @click="$parent.close()">Anulează</button>
                     <submit :fetching="fetching" :success="success">Salvează</submit>
                 </footer>
             </div>
@@ -39,11 +39,6 @@
     export default {
         data() {
             return {
-                fromProps: {
-                    title: '',
-                    description: '',
-                },
-                isComponentModalActive: false,
                 title: '',
                 description: '',
                 fetching: false,
@@ -59,16 +54,14 @@
                         this.fetching = false;
                         this.title = '';
                         this.description = '';
-                        this.isComponentModalActive = false;
                         this.$toast.open({
-                            message: 'Ati adaugat un playlist',
+                            message: 'Ați adaugat un playlist',
                             type: 'is-success',
                         });
-                        this.$router.push({ name: 'playlists' });
                     })
                     .catch(err => {
                         this.$toast.open({
-                            message: 'A aparut o eroare..',
+                            message: 'A apărut o eroare..',
                             type: 'is-danger',
                         });
                         this.fetching = false;

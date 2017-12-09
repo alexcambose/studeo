@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{ getCurrentPlaylist }}
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
             <add-playlist></add-playlist>
         </b-modal>
@@ -18,16 +17,16 @@
                     </aside>
                 </div>
                 <div class="column rightsidePlaylists mb-5">
-                    <div class="hasId" v-if="this.params">
+                    <div class="hasId" v-if="playlistId">
                         <div class="header">
                             <div class="playlistDetails">
                                 <div class="columns">
                                     <div class="column">
                                         <div class="playlistTitle">
-                                            {{ this.playlist.title }}
+                                            {{ playlist.title }}
                                         </div>
                                         <div class="nrCoursesLessons">
-                                            Cursuri: <strong>50</strong> &#149; Lectii: <strong>134</strong>
+                                            Cursuri: <strong>{{ playlist._courses.length }}</strong> &#149; Lectii: <strong>{{ nrLessons }}</strong>
                                         </div>
                                         <div class="playlistTime">
                                             Durata totala: <strong>48o 6m</strong>
@@ -44,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="playlistDescription">
-                                    {{ this.playlist.description }}
+                                   {{ playlist.description }}
                                 </div>
                                 <div class="playlistProgress mt-15">
                                     <progress class="progress is-primary" value="15" max="100">30%</progress>
@@ -53,13 +52,17 @@
                         </div>
                         <div class="content mt-20">
                             <hr>
-                            <div class="playlistsCourses" v-for="course in this.playlist._courses">
-                                <playlist-course :course="course"></playlist-course>
+                            <div v-if="playlist._courses.length == 0" class="has-text-centered">
+                                <h3>Adauga cursuri la playlist</h3>
+                                <p>Apasă pe <i class="fa fa-plus"></i> pentru a adăuga cursul dorit la playlist. Pe aceasta pagină iți poți customiza playlistul.</p>
+                            </div>
+                            <div class="playlistsCourses" v-for="course in playlist._courses">
+                                <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }"><playlist-course :course="course"></playlist-course></router-link>
                             </div>
                         </div>
                     </div>
-                    <div class="columns is-centered is-multiline" v-else>
-                        <div class="noId column is-one-fifth">
+                    <div class="columns is-vcentered is-centered" v-else>
+                        <div class="column noId is-one-fifth">
                             <div class="box noIdBox" @click="isComponentModalActive = true">
                                 <div class="add">
                                     <b-tooltip
@@ -84,42 +87,37 @@
     import store from '../../../../store/index';
     import config from '../../../../../config';
     export default {
+        mounted() {
+            axios.post(config.url.PLAYLISTS)
+                .then(({ data }) => {
+                    store.dispatch('getAllPlaylists', data);
+                })
+        },
+
         data() {
             return {
                 isComponentModalActive: false,
-                playlist: '',
-                params: '',
+                playlist: {},
+                playlistId: null,
             };
-        },
-        methods: {
-            abc() {
-                axios.post(config.url.PLAYLISTS)
-                    .then(({ data }) => {
-                        store.dispatch('getAllPlaylists', data);
-                        console.log(data);
-                    });
-            },
         },
         computed: {
             ...mapState({
                 playlists: state => state.playlist.playlists,
             }),
-            getCurrentPlaylist() {
-                let arr = this.playlists;
-                let id = this.$route.params.id;
-                let playlist = '';
-                console.log(arr);
-                Object.keys(arr).forEach(function (x) {
-                    if (arr[x].id == id) {
-                        playlist = arr[x];
-                    }
-                });
-                this.playlist = playlist;
-                this.params = id;
-            },
+            // nrLessons() {
+            //     let nrLessons = 0;
+            //     this.playlist._courses.forEach(e => {
+            //         nrLessons += e.lessons.length;
+            //     });
+            //     return nrLessons;
+            // }
         },
-        mounted() {
-            this.abc()
+        watch: {
+            '$route.params.id'() {
+                this.playlistId = parseInt(this.$route.params.id);
+                this.playlist = this.playlists.find(e => e.id === this.playlistId);
+            },
         },
         components: {
             PlaylistCourse,

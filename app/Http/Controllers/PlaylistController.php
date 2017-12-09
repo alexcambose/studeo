@@ -12,7 +12,8 @@ class PlaylistController extends Controller
     //
 
     public function getAllPlaylists() {
-        $playlists = Playlist::all();
+        $userId = Auth::id();
+        $playlists = Playlist::where('user_id', $userId)->get();
         return response()->json([
            'playlists' => $playlists,
         ]);
@@ -36,7 +37,7 @@ class PlaylistController extends Controller
         $playlist->title = $request->title;
         $playlist->description = $request->description;
         $playlist->user_id = $user->id;
-        $playlist->image_id = 1;
+        $playlist->image_id = 1; // ceva default
 
         $playlist->save();
 

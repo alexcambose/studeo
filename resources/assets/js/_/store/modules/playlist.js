@@ -16,7 +16,7 @@ const actions = {
             axios.post(config.url.PLAYLIST_CREATE, { title, description })
                 .then(({ data }) => {
                     if (data.success) {
-                        commit(PLAYLIST_CREATE);
+                        commit(PLAYLIST_CREATE, data);
                         resolve();
                     } else {
                         reject(data.message);
@@ -31,8 +31,9 @@ const actions = {
 };
 
 const mutations = {
-    [PLAYLIST_CREATE](state, playlist) {
-        state.playlist = playlist;
+    [PLAYLIST_CREATE](state, payload) {
+        state.playlist = payload.playlist;
+        state.playlists.push(payload.playlist);
     },
     [PLAYLIST_ALL](state, playlists) {
         state.playlists = playlists;
