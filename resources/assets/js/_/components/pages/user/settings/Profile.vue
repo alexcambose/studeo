@@ -56,7 +56,7 @@
             <b-datepicker
                      v-model="birthday"
                      :max-date="new Date(2009, 0, 0)"
-                     :month-names="['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie']"
+                     :month-names="monthNames"
                      :day-names="['Lu','Ma','Mi','Jo','Vi','Sb','D']"
                      placeholder="Apasă pentru a selecta ziua de naștere"
                      icon="calendar-today"
@@ -115,7 +115,7 @@
     import Submit from '../../../../components/includes/dumb/Submit.vue';
     import UploadImageModal from '../../../../components/includes/dumb/UploadImageModal.vue';
     import config from '../../../../../config';
-    import { cities } from '../../../../../utils';
+    import { cities, monthNames } from '../../../../../utils';
 
     export default {
         computed: {
@@ -139,6 +139,7 @@
                 cover_color: user.cover_color,
                 success: '',
                 classLevels: config.classLevels,
+                monthNames,
             };
         },
         methods: {

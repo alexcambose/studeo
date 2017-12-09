@@ -42,7 +42,7 @@ const router = new VueRouter({
         },
         {
             path: '/legal',
-            // component: Help,
+            // component: Legal, il facem cand terminam
             name: 'legal',
         },
         ...guestRoutes,

@@ -87,9 +87,16 @@ export const chunkArray = (array, length) => {
     }
 };
 
-export const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie','Octombrie', 'Noiembrie', 'Decembrie'];
+export const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
 export const displayDate = e => {
     let date = new Date(e);
     return date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
 };
 
+export const pluralize = (number, singular, plural) => {
+    let content = '';
+    if (number < 1) content += 'nicio ' + singular;
+    if (number === 1) content += 'o ' + singular;
+    if (number > 1) content += number + (number > 19 ? ' de ' : ' ') + plural;
+    return content;
+};

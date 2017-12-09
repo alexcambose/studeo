@@ -15,13 +15,12 @@ Vue.component('main1', require('./Main.vue'));
 
 window.vue = new Vue({
     mounted() {
-        axios.interceptors.response.use(function(response) {
+        const _this = this;
+        axios.interceptors.response.use(function (response) {
             return response;
-        }, function(error) {
-            if (error.response.status === 419) {
-                location.reload();
-            }
-
+        }, function (error) {
+            if (error.response.status === 404) _this.$router.replace({ name: '404' });
+            return Promise.reject(error);
         });
     },
     store: store,

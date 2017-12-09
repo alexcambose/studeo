@@ -75,7 +75,7 @@
             setSlug(e) {
                 this.$store.dispatch('updateNewCourseData', { slug: encodeURIComponent(e.target.value) });
             },
-            setshort_description(e) {
+            setShortDescription(e) {
                 this.$store.dispatch('updateNewCourseData', { short_description: e.target.value });
             },
             setDescription(e) {

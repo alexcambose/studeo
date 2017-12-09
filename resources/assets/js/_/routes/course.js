@@ -9,7 +9,7 @@ export default [
         meta: { onlyAuth: true },
     },
     {
-        path: '/curs/:slug/:lessonIndex',
+        path: '/curs/:slug/lectii',
         name: 'courseLesson',
         component: Lesson,
         meta: { onlyAuth: true },

@@ -18,6 +18,6 @@ $factory->define(App\Course::class, function (Faker $faker) {
         'image_id' => function() {
             return factory(App\Media::class)->create()->id;
         },
-        'user_id' => 11, // only sandel user
+        'user_id' => App\User::where('first_name' ,'Sandel')->first()->id, // only sandel user
     ];
 });

@@ -7,7 +7,8 @@
                     <div class="columns">
                         <div class="column is-5">
                             <video controls>
-                                <source src="https://ia800605.us.archive.org/23/items/youtube-GzgavGowD_A/Flutterbye_fairy_toy_flies_into_fire_O_Fortuna-GzgavGowD_A.mp4" type="video/mp4">
+                                <source src="https://ia800605.us.archive.org/23/items/youtube-GzgavGowD_A/Flutterbye_fairy_toy_flies_into_fire_O_Fortuna-GzgavGowD_A.mp4"
+                                        type="video/mp4">
                                 Your browser does not support HTML5 video.
                             </video>
                         </div>
@@ -18,7 +19,8 @@
                             <div class="subtitle">
                                 {{course.short_description}}
                                 <div class="apply-container">
-                                    <button v-if="!course._joined" @click="join" class="button is-outlined is-success apply">Înscriere</button>
+                                    <button v-if="!course._joined" @click="join" class="button is-outlined is-success apply">Înscriere
+                                    </button>
                                     <router-link v-else :to="{ name: 'courseLesson', params: { slug: course.slug, lessonIndex: 1 } }">
                                         <button class="button is-outlined is-primary apply">Desc</button>
                                     </router-link>
@@ -78,7 +80,7 @@
     import LessonBox from '../../../../components/includes/dumb/LessonBox.vue';
 
     export default {
-        mounted() {
+        mounted () {
             const loadingComponent = this.$loading.open();
             axios.get(config.url.COURSE + this.$route.params.slug)
                 .then(({ data }) => { // get course data
@@ -86,21 +88,21 @@
                     if (!data.course) {
                         loadingComponent.close();
                         this.fetching = false;
-                        this.$router.push({ name: '404' });
                     } else { // if the course was found
                         return axios.post(config.url.USER + data.course.user_id)
                             .then(({ data }) => { // get course user data
                                 this.user = data.user;
-                                return axios.get(config.url.LESSON_ALL + this.course.id);
+                                return axios.get(config.url.LESSON_ALL + this.$route.params.slug);
                             }).then(({ data }) => {
                                 this.lessons = data.lessons;
                                 loadingComponent.close();
                                 this.fetching = false;
                             });
                     }
-                });
+                })
+                .catch(() => loadingComponent.close());
         },
-        data() {
+        data () {
             return {
                 course: {},
                 user: {},
@@ -109,13 +111,13 @@
             };
         },
         methods: {
-            join() {
+            join () {
                 this.fetching = false;
 
                 axios.post(config.url.COURSE_USER_JOIN, { courseId: this.course.id })
                     .then(({ data }) => {
                         this.fetching = true;
-                        this.$router.push({ name: 'courseLesson', params: { slug: this.course.slug, lessonIndex: 1 } });
+                        this.$router.push({ name: 'courseLesson', params: { slug: this.course.slug } });
                     });
             },
         },

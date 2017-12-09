@@ -42,8 +42,9 @@ class Course extends Model
     public function getPurposeWhatWillLearnAttribute($value) {
         return json_decode($value);
     }
+
     public function joinedUsersArray() {
-        $lessons = $this->lessons;
+        $lessons = $this->lessons()->get();
         $users = [];
         foreach ($lessons as $lesson){
             $joinedUsers = $lesson->joinedUsers;

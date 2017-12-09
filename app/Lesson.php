@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Lesson extends Model
 {
@@ -25,6 +26,7 @@ class Lesson extends Model
         '_questions',
         '_thumbnail',
         '_video',
+        '_watched',
     ];
     public function getQuestionsAttribute(){
         return Question::where('lesson_id', $this->id)->get();
@@ -35,9 +37,12 @@ class Lesson extends Model
     public function getVideoAttribute(){
         return Media::find($this->video_id);
     }
+    public function getWatchedAttribute(){
+        return $this->userWatched(Auth::user());
+    }
 
-    public function isUserJoined($id) {
-        return $this->joinedUsers()->where('id', $id)->exists();
+    public function userWatched(User $user) {
+        return $this->joinedUsers()->where('id', $user->id)->exists();
     }
     
     // Relationships

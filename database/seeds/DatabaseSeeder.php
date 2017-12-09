@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -9,9 +11,27 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        factory(\App\User::class, 10)->create();
+    public function run() {
+        /*
+         * Ca sa nu trebuiasca de fiecare data sa stergem tabelele cand testam un seeder,
+         * e suficient doar
+         *  ~ php artisan db:seed
+         *
+         * iar varianta veche era
+         *  ~ php artisan migrate:rollback && php artisan migrate && php artisan db:seed
+        */
+        DB::statement("SET foreign_key_checks=0");
+        \App\Answer::truncate();
+        \App\Question::truncate();
+        \App\Lesson::truncate();
+        \App\Course::truncate();
+        \App\Item::truncate();
+        \App\User::truncate();
+        \App\Media::truncate();
+        DB::statement("SET foreign_key_checks=1");
+
+
+        factory(\App\User::class, 2)->create();
         factory(\App\Item::class, 10)->create();
 
         //Create SANDEL
@@ -23,9 +43,9 @@ class DatabaseSeeder extends Seeder
             'role' => 2,
         ]);
 
-        factory(\App\Course::class, 20)->create();
-        factory(\App\Lesson::class, 100)->create();
-        factory(\App\Question::class, 90)->create();
-        factory(\App\Answer::class, 100)->create();
+        factory(\App\Course::class, 1)->create();
+        factory(\App\Lesson::class, 10)->create();
+        factory(\App\Question::class, 10)->create();
+        factory(\App\Answer::class, 40)->create();
     }
 }
