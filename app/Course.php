@@ -32,7 +32,9 @@ class Course extends Model
     }
     public function getJoinedAttribute(){
         if($this->isUserJoined(Auth::user())){
-            return [];
+            return [
+                'users' => count($this->joinedUsersArray()),
+            ];
         }
         return false;
     }

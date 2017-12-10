@@ -66,7 +66,7 @@
     }
     .lesson-card .lesson-box .lesson-meta{
         display: flex;
-        margin-right: 10px;
+        margin-left: 10px;
         align-items: center;
     }
     .lesson-card .lesson-box .lesson-info .lesson-title{

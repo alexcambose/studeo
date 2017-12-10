@@ -18,7 +18,7 @@ export default {
         COURSE_ALL: SERVER + 'course/all/',
         COURSE_ADD: SERVER + 'course/add/',
         COURSE_BEST_SLUG: SERVER + 'course/slug/best/',
-        COURSE_USER_JOIN: SERVER + 'course/user/join',
+        COURSE_USER_JOIN: SERVER + 'course/user/join/',
         LESSON_ALL: SERVER + 'lesson/all/',
         PLAYLISTS: SERVER + 'playlists/',
         PLAYLIST_CREATE: SERVER + 'playlists/create/',

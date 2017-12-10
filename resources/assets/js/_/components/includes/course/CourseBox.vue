@@ -1,5 +1,5 @@
 <template>
-    <div class="card course-box">
+    <div :class="['card', 'course-box', course._joined ? 'course-joined' : '']">
         <div class="card-image">
             <image-container class="course-image" :image="course._image.filename"></image-container>
         </div>
@@ -10,7 +10,6 @@
                 <div class="course-content">
                     {{course.short_description}}
                 </div>
-
                 <user-box :user="course._user" size="is-small"></user-box>
             </router-link>
         </div>

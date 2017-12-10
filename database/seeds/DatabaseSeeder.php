@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
         \App\Lesson::truncate();
         \App\Course::truncate();
         \App\Item::truncate();
+        \App\Playlist::truncate();
         \App\User::truncate();
         \App\Media::truncate();
         DB::statement("SET foreign_key_checks=1");
-
 
         factory(\App\User::class, 2)->create();
         factory(\App\Item::class, 10)->create();
@@ -44,9 +44,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         factory(\App\Course::class, 1)->create();
-        factory(\App\Lesson::class, 10)->create();
-        factory(\App\Question::class, 10)->create();
-        factory(\App\Answer::class, 40)->create();
+        factory(\App\Lesson::class, 30)->create();
+        factory(\App\Question::class, 40)->create();
+        factory(\App\Answer::class, 60)->create();
         factory(\App\Playlist::class, 50)->create()->each(function($playlist) {
             $playlist->courses()->sync(
                 \App\Course::all()->random(1)

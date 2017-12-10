@@ -40,17 +40,24 @@
     }
   }
   .rightsidePlaylists {
+    position: relative;
     margin: 0 20px;
-    .is-centered {
-      .noId {
-        .noIdBox {
-          &:hover {
-            cursor: pointer;
-            background-color: whitesmoke !important;
-          }
-          .add {
-            text-align: center;
-          }
+    .addPlaylistBoxContainer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .addPlaylistBox {
+        &:hover {
+          cursor: pointer;
+          background-color: whitesmoke !important;
+        }
+        .add {
+          text-align: center;
         }
       }
     }

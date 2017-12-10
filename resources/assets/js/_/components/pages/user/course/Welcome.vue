@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!fetching" class="course-welcome">
+    <div v-if="fetched" class="course-welcome">
         <section class="hero course-hero is-medium" :style="{backgroundImage: `url(${course._image.filename})`}">
             <div class="background-filter"></div>
             <div class="hero-body">
@@ -22,7 +22,7 @@
                                     <button v-if="!course._joined" @click="join" class="button is-outlined is-success apply">Înscriere
                                     </button>
                                     <router-link v-else :to="{ name: 'courseLesson', params: { slug: course.slug, lessonIndex: 1 } }">
-                                        <button class="button is-outlined is-primary apply">Desc</button>
+                                        <button class="button is-outlined is-primary apply">Continuă</button>
                                     </router-link>
                                 </div>
                             </div>
@@ -67,6 +67,28 @@
                         </div>
                     </div>
 
+                    <div class="card margin-bottom">
+                        <div class="card-header">
+                            <p class="card-header-title">Statstici</p>
+                        </div>
+                        <div class="card-content has-text-centered">
+                            <nav class="level">
+                                <div class="level-item has-text-centered">
+                                    <div>
+                                        <p class="heading">Utilizatori înscriși</p>
+                                        <p class="title">{{course._joined.users || 0}}</p>
+                                    </div>
+                                </div>
+                                <div class="level-item has-text-centered">
+                                    <div>
+                                        <p class="heading">Vizualizări</p>
+                                        <p class="title">{{course.views}}</p>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
                     <user-card :user="user"></user-card>
                     <!--<button class="button is-success is-fullwidth mt-10">Înscriere</button>-->
                 </div>
@@ -81,13 +103,14 @@
 
     export default {
         mounted () {
+            this.fetched = false;
             const loadingComponent = this.$loading.open();
             axios.get(config.url.COURSE + this.$route.params.slug)
                 .then(({ data }) => { // get course data
                     this.course = data.course;
                     if (!data.course) {
                         loadingComponent.close();
-                        this.fetching = false;
+                        this.fetched = true;
                     } else { // if the course was found
                         return axios.post(config.url.USER + data.course.user_id)
                             .then(({ data }) => { // get course user data
@@ -96,7 +119,7 @@
                             }).then(({ data }) => {
                                 this.lessons = data.lessons;
                                 loadingComponent.close();
-                                this.fetching = false;
+                                this.fetched = true;
                             });
                     }
                 })
@@ -107,7 +130,7 @@
                 course: {},
                 user: {},
                 lessons: [],
-                fetching: true,
+                fetched: false,
             };
         },
         methods: {

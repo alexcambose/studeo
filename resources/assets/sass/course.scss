@@ -4,6 +4,11 @@
 
 .course-box{
   transition: box-shadow 150ms ease;
+  &.course-joined{
+    // because css doesn't have box-shadow-color we need to hard code the values... :<
+    // also looks ugly
+    box-shadow: 0 2px 3px rgba(35, 209, 96, 0.5), 0 0 0 1px rgba(35, 209, 96, 0.5);
+  }
   &:hover{
     box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1);
   }
@@ -61,7 +66,7 @@
           color: $light;
         }
         button.apply{
-          width: 200px;
+          width: 250px;
         }
         .apply-container{
           margin-top: 12px;

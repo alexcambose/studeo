@@ -13,6 +13,10 @@ const getters = {
         lessons.sort((a, b) => a.order_index - b.order_index);
         return lessons;
     },
+    progress (state) {
+        const watchedLessons = state.lessons.filter(e => e._watched).length;
+        return watchedLessons / state.lessons.length * 100;
+    },
 };
 
 const actions = {
@@ -23,6 +27,7 @@ const actions = {
                     if (data.success && data.userJoined) {
                         resolve(data.lessons);
                         commit(COURSE_SET_LESSONS, data.lessons);
+                        commit(COURSE_SET_LESSON_SELECTED_INDEX, data.lessons.filter(e => e._watched).length - 1);
                     } else reject();
                 })
                 .catch(err => reject(err));

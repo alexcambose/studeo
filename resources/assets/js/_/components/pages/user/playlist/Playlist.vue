@@ -12,7 +12,7 @@
                         </p>
                         <ul class="menu-list playlistsBar">
                             <li @click="isComponentModalActive = true"><a class="first"><i class="fa fa-plus"></i>&nbsp; Creeaza un nou playlist</a></li>
-                            <li v-for="item in playlists"><router-link :to="{ name: 'playlist', params: { id: item.id } }">{{ item.title }}</router-link></li>
+                            <li v-for="item in playlists" @click="playlistId = item.id" ><router-link :to="{ name: 'playlist', params: { id: item.id } }">{{ item.title }}</router-link></li>
                         </ul>
                     </aside>
                 </div>
@@ -61,18 +61,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="columns is-vcentered is-centered" v-else>
-                        <div class="column noId is-one-fifth">
-                            <div class="box noIdBox" @click="isComponentModalActive = true">
+                    <div class="addPlaylistBoxContainer" v-else>
+                        <b-tooltip
+                                label="Adaugă un curs"
+                                :animated="true"
+                        >
+                            <div class="box addPlaylistBox" @click="isComponentModalActive = true">
                                 <div class="add">
-                                    <b-tooltip
-                                            label="Adaugă un curs"
-                                    >
-                                        <i class="fa fa-plus fa-3x"></i>
-                                    </b-tooltip>
+
+                                    <i class="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                        </div>
+                        </b-tooltip>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,8 @@
             axios.post(config.url.PLAYLISTS)
                 .then(({ data }) => {
                     store.dispatch('getAllPlaylists', data);
-                })
+                    this.getPlaylistById(this.playlistId);
+                });
         },
 
         data() {
@@ -116,7 +117,12 @@
         watch: {
             '$route.params.id'() {
                 this.playlistId = parseInt(this.$route.params.id);
-                this.playlist = this.playlists.find(e => e.id === this.playlistId);
+                this.getPlaylistById(this.playlistId);
+            },
+        },
+        methods: {
+            getPlaylistById($id) { // poti sa il pui in getters daca vrei
+                this.playlist = this.playlists.find(e => e.id === $id);
             },
         },
         components: {

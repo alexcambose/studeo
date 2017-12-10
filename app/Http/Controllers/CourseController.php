@@ -9,6 +9,7 @@ use App\Media;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Validator;
 
 
@@ -17,10 +18,15 @@ class CourseController extends Controller
     function one($slug) {
         $course = Course::where('slug', $slug)->first();
         if(!$course) abort(404);
+        if(!isset($_COOKIE['viewed-' . $course->id])){ // Cookie::get() returns null because of some kind of encryption shit
+            $course->views++;
+            $course->save();
+        }
+
         return response()->json([
             'success' => true,
             'course' => $course,
-        ]);
+        ])->cookie('viewed-'.$course->id);
     }
     function all($userId = null, Request $request) {
         if($request->sort) {
@@ -52,9 +58,7 @@ class CourseController extends Controller
 
     public function userJoin(Request $request) {
         Course::find($request->courseId)->lessons()->where('order_index', 0)->first()->joinedUsers()->attach(Auth::user()->id);
-        return response()->json([
-            'success' => true,
-        ]);
+        return response()->json([ 'success' => true ]);
     }
     /**
      * Cancer pe paine

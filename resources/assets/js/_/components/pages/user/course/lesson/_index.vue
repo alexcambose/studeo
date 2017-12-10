@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="fetched">
         <section class="hero is-info">
             <div class="hero-body">
                 <div class="container">
@@ -11,7 +11,7 @@
                         44 minute
                         <!--todo replace time-->
                     </h2>
-                    <progress class="progress is-dark" value="45" max="100">45%</progress>
+                    <progress class="progress is-dark" :value="progress" max="100"></progress>
 
                 </div>
             </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapState, mapGetters } from 'vuex';
     import LessonVideo from './LessonVideo.vue';
     import LessonSidebar from './LessonSidebar.vue';
     import LessonFooter from './LessonFooter.vue';
@@ -64,6 +64,7 @@
             ...mapState({
                 course: ({ course }) => course.courseInfo,
             }),
+            ...mapGetters(['progress']),
         },
         methods: mapActions(['getLessons', 'getCourseInfo']),
         components: {
