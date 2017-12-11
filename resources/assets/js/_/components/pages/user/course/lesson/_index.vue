@@ -21,6 +21,7 @@
                 <div class="columns">
                     <div class="column is-4">
                         <lesson-sidebar></lesson-sidebar>
+                        <lesson-notes></lesson-notes>
                     </div>
                     <div class="column is-8">
                         <lesson-video></lesson-video>
@@ -39,6 +40,7 @@
     import LessonVideo from './LessonVideo.vue';
     import LessonSidebar from './LessonSidebar.vue';
     import LessonFooter from './LessonFooter.vue';
+    import LessonNotes from './notes/CourseNotes.vue';
     // import CourseBox from '../../../../../components/includes/dumb/UserBox';
     // import CourseCard from '../../../../../components/includes/dumb/UserCard';
     export default {
@@ -71,6 +73,7 @@
             LessonVideo,
             LessonSidebar,
             LessonFooter,
+            LessonNotes,
             // CourseBox,
             // CourseCard,
         },

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         \App\Question::truncate();
         \App\Lesson::truncate();
         \App\Course::truncate();
+        \App\Note::truncate();
         \App\Item::truncate();
         \App\Playlist::truncate();
         \App\User::truncate();
@@ -44,7 +45,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         factory(\App\Course::class, 1)->create();
-        factory(\App\Lesson::class, 30)->create();
+        factory(\App\Note::class, 10)->create();
+        factory(\App\Lesson::class, 10)->create();
         factory(\App\Question::class, 40)->create();
         factory(\App\Answer::class, 60)->create();
         factory(\App\Playlist::class, 50)->create()->each(function($playlist) {

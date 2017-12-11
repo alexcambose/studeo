@@ -34,6 +34,7 @@ class Course extends Model
         if($this->isUserJoined(Auth::user())){
             return [
                 'users' => count($this->joinedUsersArray()),
+                'notes' => $this->notes()->orderBy('created_at', 'DESC')->get(),
             ];
         }
         return false;
@@ -68,6 +69,9 @@ class Course extends Model
     }
     public function lessons() {
         return $this->hasMany(Lesson::class);
+    }
+    public function notes() {
+        return $this->hasMany(Note::class);
     }
     public function playlists() {
         return $this->belongsToMany(Playlist::class);
