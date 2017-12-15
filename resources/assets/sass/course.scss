@@ -20,13 +20,16 @@
     height: $course-box-user-image-height;
   }
   .course-title{
-    @include clampText;
+    @include clampText(4);
     font-size: 1.1em;
     font-weight: bold;
-    height: 80px;
+    height: 98px;
+    margin-bottom: 2px;
   }
   .course-content{
-    height: 170px;
+    height: 130px;
+    font-size: .85em;
+    color: lighten($dark, 20);
     overflow: hidden;
   }
   .card-content > a{

@@ -1,13 +1,24 @@
 <template>
-    <div v-bind="$attrs" :style="{'background-image': `url(${(notFromServer ? '' : config.url.SERVER)+ image})`, 'background-position': 'center', 'background-size': 'cover'}" ></div>
+    <div v-bind="$attrs" :style="{'background-image': `url(${url})`, 'background-position': 'center', 'background-size': 'cover'}" ></div>
 </template>
 <script>
     import config from '../../../../config';
 
     export default {
-        props: ['image', 'notFromServer'],
-        data() {
-            return { config };
+        props: {
+            src: {
+                type: String,
+                required: true,
+            },
+            notFromServer: {
+                type: Boolean,
+                required: false,
+            },
+        },
+        computed: {
+            url() {
+                return (this.notFromServer ? '' : config.url.SERVER) + this.src;
+            },
         },
     };
 </script>

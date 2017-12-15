@@ -16,23 +16,10 @@ html {
   box-shadow: 0 0 1px 1px rgba(20, 23, 28, .1), 0 3px 1px 0 rgba(20, 23, 28, .1);
 }
 
-//.flex-container {
-//  padding: 10px 25px;
-//}
-
-.cp {
-  cursor: pointer !important;
-}
-
-.ca {
-  cursor: auto !important;
-}
-
-.is-rounded {
-  border-radius: 9999px !important;
-}
-
-
+.cp { cursor: pointer !important }
+.ca { cursor: auto !important }
+.is-rounded { border-radius: 9999px !important }
+.no-text-decoration { text-decoration: none }
 .content-lower { //container margin-top
   margin-top: 30px;
 }

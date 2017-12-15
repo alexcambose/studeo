@@ -1,8 +1,12 @@
 <template>
     <div :class="['card', 'course-box', course._joined ? 'course-joined' : '']">
-        <div class="card-image">
-            <image-container class="course-image" :image="course._image.filename"></image-container>
-        </div>
+        <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
+            <!--todo refactor-->
+            <div class="card-image">
+                <image-container class="course-image" :src="course._image.filename"></image-container>
+            </div>
+        </router-link>
+
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
                 <span class="course-title">{{course.title}}</span>

@@ -4,7 +4,7 @@
         <div class="profileNav">
             <navbar-profile></navbar-profile>
             <div class="container">
-                <image-container class="profileImage" :image="user._image.filename"></image-container>
+                <image-container class="profileImage" :src="user._image.filename"></image-container>
                 <div class="avatarImage"></div>
             </div>
         </div>

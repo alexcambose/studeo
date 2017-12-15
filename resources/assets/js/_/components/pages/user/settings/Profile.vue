@@ -11,7 +11,7 @@
                 </b-field>
             </div>
             <div class="column is-4 has-text-centered">
-                <image-container class="settings_img" :image="image"></image-container>
+                <image-container class="settings_img" :src="image"></image-container>
                 <div class="image-change">
                     <upload-image-modal
                             title="Adaugă fotografie"

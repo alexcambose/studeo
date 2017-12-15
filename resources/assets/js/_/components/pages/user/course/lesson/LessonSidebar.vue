@@ -20,10 +20,9 @@
         },
         methods: {
             selectLesson (index) {
-                const skippedLessons = Math.abs(this.currentLessonIndex - index);
-                if (skippedLessons > 1) {
+                if (!this.lessons[index]._watched && index > this.lessons.findIndex(e => !e._watched)) {
                     this.$toast.open({
-                        message: `Nu poți sări ${pluralize(skippedLessons - 1, 'lecție', 'lecții')}`,
+                        message: `Nu poți sări peste lecții!`,
                         type: 'is-danger',
                     });
                 } else this.$store.dispatch('selectLesson', index);

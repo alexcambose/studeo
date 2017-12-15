@@ -26,7 +26,7 @@
                     required
                     type="textarea"
                     :value="newCourse.short_description"
-                    @blur="setshort_description"
+                    @blur="setShortDescription"
             ></b-input>
         </b-field>
         <b-field label="Descriere completă">

@@ -2,7 +2,7 @@
     <div :class="['card', 'lesson-card', (active ? 'lesson-card-active' : '')]">
         <div class="card-content">
             <div class="lesson-box">
-                <image-container class="lesson-image" :image="lesson._thumbnail.filename"></image-container>
+                <image-container class="lesson-image" :src="lesson._thumbnail.filename"></image-container>
                 <div class="lesson-info">
                     <div class="lesson-title">{{lesson.title}}</div>
                 </div>

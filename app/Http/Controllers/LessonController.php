@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,5 +17,15 @@ class LessonController extends Controller
             'lessons' => $course->lessons,
             'userJoined' => $course->isUserJoined(Auth::user()),
         ]);
+    }
+
+    public function watched(Lesson $lesson) {
+        if($lesson->userWatched(Auth::user()))
+            return response()->json([ 'success' => true ]);
+        if($lesson->course->isUserJoined(Auth::user())){
+            $lesson->joinedUsers()->attach(Auth::id());
+            return response()->json([ 'success' => true ]);
+        }
+        return response()->json([ 'success' => false ]);
     }
 }

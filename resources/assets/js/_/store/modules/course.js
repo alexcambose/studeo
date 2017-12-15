@@ -7,6 +7,7 @@ import {
     COURSE_DELETE_NOTE,
     COURSE_UPDATE_NOTE,
     COURSE_ADD_NOTE,
+    COURSE_LESSON_WATCHED,
 } from '../mutators-types';
 import Vue from 'vue';
 
@@ -51,6 +52,19 @@ const actions = {
                         resolve(data.course);
                         commit(COURSE_SET_INFO, data.course);
                         commit(COURSE_SET_NOTES, data.course._joined.notes);
+                    } else reject();
+                })
+                .catch(err => reject(err));
+        });
+    },
+    lessonMarkAsViewed({ commit, state }) {
+        const lesson = state.lessons[state.currentLessonIndex];
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.COURSE_LESSON_WATCHED + lesson.id)
+                .then(({ data }) => {
+                    if (data.success) {
+                        resolve();
+                        commit(COURSE_LESSON_WATCHED);
                     } else reject();
                 })
                 .catch(err => reject(err));
@@ -115,6 +129,10 @@ const mutations = {
     },
     [COURSE_DELETE_NOTE] (state, { noteIndex }) {
         state.notes.splice(noteIndex, 1);
+    },
+    [COURSE_LESSON_WATCHED] (state) {
+        state.lessons[state.currentLessonIndex]._watched = true;
+        state.currentLessonIndex++;
     },
     [COURSE_UPDATE_NOTE] (state, { noteIndex, data }) {
         Vue.set(state.notes, noteIndex, { ...state.notes[noteIndex], ...data });

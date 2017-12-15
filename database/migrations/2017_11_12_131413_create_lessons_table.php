@@ -23,7 +23,6 @@ class CreateLessonsTable extends Migration
             $table->integer('video_id')->unsigned();
             $table->integer('course_id')->unsigned();
             $table->integer('order_index');
-//            $table->string('question_ids'); // array cu toate intrebarile corespunzatoare acestei lectii | am pus in questions un lesson_id
             $table->timestamps();
 
             $table->foreign('video_id')->references('id')->on('media');

@@ -13,10 +13,10 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   }
 }
 
-@mixin clampText {
+@mixin clampText($maxRows) {
   width: 100%;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: $maxRows;
   -webkit-box-orient: vertical;
 }

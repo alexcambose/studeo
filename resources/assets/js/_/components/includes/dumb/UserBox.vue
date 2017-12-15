@@ -1,7 +1,7 @@
 <template>
     <router-link :to="{name: 'profile',  params: { username: user.username }}">
         <div :class="['user-box', size]">
-            <image-container class="user-image" :image="user._image.filename"></image-container>
+            <image-container class="user-image" :src="user._image.filename"></image-container>
             <div class="user-info">
                 <div class="user-name">{{user.first_name}} {{user.last_name}}</div>
             </div>

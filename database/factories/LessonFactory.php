@@ -15,7 +15,10 @@ $factory->define(App\Lesson::class, function (Faker $faker) {
             return factory(App\Media::class)->create()->id;
         },
         'video_id' => function() {
-            return factory(App\Media::class)->create()->id;
+            return factory(App\Media::class)->create([
+                'type' => 1,
+                'filename' => 'userdata/courses/videos/test.mp4',
+            ])->id;
         },
         'course_id' => App\Course::all()->random()->id,
         'order_index' => ++$order - 1,

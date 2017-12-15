@@ -22,6 +22,7 @@ export default {
         COURSE_UPDATE_NOTE: SERVER + 'course/user/note/update/',
         COURSE_ADD_NOTE: SERVER + 'course/user/note/add/',
         COURSE_DELETE_NOTE: SERVER + 'course/user/note/delete/',
+        COURSE_LESSON_WATCHED: SERVER + 'course/user/lesson/watched/',
         LESSON_ALL: SERVER + 'lesson/all/',
         PLAYLISTS: SERVER + 'playlists/',
         PLAYLIST_CREATE: SERVER + 'playlists/create/',

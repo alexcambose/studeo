@@ -37,6 +37,7 @@ Route::post('course/user/join/', 'CourseController@userJoin');
 Route::post('course/user/note/add/{course}', 'NoteController@add');
 Route::post('course/user/note/update/{note}', 'NoteController@update');
 Route::delete('course/user/note/delete/{note}', 'NoteController@delete');
+Route::post('course/user/lesson/watched/{lesson}', 'LessonController@watched');
 
 Route::get('lesson/all/{course}', 'LessonController@all');
 // endregion
