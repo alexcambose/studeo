@@ -1,4 +1,5 @@
 <template>
+    <!-- redesign soon -->
     <div class="box mt-10" style="max-height: 400px; overflow-y: scroll">
         <button @click="modalActive = true" class="button is-primary is-pulled-right is-small">
             <b-icon pack="fa" icon="plus"></b-icon>
@@ -36,7 +37,7 @@
                 </div>
             </form>
         </b-modal>
-        <p class="title is-4">Notițe - {{notes.length}}</p>
+        <p class="title is-4"><b-icon pack="fa" icon="sticky-note" size="is-small"></b-icon> Notițe - {{notes.length}}</p>
         <hr>
         <course-note-item v-for="(note, index) in notes" :note-index="index" :key="index"></course-note-item>
     </div>

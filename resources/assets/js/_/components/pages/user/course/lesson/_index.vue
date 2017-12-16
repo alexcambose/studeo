@@ -1,5 +1,9 @@
 <template>
     <div v-if="fetched">
+        <b-modal :active.sync="isQuestionsModalActive" has-modal-card>
+            <lesson-questions :onSuccess="lessonWatched"></lesson-questions>
+        </b-modal>
+
         <section class="hero is-info">
             <div class="hero-body">
                 <div class="container">
@@ -24,7 +28,7 @@
                         <lesson-notes></lesson-notes>
                     </div>
                     <div class="column is-8">
-                        <lesson-video></lesson-video>
+                        <lesson-video :onEnded="onVideoEnded"></lesson-video>
                     </div>
                 </div>
             </div>
@@ -39,6 +43,7 @@
     import { mapActions, mapState, mapGetters } from 'vuex';
     import LessonVideo from './LessonVideo.vue';
     import LessonSidebar from './LessonSidebar.vue';
+    import LessonQuestions from './LessonQuestions.vue';
     import LessonFooter from './LessonFooter.vue';
     import LessonNotes from './notes/CourseNotes.vue';
     // import CourseBox from '../../../../../components/includes/dumb/UserBox';
@@ -60,20 +65,46 @@
         data() {
             return {
                 fetched: false,
+                isQuestionsModalActive: false,
             };
         },
         computed: {
             ...mapState({
                 course: ({ course }) => course.courseInfo,
             }),
-            ...mapGetters(['progress']),
+            ...mapGetters(['progress', 'lessons']),
+            lesson() {
+                const { currentLessonIndex } = this.$store.state.course;
+                return this.lessons[currentLessonIndex];
+            },
         },
-        methods: mapActions(['getLessons', 'getCourseInfo']),
+        methods: {
+            ...mapActions(['getLessons', 'getCourseInfo', 'lessonMarkAsViewed']),
+            onVideoEnded() {
+                if (this.lesson._questions.length) {
+                    this.isQuestionsModalActive = true;
+                } else if (!this.lesson._watched) {
+                    this.lessonWatched();
+                }
+            },
+            lessonWatched() {
+                this.isQuestionsModalActive = false;
+                this.lessonMarkAsViewed()
+                    .then(() => {
+                        this.$dialog.alert({
+                            title: 'Ai terminat o lecție!',
+                            message: `Felicitări pentru terminarea lecției <b>${this.lesson.title}</b>.`,
+                            confirmText: 'Următoarea lecție!',
+                        });
+                    });
+            },
+        },
         components: {
             LessonVideo,
             LessonSidebar,
             LessonFooter,
             LessonNotes,
+            LessonQuestions,
             // CourseBox,
             // CourseCard,
         },

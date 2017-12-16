@@ -1,17 +1,14 @@
 <template>
-    <div class="video-container" ref="videoContainer">
-        <video
-                controls
-                controlsList="nodownload"
-                v-bind="$attrs"
-                ref="video"
-                :poster="thumbnail ? thumbnailUrl : ''">
-            <source :src="url" type="video/mp4">
-            Ne pare rău dar browserul tău nu suporta acest format.
-        </video>
-        <!--<div :class="['video-play', playing ? 'hidden' : '']" ref="videoPlay"></div>-->
-
-    </div>
+    <video
+            controls
+            controlsList="nodownload"
+            v-bind="$attrs"
+            ref="video"
+            :poster="thumbnail ? thumbnailUrl : ''"
+    >
+        <source :src="url" type="video/mp4">
+        Ne pare rău dar browserul tău nu suporta acest format.
+    </video>
 </template>
 
 <script>
@@ -37,10 +34,6 @@
         },
         mounted() {
             const $video = this.$refs.video;
-            // this.$refs.videoContainer.addEventListener('click', () => {
-            //     if (!this.playing) $video.play();
-            //     else $video.pause();
-            // });
             $video.onplay = () => {
                 this.playing = true;
             };
@@ -68,18 +61,5 @@
 <style scoped>
 .video-container{
     position: relative;
-}
-.video-play {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 38px;
-    background-color: #000;
-    opacity: 0.5;
-    visibility: visible;
-}
-.video-play.hidden{
-    visibility: hidden;
 }
 </style>
