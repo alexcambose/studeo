@@ -5,7 +5,6 @@ use Faker\Generator as Faker;
 /* @var Illuminate\Database\Eloquent\Factory $factory */
 
 $factory->define(App\Lesson::class, function (Faker $faker) {
-    static $order;
     return [
         'title' => $faker->text($maxNbChars = 100),
         'short_description' => $faker->text($maxNbChars = 240),
@@ -21,6 +20,6 @@ $factory->define(App\Lesson::class, function (Faker $faker) {
             ])->id;
         },
         'course_id' => App\Course::all()->random()->id,
-        'order_index' => ++$order - 1,
+        'order_index' => 0, //not good
     ];
 });

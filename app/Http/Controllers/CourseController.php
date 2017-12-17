@@ -212,6 +212,7 @@ class CourseController extends Controller
         $newCourse->target_class_level = $course['targetClassLevel'];
         $newCourse->image_id = $courseImageId;
         Auth::user()->courses()->save($newCourse);
+        $newCourse->tags()->sync($course['tags']);
 
         foreach ($course['lessons'] as $key => $lesson) {
             $newLesson = new Lesson();

@@ -3,7 +3,7 @@
         <section class="hero course-hero is-medium" :style="{backgroundImage: `url(${course._image.filename})`}">
             <div class="background-filter"></div>
             <div class="hero-body">
-                <div class="container content-lower">
+                <div class="container">
                     <div class="columns">
                         <div class="column is-5">
                             <video-player :src="lessons[0]._video.filename"></video-player>
@@ -24,6 +24,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="container tag-container has-text-centered">
+                    <b-tag v-for="(tag, index) in course._tags" :key="index" type="is-dark" class="mr-10">
+                        {{tag.label}}
+                    </b-tag>
                 </div>
             </div>
         </section>

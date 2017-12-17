@@ -16,7 +16,7 @@
             </div>
         </b-field>
 
-        <button @click="addField" class="button is-info" :disabled="!fields[fields.length-1]"><b-icon pack="fa" icon="plus" size="is-small"></b-icon> &nbsp; {{addFieldLabel}}</button>
+        <button @click="addField" class="button is-info" :disabled="!fields[fields.length-1] && fields.length > 1"><b-icon pack="fa" icon="plus" size="is-small"></b-icon> &nbsp; {{addFieldLabel}}</button>
     </div>
 </template>
 <script>
@@ -29,7 +29,7 @@
             },
             value: {
                 type: Array,
-                default: [],
+                default: () => [],
             },
         },
         data() {

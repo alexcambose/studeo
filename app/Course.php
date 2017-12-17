@@ -21,11 +21,15 @@ class Course extends Model
     ];
     protected $appends = [
         '_image',
+        '_tags',
         '_joined',
         '_user',
     ];
     public function getImageAttribute(){
         return Media::find($this->image_id);
+    }
+    public function getTagsAttribute(){
+        return $this->tags()->get();
     }
     public function getUserAttribute(){
         return User::find($this->user_id);
@@ -76,5 +80,7 @@ class Course extends Model
     public function playlists() {
         return $this->belongsToMany(Playlist::class);
     }
-
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
 }

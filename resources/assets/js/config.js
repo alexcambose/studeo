@@ -15,6 +15,7 @@ export default {
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll/',
         COURSE: SERVER + 'course/slug/',
+        COURSE_TAGS: SERVER + 'course/tags/',
         COURSE_ALL: SERVER + 'course/all/',
         COURSE_ADD: SERVER + 'course/add/',
         COURSE_BEST_SLUG: SERVER + 'course/slug/best/',
