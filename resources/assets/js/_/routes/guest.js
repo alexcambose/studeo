@@ -7,7 +7,7 @@ export default [
         path: '/welcome',
         name: 'welcome',
         component: Welcome,
-        meta: { onlyGuest: true },
+        meta: { onlyGuest: true, hideNavbar: true },
 
     },
     {

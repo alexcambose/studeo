@@ -10,7 +10,7 @@ Vue.use(Buefy);
 Vue.use(VueRouter);
 
 
-Vue.component('main1', require('./Main.vue'));
+Vue.component('root', require('./Main.vue'));
 
 
 window.vue = new Vue({

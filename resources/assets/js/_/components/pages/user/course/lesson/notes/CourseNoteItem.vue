@@ -1,5 +1,5 @@
 <template>
-        <b-collapse class="card" :open.sync="isOpen">
+        <b-collapse class="card" :open.sync="isOpen" @close="editMode = false; successfullySaved = ''">
             <div slot="trigger" class="card-header">
                 <p class="card-header-title">
                     {{title}}
@@ -35,7 +35,14 @@
                                         minlength="4"
                                 ></b-input>
                             </b-field>
-                            <button :class="['button', 'is-success', 'is-fullwidth', (saving ? 'is-loading' : '')]" type="submit">Salvează</button>
+                            <div class="field has-addons is-fullwidth">
+                                <p @click="editMode = false" class="control is-fullwidth">
+                                    <button class="button is-fullwidth" type="button">Anulează</button>
+                                </p>
+                                <p class="control is-fullwidth">
+                                    <button :class="['button', 'is-success', 'is-fullwidth', (saving ? 'is-loading' : '')]" type="submit">Salvează</button>
+                                </p>
+                            </div>
                         </form>
                     </div>
                 </div>

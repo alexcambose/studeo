@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+$landing-navbar-height: $navbar-height + 20;
+$landing-navbar-height-compressed: $landing-navbar-height - 30;
+$section-padding: 40px 0;
+.welcome{
+  .landing-navbar{
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: line-height .3s;
+    line-height: $landing-navbar-height;
+    z-index: 3;
+    &.compressed{
+      line-height: $landing-navbar-height-compressed;
+    }
+    .navbar-content {
+      ul{
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      li{
+        float: right;
+        padding: 0 30px;
+      }
+      a{
+        &:hover{ color: $light }
+        display: block;
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+  .landing-navbar-filter{
+    @extend .landing-navbar;
+    height: $landing-navbar-height;
+    transition: height .3s;
+    z-index: 1;
+    background-color: rgba(0,0,0,.4);
+    &.compressed{
+      height: $landing-navbar-height-compressed;
+    }
+  }
+  .landing-page {
+    font-family: 'Muli', sans-serif;
+    position: relative;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=750&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    .landing-page-filter{
+      @include absoluteFull;
+      background: linear-gradient(to top, black, transparent);
+      opacity: 0.8;
+    }
+    .landing-page-content {
+      z-index: 2;
+      .landing-page-title {
+        text-align: center;
+        font-size: 4em;
+        color: $light !important;
+      }
+    }
+  }
+  .title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-weight: 300;
+    font-size: 3em;
+  }
+  .about-us{
+    height: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $light;
+    padding: $section-padding;
+    .subtitle{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+    }
+  }
+  .details{ //https://www.iconfinder.com/iconsets/social-media-8
+    background-size: cover;
+    padding: $section-padding;
+    background-image: url(https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=541&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
+    background-position: center;
+    background-attachment: fixed;
+    color: $light !important;
+    position: relative;
+    .background-filter{
+      position:absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000;
+      opacity: .5;
+      z-index: 1;
+    }
+    .container{
+      z-index:2;
+    }
+    .title{
+      color: $light !important;
+      margin-bottom: 70px;
+    }
+    .column-title{
+      font-size: 1.5em;
+      font-weight: 500;
+      text-align: center;
+    }
+    .content{
+      text-align: center;
+    }
+    .icon {
+      width: 100%;
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+  .testimonials{
+    padding: $section-padding;
+    .media {
+      margin-top: 20px;
+      .user-image {
+        width: 64px;
+        height: 64px;
+        @extend .is-rounded;
+      }
+      .user-name{
+        font-size: .9em;
+        font-weight: 300;
+      }
+      .user-title{
+        font-size: 1.4em;
+        font-weight: 800;
+      }
+      .user-content{
+        font-style: italic;
+      }
+    }
+  }
+  .join{
+    padding: $section-padding;
+
+  }
+}

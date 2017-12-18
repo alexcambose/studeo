@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="app">
-    <main1></main1>
+    <root></root>
 </div>
 
 <!-- Scripts -->

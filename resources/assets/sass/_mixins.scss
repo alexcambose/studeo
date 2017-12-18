@@ -20,3 +20,11 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   -webkit-line-clamp: $maxRows;
   -webkit-box-orient: vertical;
 }
+
+@mixin absoluteFull{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -90,7 +90,7 @@ class DatabaseSeeder extends Seeder
         });
         $this->command->info('30%');
         factory(\App\Note::class, 10)->create();
-        factory(\App\Lesson::class, 40)->create();
+        factory(\App\Lesson::class, 50)->create();
         factory(\App\Question::class, 40)->create();
         factory(\App\Answer::class, 200)->create();$this->command->info('60%');
         factory(\App\Playlist::class, 50)->create()->each(function($playlist) {
