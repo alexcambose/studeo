@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->insertTags();
 
-        factory(\App\Course::class, 10)->create()->each(function($course) {
+        factory(\App\Course::class, 30)->create()->each(function($course) {
             $course->tags()->sync( \App\Tag::all()->random(16)->pluck('id') );
         });
         $this->command->info('30%');

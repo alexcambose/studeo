@@ -15,6 +15,7 @@ export default {
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll/',
         COURSE: SERVER + 'course/slug/',
+        COURSE_FIND: SERVER + 'course/find/',
         COURSE_TAGS: SERVER + 'course/tags/',
         COURSE_ALL: SERVER + 'course/all/',
         COURSE_ADD: SERVER + 'course/add/',
@@ -40,6 +41,6 @@ export default {
     },
     classLevels: ['Altceva', 'Școala generală', 'Gimnaziu', 'Liceu', 'Facultate'],
     course: {
-        loadAmount: 12,
+        loadAmount: 5,
     },
 };

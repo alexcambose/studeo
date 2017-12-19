@@ -24,18 +24,13 @@
                         </a>
 
                         <div class="navbar-dropdown navbar-classes">
-                            <catmenu></catmenu>
+                            <cat-menu></cat-menu>
                         </div>
                     </div>
                     <!--navbar secundar -->
-                    <b-field style="padding-top: 12px">
-                        <b-input placeholder="Caută"
-                                 type="search"
-                                 icon-pack="fa"
-                                 icon="search"
-                        >
-                        </b-input>
-                    </b-field>
+                    <div style="padding-top: 12px">
+                        <search-bar></search-bar>
+                    </div>
                 </div>
             </div>
             <div class="navbar-end" v-if="!logged">
@@ -53,7 +48,7 @@
                     </a>
 
                     <div class="navbar-dropdown navbar-notifications">
-                        <notifmenu></notifmenu>
+                        <notif-menu></notif-menu>
                     </div>
                 </div>
 
@@ -85,7 +80,8 @@
 <script>
     import CatMenu from './navbar/CatMenu';
     import NotifMenu from './navbar/NotifMenu';
-    import { mapState, mapActions, mapGetters } from 'vuex';
+    import { mapState, mapGetters } from 'vuex';
+    import SearchBar from './navbar/SearchBar';
 
     export default {
         computed: {
@@ -103,8 +99,9 @@
             },
         },
         components: {
-            'catmenu': CatMenu,
-            'notifmenu': NotifMenu,
+            SearchBar,
+            CatMenu,
+            NotifMenu,
         },
     };
 </script>

@@ -40,7 +40,7 @@
 <script>
     import config from '../../../../config';
     import { chunkArray } from '../../../../utils';
-    import CourseBox from './CourseBox.vue';
+    import CourseBoxVertical from './CourseBoxVertical.vue';
     import Dropdown from '../dumb/Dropdown.vue';
     import InfiniteLoading from 'vue-infinite-loading';
 
@@ -52,25 +52,40 @@
                 sorting: 'date-desc',
             };
         },
+        mounted() {
+            this.getCourses();
+        },
         methods: {
             chunkArray,
             infiniteHandler($state) {
-                axios.get(config.url.COURSE_ALL + this.$store.state.user.user.id, {
-                    params: {
-                        start: this.loadIndex,
-                        end: config.course.loadAmount,
-                        sort: this.sorting,
-                    },
-                }).then(({ data }) => {
-                    if (data.courses.length) {
-                        this.loadIndex += config.course.loadAmount;
-                        data.courses.forEach(course => {
-                            this.courses.push(course);
-                        });
-                        $state.loaded();
-                    } else {
-                        $state.complete();
-                    }
+                this.getCourses()
+                    .then(courses => {
+                        if (courses.length) {
+                            $state.loaded();
+                        } else {
+                            $state.complete();
+                        }
+                    });
+            },
+            getCourses() {
+                return new Promise((resolve, reject) => {
+                    axios.get(config.url.COURSE_ALL + this.$store.state.user.user.id, {
+                        params: {
+                            start: this.loadIndex,
+                            end: config.course.loadAmount,
+                            sort: this.sorting,
+                        },
+                    }).then(({ data }) => {
+                        if (data.courses.length) {
+                            this.loadIndex += config.course.loadAmount;
+                            data.courses.forEach(course => {
+                                this.courses.push(course);
+                            });
+                            resolve(data.courses);
+                        } else {
+                            resolve(data.courses);
+                        }
+                    });
                 });
             },
             resetCourses() {
@@ -82,7 +97,7 @@
             },
         },
         components: {
-            CourseBox,
+            CourseBoxVertical,
             Dropdown,
             InfiniteLoading,
         },

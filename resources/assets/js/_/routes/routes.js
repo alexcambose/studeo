@@ -55,6 +55,10 @@ const router = new VueRouter({
             component: NotFound404,
             name: '404',
         },
+        {
+            path: '*',
+            component: NotFound404,
+        },
     ],
 });
 
@@ -62,6 +66,7 @@ router.beforeEach((to, from, next) => {
     const user = store.state.user;
     if (user.logged) store.dispatch('getNotification');
 
+    // if (playlists)
     const check = () => {
         if (to.matched.some(record => record.meta.onlyAuth)) {
             if (!user.logged) next({ name: 'welcome' });

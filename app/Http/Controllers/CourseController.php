@@ -45,6 +45,14 @@ class CourseController extends Controller
         ]);
     }
 
+    public function find($query = '') {
+        if($query)
+            return response()->json([
+                'success' => true,
+                'courses' => Course::where('title', 'LIKE', '%'.$query.'%')->get(),
+            ]);
+        return response()->json([ 'success' => true ]);
+    }
     public function bestSlug($currentSlug){
         $someNumber = 0;
         while(Course::where('slug', $currentSlug)->count()){ //while there is a database course with the same slug
