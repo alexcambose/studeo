@@ -20,18 +20,7 @@
                         required
                 ></b-input>
         </b-field>
-        <b-field label="Etichete">
-            <b-taginput
-                    v-model="tags"
-                    :data="filteredTags"
-                    autocomplete
-                    field="label"
-                    maxtags="16"
-                    icon="label"
-                    placeholder="Adaugă câteva etichete pentru a face cursul mai ușor de găsit"
-                    @typing="getFilteredTags">
-            </b-taginput>
-        </b-field>
+        <course-tag-input v-model="tags" placeholder="Adaugă câteva etichete pentru a face cursul mai ușor de găsit"></course-tag-input>
         <b-field label="Scurtă descriere">
             <b-input
                     maxlength="240"
@@ -75,20 +64,12 @@
     import config from '../../../../../../../config';
     import MultipleFields from '../../../../../../components/includes/dumb/MultipleFields.vue';
     import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
+    import CourseTagInput from '../../../../../includes/course/CourseTagInput.vue';
 
     export default {
-        mounted() {
-            axios.get(config.url.COURSE_TAGS)
-                .then(({ data }) => {
-                    this.availableTags = data.tags;
-                    this.filteredTags = data.tags;
-                });
-        },
         data() {
             return {
                 fetchingSlug: false,
-                availableTags: [],
-                filteredTags: [],
             };
         },
         computed: {
@@ -97,7 +78,7 @@
             }),
             tags: {
                 get() {
-                    return this.newCourse.tags.map(tagid => this.availableTags.find(e => e.id === tagid));
+                    return this.newCourse.tags;
                 },
                 set(value) {
                     this.setData('tags', value.map(e => e.id));
@@ -117,14 +98,6 @@
         },
         methods: {
             ...mapActions(['updateNewCourseData']),
-            getFilteredTags(text) {
-                this.filteredTags = this.availableTags.filter(option => {
-                    return option.label
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(text.toLowerCase()) >= 0;
-                });
-            },
             setData(key, value) { console.log(key, value);
                 this.updateNewCourseData({ [key]: value });
             },
@@ -144,6 +117,7 @@
             },
         },
         components: {
+            CourseTagInput,
             MultipleFields,
             UploadImage,
         },

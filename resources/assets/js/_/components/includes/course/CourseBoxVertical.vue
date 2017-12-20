@@ -7,23 +7,11 @@
             </div>
         </router-link>
 
-        <b-dropdown @active-change="active => dropdownActive = active" class="playlist-button">
-            <button class="button is-small is-dark" slot="trigger">
-                <b-icon v-if="dropdownActive" icon="menu-down"></b-icon>
-                <b-icon v-else icon="plus"></b-icon>
-            </button>
-            <b-dropdown-item class="playlist-button-header" custom>
-                Biblioteca mea
-            </b-dropdown-item>
-            <b-dropdown-item separator></b-dropdown-item>
-            <b-dropdown-item v-for="(playlist, index) in Math.floor(Math.random() * 100) + 1">
-                Playlist no #{{playlist}}
-            </b-dropdown-item>
-        </b-dropdown>
+        <add-to-playlist-dropdown :course="course"></add-to-playlist-dropdown>
 
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
-                <span class="course-title">{{course.title}}</span>
+                <span class="course-title">{{course.id}} | {{course.title}}</span>
 
                 <div class="course-content">
                     {{course.short_description}}
@@ -36,7 +24,7 @@
 <script>
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import UserBox from '../../includes/dumb/UserBox.vue';
-
+    import AddToPlaylistDropdown from './AddToPlaylistDropdown.vue';
     export default {
         props: {
             course: {
@@ -44,14 +32,10 @@
                 required: true,
             },
         },
-        data() {
-            return {
-                dropdownActive: false,
-            };
-        },
         components: {
             ImageContainer,
             UserBox,
+            AddToPlaylistDropdown,
         },
     };
 </script>

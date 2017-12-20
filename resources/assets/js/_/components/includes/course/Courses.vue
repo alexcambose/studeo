@@ -1,35 +1,63 @@
 <template>
     <div>
-        <div class="is-clearfix">
-            <dropdown :values="[
-            {
-              title: 'Data postării crescătoare',
-              subtitle: 'De la cel mai vechi până la cel mai nou curs',
-              icon: 'sort-numeric-asc',
-              value: 'date-asc'
-            },{
-              title: 'Data postării descrescătoare',
-              subtitle: 'De la cel mai nou până la cel mai vechi curs',
-              icon: 'sort-numeric-desc',
-              value: 'date-desc'
-            },
-            {
-              title: 'Alfabetic crescător',
-              subtitle: 'Ordine alfabetică crescătoare',
-              icon: 'sort-alpha-asc',
-              value: 'alph-asc'
-            },{
-              title: 'Alfabetic descrescător',
-              subtitle: 'Ordine alfabetică descrescătoare',
-              icon: 'sort-alpha-desc',
-              value: 'alph-desc'
-            }
-            ]" v-model="sorting" :changed="resetCourses" label="Sortează după: " class="is-pulled-right"></dropdown>
+        <div class="course-filters">
+            <div class="course-filter-joined">
+                <div class="field">
+                    <b-switch v-model="filters.onlyRegistered" @input="resetCourses" type="is-info">
+                        Înregistrat
+                    </b-switch>
+                </div>
+            </div>
 
-        </div><hr>
+            <div class="course-filter-sorting">
+                <dropdown :values="[
+                        {
+                          title: 'Data postării crescătoare',
+                          subtitle: 'De la cel mai vechi până la cel mai nou curs',
+                          icon: 'sort-numeric-asc',
+                          value: 'date-asc'
+                        },{
+                          title: 'Data postării descrescătoare',
+                          subtitle: 'De la cel mai nou până la cel mai vechi curs',
+                          icon: 'sort-numeric-desc',
+                          value: 'date-desc'
+                        },
+                        {
+                          title: 'Alfabetic crescător',
+                          subtitle: 'Ordine alfabetică crescătoare',
+                          icon: 'sort-alpha-asc',
+                          value: 'alph-asc'
+                        },{
+                          title: 'Alfabetic descrescător',
+                          subtitle: 'Ordine alfabetică descrescătoare',
+                          icon: 'sort-alpha-desc',
+                          value: 'alph-desc'
+                        }
+                        ]" v-model="filters.sorting" :changed="resetCourses" label="Sortează după: "
+                          class="is-pulled-right"></dropdown>
+            </div>
+
+
+        </div>
+        <div class="course-more-filters">
+            <div :class="['show-more-content', moreFilters ? 'expanded' : '']">
+                <course-tag-input v-model="filters.tags" @input="resetCourses" placeholder="Găsește doar cursurile care au conținutul comun"></course-tag-input>
+                <b-field label="Autor">
+                    <b-input v-model="filters.author" @input.native="resetCourses" placeholder="Numele autorului pe care vrei să îl cauți" expanded></b-input>
+                </b-field>
+            </div>
+            <div class="course-show-more-filters">
+
+                <hr>
+                <button @click="moreFilters = !moreFilters" class="button is-small">Filtre avansate &nbsp;
+                    <b-icon pack="fa" :icon="moreFilters ? 'angle-up' : 'angle-down'"></b-icon>
+                </button>
+            </div>
+
+        </div>
         <div v-for="(courseGroup, index) in chunkArray(courses, 4)" :key="index" class="columns">
             <div class="column is-3" v-for="(course, index) in courseGroup" :key="index">
-                <course-box :course="course"></course-box>
+                <course-box-vertical :course="course"></course-box-vertical>
             </div>
         </div>
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
@@ -39,20 +67,36 @@
 </template>
 <script>
     import config from '../../../../config';
+    import _ from 'lodash';
     import { chunkArray } from '../../../../utils';
     import CourseBoxVertical from './CourseBoxVertical.vue';
     import Dropdown from '../dumb/Dropdown.vue';
     import InfiniteLoading from 'vue-infinite-loading';
+    import CourseTagInput from '../../includes/course/CourseTagInput.vue';
 
     export default {
+        props: {
+            search: {
+                type: String,
+            },
+        },
         data: function() {
             return {
                 courses: [],
                 loadIndex: 0,
-                sorting: 'date-desc',
+                moreFilters: false,
+                filters: {
+                    author: '',
+                    tags: [],
+                    sorting: 'date-desc',
+                    onlyRegistered: false,
+                },
             };
         },
         mounted() {
+            // this.$nextTick(() => {
+            //     this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+            // });
             this.getCourses();
         },
         methods: {
@@ -73,7 +117,10 @@
                         params: {
                             start: this.loadIndex,
                             end: config.course.loadAmount,
-                            sort: this.sorting,
+                            sort: this.filters.sorting,
+                            onlyRegistered: this.filters.onlyRegistered,
+                            author: this.filters.author,
+                            tags: this.filters.tags,
                         },
                     }).then(({ data }) => {
                         if (data.courses.length) {
@@ -88,15 +135,16 @@
                     });
                 });
             },
-            resetCourses() {
+            resetCourses: _.debounce(function(){
                 this.courses = [];
                 this.loadIndex = 0;
                 this.$nextTick(() => {
                     this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                 });
-            },
+            }, 350),
         },
         components: {
+            CourseTagInput,
             CourseBoxVertical,
             Dropdown,
             InfiniteLoading,

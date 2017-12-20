@@ -36,6 +36,9 @@ class CourseController extends Controller
         } else {
             $courses = Course::orderBy('created_at', 'DESC');
         }
+
+        $courses = $courses->newQuery();
+
         if($userId) $courses = $courses->where('user_id', $userId);
 
         if($request->start !== null && $request->end !== null) $courses->skip((int)$request->start)->take((int)$request->end);

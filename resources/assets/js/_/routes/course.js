@@ -1,7 +1,14 @@
 import Welcome from '../components/pages/user/course/Welcome.vue';
 import Lesson from '../components/pages/user/course/lesson/_index.vue';
+import All from '../components/pages/user/course/All.vue';
 
 export default [
+    {
+        path: '/cursuri',
+        name: 'courses',
+        component: All,
+        meta: { onlyAuth: true },
+    },
     {
         path: '/curs/:slug',
         name: 'courseWelcome',

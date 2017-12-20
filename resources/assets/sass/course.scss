@@ -41,7 +41,7 @@
     margin-bottom: 2px;
   }
   .course-content{
-    height: 124px;
+    height: 102px;
     font-size: .85em;
     color: lighten($dark, 20);
     overflow: hidden;
@@ -98,6 +98,40 @@
           text-align: center;
         }
       }
+    }
+  }
+}
+.course-filters{
+  display: flex;
+  .course-filter-sorting{
+    flex:1;
+  }
+  .course-filter-joined{
+    flex: 1;
+    align-items: center;
+    display: flex;
+  }
+}
+.course-more-filters{
+  position: relative;
+  .show-more-content{
+    margin: 10px 0;
+    transition: all .3s;
+    overflow: hidden;
+    height: 0;
+    &.expanded{
+      height: 100%;
+    }
+  }
+  .course-show-more-filters{
+    button{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: -42px;
+    }
+    hr{
+      margin: 1.7rem 0;
     }
   }
 }
