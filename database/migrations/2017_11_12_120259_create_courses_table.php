@@ -23,7 +23,7 @@ class CreateCoursesTable extends Migration
             $table->text('purpose');
             $table->text('purpose_what_will_learn');
             $table->text('prerequisites');
-            $table->text('difficulty')->comment("1 - Usor, 2 - Mediu, 3 - Greu");
+            $table->integer('difficulty')->comment("1 - Usor, 2 - Mediu, 3 - Greu");
             $table->boolean('is_private')->default(0);
             $table->integer('image_id')->unsigned();
             $table->integer('user_id')->unsigned();

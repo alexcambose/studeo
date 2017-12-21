@@ -34,7 +34,9 @@
                           value: 'alph-desc'
                         }
                         ]" v-model="filters.sorting" :changed="resetCourses" label="Sortează după: "
-                          class="is-pulled-right"></dropdown>
+                          class="is-pulled-right">
+                    
+                </dropdown>
             </div>
 
 
@@ -45,6 +47,18 @@
                 <b-field label="Autor">
                     <b-input v-model="filters.author" @input.native="resetCourses" placeholder="Numele autorului pe care vrei să îl cauți" expanded></b-input>
                 </b-field>
+                <div class="block">
+                    <b-field label="Dificultate"></b-field>
+                    <b-checkbox v-model="filters.difficulty" @input="resetCourses" native-value="1">
+                        Ușor
+                    </b-checkbox>
+                    <b-checkbox v-model="filters.difficulty" @input="resetCourses" native-value="2">
+                        Mediu
+                    </b-checkbox>
+                    <b-checkbox v-model="filters.difficulty" @input="resetCourses" native-value="3">
+                        Greu
+                    </b-checkbox>
+                </div>
             </div>
             <div class="course-show-more-filters">
 
@@ -81,22 +95,23 @@
             },
         },
         data: function() {
+            const queryFilters = this.$route.query;
+            let sorting = queryFilters['sortare'] || '';
+            if (sorting !== 'alph-asc' && sorting !== 'alph-desc' && sorting !== 'date-asc' && sorting !== 'date-desc') sorting = 'date-asc';
             return {
                 courses: [],
                 loadIndex: 0,
-                moreFilters: false,
+                moreFilters: !!Object.keys(queryFilters).length,
                 filters: {
-                    author: '',
-                    tags: [],
-                    sorting: 'date-desc',
-                    onlyRegistered: false,
+                    author: queryFilters['autor'] || null,
+                    tags: queryFilters['etichete'] || [],
+                    difficulty: [...queryFilters['dificultate'] || []],
+                    sorting: sorting,
+                    onlyRegistered: !!queryFilters['inregistrat'] || false,
                 },
             };
         },
         mounted() {
-            // this.$nextTick(() => {
-            //     this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-            // });
             this.getCourses();
         },
         methods: {
@@ -120,6 +135,7 @@
                             sort: this.filters.sorting,
                             onlyRegistered: this.filters.onlyRegistered,
                             author: this.filters.author,
+                            difficulty: this.filters.difficulty,
                             tags: this.filters.tags,
                         },
                     }).then(({ data }) => {
@@ -135,7 +151,16 @@
                     });
                 });
             },
-            resetCourses: _.debounce(function(){
+            resetCourses: _.debounce(function() {
+                let queryObject = {};
+                const { filters } = this;
+                if (filters.sorting !== 'date-asc') queryObject['sortare'] = filters.sorting;
+                if (filters.onlyRegistered) queryObject['inregistrat'] = '1';
+                if (filters.author) queryObject['autor'] = filters.author;
+                if (filters.difficulty) queryObject['dificultate'] = filters.difficulty;
+                if (filters.tags) queryObject['eticheta'] = filters.tags;
+                this.$router.push({ query: queryObject });
+
                 this.courses = [];
                 this.loadIndex = 0;
                 this.$nextTick(() => {

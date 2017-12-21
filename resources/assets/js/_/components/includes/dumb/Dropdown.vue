@@ -29,9 +29,7 @@
 <script>
     export default {
         props: {
-            value: { // from v-model
-                required: true,
-            },
+            value: {},
             values: {
                 required: true,
                 type: Array,

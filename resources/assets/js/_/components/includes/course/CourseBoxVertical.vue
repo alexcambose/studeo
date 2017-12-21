@@ -4,6 +4,9 @@
             <!--todo refactor-->
             <div class="card-image">
                 <image-container class="course-image" :src="course._image.filename"></image-container>
+                <div class="image-footer">
+                    <b-tag type="is-dark" class="difficulty-tag">{{difficultyLabel}}</b-tag>
+                </div>
             </div>
         </router-link>
 
@@ -30,6 +33,13 @@
             course: {
                 type: Object,
                 required: true,
+            },
+        },
+        computed: {
+            difficultyLabel() {
+                if (this.course.difficulty === 3) return 'Greu';
+                if (this.course.difficulty === 2) return 'Mediu';
+                return 'Ușor';
             },
         },
         components: {

@@ -36,7 +36,7 @@
         methods: {
             changedTags(value) {
                 this.tags = value;
-                this.$emit('input', this.tags);
+                this.$emit('input', this.tags.map(e => e.id));
             },
             getFilteredTags(text) {
                 this.filteredTags = this.availableTags.filter(option => {

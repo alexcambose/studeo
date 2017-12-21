@@ -13,6 +13,15 @@
   &:hover{
     box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1);
   }
+  .image-footer{
+    position: absolute;
+    top: $course-box-image-height - 24px - 6px;
+    left: 4px;
+    .difficulty-tag{
+
+    }
+  }
+
   .playlist-button{
     position: absolute;
     right: 4px;

@@ -1,5 +1,5 @@
 <template>
-    <!-- redesign soon -->
+    <!-- sugi pula -->
     <div class="box mt-10" style="max-height: 400px; overflow-y: scroll">
         <button @click="modalActive = true" class="button is-primary is-pulled-right is-small">
             <b-icon pack="fa" icon="plus"></b-icon>

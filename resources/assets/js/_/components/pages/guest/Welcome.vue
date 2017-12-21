@@ -57,7 +57,7 @@
                     </div>
                     <div class="column">
                         <div class="icon">
-                            <img src="images/bus.png"/>
+                            <img src="images/anywhere.png"/>
                         </div>
                         <div class="column-title">Mobilitate</div>
                         <div class="content">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="column">
                         <div class="icon">
-                            <img src="images/book.png"/>
+                            <img src="images/friends.png"/>
                         </div>
                         <div class="column-title">Interacțiune cu prietenii ?</div>
                         <div class="content">
@@ -99,8 +99,8 @@
             <div class="title">Alătură-te și descoperă-ți potențialul!</div>
             <div class="container">
                 <div class="columns">
-                    <div class="column is-4 is-offset-1"><router-link :to="{name: 'login'}" class="button is-outlined is-link is-large is-fullwidth">Autentificare</router-link></div>
-                    <div class="column is-4 is-offset-2"><router-link :to="{name: 'register'}" class="button is-outlined is-link is-large is-fullwidth">Înregistrare</router-link></div>
+                    <div class="column is-4 is-offset-1"><router-link :to="{name: 'login'}" class="button is-outlined is-info is-large is-fullwidth">Autentificare</router-link></div>
+                    <div class="column is-4 is-offset-2"><router-link :to="{name: 'register'}" class="button is-outlined is-info is-large is-fullwidth">Înregistrare</router-link></div>
                 </div>
             </div>
         </section>

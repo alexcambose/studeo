@@ -85,12 +85,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->insertTags();
 
-        factory(\App\Course::class, 30)->create()->each(function($course) {
+        factory(\App\Course::class, 20)->create()->each(function($course) {
             $course->tags()->sync( \App\Tag::all()->random(16)->pluck('id') );
         });
         $this->command->info('30%');
         factory(\App\Note::class, 10)->create();
-        factory(\App\Lesson::class, 50)->create();
+        factory(\App\Lesson::class, 100)->create();
         factory(\App\Question::class, 40)->create();
         factory(\App\Answer::class, 200)->create();$this->command->info('60%');
         factory(\App\Playlist::class, 50)->create()->each(function($playlist) {

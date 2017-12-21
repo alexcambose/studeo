@@ -7,6 +7,7 @@ use App\Course;
 use App\Lesson;
 use App\Media;
 use App\Question;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -37,14 +38,36 @@ class CourseController extends Controller
             $courses = Course::orderBy('created_at', 'DESC');
         }
 
-        $courses = $courses->newQuery();
-
         if($userId) $courses = $courses->where('user_id', $userId);
-
         if($request->start !== null && $request->end !== null) $courses->skip((int)$request->start)->take((int)$request->end);
+        if($request->difficulty) $courses = $courses->whereIn('difficulty', $request->difficulty);
+        $coursesArray = $courses->get();
+
+        if($request->author) {
+            $coursesArray = $coursesArray->filter(function($course)use($request){
+                $name = strtolower($course->user->first_name . $course->user->last_name);
+                $search = strtolower($request->author);
+                return stristr($name, $search);
+            });
+        }
+
+        if($request->tags) {
+            $coursesArray = $coursesArray->filter(function($course)use($request){
+                foreach ($request->tags as $tag){
+                    if($course->hasTag(Tag::find($tag))) return true;
+                }
+                return false;
+            });
+        }
+        if($request->onlyRegistered === "true") {
+            $coursesArray = $coursesArray->filter(function($course)use($request){
+                return $course->isUserJoined(Auth::user());
+            });
+        }
         return response()->json([
             'success' => true,
-            'courses' => $courses->get(),
+            'a' => $request->onlyRegistered,
+            'courses' => $coursesArray->values(),
         ]);
     }
 

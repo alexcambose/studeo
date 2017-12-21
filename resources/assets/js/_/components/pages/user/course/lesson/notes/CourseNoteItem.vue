@@ -36,7 +36,7 @@
                                 ></b-input>
                             </b-field>
                             <div class="field has-addons is-fullwidth">
-                                <p @click="editMode = false" class="control is-fullwidth">
+                                <p @click="editCanceled" class="control is-fullwidth">
                                     <button class="button is-fullwidth" type="button">Anulează</button>
                                 </p>
                                 <p class="control is-fullwidth">
@@ -70,8 +70,14 @@
                 required: true,
             },
         },
+        mounted() {
+            this.initialTitle = this.note.title;
+            this.initialContent = this.note.content;
+        },
         data() {
             return {
+                initialTitle: '',
+                initialContent: '',
                 isOpen: false,
                 editMode: false,
                 saving: false,
@@ -101,6 +107,11 @@
         },
         methods: {
             ...mapActions(['updateNote', 'deleteNote', 'saveNote']),
+            editCanceled() {
+                this.updateNote({ noteIndex: this.noteIndex, data: { title: this.initialTitle } });
+                this.updateNote({ noteIndex: this.noteIndex, data: { content: this.initialContent } });
+                this.editMode = false;
+            },
             uploadNote(e) {
                 e.preventDefault();
                 this.saving = true;

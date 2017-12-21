@@ -92,6 +92,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post(config.url.COURSE_UPDATE_NOTE + state.notes[noteIndex].id, { title, content })
                 .then(({ data }) => {
+
                     if (data.success) {
                         commit(COURSE_UPDATE_NOTE, { noteIndex, data });
                         resolve(data);
