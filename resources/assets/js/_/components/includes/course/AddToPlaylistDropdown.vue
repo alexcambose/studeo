@@ -8,14 +8,15 @@
             Biblioteca mea
         </b-dropdown-item>
         <b-dropdown-item separator></b-dropdown-item>
-        <b-dropdown-item v-for="(playlist, index) in Math.floor(Math.random() * 100) + 1" :key="index">
-            Playlist no #{{playlist}}
+        <b-dropdown-item v-for="(playlist, index) in playlists" :key="index">
+            {{playlist.title}}
         </b-dropdown-item>
     </b-dropdown>
 
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default {
         props: {
             course: {
@@ -27,6 +28,11 @@
             return {
                 dropdownActive: false,
             };
+        },
+        computed: {
+            ...mapState({
+                playlists: state => state.playlist.playlists,
+            }),
         },
     };
 </script>

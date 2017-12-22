@@ -6,6 +6,10 @@
                 <image-container class="course-image" :src="course._image.filename"></image-container>
                 <div class="image-footer">
                     <b-tag type="is-dark" class="difficulty-tag">{{difficultyLabel}}</b-tag>
+                    <div class="progress-container">
+                        <progress v-if="course._joined" class="progress is-small" :value="finishedPercent" max="100"></progress>
+                    </div>
+                    <b-tag type="is-dark" class="length-tag">{{length}}</b-tag>
                 </div>
             </div>
         </router-link>
@@ -25,6 +29,7 @@
     </div>
 </template>
 <script>
+    import { percent, timeConvert } from '../../../../utils';
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import UserBox from '../../includes/dumb/UserBox.vue';
     import AddToPlaylistDropdown from './AddToPlaylistDropdown.vue';
@@ -40,6 +45,14 @@
                 if (this.course.difficulty === 3) return 'Greu';
                 if (this.course.difficulty === 2) return 'Mediu';
                 return 'Ușor';
+            },
+            length() {
+                const total = this.course._lessons.reduce((time, lesson) => time + lesson.length, 0);
+                return timeConvert(total);
+            },
+            finishedPercent() {
+                const finishedLessonsCount = this.course._lessons.filter(e => e._watched).length;
+                return percent(finishedLessonsCount, this.course._lessons.length);
             },
         },
         components: {

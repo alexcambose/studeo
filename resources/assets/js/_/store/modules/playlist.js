@@ -49,8 +49,13 @@ const actions = {
         });
 
     },
-    getAllPlaylists({ commit }, { playlists }) {
-        commit(PLAYLIST_ALL, playlists);
+    getAllPlaylists({ commit }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.PLAYLISTS)
+                .then(({ data }) => {
+                    commit(PLAYLIST_ALL, data.playlists);
+                });
+        });
     },
 };
 

@@ -65,7 +65,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const user = store.state.user;
     if (user.logged) store.dispatch('getNotification');
-
+    if (!store.state.playlist.playlists.length) store.dispatch('getAllPlaylists');
     // if (playlists)
     const check = () => {
         if (to.matched.some(record => record.meta.onlyAuth)) {

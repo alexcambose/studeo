@@ -101,33 +101,15 @@ export const pluralize = (number, singular, plural) => {
     return content;
 };
 
-//TODO sigur exista o metoda mai clean
-export const convert = sec => {
-    let output = '';
-    if (sec > 3600*24*7*28*12) {
-        let years = parseInt(sec / (3600 * 24 * 7 * 28 * 12));
-        output = years + ' ani ';
-        sec = sec/(3600* 24 * 7* 28 * 12);
-    }
-    if (sec > 3600*24*7*28) {
-        let months = parseInt(sec / (3600 * 24 * 7 * 28));
-        output = months + ' luni ';
-        sec = sec/(3600* 24 * 7 * 28);
-    }
-    if (sec > 3600*24*7) {
-        let weeks = parseInt(sec / (3600 * 24 * 7));
-        output = weeks + ' săptamâni ';
-        sec = sec/(3600* 24 * 7);
-    }
-    if (sec > 3600*24) {
-        let days = sec / (3600 * 24);
-        output += days + ' zile ';
-        sec = parseInt(sec/3600*24);
-    }
-    if (sec > 3600) {
-        let hours = parseInt(sec / 3600);
-        output += hours + ' ore ';
-        sec = sec/3600;
-    }
-    return output;
-}
+// TODO trebuie imbunatatita
+export const timeConvert = (sec, levelIndex = 0) => {
+    const levels = [['secundă', 'secunde'], ['minut', 'minute'], ['oră', 'ore'], ['zi', 'zile'], ['lună', 'luni'], ['an', 'ani']];
+    if (sec > 60) return timeConvert(Math.floor(sec / 60), levelIndex + 1);
+    return sec + (sec % 100 > 19 ? ' de ' : ' ') + levels[levelIndex][sec === 1 ? 0 : 1]; // in functie de cum o sa fie mai ok formatarea, modificam
+};
+
+export const percent = (current, max, rounded = true) => {
+    if (rounded) return Math.floor(current/max * 100);
+    return current/max * 100;
+};
+

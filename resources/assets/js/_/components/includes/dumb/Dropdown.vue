@@ -70,6 +70,7 @@
 <style>
     .dropdown-component{
         display: flex;
+        justify-content: flex-end;
         flex-direction: row;
     }
     .dropdown-component .dropdown-label{

@@ -59,6 +59,7 @@ class DatabaseSeeder extends Seeder
         DB::table('answers')->truncate();
         DB::table('questions')->truncate();
         DB::table('lessons')->truncate();
+        DB::table('lesson_user')->truncate();
         DB::table('tags')->truncate();
         DB::table('courses')->truncate();
         DB::table('notes')->truncate();
@@ -85,16 +86,16 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->insertTags();
 
-        factory(\App\Course::class, 20)->create()->each(function($course) {
+        factory(\App\Course::class, 10)->create()->each(function($course) {
             $course->tags()->sync( \App\Tag::all()->random(16)->pluck('id') );
         });
         $this->command->info('30%');
         factory(\App\Note::class, 10)->create();
-        factory(\App\Lesson::class, 100)->create();
-        factory(\App\Question::class, 40)->create();
-        factory(\App\Answer::class, 200)->create();$this->command->info('60%');
+        factory(\App\Lesson::class, 40)->create();
+        factory(\App\Question::class, 30)->create();
+        factory(\App\Answer::class, 40)->create();$this->command->info('60%');
         factory(\App\Playlist::class, 50)->create()->each(function($playlist) {
-            $playlist->courses()->sync( \App\Course::all()->random(5)->pluck('id') );
+            $playlist->courses()->sync( \App\Course::all()->random(1)->pluck('id') );
         });
         $this->command->info('100%');
     }

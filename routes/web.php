@@ -21,10 +21,9 @@ Route::prefix('user')->group(function () {
     Route::post('mentor/register', 'UserController@becomeMentor'); // inregistrare ca mentor
 });
 
-
 Route::prefix('course')->group(function () {
     Route::post('add', 'CourseController@add'); // adaugare curs
-    Route::get('tags', 'TagController@all');  // luare taguri disponibile
+    Route::get('tag', 'TagController@all');  // luare taguri disponibile
     Route::get('find/{query?}', 'CourseController@find'); // cautare cursuri
     Route::get('all/{userId?}', 'CourseController@all'); //toate cursurile unui user, daca userId nu e specificat, toate cursurile
     Route::get('slug/{slug}', 'CourseController@one'); // luare curs dupa slug
@@ -42,48 +41,10 @@ Route::prefix('lesson')->group(function () {
 Route::prefix('playlist')->group(function () {
     Route::post('/', 'PlaylistController@getAllPlaylists'); // luare toate playlist-urile
     Route::post('create', 'PlaylistController@createPlaylist'); // creare playlist
+    Route::post('update/{id}', 'PlaylistController@updatePlaylist');
+    Route::delete('delete/{playlistId}', 'PlaylistController@deletePlaylist');
 });
 // endregion
-
-// region Notification
-Route::post('notification', 'NotificationController@notifications');
-Route::post('notification/toggle', 'NotificationController@toggle');
-Route::post('notification/toggleReadAll', 'NotificationController@toggleReadAll');
-// endregion
-
-// region Settings
-Route::post('user/update', 'UserController@updateData');
-Route::post('user/update/password', 'UserController@updatePassword');
-Route::post('user/update/profile', 'UserController@updateProfile');
-Route::post('user/update/profileImage', 'UserController@updateProfileImage');
-// endregion
-
-// region Mentor stuff
-Route::post('user/mentor/register', 'UserController@becomeMentor');
-// endregion
-
-// region Course
-Route::get('course/all/{userId?}', 'CourseController@all');
-Route::get('course/slug/{slug}', 'CourseController@one');
-Route::get('course/slug/best/{slug}', 'CourseController@bestSlug');
-Route::post('course/add', 'CourseController@add');
-Route::post('course/user/join/', 'CourseController@userJoin');
-Route::post('course/user/note/add/{course}', 'NoteController@add');
-Route::post('course/user/note/update/{note}', 'NoteController@update');
-Route::delete('course/user/note/delete/{note}', 'NoteController@delete');
-Route::post('course/user/lesson/watched/{lesson}', 'LessonController@watched');
-
-Route::get('lesson/all/{course}', 'LessonController@all');
-// endregion
-
-
-// region Playlist
-Route::post('playlists', 'PlaylistController@getAllPlaylists');
-Route::post('playlists/create', 'PlaylistController@createPlaylist');
-Route::post('playlist/update/{id}', 'PlaylistController@updatePlaylist');
-Route::delete('playlists/delete/{playlistId}', 'PlaylistController@deletePlaylist');
-//endregion
-
 
 Route::get('/', function(){
     return view('index');

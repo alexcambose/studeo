@@ -14,7 +14,7 @@
                             Bibliotecă
                         </p>
                         <ul class="menu-list playlistsBar">
-                            <li @click="isComponentModalActive = true"><a class="first"><i class="fa fa-plus"></i>&nbsp; Creeaza un nou playlist</a></li>
+                            <li @click="isComponentModalActive = true"><a class="first"><i class="fa fa-plus"></i>&nbsp; Creează un nou playlist</a></li>
                             <li v-for="item in playlists" @click="playlistId = item.id" ><router-link :to="{ name: 'playlist', params: { id: item.id } }">{{ item.title }}</router-link></li>
                         </ul>
                     </aside>
@@ -29,18 +29,18 @@
                                             {{ playlist.title }}
                                         </div>
                                         <div class="nrCoursesLessons">
-                                            Cursuri: <strong>{{ playlist._courses.length }}</strong> &#149; Lectii: <strong>{{ nrLessons }}</strong>
+                                            Cursuri: <strong>{{ playlist._courses.length }}</strong> &#149; Lecții: <strong>{{ nrLessons }}</strong>
                                         </div>
                                         <div class="playlistTime">
-                                            Durata totala: <strong>{{ totalDuration }}</strong>
+                                            Durata totală: <strong>{{ totalDuration }}</strong>
                                         </div>
                                     </div>
                                     <div class="column is-one-quarter">
                                         <div class="box">
                                             <ul class="playlistActions">
-                                                <li><a @click="isEditModalActive = true"><i class="fa fa-edit"></i>&nbsp; <span>Editeaza playlistul</span></a></li>
+                                                <li><a @click="isEditModalActive = true"><i class="fa fa-edit"></i>&nbsp; <span>Editează playlistul</span></a></li>
                                                 <li><a href=""><i class="fa fa-eye"></i>&nbsp; <span>Vezi playlistul</span></a></li>
-                                                <li><a @click="removePlaylist"><i class="fa fa-trash"></i>&nbsp; <span>Sterge playlistul</span></a></li>
+                                                <li><a @click="removePlaylist"><i class="fa fa-trash"></i>&nbsp; <span>Șterge playlistul</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                 <p>Apasă pe <i class="fa fa-plus"></i> pentru a adăuga cursul dorit la playlist. Pe aceasta pagină iți poți customiza playlistul.</p>
                             </div>
                             <div class="playlistsCourses" v-for="course in playlist._courses">
-                                <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }"><playlist-course :course="course"></playlist-course></router-link>
+                                <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }"><course-box-horizontal :course="course"></course-box-horizontal></router-link>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,6 @@
                         >
                             <div class="box addPlaylistBox" @click="isComponentModalActive = true">
                                 <div class="add">
-
                                     <i class="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
@@ -84,20 +83,18 @@
 </template>
 
 <script>
-    import PlaylistCourse from './components/PlaylistCourses.vue';
+    import CourseBoxHorizontal from '../../../includes/course/CourseBoxHorizontal.vue';
     import AddPlaylist from './components/AddPlaylist.vue';
     import { mapState, mapActions } from 'vuex';
-    import store from '../../../../store/index';
     import config from '../../../../../config';
-    import { convert } from '../../../../../utils';
+    import { timeConvert } from '../../../../../utils';
     import EditPlaylist from './components/EditPlaylist';
 
     export default {
         mounted() {
-            axios.post(config.url.PLAYLISTS)
-                .then(({ data }) => {
-                    store.dispatch('getAllPlaylists', data);
-                    this.getPlaylistById(this.playlistId);
+            this.$store.dispatch('getAllPlaylists')
+                .then(() => {
+                    this.getPlaylistById(parseInt(this.$route.params.id));
                 });
         },
 
@@ -115,20 +112,18 @@
             }),
             nrLessons() {
                 let nrLessons = 0;
-                this.playlist._courses.forEach(e => {
-                    nrLessons += e.lessons.length;
+                this.playlist._courses.forEach(e => { // reduce
+                    nrLessons += e._lessons.length;
                 });
                 return nrLessons;
             },
             totalDuration() {
-                let totalDuration = 0;
-                this.playlist._courses.forEach(e => {
-                    e.lessons.forEach(x => {
-                        totalDuration += x.length;
-                    });
-                })
-                return convert(totalDuration);
-            }
+                let totalDuration = this.playlist._courses
+                    .reduce((total, course) => {
+                        return total + course._lessons.reduce((seconds, lesson) => seconds + lesson.length, 0);
+                    }, 0);
+                return timeConvert(totalDuration);
+            },
         },
         watch: {
             '$route.params.id'() {
@@ -150,14 +145,14 @@
                         this.deletePlaylist({ playlistIndex: this.playlist.id })
                             .then(() => this.$toast.open('Playlistul a fost șters') );
                     },
-                })
+                });
             },
             getPlaylistById($id) { // TODO move to getters
                 this.playlist = this.playlists.find(e => e.id === $id);
             },
         },
         components: {
-            PlaylistCourse,
+            CourseBoxHorizontal,
             AddPlaylist,
             EditPlaylist,
         },

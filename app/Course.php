@@ -24,6 +24,7 @@ class Course extends Model
         '_tags',
         '_joined',
         '_user',
+        '_lessons',
     ];
     public function getImageAttribute(){
         return Media::find($this->image_id);
@@ -49,9 +50,12 @@ class Course extends Model
     public function getPurposeWhatWillLearnAttribute($value) {
         return json_decode($value);
     }
+    public function getLessonsAttribute(){
+        return $this->lessons()->get();
+    }
 
     public function joinedUsersArray() {
-        $lessons = $this->lessons;
+        $lessons = $this->lessons()->get();
         $users = [];
         foreach ($lessons as $lesson){
             $joinedUsers = $lesson->joinedUsers;

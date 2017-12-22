@@ -3,7 +3,7 @@
         <form @submit="updatePlaylist">
             <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-title">Editeaza playlistul</p>
+                    <p class="modal-card-title">Editează playlistul</p>
                 </header>
                 <section class="modal-card-body">
                     <b-field label="Titlu">

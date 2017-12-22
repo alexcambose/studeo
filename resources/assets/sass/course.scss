@@ -1,108 +1,123 @@
-.course-watch{
+.course-watch {
   margin: 10px;
 }
 
-.course-box{
+.course-box {
   position: relative;
   transition: box-shadow 150ms ease;
-  &.course-joined{
+  &.course-joined {
     // because css doesn't have box-shadow-color we need to hard code the values... :<
     // also looks ugly
     box-shadow: 0 2px 3px rgba(35, 209, 96, 0.5), 0 0 0 1px rgba(35, 209, 96, 0.5);
   }
-  &:hover{
+  &:hover {
     box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1);
   }
-  .image-footer{
+  .image-footer {
     position: absolute;
     top: $course-box-image-height - 24px - 6px;
     left: 4px;
-    .difficulty-tag{
-
+    right: 4px;
+    display: flex;
+    align-items: center;
+    .difficulty-tag {}
+    .length-tag {
+      align-self:flex-end;
+    }
+    .progress-container {
+      flex: 1;
+      padding: 0 10px;
+      .progress {
+        height: 6px;
+        margin-bottom: 0;
+      }
     }
   }
 
-  .playlist-button{
+  .playlist-button {
     position: absolute;
     right: 4px;
     top: 4px;
-    .dropdown-content{
+    .dropdown-content {
       max-height: 300px;
       overflow-y: auto;
     }
-    .playlist-button-header{
+    .playlist-button-header {
       text-align: center;
       font-weight: 800;
     }
   }
-  .course-image{
+  .course-image {
     height: $course-box-image-height;
   }
-  .course-user-image{
+  .course-user-image {
     width: $course-box-user-image-width;
     height: $course-box-user-image-height;
   }
-  .course-title{
+  .course-title {
     @include clampText(4);
     font-size: 1.1em;
     font-weight: bold;
     height: 98px;
     margin-bottom: 2px;
   }
-  .course-content{
+  .course-content {
     height: 102px;
     font-size: .85em;
     color: lighten($dark, 20);
     overflow: hidden;
   }
-  .card-content > a{
-    color:inherit;
+  .card-content > a {
+    color: inherit;
     text-decoration: none;
   }
 }
 
-.course-welcome{
+.course-welcome {
   .course-hero {
     position: relative;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    .background-filter{
+    .background-filter {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0,0,0,.5);
+      background-color: rgba(0, 0, 0, .5);
     }
-    .hero-body{
+    .hero-body {
       padding: 0;
       height: 400px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      .container{
-        &.tag-container{
+      .container {
+        &.tag-container {
           margin-top: 15px;
-          display:block;
+          display: block;
           text-align: center;
-          .tag { margin-right: 10px; margin-top: 10px; }
+          .tag {
+            margin-right: 10px;
+            margin-top: 10px;
+          }
         }
         display: flex;
-        .columns{
-          .column{
+        .columns {
+          .column {
             display: flex;
             justify-content: center;
             flex-direction: column;
           }
         }
-        .title, .subtitle{
+        .title, .subtitle {
           color: $light;
         }
-        button.apply{
+        button.apply {
           width: 250px;
         }
-        .apply-container{
+        .apply-container {
           margin-top: 12px;
           text-align: center;
         }
@@ -110,36 +125,38 @@
     }
   }
 }
-.course-filters{
+
+.course-filters {
   display: flex;
-  .course-filter-sorting{
-    flex:1;
+  .course-filter-sorting {
+    flex: 1;
   }
-  .course-filter-joined{
+  .course-display {
     flex: 1;
     align-items: center;
     display: flex;
   }
 }
-.course-more-filters{
+
+.course-more-filters {
   position: relative;
-  .show-more-content{
+  .show-more-content {
     margin: 10px 0;
     transition: all .3s;
     overflow: hidden;
     height: 0;
-    &.expanded{
+    &.expanded {
       height: 100%;
     }
   }
-  .course-show-more-filters{
-    button{
+  .course-show-more-filters {
+    button {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       margin-top: -42px;
     }
-    hr{
+    hr {
       margin: 1.7rem 0;
     }
   }
