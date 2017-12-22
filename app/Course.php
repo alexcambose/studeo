@@ -51,7 +51,7 @@ class Course extends Model
     }
 
     public function joinedUsersArray() {
-        $lessons = $this->lessons()->get();
+        $lessons = $this->lessons;
         $users = [];
         foreach ($lessons as $lesson){
             $joinedUsers = $lesson->joinedUsers;

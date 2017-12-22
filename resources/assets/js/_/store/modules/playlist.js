@@ -1,6 +1,7 @@
 /* eslint-disable no-trailing-spaces */
 import config from '../../../config';
-import { PLAYLIST_CREATE, PLAYLIST_ALL } from '../mutators-types';
+import { PLAYLIST_CREATE, PLAYLIST_ALL, PLAYLIST_DELETE, PLAYLIST_EDIT } from '../mutators-types';
+import Vue from 'vue';
 const state = {
     playlist: {},
     playlists: {},
@@ -25,18 +26,48 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
+    deletePlaylist({ commit }, { playlistIndex }) {
+        return new Promise((resolve, reject) => {
+            axios.delete(config.url.PLAYLIST_DELETE + playlistIndex)
+                .then(() => {
+                    commit(PLAYLIST_DELETE, playlistIndex);
+                    resolve();
+                })
+                .catch(err => reject(err));
+        });
+    },
+    savePlaylist({ state, commit }, { playlistIndex, data: { title, description } }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.PLAYLIST_EDIT + state.playlists[playlistIndex].id, { title, description })
+                .then(({ data }) => {
+                    if (data.success) {
+                        commit(PLAYLIST_EDIT, { playlistIndex, title, description });
+                        resolve();
+                    } else reject();
+                })
+                .catch(err => reject(err));
+        });
+
+    },
     getAllPlaylists({ commit }, { playlists }) {
         commit(PLAYLIST_ALL, playlists);
     },
 };
 
 const mutations = {
+    [PLAYLIST_ALL](state, playlists) {
+        state.playlists = playlists;
+    },
+    [PLAYLIST_DELETE](state, { playlistIndex }) {
+        state.playlists.splice(playlistIndex, 1);
+    },
     [PLAYLIST_CREATE](state, payload) {
         state.playlist = payload.playlist;
         state.playlists.push(payload.playlist);
     },
-    [PLAYLIST_ALL](state, playlists) {
-        state.playlists = playlists;
+    [PLAYLIST_EDIT](state, { playlistIndex, title, description }) {
+        state.playlists[playlistIndex].description = description;
+        state.playlists[playlistIndex].title = title;
     },
 };
 

@@ -28,6 +28,8 @@ export default {
         LESSON_ALL: SERVER + 'lesson/all/',
         PLAYLISTS: SERVER + 'playlists/',
         PLAYLIST_CREATE: SERVER + 'playlists/create/',
+        PLAYLIST_DELETE: SERVER + 'playlists/delete/',
+        PLAYLIST_EDIT: SERVER + 'playlist/update/',
     },
     notifications: {
         PASSWORD_CHANGED: {

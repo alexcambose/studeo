@@ -27,6 +27,14 @@ class PlaylistController extends Controller
 
     public function createPlaylist(Request $request){
         $playlist = new Playlist();
+
+        $validation = Validator::make($request->all(), [
+            'title' => Playlist::$rules['title'],
+            'description' => Playlist::$rules['description'],
+        ]);
+
+        if($validation->fails()) return response()->json(['success' => 'false']);
+
         $user = Auth::user();
         $validation = Validator::make($request->all(), [
             'title' => Playlist::$rules['title'],
@@ -45,5 +53,32 @@ class PlaylistController extends Controller
            'success' => true,
            'playlist' => $playlist,
         ]);
+    }
+
+    public function updatePlaylist(Request $request, $id) {
+        $playlist = Playlist::find($id);
+
+        $validation = Validator::make($request->all(), [
+            'title' => Playlist::$rules['title'],
+            'description' => Playlist::$rules['description'],
+        ]);
+
+        if($validation->fails()) return response()->json(['success' => 'false']);
+
+        $playlist->title = $request->title;
+        $playlist->description = $request->description;
+
+        $playlist->save();
+
+        return response()->json(['success' => 'true']);
+    }
+
+    public function deletePlaylist($id) {
+        $playlist = Playlist::find($id);
+
+        $playlist->delete();
+        $playlist->courses()->detach();
+
+        return response()->json(['success' => 'true']);
     }
 }

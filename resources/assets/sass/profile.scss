@@ -50,7 +50,8 @@
   /* endregion */
 }
 
-.cursCard { // mori pls
+
+.courseCard {
   margin: 30px 50px;
 }
 
@@ -124,12 +125,12 @@
     display: block;
   }
 
-  .nrCursuri { // ROMANA AQNANANAQNAQ Awgfndbjkldopbgjklpdbjklp
+  .nrCourses {
     text-align: center;
     font-weight: 500;
   }
 
-  .navbar-item:hover .nrCursuri { //rornwanandjladflbfS,.BFC
+  .navbar-item:hover .nrCourses {
     color: $primary;
   }
 }

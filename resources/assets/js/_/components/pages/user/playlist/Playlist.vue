@@ -3,6 +3,9 @@
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
             <add-playlist></add-playlist>
         </b-modal>
+        <b-modal :active.sync="isEditModalActive" has-modal-card>
+            <edit-playlist></edit-playlist>
+        </b-modal>
         <div class="container mt-30 mb-30">
             <div class="columns playlists">
                 <div class="column is-one-fifth leftsidePlaylists" style="margin: 0; padding: 0">
@@ -29,15 +32,15 @@
                                             Cursuri: <strong>{{ playlist._courses.length }}</strong> &#149; Lectii: <strong>{{ nrLessons }}</strong>
                                         </div>
                                         <div class="playlistTime">
-                                            Durata totala: <strong>48o 6m</strong>
+                                            Durata totala: <strong>{{ totalDuration }}</strong>
                                         </div>
                                     </div>
                                     <div class="column is-one-quarter">
                                         <div class="box">
                                             <ul class="playlistActions">
-                                                <li><a href=""><i class="fa fa-edit"></i>&nbsp; <span>Editeaza playlistul</span></a></li>
+                                                <li><a @click="isEditModalActive = true"><i class="fa fa-edit"></i>&nbsp; <span>Editeaza playlistul</span></a></li>
                                                 <li><a href=""><i class="fa fa-eye"></i>&nbsp; <span>Vezi playlistul</span></a></li>
-                                                <li><a href=""><i class="fa fa-trash"></i>&nbsp; <span>Sterge playlistul</span></a></li>
+                                                <li><a @click="removePlaylist"><i class="fa fa-trash"></i>&nbsp; <span>Sterge playlistul</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -83,9 +86,12 @@
 <script>
     import PlaylistCourse from './components/PlaylistCourses.vue';
     import AddPlaylist from './components/AddPlaylist.vue';
-    import { mapState } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     import store from '../../../../store/index';
     import config from '../../../../../config';
+    import { convert } from '../../../../../utils';
+    import EditPlaylist from './components/EditPlaylist';
+
     export default {
         mounted() {
             axios.post(config.url.PLAYLISTS)
@@ -100,19 +106,29 @@
                 isComponentModalActive: false,
                 playlist: {},
                 playlistId: null,
+                isEditModalActive: false,
             };
         },
         computed: {
             ...mapState({
                 playlists: state => state.playlist.playlists,
             }),
-            // nrLessons() {
-            //     let nrLessons = 0;
-            //     this.playlist._courses.forEach(e => {
-            //         nrLessons += e.lessons.length;
-            //     });
-            //     return nrLessons;
-            // }
+            nrLessons() {
+                let nrLessons = 0;
+                this.playlist._courses.forEach(e => {
+                    nrLessons += e.lessons.length;
+                });
+                return nrLessons;
+            },
+            totalDuration() {
+                let totalDuration = 0;
+                this.playlist._courses.forEach(e => {
+                    e.lessons.forEach(x => {
+                        totalDuration += x.length;
+                    });
+                })
+                return convert(totalDuration);
+            }
         },
         watch: {
             '$route.params.id'() {
@@ -121,13 +137,29 @@
             },
         },
         methods: {
-            getPlaylistById($id) { // poti sa il pui in getters daca vrei
+            ...mapActions(['deletePlaylist']),
+            removePlaylist() {
+                this.$dialog.confirm({
+                    title: 'Ștergere playlist',
+                    message: `Ești sigur că vrei să stergi <strong>${this.playlist.title}</strong> ?`,
+                    confirmText: 'Șterge',
+                    cancelText: 'Anulează',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => {
+                        this.deletePlaylist({ playlistIndex: this.playlist.id })
+                            .then(() => this.$toast.open('Playlistul a fost șters') );
+                    },
+                })
+            },
+            getPlaylistById($id) { // TODO move to getters
                 this.playlist = this.playlists.find(e => e.id === $id);
             },
         },
         components: {
             PlaylistCourse,
             AddPlaylist,
+            EditPlaylist,
         },
     };
 </script>

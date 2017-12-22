@@ -100,3 +100,34 @@ export const pluralize = (number, singular, plural) => {
     if (number > 1) content += number + (number > 19 ? ' de ' : ' ') + plural;
     return content;
 };
+
+//TODO sigur exista o metoda mai clean
+export const convert = sec => {
+    let output = '';
+    if (sec > 3600*24*7*28*12) {
+        let years = parseInt(sec / (3600 * 24 * 7 * 28 * 12));
+        output = years + ' ani ';
+        sec = sec/(3600* 24 * 7* 28 * 12);
+    }
+    if (sec > 3600*24*7*28) {
+        let months = parseInt(sec / (3600 * 24 * 7 * 28));
+        output = months + ' luni ';
+        sec = sec/(3600* 24 * 7 * 28);
+    }
+    if (sec > 3600*24*7) {
+        let weeks = parseInt(sec / (3600 * 24 * 7));
+        output = weeks + ' săptamâni ';
+        sec = sec/(3600* 24 * 7);
+    }
+    if (sec > 3600*24) {
+        let days = sec / (3600 * 24);
+        output += days + ' zile ';
+        sec = parseInt(sec/3600*24);
+    }
+    if (sec > 3600) {
+        let hours = parseInt(sec / 3600);
+        output += hours + ' ore ';
+        sec = sec/3600;
+    }
+    return output;
+}

@@ -9,7 +9,9 @@
                     <progress class="progress is-primary progressBox" value="15" max="90" style="width: 30%; height: 5px"></progress>
                 </div>
                 <div class="column actionsPlaylistCourse">
-                    <i class="fa fa-minus"></i>
+                    <b-tooltip label="Elimină cursul din playlist" animated>
+                        <i class="fa fa-minus"></i>
+                    </b-tooltip>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card cursCard">
+        <div class="card courseCard">
             <div class="card-image">
                 <figure class="image is-2by1" style="background:url(http://www.codecaven.co.uk/images/laravel.jpg); background-position: center">
 
