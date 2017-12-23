@@ -91,11 +91,22 @@
                 this.isQuestionsModalActive = false;
                 this.lessonMarkAsViewed()
                     .then(() => {
-                        this.$dialog.alert({
-                            title: 'Ai terminat o lecție!',
-                            message: `Felicitări pentru terminarea lecției <b>${this.lesson.title}</b>.`,
-                            confirmText: 'Următoarea lecție!',
-                        });
+                        if (this.$store.state.course.currentLessonIndex === this.lessons.length - 1) {
+                            this.$dialog.alert({
+                                title: 'Felicitări!',
+                                message: 'Tocmai ai terminat acest curs!',
+                                confirmText: 'Super!',
+                                onConfirm: () => {
+                                    this.$router.push({ name: 'root' });
+                                },
+                            });
+                        } else {
+                            this.$dialog.alert({
+                                title: 'Ai terminat o lecție!',
+                                message: `Felicitări pentru terminarea lecției <b>${this.lesson.title}</b>.`,
+                                confirmText: 'Următoarea lecție!',
+                            });
+                        }
                     });
             },
         },

@@ -6,6 +6,8 @@ use App\Answer;
 use App\Course;
 use App\Lesson;
 use App\Media;
+use App\Notifications\FirstCourseJoined;
+use App\Notifications\FirstCoursePosted;
 use App\Question;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -37,7 +39,7 @@ class CourseController extends Controller
         } else {
             $courses = Course::orderBy('created_at', 'DESC');
         }
-
+        if($request->search) $courses->where('title', 'LIKE', '%'.$request->search.'%');
         if($userId) $courses = $courses->where('user_id', $userId);
         if($request->start !== null && $request->end !== null) $courses->skip((int)$request->start)->take((int)$request->end);
         if($request->difficulty) $courses = $courses->whereIn('difficulty', $request->difficulty);
@@ -66,18 +68,8 @@ class CourseController extends Controller
         }
         return response()->json([
             'success' => true,
-            'a' => $request->onlyRegistered,
             'courses' => $coursesArray->values(),
         ]);
-    }
-
-    public function find($query = '') {
-        if($query)
-            return response()->json([
-                'success' => true,
-                'courses' => Course::where('title', 'LIKE', '%'.$query.'%')->get(),
-            ]);
-        return response()->json([ 'success' => true ]);
     }
     public function bestSlug($currentSlug){
         $someNumber = 0;
@@ -91,6 +83,7 @@ class CourseController extends Controller
     }
 
     public function userJoin(Request $request) {
+        if(!Auth::user()->joinedCourses()->count()) Auth::user()->notify(new FirstCourseJoined());
         Course::find($request->courseId)->lessons()->where('order_index', 0)->first()->joinedUsers()->attach(Auth::user()->id);
         return response()->json([ 'success' => true ]);
     }
@@ -274,6 +267,7 @@ class CourseController extends Controller
                 }
             }
         }
+        if(!Auth::user()->courses()->count()) Auth::user()->notify(new FirstCoursePosted());
 
         return response()->json([
             'success' => true, // :D :D :D see ya'

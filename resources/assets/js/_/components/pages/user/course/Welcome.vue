@@ -26,9 +26,11 @@
                     </div>
                 </div>
                 <div class="container tag-container has-text-centered">
-                    <b-tag v-for="(tag, index) in course._tags" :key="index" type="is-dark" class="mr-10">
-                        {{tag.label}}
-                    </b-tag>
+                    <router-link v-for="(tag, index) in course._tags" :key="index" :to="{ name:'courses', query : { eticheta: tag.id } }">
+                        <b-tag type="is-dark" class="mr-10">
+                            {{tag.label}}
+                        </b-tag>
+                    </router-link><
                 </div>
             </div>
         </section>
@@ -105,27 +107,7 @@
 
     export default {
         mounted () {
-            this.fetched = false;
-            const loadingComponent = this.$loading.open();
-            axios.get(config.url.COURSE + this.$route.params.slug)
-                .then(({ data }) => { // get course data
-                    this.course = data.course;
-                    if (!data.course) {
-                        loadingComponent.close();
-                        this.fetched = true;
-                    } else { // if the course was found
-                        return axios.post(config.url.USER + data.course.user_id)
-                            .then(({ data }) => { // get course user data
-                                this.user = data.user;
-                                return axios.get(config.url.LESSON_ALL + this.$route.params.slug);
-                            }).then(({ data }) => {
-                                this.lessons = data.lessons;
-                                loadingComponent.close();
-                                this.fetched = true;
-                            });
-                    }
-                })
-                .catch(() => loadingComponent.close());
+            this.fetchCourse();
         },
         data () {
             return {
@@ -135,7 +117,33 @@
                 fetched: false,
             };
         },
+        watch: {
+            '$route.params.slug'() {
+                this.fetchCourse();
+            },
+        },
         methods: {
+            fetchCourse() {
+                this.fetched = false;
+                const loadingComponent = this.$loading.open();
+                axios.get(config.url.COURSE + this.$route.params.slug)
+                    .then(({ data }) => { // get course data
+                        this.course = data.course;
+                        this.lessons = data.course._lessons;
+                        if (!data.course) {
+                            loadingComponent.close();
+                            this.fetched = true;
+                        } else { // if the course was found
+                            return axios.post(config.url.USER + data.course.user_id)
+                                .then(({ data }) => { // get course user data
+                                    this.user = data.user;
+                                    loadingComponent.close();
+                                    this.fetched = true;
+                                });
+                        }
+                    })
+                    .catch(() => loadingComponent.close());
+            },
             join () {
                 this.fetching = false;
 

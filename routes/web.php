@@ -24,7 +24,6 @@ Route::prefix('user')->group(function () {
 Route::prefix('course')->group(function () {
     Route::post('add', 'CourseController@add'); // adaugare curs
     Route::get('tag', 'TagController@all');  // luare taguri disponibile
-    Route::get('find/{query?}', 'CourseController@find'); // cautare cursuri
     Route::get('all/{userId?}', 'CourseController@all'); //toate cursurile unui user, daca userId nu e specificat, toate cursurile
     Route::get('slug/{slug}', 'CourseController@one'); // luare curs dupa slug
     Route::get('slug/best/{slug}', 'CourseController@bestSlug'); // determinare cel mai bun slug pentru curs, luindu-ne dupa un slug existent (un pic bullshit si useless)

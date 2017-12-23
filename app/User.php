@@ -69,8 +69,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Lesson::class)->withTimestamps();
     }
     public function joinedCourses() {
-        return $this->joinedLessons->map(function($lesson){
+        return collect($this->joinedLessons->map(function($lesson){
             return $lesson->course;
-        });
+        }));
     }
 }

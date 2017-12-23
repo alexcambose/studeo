@@ -1,6 +1,11 @@
 <template>
     <div>
         <card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">
+            <b-field label="Just testing things">
+                <markdown-textarea
+                v-model="text"></markdown-textarea>
+            </b-field>
+            <hr>
             Tu:
            <pre>{{$store.state.user.user}}</pre>
         </card>
@@ -34,6 +39,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -41,9 +47,17 @@
     import HomeCard from '../includes/dumb/HomeCard.vue';
     import Card from '../includes/dumb/Card.vue';
     import UploadImage from '../includes/dumb/UploadImage.vue';
+    import MarkdownTextarea from '../includes/dumb/MarkdownTextarea';
 
     export default {
+        data() {
+            return {
+                text: '',
+
+            };
+        },
         components: {
+            MarkdownTextarea,
             Card,
             HomeCard,
             UploadImage,

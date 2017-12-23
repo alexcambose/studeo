@@ -133,7 +133,7 @@ const mutations = {
     },
     [COURSE_LESSON_WATCHED] (state) {
         state.lessons[state.currentLessonIndex]._watched = true;
-        state.currentLessonIndex++;
+        if (state.currentLessonIndex < state.lessons.length - 1) state.currentLessonIndex++;
     },
     [COURSE_UPDATE_NOTE] (state, { noteIndex, data }) {
         Vue.set(state.notes, noteIndex, { ...state.notes[noteIndex], ...data });

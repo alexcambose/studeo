@@ -42,6 +42,18 @@ export default {
             title: 'Ai devenit mentor',
             message: () => 'Tocmai ai devenit mentor! Contribuie și tu la succesul altora!',
         },
+        COURSE_FINISHED: {
+            title: 'Ai terminat un curs',
+            message: () => 'Tocmai ai terminat un curs. Bravo!',
+        },
+        FIRST_COURSE_JOINED: {
+            title: 'Te-ai înscris prima dată la un curs!',
+            message: () => 'Spor la învățat!',
+        },
+        FIRST_COURSE_POSTED: {
+            title: 'Ai publicat primul tău curs!',
+            message: () => 'Felicitări de contribuție!',
+        },
     },
     classLevels: ['Altceva', 'Școala generală', 'Gimnaziu', 'Liceu', 'Facultate'],
     course: {

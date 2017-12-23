@@ -1,7 +1,7 @@
 <template>
     <b-field v-bind="$attrs" class="search-bar">
         <b-autocomplete
-                v-model="query"
+                v-model="search"
                 @input="fetchResults"
                 placeholder="Caută..."
                 :keep-first="true"
@@ -11,19 +11,19 @@
                 icon="magnify"
                 :loading="loading"
                 @select="onSelected">
-                <template slot-scope="props">
-                    <div class="media">
-                        <div class="media-left">
-                            <image-container :src="props.option._image.filename" style="width: 64px;height: 64px;"></image-container>
-                        </div>
-                        <div class="media-content">
-                            <b-tag v-if="props.option._joined" type="is-success" class="is-pulled-right">Înscris</b-tag>
-                            <strong class="title is-6">{{ props.option.title }}</strong>
-                            <br>
-                            <p style="white-space: normal; font-size: .9em;">{{ props.option.short_description }}</p>
-                        </div>
+            <template slot-scope="props">
+                <div class="media">
+                    <div class="media-left">
+                        <image-container :src="props.option._image.filename" style="width: 64px;height: 64px;"></image-container>
                     </div>
-                </template>
+                    <div class="media-content">
+                        <b-tag v-if="props.option._joined" type="is-success" class="is-pulled-right">Înscris</b-tag>
+                        <strong class="title is-6">{{ props.option.title }}</strong>
+                        <br>
+                        <p style="white-space: normal; font-size: .9em;">{{ props.option.short_description }}</p>
+                    </div>
+                </div>
+            </template>
         </b-autocomplete>
     </b-field>
 </template>
@@ -35,7 +35,7 @@
     export default {
         data() {
             return {
-                query: '',
+                search: '',
                 loading: false,
                 filteredData: [],
             };
@@ -43,7 +43,7 @@
         methods: {
             fetchResults: _.debounce(function () {
                 this.loading = true;
-                axios.get(config.url.COURSE_FIND + this.query)
+                axios.get(config.url.COURSE_ALL, { params: { search: this.search } })
                     .then(({ data }) => {
                         this.loading = false;
                         this.filteredData = data.courses;

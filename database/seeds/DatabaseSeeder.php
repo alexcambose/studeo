@@ -86,13 +86,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->insertTags();
 
-        $courseNumber = 10; //ca sa nu mai modificam peste tot
+        $courseNumber = 1; //ca sa nu mai modificam peste tot
         factory(\App\Course::class, $courseNumber)->create()->each(function($course)use($courseNumber) {
-            $course->tags()->sync( \App\Tag::all()->random($courseNumber)->pluck('id') );
+            $course->tags()->sync( \App\Tag::all()->random(floor($courseNumber/2))->pluck('id') );
         });
         $this->command->info('30%');
-        factory(\App\Note::class, 10)->create();
-        factory(\App\Lesson::class, 40)->create();
+        factory(\App\Note::class, $courseNumber*10)->create();
+        factory(\App\Lesson::class, $courseNumber*4)->create();
         factory(\App\Question::class, 30)->create();
         factory(\App\Answer::class, 40)->create();$this->command->info('60%');
         factory(\App\Playlist::class, 50)->create()->each(function($playlist)use($courseNumber) {
