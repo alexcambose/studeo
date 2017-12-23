@@ -60,7 +60,7 @@
                         <router-link :to="{name: 'playlists'}" class="navbar-item"><b-icon pack="fa" icon="book"></b-icon>&nbsp; Bibliotecă</router-link>
                         <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon>&nbsp; Setări</router-link>
 
-                        <router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon>&nbsp; Panou admin</router-link>
+                        <!--<router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon>&nbsp; Panou admin</router-link>-->
 
                         <hr class="navbar-divider">
 

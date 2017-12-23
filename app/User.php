@@ -62,6 +62,9 @@ class User extends Authenticatable
     public function courses() {
         return $this->hasMany(Course::class);
     }
+    public function playlists() {
+        return $this->hasMany(Playlist::class);
+    }
     public function joinedLessons() {
         return $this->belongsToMany(Lesson::class)->withTimestamps();
     }

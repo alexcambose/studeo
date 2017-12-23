@@ -101,7 +101,6 @@ export const pluralize = (number, singular, plural) => {
     return content;
 };
 
-// TODO trebuie imbunatatita
 export const timeConvert = (sec, levelIndex = 0) => {
     const levels = [['secundă', 'secunde'], ['minut', 'minute'], ['oră', 'ore'], ['zi', 'zile'], ['lună', 'luni'], ['an', 'ani']];
     if (sec > 60) return timeConvert(Math.floor(sec / 60), levelIndex + 1);

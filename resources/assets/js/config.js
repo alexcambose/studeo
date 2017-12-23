@@ -30,6 +30,8 @@ export default {
         PLAYLIST_CREATE: SERVER + 'playlist/create/',
         PLAYLIST_DELETE: SERVER + 'playlist/delete/',
         PLAYLIST_EDIT: SERVER + 'playlist/update/',
+        PLAYLIST_ADD_COURSE: (playlistId, courseId) => SERVER + `playlist/${playlistId}/addCourse/${courseId}`,
+        PLAYLIST_DELETE_COURSE: (playlistId, courseId) => SERVER + `playlist/${playlistId}/addCourse/${courseId}`,
     },
     notifications: {
         PASSWORD_CHANGED: {

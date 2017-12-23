@@ -43,6 +43,8 @@ Route::prefix('playlist')->group(function () {
     Route::post('create', 'PlaylistController@createPlaylist'); // creare playlist
     Route::post('update/{id}', 'PlaylistController@updatePlaylist');
     Route::delete('delete/{playlistId}', 'PlaylistController@deletePlaylist');
+    Route::put('{playlist}/addCourse/{course}', 'PlaylistController@addCourse'); // adaugare curs in playlist
+    Route::delete('{playlist}/addCourse/{course}', 'PlaylistController@deleteCourse'); // stergere curs din playlist
 });
 // endregion
 

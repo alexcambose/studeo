@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Playlist;
 use Validator;
 use Illuminate\Http\Request;
@@ -15,17 +16,18 @@ class PlaylistController extends Controller
         $userId = Auth::id();
         $playlists = Playlist::where('user_id', $userId)->get();
         return response()->json([
-           'playlists' => $playlists,
+            'success' => true,
+            'playlists' => $playlists,
         ]);
     }
 
     public function all($playlistId) {
-        return response()->json([
+        return response()->json([ // success ?
            'playlists' => Course::find($playlistId)->courses,
         ]);
     }
 
-    public function createPlaylist(Request $request){
+    public function createPlaylist(Request $request) { // dafuq validation
         $playlist = new Playlist();
 
         $validation = Validator::make($request->all(), [
@@ -70,7 +72,7 @@ class PlaylistController extends Controller
 
         $playlist->save();
 
-        return response()->json(['success' => 'true']);
+        return response()->json(['success' => true]);
     }
 
     public function deletePlaylist($id) {
@@ -80,5 +82,16 @@ class PlaylistController extends Controller
         $playlist->courses()->detach();
 
         return response()->json(['success' => 'true']);
+    }
+
+    public function addCourse(Playlist $playlist, Course $course) {
+        if($playlist->user->id !== Auth::id()) abort(401);
+        $playlist->courses()->attach($course->id);
+        return response()->json(['success' => true]);
+    }
+    public function deleteCourse(Playlist $playlist, Course $course) {
+        if($playlist->user->id !== Auth::id()) abort(401);
+        $playlist->courses()->detach($course->id);
+        return response()->json(['success' => true]);
     }
 }

@@ -7,7 +7,8 @@
                 <div class="image-footer">
                     <b-tag type="is-dark" class="difficulty-tag">{{difficultyLabel}}</b-tag>
                     <div class="progress-container">
-                        <progress v-if="course._joined" class="progress is-small" :value="finishedPercent" max="100"></progress>
+                        <progress v-if="course._joined && finishedPercent !== 100" class="progress is-small" :value="finishedPercent" max="100"></progress>
+                        <b-tag v-if="finishedPercent === 100" type="is-success">Terminat</b-tag>
                     </div>
                     <b-tag type="is-dark" class="length-tag">{{length}}</b-tag>
                 </div>

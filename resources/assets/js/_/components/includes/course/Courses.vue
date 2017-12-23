@@ -4,14 +4,18 @@
             <div class="course-display">
                 <div class="field has-addons">
                     <p class="control">
-                        <button @click="setDisplay(true)" :class="['button', displayVertical ? 'is-primary' : '']">
-                            <b-icon icon="reorder-vertical"></b-icon>
-                        </button>
+                        <b-tooltip label="Afișare in poziție verticală" size="is-small" animated>
+                            <button @click="setDisplay(true)" :class="['button', displayVertical ? 'is-primary' : '']">
+                                <b-icon icon="reorder-vertical"></b-icon>
+                            </button>
+                        </b-tooltip>
                     </p>
                     <p class="control">
-                        <button @click="setDisplay(false)" :class="['button', displayVertical ? '' : 'is-primary']">
-                            <b-icon icon="reorder-horizontal"></b-icon>
-                        </button>
+                        <b-tooltip label="Afișare in poziție orizontală" size="is-small" position="is-bottom" animated>
+                            <button @click="setDisplay(false)" :class="['button', displayVertical ? '' : 'is-primary']">
+                                <b-icon icon="reorder-horizontal"></b-icon>
+                            </button>
+                        </b-tooltip>
                     </p>
 
                 </div>
