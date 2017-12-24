@@ -14,6 +14,7 @@
         "babel-eslint": "^8.0.1",
         "buefy": "^0.6.2",
         "bulma": "^0.6.1",
+        "color": "^2.0.1",
         "cross-env": "^5.0.1",
         "eslint": "^4.11.0",
         "eslint-config-google": "^0.9.1",

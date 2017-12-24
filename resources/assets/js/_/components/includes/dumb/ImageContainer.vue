@@ -17,14 +17,11 @@
                 type: String,
                 required: true,
             },
-            notFromServer: {
-                type: Boolean,
-                required: false,
-            },
         },
         computed: {
             url() {
-                return (this.notFromServer ? '' : config.url.SERVER) + this.src;
+                if (this.src.indexOf('http') !== -1) return this.src;
+                return config.url.SERVER + this.src;
             },
         },
     };

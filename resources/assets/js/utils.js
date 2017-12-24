@@ -1,3 +1,6 @@
+import config from './config';
+import color from 'color';
+
 export const MATERII = [
     {
         name: 'Matematică',
@@ -111,4 +114,31 @@ export const percent = (current, max, rounded = true) => {
     if (rounded) return Math.floor(current/max * 100);
     return current/max * 100;
 };
+/* ca sa nu mai calculăm
+lvl: 1: < 100xp (100xp)
+lvl: 2: < 210xp (110xp)
+lvl: 3: < 331xp (121xp)
+lvl: 4: < 464xp (133xp)
+lvl: 5: < 610xp (146xp)
+lvl: 6: < 771xp (161xp)
+ */
+export const xp = level => { // cat xp are un level
+    if(level === 0) return 0;
+    return xp(level - 1) + Math.floor(100 * (1.1 ** (level - 1)));
+};
 
+export const level = theXp => { // ce level are in functie de xp, nu merge frumos recursiv :c
+    let level = 0;
+    while(xp(level) <= theXp) level++;
+    return level;
+};
+// export const level = xp => { // ce level are in functie de xp
+//     // https://math.stackexchange.com/a/447670
+//     if(xp < 100) return 1;
+//     return Math.floor((Math.log(xp) - Math.log(100))/Math.log(1.1)) + 2; // primul nivel deja exista deci + 2
+//     //daca nu, cu while
+// };
+export const levelColor = level => {
+    const colorIndex = Object.keys(config.xpLevelColors).find(e => e >= level);
+    return color(config.xpLevelColors[colorIndex]).darken(level%10 / 10 / 2);
+};

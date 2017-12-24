@@ -65,8 +65,7 @@ const actions = {
             });
         });
     },
-    toggleReadAllNotifications({ state, commit, getters }) {
-        console.log(getters.unreadNotificationsCount);
+    toggleReadAllNotifications({ commit }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.NOTIFICATION_TOGGLE_READ_ALL)
                 .then(({ data }) => {

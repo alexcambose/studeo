@@ -15,8 +15,12 @@ $open-sans: 'Open Sans', sans-serif;
 // --- Pages --- //
 
   //Profile
-$height-image: 200px;
-$margin-image: $height-image / 2;
+$profile-image-border-width: 4px;
+$profile-image-width: 200px;
+$profile-image-height: $profile-image-width;
+$profile-image-offset: $profile-image-width / (5 / 4);
+$profile-avatar-image-width: $profile-image-width / 2 + 10px;
+$profile-avatar-image-height: $profile-avatar-image-width;
 
 //course
 $course-box-image-height: 160px;

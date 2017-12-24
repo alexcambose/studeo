@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
          * iar varianta veche era
          *  ~ php artisan migrate:rollback && php artisan migrate && php artisan db:seed
         */
-        if(!$this->command->confirm('Ejti sigor cî vrei să golejti tabelarele tabeloase? :>', true)) return;
+        $this->command->alert('Tabelarele tabeloase o sâ fii golite :>');
 
         DB::statement("SET foreign_key_checks=0");
         DB::table('answers')->truncate();
@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->insertTags();
 
-        $courseNumber = 1; //ca sa nu mai modificam peste tot
+        $courseNumber = 10; //ca sa nu mai modificam peste tot
         factory(\App\Course::class, $courseNumber)->create()->each(function($course)use($courseNumber) {
             $course->tags()->sync( \App\Tag::all()->random(floor($courseNumber/2))->pluck('id') );
         });

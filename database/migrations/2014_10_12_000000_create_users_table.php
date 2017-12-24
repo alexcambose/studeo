@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             $table->integer('is_teacher')->nullable();
             $table->integer('role')->default(1)->comment("1 - user, 2 - mentor, 3 - administrator");
             $table->string('cover_color')->default("#fff");
-            $table->integer('points')->default(0);
+            $table->integer('xp')->default(0);
             $table->string('social')->default("{}");
             $table->string('password');
             $table->rememberToken();

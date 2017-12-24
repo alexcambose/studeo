@@ -1,7 +1,6 @@
 <template>
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
-
             <div class="navbar-start">
                 <div class="navbar-brand">
                     <router-link class="navbar-item" to="/">
@@ -27,10 +26,7 @@
                             <cat-menu></cat-menu>
                         </div>
                     </div>
-                    <!--navbar secundar -->
-                    <div style="padding-top: 12px">
-                        <search-bar></search-bar>
-                    </div>
+                    <search-bar style="padding-top: 12px"></search-bar>
                 </div>
             </div>
             <div class="navbar-end" v-if="!logged">

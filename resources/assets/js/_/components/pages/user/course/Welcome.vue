@@ -30,7 +30,7 @@
                         <b-tag type="is-dark" class="mr-10">
                             {{tag.label}}
                         </b-tag>
-                    </router-link><
+                    </router-link>
                 </div>
             </div>
         </section>

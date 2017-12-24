@@ -36,13 +36,61 @@
         <b-modal :active.sync="isHelpModalActive" has-modal-card>
             <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-title">Formatare text</p>
+                    <p class="modal-card-title">Formatare text in markdown</p>
                 </header>
-                <section class="modal-card-body">
-                    ffff
+                <section class="modal-card-body" style="height: 600px;">
+                    <div class="content">
+                        <p>Markdown este un instrument de conversie text-la-HTML pentru scriitorii web. Markdown vă
+                            permite să
+                            scrieți utilizând un format de text simplu, ușor de citit și ușor de scris, apoi să îl
+                            convertiți la XHTML valabil structural.</p>
+                        <table class="table is-bordered is-fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Tip</th>
+                                <th>Rezultat</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr> <td><code># Titlu 1</code></td> <td><h1>Titlu 1</h1> </td> </tr>
+                            <tr> <td><code>## Titlu 2</code></td> <td> <h2>Titlu 2</h2> </td> </tr>
+                            <tr> <td><code>### Titlu 3</code></td> <td> <h3>Titlu 3</h3> </td> </tr>
+                            <tr> <td><code>#### Titlu 4</code></td> <td> <h4>Titlu 4</h4> </td> </tr>
+                            <tr> <td><code>##### Titlu 5</code></td> <td> <h5>Titlu 5</h5> </td> </tr>
+                            <tr> <td><code>###### Titlu 6</code></td> <td> <h6>Titlu 6</h6> </td> </tr>
+                            <tr> <td><code>*Italic*</code></td> <td><em>Italic</em></td> </tr>
+                            <tr> <td><code>**Bold**</code></td> <td><strong>Bold</strong></td> </tr>
+                            <tr> <td><code>~~Tăiat~~</code></td> <td><del>Tăiat</del></td> </tr>
+                            <tr> <td><code>`Cod`</code></td> <td><code>Cod</code></td> </tr>
+                            <tr> <td>
+<pre><code>* Item 1
+* Item 2
+    * Item 2a
+    * Item 2b</code></pre>
+                            </td> <td>
+                                <ul>
+                                    <li>Item 1</li>
+                                    <li>Item 2 <ul><li>Item 2a</li><li>Item 2b</li></ul></li>
+                                </ul></td> </tr>
+                            <tr> <td>
+<pre><code>1. Item 1
+2. Item 2
+   1. Item 2a
+   2. Item 2b</code></pre>
+                            </td> <td>
+                                <ol>
+                                    <li>Item 1</li>
+                                    <li>Item 2 <ol><li>Item 2a</li><li>Item 2b</li></ol></li>
+                                </ol></td> </tr>
+                            <tr> <td><code>![Imagine](/images/logo.png)</code></td> <td><img src="/images/logo.png" alt="Imagine" style="height: 50px;"></td> </tr>
+                            <tr> <td><code>[Link](/images/logo.png)</code></td> <td><a href="/images/logo.png">Link</a></td> </tr>
+                            <tr> <td><code>---</code></td> <td><hr></td> </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
                 <footer class="modal-card-foot">
-                    <button class="button" type="button" @click="isHelpModalActive = false">Close</button>
+                    <button class="button" type="button" @click="isHelpModalActive = false">Închide</button>
                 </footer>
             </div>
         </b-modal>
@@ -62,7 +110,7 @@
             return {
                 content: this.value,
                 hovered: true,
-                automaticPreview: true,
+                automaticPreview: false,
                 isHelpModalActive: false,
             };
         },

@@ -59,4 +59,12 @@ export default {
     course: {
         loadAmount: 10,
     },
+    xpLevelColors: {
+        10: '#dfdbff',
+        20: '#afff9d',
+        30: '#ffed41',
+        40: '#991fff',
+        50: '#ff4d00',
+        60: '#4d7edc',
+    },
 };

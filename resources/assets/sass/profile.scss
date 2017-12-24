@@ -1,60 +1,64 @@
-.profilPage {
-  /* region Images (avatar&imgProfil&Banner) */
-  background-color: whitesmoke;
-  //height: 100vh; un deget taiat pentru asta
-  .banner {
-    height: 300px;
-    background: #e9ecee;
-  }
-  .profileNav {
-    position: relative;
-    .profileImage {
-      width: $height-image;
-      height: $height-image;
-      border-radius: $margin-image;
-      position: absolute;
-      border:5px solid white;
-      top: - (3/2 * $margin-image);
-      background-color: #1ca64c;
+.profile-page {
+  .header {
+    .banner {
+      height: 300px;
+      background: #e9ecee;
     }
-    .avatarImage {
-      @extend .profileImage;
-      right: 0;
+    .profile-nav {
+      position: relative;
+      .profile-image {
+        position: absolute !important;
+        width: $profile-image-width;
+        height: $profile-image-height;
+        border-radius: 100%;
+        border: $profile-image-border-width solid white;
+        top: -$profile-image-offset;
+      }
+      .profile-avatar-image {
+        @extend .profile-image;
+        width: $profile-avatar-image-width;
+        height: $profile-avatar-image-height;
+        left: $profile-avatar-image-width / (2 / 3);
+        top: $profile-image-height - $profile-avatar-image-height - $profile-image-border-width;
+        background: $info;
+        transition: transform .5s cubic-bezier(0.62,-1.13, 0.37, 2.35);
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .progress-container{
+        //margin-left: $profile-image-width + $profile-avatar-image-width;
+        .progress {
+          margin: 0;
+          width: 300px;
+        }
+        .status {
+          margin-right: 4px;
+          font-size: .9rem;
+        }
+      }
     }
   }
-  /* endregion */
 
-  /* region User Description (Left side) */
-  .mainUser {
-    margin-top: $margin-image + 20px;
-    .fullname {
-      font-size: 21px;
-      font-weight: 500;
-      margin-left: 2%;
-    }
-    .description {
-      font-family: $roboto-slab;
-      font-size: 14px;
-      line-height: 20px;
-      word-wrap: break-word;
-      margin-top: 5px;
-    }
-    .userInfo {
-      font-family: $roboto-slab;
-      font-size: 14px !important;
-      line-height: 20px;
-      color: #657786;
-      margin-top:1px;
-    }
+  .fullname {
+    @extend .title, .is-3;
+    font-weight: 400;
+    margin: 0 !important;
   }
-  /* endregion */
+  .username-link {}
+  .description {
+    @extend .content;
+  }
+  .user-info-item {
+    font-size: 15px !important;
+    color: #657786;
+    margin-top: 5px;
+  }
 }
 
-
-.courseCard {
-  margin: 30px 50px;
+.user-container {
+  margin-top: 30px;
 }
-
 /* region Recompense */
 .customBox {
   margin: 5px;
@@ -117,22 +121,6 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
   box-sizing: border-box;
 
-  .profile-navbar-container {
-    margin: 0px 300px;
-  }
-
-  p .textProfileNav {
-    display: block;
-  }
-
-  .nrCourses {
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .navbar-item:hover .nrCourses {
-    color: $primary;
-  }
 }
 /* endregion */
 

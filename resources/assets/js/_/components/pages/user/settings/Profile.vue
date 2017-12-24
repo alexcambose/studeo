@@ -25,12 +25,12 @@
 
 
         <b-field label="Descriere">
-            <b-input
+            <markdown-textarea
                     v-model="description"
                     type="textarea"
                     maxlength="250"
             >
-            </b-input>
+            </markdown-textarea>
         </b-field>
 
         <b-field label="Studii">
@@ -116,6 +116,7 @@
     import UploadImageModal from '../../../../components/includes/dumb/UploadImageModal.vue';
     import config from '../../../../../config';
     import { cities, monthNames } from '../../../../../utils';
+    import MarkdownTextarea from '../../../includes/dumb/MarkdownTextarea';
 
     export default {
         computed: {
@@ -162,6 +163,7 @@
             },
         },
         components: {
+            MarkdownTextarea,
             Submit,
             UploadImageModal,
             ImageContainer,

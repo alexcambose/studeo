@@ -83,7 +83,7 @@
                     <div v-for="(testimonial, index) in someTestimonials" :key="index" class="column">
                         <article class="media">
                             <figure class="media-left">
-                                <image-container :src="testimonial.image" notFromServer class="user-image"></image-container>
+                                <image-container :src="testimonial.image" class="user-image"></image-container>
                             </figure>
                             <div class="media-content">
                                 <div class="user-name">{{testimonial.name}}</div>
