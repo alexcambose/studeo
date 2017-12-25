@@ -11,9 +11,9 @@ const getters = {
 };
 
 const actions = {
-    playlistCreate({ commit }, { title, description }) {
+    playlistCreate({ commit }, { title, description, color }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.url.PLAYLIST_CREATE, { title, description })
+            axios.post(config.url.PLAYLIST_CREATE, { title, description, color })
                 .then(({ data }) => {
                     if (data.success) {
                         commit(PLAYLIST_CREATE, data);
@@ -25,22 +25,22 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
-    deletePlaylist({ commit }, { playlistIndex }) {
+    deletePlaylist({ state, commit }, { playlistIndex }) {
         return new Promise((resolve, reject) => {
-            axios.delete(config.url.PLAYLIST_DELETE + playlistIndex)
+            axios.delete(config.url.PLAYLIST_DELETE + state.playlists[playlistIndex].id)
                 .then(() => {
-                    commit(PLAYLIST_DELETE, playlistIndex);
+                    commit(PLAYLIST_DELETE, { playlistIndex });
                     resolve();
                 })
                 .catch(err => reject(err));
         });
     },
-    savePlaylist({ state, commit }, { playlistIndex, data: { title, description } }) {
+    savePlaylist({ state, commit }, { playlistIndex, data: { title, description, color } }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.url.PLAYLIST_EDIT + state.playlists[playlistIndex].id, { title, description })
+            axios.post(config.url.PLAYLIST_EDIT + state.playlists[playlistIndex].id, { title, description, color })
                 .then(({ data }) => {
                     if (data.success) {
-                        commit(PLAYLIST_EDIT, { playlistIndex, title, description });
+                        commit(PLAYLIST_EDIT, { playlistIndex, title, description, color });
                         resolve();
                     } else reject();
                 })
@@ -89,19 +89,23 @@ const mutations = {
     [PLAYLIST_ALL](state, playlists) {
         state.playlists = playlists;
     },
-    [PLAYLIST_DELETE](state, { playlistIndex }) {
-        state.playlists.splice(playlistIndex, 1);
-    },
     [PLAYLIST_CREATE](state, payload) {
         state.playlist = payload.playlist;
         state.playlists.push(payload.playlist);
     },
-    [PLAYLIST_EDIT](state, { playlistIndex, title, description }) {
+    [PLAYLIST_EDIT](state, { playlistIndex, title, description, color }) {
         state.playlists[playlistIndex].description = description;
         state.playlists[playlistIndex].title = title;
+        state.playlists[playlistIndex].color = color;
+    },
+    [PLAYLIST_DELETE](state, { playlistIndex }) {
+        state.playlists.splice(playlistIndex, 1);
     },
     [PLAYLIST_ADD_COURSE](state, { playlistIndex, courseId }) {},
-    [PLAYLIST_DELETE_COURSE](state, { playlistIndex, courseId }) {},
+    [PLAYLIST_DELETE_COURSE](state, { playlistIndex, courseId }) {
+        let courseIndex = state.playlists[playlistIndex]._courses.findIndex(x => x.id == courseId);
+        state.playlists[playlistIndex]._courses.splice(courseIndex, 1);
+    },
 };
 
 export default {

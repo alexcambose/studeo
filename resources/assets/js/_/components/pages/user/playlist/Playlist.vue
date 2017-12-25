@@ -14,8 +14,15 @@
                             Bibliotecă
                         </p>
                         <ul class="menu-list playlistsBar">
-                            <li @click="isComponentModalActive = true"><a class="first"><i class="fa fa-plus"></i>&nbsp; Creează un nou playlist</a></li>
-                            <li v-for="item in playlists" @click="playlistId = item.id" ><router-link :to="{ name: 'playlist', params: { id: item.id } }">{{ item.title }}</router-link></li>
+                            <li @click="isComponentModalActive = true">
+                                <a class="first">
+                                    <i class="fa fa-plus"></i>&nbsp;
+                                    Creează un nou playlist
+                                </a>
+                            </li>
+                            <li v-for="item in playlists" @click="playlistId = item.id">
+                                <router-link :to="{ name: 'playlist', params: { id: item.id } }">{{ item.title }}</router-link>
+                            </li>
                         </ul>
                     </aside>
                 </div>
@@ -38,15 +45,15 @@
                                     <div class="column is-one-quarter">
                                         <div class="box">
                                             <ul class="playlistActions">
-                                                <li><a @click="isEditModalActive = true"><i class="fa fa-edit"></i>&nbsp; <span>Editează playlistul</span></a></li>
-                                                <li><a href=""><i class="fa fa-eye"></i>&nbsp; <span>Vezi playlistul</span></a></li>
-                                                <li><a @click="removePlaylist"><i class="fa fa-trash"></i>&nbsp; <span>Șterge playlistul</span></a></li>
+                                                <li><a @click="isEditModalActive = true" :style="{ color: playlist.color }"><i class="fa fa-edit"></i>&nbsp; <span>Editează playlistul</span></a></li>
+                                                <li><a href="" :style="{ color: playlist.color }"><i class="fa fa-eye"></i>&nbsp; <span>Vezi playlistul</span></a></li>
+                                                <li><a @click="removePlaylist" :style="{ color: playlist.color }"><i class="fa fa-trash"></i>&nbsp; <span>Șterge playlistul</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="playlistDescription">
-                                   {{ playlist.description }}
+                                    {{ playlist.description }}
                                 </div>
                                 <div class="playlistProgress mt-15">
                                     <progress class="progress is-primary" value="15" max="100">30%</progress>
@@ -60,7 +67,9 @@
                                 <p>Apasă pe <i class="fa fa-plus"></i> pentru a adăuga cursul dorit la playlist. Pe aceasta pagină iți poți customiza playlistul.</p>
                             </div>
                             <div class="playlistsCourses" v-for="course in playlist._courses">
-                                <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }"><course-box-horizontal :course="course"></course-box-horizontal></router-link>
+                                <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }">
+                                    <course-box-horizontal :course="course" :inPlaylist="true" :playlistIndex="playlistIndex"></course-box-horizontal>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -104,6 +113,7 @@
                 playlist: {},
                 playlistId: null,
                 isEditModalActive: false,
+                abc: '#00d1b2',
             };
         },
         computed: {
@@ -111,11 +121,7 @@
                 playlists: state => state.playlist.playlists,
             }),
             nrLessons() {
-                let nrLessons = 0;
-                this.playlist._courses.forEach(e => { // reduce
-                    nrLessons += e._lessons.length;
-                });
-                return nrLessons;
+                return this.playlist._courses.reduce((sum, course) => sum + course._lessons.length, 0);
             },
             totalDuration() {
                 let totalDuration = this.playlist._courses
@@ -123,6 +129,9 @@
                         return total + course._lessons.reduce((seconds, lesson) => seconds + lesson.length, 0);
                     }, 0);
                 return timeConvert(totalDuration);
+            },
+            playlistIndex() {
+                return this.$store.state.playlist.playlists.findIndex(e => e.id == this.$route.params.id);
             },
         },
         watch: {
@@ -142,7 +151,8 @@
                     type: 'is-danger',
                     hasIcon: true,
                     onConfirm: () => {
-                        this.deletePlaylist({ playlistIndex: this.playlist.id })
+
+                        this.deletePlaylist({ playlistIndex: this.playlistIndex })
                             .then(() => this.$toast.open('Playlistul a fost șters') );
                     },
                 });

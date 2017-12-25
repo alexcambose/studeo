@@ -22,22 +22,16 @@ class PlaylistController extends Controller
     }
 
     public function all($playlistId) {
-        return response()->json([ // success ?
-           'playlists' => Course::find($playlistId)->courses,
+        return response()->json([
+            'success' => true,
+            'playlists' => Course::find($playlistId)->courses,
         ]);
     }
 
     public function createPlaylist(Request $request) { // dafuq validation
         $playlist = new Playlist();
-
-        $validation = Validator::make($request->all(), [
-            'title' => Playlist::$rules['title'],
-            'description' => Playlist::$rules['description'],
-        ]);
-
-        if($validation->fails()) return response()->json(['success' => 'false']);
-
         $user = Auth::user();
+
         $validation = Validator::make($request->all(), [
             'title' => Playlist::$rules['title'],
             'description' => Playlist::$rules['description'],
@@ -47,13 +41,14 @@ class PlaylistController extends Controller
         $playlist->title = $request->title;
         $playlist->description = $request->description;
         $playlist->user_id = $user->id;
+        $playlist->color = $request->color;
         $playlist->image_id = 1; // ceva default
 
         $playlist->save();
 
         return response()->json([
-           'success' => true,
-           'playlist' => $playlist,
+            'success' => true,
+            'playlist' => $playlist,
         ]);
     }
 
@@ -69,6 +64,7 @@ class PlaylistController extends Controller
 
         $playlist->title = $request->title;
         $playlist->description = $request->description;
+        $playlist->color = $request->color;
 
         $playlist->save();
 
@@ -81,7 +77,7 @@ class PlaylistController extends Controller
         $playlist->delete();
         $playlist->courses()->detach();
 
-        return response()->json(['success' => 'true']);
+        return response()->json(['success' => true]);
     }
 
     public function addCourse(Playlist $playlist, Course $course) {

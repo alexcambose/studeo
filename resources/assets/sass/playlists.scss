@@ -79,7 +79,6 @@
       .playlistActions {
         li {
           a {
-            color: $primary !important;
             span:hover {
               text-decoration-line: underline;
             }
@@ -107,6 +106,13 @@
   }
   .actionsPlaylistCourse {
     display: none;
+    .deleteCourseFromPlaylistBtn {
+      color: #363636 !important;
+      font-weight: 300 !important;
+      &:hover {
+        color: $primary !important;
+      }
+    }
   }
   .progressBox {
     width: 50%; height: 5px

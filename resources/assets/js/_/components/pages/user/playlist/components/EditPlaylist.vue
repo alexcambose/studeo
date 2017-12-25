@@ -23,6 +23,16 @@
                         >
                         </b-input>
                     </b-field>
+
+                    <b-field label="Culoare:">
+                        <b-input
+                                type="color"
+                                v-model="color"
+                                required
+                        >
+                        </b-input>
+                    </b-field>
+
                 </section>
                 <footer class="modal-card-foot">
                     <button class="button" type="button" @click="$parent.close()">Anulează</button>
@@ -41,6 +51,7 @@
         mounted() {
             this.title = this.$store.state.playlist.playlists[this.playlistIndex].title;
             this.description = this.$store.state.playlist.playlists[this.playlistIndex].description;
+            this.color = this.$store.state.playlist.playlists[this.playlistIndex].color;
         },
         data() {
             return {
@@ -48,6 +59,7 @@
                 success: '',
                 title: '',
                 description: '',
+                color: '',
             };
         },
         computed: {

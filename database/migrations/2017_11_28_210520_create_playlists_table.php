@@ -12,21 +12,19 @@ class CreatePlaylistsTable extends Migration
      * @return void
      */
 
-    /**
-     * posibil sa fie adaugat ceva pentru progres in caz ca ne bate matematica :'(
-     */
     public function up()
     {
         Schema::create('playlists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->text('description');
+            $table->string('color')->default('#00d1b2');
             $table->integer('user_id')->unsigned();;
             $table->integer('image_id')->unsigned();;
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('image_id')->references('id')->on('media');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 

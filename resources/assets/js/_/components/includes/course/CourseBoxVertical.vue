@@ -15,7 +15,7 @@
             </div>
         </router-link>
 
-        <add-to-playlist-dropdown :course="course"></add-to-playlist-dropdown>
+        <playlist-dropdown-button :course="course"></playlist-dropdown-button>
 
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
@@ -33,7 +33,7 @@
     import { percent, timeConvert } from '../../../../utils';
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import UserBox from '../../includes/dumb/UserBox.vue';
-    import AddToPlaylistDropdown from './AddToPlaylistDropdown.vue';
+    import PlaylistDropdownButton from './PlaylistDropdownButton.vue';
     export default {
         props: {
             course: {
@@ -59,7 +59,7 @@
         components: {
             ImageContainer,
             UserBox,
-            AddToPlaylistDropdown,
+            PlaylistDropdownButton,
         },
     };
 </script>

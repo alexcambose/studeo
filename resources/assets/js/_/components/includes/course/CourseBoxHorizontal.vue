@@ -9,9 +9,16 @@
                     <progress class="progress is-primary progressBox" value="15" max="90" style="width: 30%; height: 5px"></progress>
                 </div>
                 <div class="column actionsPlaylistCourse">
-                    <b-tooltip label="Elimină cursul din playlist" animated>
-                        <i class="fa fa-minus"></i>
-                    </b-tooltip>
+                    <div v-if="inPlaylist">
+                        <b-tooltip label="Elimină cursul din playlist" animated>
+                            <router-link :to="{ name: 'playlist', params: { id: course.pivot.playlist_id } }">
+                                <i class="fa fa-minus fa-2x deleteCourseFromPlaylistBtn" @click="removeCourseFromPlaylist"></i>
+                            </router-link>
+                        </b-tooltip>
+                    </div>
+                    <div v-else>
+                        <playlist-dropdown-button :course="course"></playlist-dropdown-button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,8 +26,24 @@
 </template>
 
 <script>
+    import PlaylistDropdownButton from './PlaylistDropdownButton';
+    import { mapActions } from 'vuex';
     export default {
-        props:['course'],
+        props: ['course', 'inPlaylist', 'playlistIndex'],
+        methods: {
+            ...mapActions(['deleteCoursePlaylist']),
+            removeCourseFromPlaylist() {
+                this.deleteCoursePlaylist({ playlistIndex: this.playlistIndex, courseId: this.course.id } )
+                    .then(() => {
+                        this.$toast.open('Cursul a fost șters din playlist');
+                    });
+            },
+        },
+        components: {
+            PlaylistDropdownButton,
+        },
+
     }
 </script>
+
 

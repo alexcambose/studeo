@@ -18,12 +18,13 @@ class Playlist extends Model
         '_courses',
     ];
 
-    /*
-     * Todo: Trebuie luate doar atributele necesare
-     */
-    public function getCoursesAttribute()
-    {
-        return $this->courses()->get();
+    public function getCoursesAttribute() {
+        $courses = $this->courses()->get();
+
+        return $courses->map(function ($user) {
+            $params = ['user_id', 'id', 'title', 'short_description', 'image_id', 'pivot', '_user', '_image', '_lessons', 'slug'];
+            return collect($user->toArray())->only($params)->all();
+        });
     }
 
     // Relationships

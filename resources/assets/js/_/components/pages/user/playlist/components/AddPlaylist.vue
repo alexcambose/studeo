@@ -25,6 +25,16 @@
                         >
                         </b-input>
                     </b-field>
+
+                    <b-field label="Culoare:">
+                        <b-input
+                                type="color"
+                                v-model="color"
+                                required
+                        >
+                        </b-input>
+                    </b-field>
+
                 </section>
                 <footer class="modal-card-foot">
                     <button class="button" type="button" @click="$parent.close()">Anulează</button>
@@ -39,6 +49,7 @@
     export default {
         data() {
             return {
+                color: '#00d1b2',
                 title: '',
                 description: '',
                 fetching: false,
@@ -54,6 +65,7 @@
                         this.fetching = false;
                         this.title = '';
                         this.description = '';
+                        this.color = '#00d1b2';
                         this.$toast.open({
                             message: 'Ați adaugat un playlist',
                             type: 'is-success',
