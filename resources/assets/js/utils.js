@@ -115,12 +115,12 @@ export const percent = (current, max, rounded = true) => {
     return current/max * 100;
 };
 /* ca sa nu mai calculăm
-lvl: 1: < 100xp (100xp)
-lvl: 2: < 210xp (110xp)
-lvl: 3: < 331xp (121xp)
-lvl: 4: < 464xp (133xp)
-lvl: 5: < 610xp (146xp)
-lvl: 6: < 771xp (161xp)
+lvl 1: < 100xp (100xp)
+lvl 2: < 210xp (110xp)
+lvl 3: < 331xp (121xp)
+lvl 4: < 464xp (133xp)
+lvl 5: < 610xp (146xp)
+lvl 6: < 771xp (161xp)
  */
 export const xp = level => { // cat xp are un level
     if(level === 0) return 0;

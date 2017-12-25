@@ -13,12 +13,14 @@ Route::prefix('notification')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::post('{id?}', 'UserController@user'); // luare date user
     Route::post('update', 'UserController@updateData'); // actualizare informatii cont
     Route::post('update/password', 'UserController@updatePassword'); // actualizare  parola
     Route::post('update/profile', 'UserController@updateProfile'); // actualizare  informatii profil
     Route::post('update/profileImage', 'UserController@updateProfileImage'); // actualizare imagine profil
     Route::post('mentor/register', 'UserController@becomeMentor'); // inregistrare ca mentor
+    Route::get('post/{username}', 'PostController@all'); // luare toate postarile de la un user
+    Route::post('post', 'PostController@add'); // adaugare post nou
+    Route::post('{id?}', 'UserController@user'); // luare date user todo refactor
 });
 
 Route::prefix('course')->group(function () {
@@ -45,7 +47,9 @@ Route::prefix('playlist')->group(function () {
     Route::put('{playlist}/addCourse/{course}', 'PlaylistController@addCourse'); // adaugare curs in playlist
     Route::delete('{playlist}/addCourse/{course}', 'PlaylistController@deleteCourse'); // stergere curs din playlist
 });
-// endregion
+Route::prefix('achievement')->group(function () {
+    Route::get('', 'AchievementController@all');  // luare achievement-uri disponibile
+});
 
 Route::get('/', function(){
     return view('index');

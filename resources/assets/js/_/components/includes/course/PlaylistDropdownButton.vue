@@ -9,12 +9,12 @@
         </b-dropdown-item>
         <b-dropdown-item separator></b-dropdown-item>
         <b-dropdown-item v-for="(playlist, index) in playlists" :key="index" paddingless custom>
-            <div @click="togglePlaylist(index)" class="playlist-item" style="padding: 0.375rem 1rem;">
-                <b-icon v-if="playlist._courses.find(e => e.id === course.id)" pack="fa" icon="check" size="is-small"></b-icon> &nbsp; {{playlist.title}}
+            <div @click="togglePlaylist(index)" class="playlist-item">
+                <b-icon v-if="playlist._courses.find(e => e.id === course.id)" pack="fa" icon="check" size="is-small" :style="{color: playlist.color}"></b-icon>
+                &nbsp; <span :style="{color: playlist.color}">{{playlist.title}}</span>
             </div>
         </b-dropdown-item>
     </b-dropdown>
-
 </template>
 
 <script>

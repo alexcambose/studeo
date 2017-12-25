@@ -39,6 +39,17 @@ class DatabaseSeeder extends Seeder
         ];
         foreach ($defaults as $default) DB::table('tags')->insert($default);
     }
+    public function insertAchievements() {
+        DB::table('achievements')->insert([
+            'type' => '1_COURSE_FINISHED',
+            'description' => 'Un curs terminat.'
+        ]);
+        foreach ([5,10,25,50,100,200,250, 500] as $value)
+            DB::table('achievements')->insert([
+                'type' => $value . '_COURSE_FINISHED',
+                'description' => $value . ($value % 100 > 19 ? ' de ' : ' ') . 'cursuri terminate.'
+            ]);
+    }
     /**
      * Run the database seeds.
      *
@@ -53,7 +64,7 @@ class DatabaseSeeder extends Seeder
          * iar varianta veche era
          *  ~ php artisan migrate:rollback && php artisan migrate && php artisan db:seed
         */
-        $this->command->alert('Tabelarele tabeloase o sâ fii golite :>');
+        $this->command->alert('Tabelarele tabeloase o sâ fii goliti :>');
 
         DB::statement("SET foreign_key_checks=0");
         DB::table('answers')->truncate();
@@ -69,13 +80,16 @@ class DatabaseSeeder extends Seeder
         DB::table('media')->truncate();
         DB::table('course_tag')->truncate();
         DB::table('course_playlist')->truncate();
+        DB::table('achievements')->truncate();
+        DB::table('achievement_user')->truncate();
         DB::statement("SET foreign_key_checks=1");
 
         $this->command->info('Tables emptied!');
 
         factory(\App\User::class, 2)->create();
         factory(\App\Item::class, 10)->create();
-
+        $this->insertTags();
+        $this->insertAchievements();
         //Create SANDEL
         factory(App\User::class)->create([
             'first_name' => 'Sandel',
@@ -83,8 +97,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'sandilica293',
             'email' => 'sandel@sandica.com',
             'role' => 2,
-        ]);
-        $this->insertTags();
+        ])->achievements()->sync(App\Achievement::all()->random(5)->pluck('type'));
 
         $courseNumber = 10; //ca sa nu mai modificam peste tot
         factory(\App\Course::class, $courseNumber)->create()->each(function($course)use($courseNumber) {
@@ -98,6 +111,7 @@ class DatabaseSeeder extends Seeder
         factory(\App\Playlist::class, 50)->create()->each(function($playlist)use($courseNumber) {
             $playlist->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
         });
+        factory(\App\Post::class, 20)->create();
         $this->command->info('100%');
     }
 }

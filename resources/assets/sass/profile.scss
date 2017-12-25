@@ -37,6 +37,9 @@
           font-size: .9rem;
         }
       }
+      .navbar-start {
+        margin-left: $profile-image-width + $profile-avatar-image-width;
+      }
     }
   }
 
@@ -54,11 +57,49 @@
     color: #657786;
     margin-top: 5px;
   }
+  .user-data-container {
+    margin-top: 30px;
+  }
+  .card {
+    margin-bottom: 20px;
+    &.achievements-card {
+      .card-header { cursor: pointer }
+      .achievement-count {
+        color: lighten($dark, 20);
+        margin-left: 10px;
+        font-size: .9em;
+      }
+      .card-header-icon { color: #eac600 }
+      .card-content { overflow-x: auto }
+      .achievements-container{
+        display: inline-flex;
+
+      }
+    }
+  }
+  .box.post-box {
+    &:hover .meta {
+      color: lighten($dark, 10);
+      border-top: 1px solid darken(whitesmoke, 5);
+    }
+    .meta {
+      transition: all .3s;
+      margin-top: 10px;
+      border-top: 1px solid whitesmoke;
+      padding-top: 10px;
+      font-size: .8em;
+      color: lighten($dark, 30);
+      display: flex;
+      .date {
+      }
+      .is-private {
+        flex: 1;
+      }
+    }
+  }
 }
 
-.user-container {
-  margin-top: 30px;
-}
+
 /* region Recompense */
 .customBox {
   margin: 5px;

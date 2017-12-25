@@ -29,8 +29,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $appends = ['_image'];
-
     public static $rules =  [
         'first_name' => 'required|string|max:30',
         'last_name' => 'required|string|max:30',
@@ -46,9 +44,16 @@ class User extends Authenticatable
         'image' => 'required|image|mimes:jpeg,png,jpg',
         'city' => 'numeric',
     ];
+    protected $appends = [
+        '_achievements',
+        '_image'
+    ];
 
     public function getSocialAttribute($value) {
-        return json_decode($value); //convert "{}" to {}
+        return json_decode($value); // convert "{}" to {}
+    }
+    public function getAchievementsAttribute() {
+        return $this->achievements()->orderBy('created_at', 'DESC')->get();
     }
     public function getImageAttribute() {
         return $this->image();
@@ -65,8 +70,15 @@ class User extends Authenticatable
     public function playlists() {
         return $this->hasMany(Playlist::class);
     }
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
     public function joinedLessons() {
         return $this->belongsToMany(Lesson::class)->withTimestamps();
+    }
+
+    public function achievements() {
+        return $this->belongsToMany(Achievement::class)->withTimestamps();
     }
     public function joinedCourses() {
         return collect($this->joinedLessons->map(function($lesson){

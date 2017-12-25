@@ -1,5 +1,5 @@
 ![Studeo Logo](public/images/logo.png)
-# opening-opportunities-IBac
+# opening-opportunities-Studeo
 A platform to help students learn faster and easier for the baccalaureate exam
 
 

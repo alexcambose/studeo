@@ -11,6 +11,9 @@ export default {
         USER_MENTOR: SERVER + 'user/mentor/register/',
         USER_UPDATE_PROFILE: SERVER + 'user/update/profile/',
         USER_UPDATE_PROFILE_IMAGE: SERVER + 'user/update/profileImage/',
+        POST_ALL: 'user/post/', // get
+        POST_ADD: 'user/post/', // post
+        ACHIEVEMENTS: SERVER + 'achievement/',
         NOTIFICATION: SERVER + 'notification/',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll/',
@@ -52,12 +55,15 @@ export default {
         },
         FIRST_COURSE_POSTED: {
             title: 'Ai publicat primul tău curs!',
-            message: () => 'Felicitări de contribuție!',
+            message: () => 'Felicitări pentru contribuție!',
         },
     },
     classLevels: ['Altceva', 'Școala generală', 'Gimnaziu', 'Liceu', 'Facultate'],
     course: {
         loadAmount: 10,
+    },
+    profile: {
+        postsLoadAmount: 10,
     },
     xpLevelColors: {
         10: '#dfdbff',

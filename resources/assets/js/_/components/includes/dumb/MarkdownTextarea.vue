@@ -8,7 +8,7 @@
                 <p class="control">
                     <button @click="hovered = true" :class="['button', 'is-small', hovered ? 'is-primary' : '']">
                         <b-icon icon="format-text" size="is-small"></b-icon>
-                        <span>Simplu</span>
+                        <span>Text</span>
                     </button>
                 </p>
                 <p class="control">
@@ -29,7 +29,11 @@
                         type="textarea"
                 ></b-input>
             </div>
-            <div v-else-if="content.trim()" v-html="htmlContent" class="content"></div>
+            <div v-else-if="content.trim()" >
+                <hr>
+                <div v-html="htmlContent" class="content"></div>
+                <hr>
+            </div>
             <div v-else-if="automaticPreview" class="instructions">Poziționează cursorul deasupra pentru a edita</div>
             <div v-else class="instructions">Nu există conținut</div>
         </div>
@@ -113,6 +117,11 @@
                 automaticPreview: false,
                 isHelpModalActive: false,
             };
+        },
+        watch: {
+            value(value) {
+                this.content = value;
+            },
         },
         computed: {
             htmlContent() {

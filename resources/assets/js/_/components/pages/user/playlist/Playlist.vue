@@ -98,7 +98,6 @@
     import config from '../../../../../config';
     import { timeConvert } from '../../../../../utils';
     import EditPlaylist from './components/EditPlaylist';
-
     export default {
         mounted() {
             this.$store.dispatch('getAllPlaylists')
@@ -106,7 +105,6 @@
                     this.getPlaylistById(parseInt(this.$route.params.id));
                 });
         },
-
         data() {
             return {
                 isComponentModalActive: false,
@@ -151,7 +149,6 @@
                     type: 'is-danger',
                     hasIcon: true,
                     onConfirm: () => {
-
                         this.deletePlaylist({ playlistIndex: this.playlistIndex })
                             .then(() => this.$toast.open('Playlistul a fost șters') );
                     },

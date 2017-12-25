@@ -7,7 +7,10 @@
                     <image-container class="profile-image" :src="user._image.filename">
                         <image-container class="profile-avatar-image" src="https://lh3.googleusercontent.com/QdPWD0J-qsqJ64d2GtZEHPk4BnO0ryDQlnA6P0UGiB1zpfdAhC3PKetkzjDmy6NVRXGpenuU5kTFF7AKMgumiWU=s400"></image-container>
                     </image-container>
-
+                    <div class="navbar-start">
+                        <router-link :to="{name:'profile-posts'}" class="navbar-item is-tab">Postări</router-link>
+                        <router-link :to="{name:'profile-recommended'}" class="navbar-item is-tab">Recomandate</router-link>
+                    </div>
                     <div class="navbar-end">
                         <div class="navbar-item progress-container">
                             <span class="status">{{userXp}} / {{levelXp}} xp</span>
@@ -17,11 +20,12 @@
                             <level-box :level="level"></level-box>
                         </div>
                     </div>
+
                 </div>
             </nav>
         </div>
 
-        <div class="container user-container">
+        <div class="container user-data-container">
             <div class="columns">
                 <div class="column is-3">
                     <h3 class="fullname">{{ fullname }}</h3>
@@ -37,29 +41,28 @@
                     </div>
                 </div>
                 <div class="column is-6">
-                    <course></course>
-                    <course></course>
-                    <course></course>
+                    <router-view></router-view>
                 </div>
                 <div class="column is-3">
-                    <div class="card">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                Recompense
-                            </p>
-                            <a href="#" class="card-header-icon">
-                          <span class="icon">
-                            <i class="fa fa-trophy" aria-hidden="true"></i>
-                          </span>
-                            </a>
-                        </header>
-                        <div class="card-content">
-                            <item></item>
-                            <item></item>
-                            <item></item>
-                            <item></item>
-                        </div>
-                    </div>
+                    <achievements :achievements="user._achievements"></achievements>
+                    <!--<div class="card">-->
+                        <!--<header class="card-header">-->
+                            <!--<p class="card-header-title">-->
+                                <!--Recompense-->
+                            <!--</p>-->
+                            <!--<a href="#" class="card-header-icon">-->
+                          <!--<span class="icon">-->
+                            <!--<i class="fa fa-trophy" aria-hidden="true"></i>-->
+                          <!--</span>-->
+                            <!--</a>-->
+                        <!--</header>-->
+                        <!--<div class="card-content">-->
+                            <!--<item></item>-->
+                            <!--<item></item>-->
+                            <!--<item></item>-->
+                            <!--<item></item>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -67,12 +70,12 @@
     </div>
 </template>
 <script>
-    import Course from '../../includes/dumb/Course.vue';
-    import Item from '../../includes/dumb/Item.vue';
-    import ImageContainer from '../../includes/dumb/ImageContainer.vue';
-    import LevelBox from '../../includes/dumb/LevelBox.vue';
+    import Course from '../../../includes/dumb/Course.vue';
+    import ImageContainer from '../../../includes/dumb/ImageContainer.vue';
+    import LevelBox from '../../../includes/dumb/LevelBox.vue';
+    import Achievements from './sidebar/Achievements.vue';
     import { mapState } from 'vuex';
-    import { cities, xp, level, displayDate } from '../../../../utils';
+    import { cities, xp, level, displayDate } from '../../../../../utils';
     import { markdown } from 'markdown';
     import moment from 'moment';
 
@@ -109,7 +112,7 @@
         },
         components: {
             Course,
-            Item,
+            Achievements,
             LevelBox,
             ImageContainer,
         },

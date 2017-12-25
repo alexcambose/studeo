@@ -1,5 +1,4 @@
 import Home from '../components/pages/Home.vue';
-import Profile from '../components/pages/user/Profile.vue';
 import Notifications from '../components/pages/user/Notifications.vue';
 import Help from '../components/pages/Help.vue';
 import NotFound404 from '../components/pages/404.vue';
@@ -7,6 +6,7 @@ import guestRoutes from './guest';
 import mentorRoutes from './mentor';
 import settingsRoutes from './settings';
 import playlistsRoutes from './playlists';
+import profileRoutes from './profile';
 import courseRoutes from './course';
 import store from '../store/index';
 import config from '../../config';
@@ -20,12 +20,6 @@ const router = new VueRouter({
             path: '/',
             component: Home,
             name: 'root',
-            meta: { onlyAuth: true },
-        },
-        {
-            path: '/profil/:username',
-            component: Profile,
-            name: 'profile',
             meta: { onlyAuth: true },
         },
         {
@@ -50,6 +44,7 @@ const router = new VueRouter({
         ...settingsRoutes,
         ...playlistsRoutes,
         ...courseRoutes,
+        ...profileRoutes,
         {
             path: '/404',
             component: NotFound404,
