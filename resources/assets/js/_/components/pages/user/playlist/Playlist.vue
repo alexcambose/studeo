@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="!fetching">
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
             <add-playlist></add-playlist>
         </b-modal>
@@ -32,7 +32,7 @@
                             <div class="playlistDetails">
                                 <div class="columns">
                                     <div class="column">
-                                        <div class="playlistTitle">
+                                        <div class="playlistTitle" :style="{ color: playlist.color }">
                                             {{ playlist.title }}
                                         </div>
                                         <div class="nrCoursesLessons">
@@ -46,7 +46,7 @@
                                         <div class="box">
                                             <ul class="playlistActions">
                                                 <li><a @click="isEditModalActive = true" :style="{ color: playlist.color }"><i class="fa fa-edit"></i>&nbsp; <span>Editează playlistul</span></a></li>
-                                                <li><a href="" :style="{ color: playlist.color }"><i class="fa fa-eye"></i>&nbsp; <span>Vezi playlistul</span></a></li>
+                                                <li><router-link :to="{ name: 'courseLesson', params: { slug: firstUnwatchedLesson } }" aria-disabled="" :style="{ color: playlist.color }"><i class="fa fa-eye"></i>&nbsp; <span>Vezi playlistul</span></router-link></li>
                                                 <li><a @click="removePlaylist" :style="{ color: playlist.color }"><i class="fa fa-trash"></i>&nbsp; <span>Șterge playlistul</span></a></li>
                                             </ul>
                                         </div>
@@ -56,7 +56,7 @@
                                     {{ playlist.description }}
                                 </div>
                                 <div class="playlistProgress mt-15">
-                                    <progress class="progress is-primary" value="15" max="100">30%</progress>
+                                    <custom-progress :color="playlist.color" :percentage="playlistProgress"></custom-progress>
                                 </div>
                             </div>
                         </div>
@@ -67,9 +67,7 @@
                                 <p>Apasă pe <i class="fa fa-plus"></i> pentru a adăuga cursul dorit la playlist. Pe aceasta pagină iți poți customiza playlistul.</p>
                             </div>
                             <div class="playlistsCourses" v-for="course in playlist._courses">
-                                <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }">
-                                    <course-box-horizontal :course="course" :inPlaylist="true" :playlistIndex="playlistIndex"></course-box-horizontal>
-                                </router-link>
+                                <course-box-horizontal :course="course" :inPlaylist="true" :playlistIndex="playlistIndex"></course-box-horizontal>
                             </div>
                         </div>
                     </div>
@@ -95,14 +93,21 @@
     import CourseBoxHorizontal from '../../../includes/course/CourseBoxHorizontal.vue';
     import AddPlaylist from './components/AddPlaylist.vue';
     import { mapState, mapActions } from 'vuex';
-    import config from '../../../../../config';
     import { timeConvert } from '../../../../../utils';
     import EditPlaylist from './components/EditPlaylist';
+    import CustomProgress from '../../../includes/dumb/CustomProgress';
+    import Refresh from '../../../includes/dumb/Refresh';
+
     export default {
         mounted() {
+            const loadingComponent = this.$loading.open();
+            this.fetching = true;
             this.$store.dispatch('getAllPlaylists')
                 .then(() => {
                     this.getPlaylistById(parseInt(this.$route.params.id));
+                    this.playlistId = this.$route.params.id;
+                    this.fetching = false;
+                    loadingComponent.close();
                 });
         },
         data() {
@@ -111,7 +116,7 @@
                 playlist: {},
                 playlistId: null,
                 isEditModalActive: false,
-                abc: '#00d1b2',
+                fetching: false,
             };
         },
         computed: {
@@ -130,6 +135,42 @@
             },
             playlistIndex() {
                 return this.$store.state.playlist.playlists.findIndex(e => e.id == this.$route.params.id);
+            },
+            playlistProgress() {
+                let progresses = this.playlist._courses.map(x => {
+                    let watchedLessons = x._lessons.filter(e => e._watched).length;
+                    return watchedLessons / x._lessons.length * 100;
+                });
+                let sum = progresses.reduce((sum, order) => sum + order, 0);
+
+                return sum/progresses.length + '%';
+            },
+            firstUnwatchedLesson() {
+                if (this.playlist._courses.length > 0) {
+                    let lessons = this.playlist._courses.map(x => {
+                        return x._lessons;
+                    });
+                    let lesson = lessons[0].find(x => {
+                        if (x._watched === false) {
+                            return x;
+                        }
+                    });
+                    let courseId = 0;
+                    if (lesson !== undefined) {
+                        courseId = lesson.course_id;
+                    }
+                    if (courseId !== 0) {
+                        let course = this.playlist._courses.find(e => {
+                            if (e.id === courseId) {
+                                return e;
+                            }
+                        });
+                        return course.slug;
+                    } else {
+                        this.$toast.open('Ai terminat toate cursurile din acest playlist.');
+                        return this.playlist._courses[0].slug;
+                    }
+                }
             },
         },
         watch: {
@@ -154,7 +195,7 @@
                     },
                 });
             },
-            getPlaylistById($id) { // TODO move to getters
+            getPlaylistById($id) {
                 this.playlist = this.playlists.find(e => e.id === $id);
             },
         },
@@ -162,6 +203,8 @@
             CourseBoxHorizontal,
             AddPlaylist,
             EditPlaylist,
+            CustomProgress,
+            Refresh,
         },
     };
 </script>

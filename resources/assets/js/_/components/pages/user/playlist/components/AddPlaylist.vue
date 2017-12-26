@@ -70,6 +70,7 @@
                             message: 'Ați adaugat un playlist',
                             type: 'is-success',
                         });
+                        this.$parent.close();
                     })
                     .catch(err => {
                         this.$toast.open({

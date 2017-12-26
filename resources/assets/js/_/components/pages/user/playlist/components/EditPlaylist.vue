@@ -81,6 +81,7 @@
                             message: 'Ați editat un playlist',
                             type: 'is-success',
                         });
+                        this.$parent.close();
                     })
             },
         },

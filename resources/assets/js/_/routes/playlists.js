@@ -8,7 +8,7 @@ export default [
         meta: { onlyAuth: true },
     },
     {
-        path: '/playlists/:id',
+        path: '/playlist/:id',
         component: Playlist,
         name: 'playlist',
         meta: { onlyAuth: true },

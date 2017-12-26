@@ -2,7 +2,6 @@ import config from '../../../config';
 import { PLAYLIST_CREATE, PLAYLIST_ALL, PLAYLIST_DELETE, PLAYLIST_EDIT, PLAYLIST_ADD_COURSE, PLAYLIST_DELETE_COURSE } from '../mutators-types';
 import Vue from 'vue';
 const state = {
-    playlist: {},
     playlists: {},
 };
 
@@ -90,7 +89,6 @@ const mutations = {
         state.playlists = playlists;
     },
     [PLAYLIST_CREATE](state, payload) {
-        state.playlist = payload.playlist;
         state.playlists.push(payload.playlist);
     },
     [PLAYLIST_EDIT](state, { playlistIndex, title, description, color }) {
