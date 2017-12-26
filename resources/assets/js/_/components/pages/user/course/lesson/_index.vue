@@ -91,7 +91,7 @@
                 this.isQuestionsModalActive = false;
                 this.lessonMarkAsViewed()
                     .then(() => {
-                        if (this.$store.state.course.currentLessonIndex === this.lessons.length - 1) {
+                        if (this.$store.state.course.currentLessonIndex === this.lessons.length - 1 && this.lessons[this.$store.state.course.currentLessonIndex]._watched === true) {
                             this.$dialog.alert({
                                 title: 'Felicitări!',
                                 message: 'Tocmai ai terminat acest curs!',

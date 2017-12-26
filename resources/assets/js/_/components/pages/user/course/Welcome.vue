@@ -88,6 +88,12 @@
                                         <p class="title">{{course.views}}</p>
                                     </div>
                                 </div>
+                                <div class="level-item has-text-centered">
+                                    <div>
+                                        <p class="heading">Distribuiri</p>
+                                        <p class="title">{{course._shares}}</p>
+                                    </div>
+                                </div>
                             </nav>
                         </div>
                     </div>

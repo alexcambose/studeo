@@ -1,11 +1,12 @@
 import Profile from '../components/pages/user/profile/Profile.vue';
-import Posts from '../components/pages/user/profile/Posts.vue';
-import Recommended from '../components/pages/user/profile/Recommended.vue';
+import Posts from '../components/pages/user/profile/posts/Posts.vue';
+import Shares from '../components/pages/user/profile/shares/Shares.vue';
 export default [
     {
         path: '/profil/:username',
         component: Profile,
         name: 'profile',
+        redirect: '/profil/:username/postari',
         meta: { onlyAuth: true },
         children: [
             {
@@ -15,7 +16,7 @@ export default [
             },
             {
                 path: 'recomandate',
-                component: Recommended,
+                component: Shares,
                 name: 'profile-recommended',
             },
         ],

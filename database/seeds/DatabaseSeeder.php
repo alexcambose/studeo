@@ -103,11 +103,12 @@ class DatabaseSeeder extends Seeder
         factory(\App\Course::class, $courseNumber)->create()->each(function($course)use($courseNumber) {
             $course->tags()->sync( \App\Tag::all()->random(floor($courseNumber/2))->pluck('id') );
         });
-        $this->command->info('30%');
         factory(\App\Note::class, $courseNumber*10)->create();
+        $this->command->info('30%');
         factory(\App\Lesson::class, $courseNumber*4)->create();
         factory(\App\Question::class, 30)->create();
-        factory(\App\Answer::class, 40)->create();$this->command->info('60%');
+        factory(\App\Answer::class, 40)->create();
+        $this->command->info('60%');
         factory(\App\Playlist::class, 50)->create()->each(function($playlist)use($courseNumber) {
             $playlist->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
         });

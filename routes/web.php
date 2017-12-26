@@ -20,7 +20,13 @@ Route::prefix('user')->group(function () {
     Route::post('mentor/register', 'UserController@becomeMentor'); // inregistrare ca mentor
     Route::get('post/{username}', 'PostController@all'); // luare toate postarile de la un user
     Route::post('post', 'PostController@add'); // adaugare post nou
-    Route::post('{id?}', 'UserController@user'); // luare date user todo refactor
+    Route::put('post/{post}', 'PostController@update'); // actualizare post
+    Route::delete('post/{post}', 'PostController@delete'); // stergere post
+    Route::post('post/{post}/like', 'PostController@toggleLike'); // like/unlike post
+    Route::get('share/{user}', 'UserController@shareAll'); // luate toate cursurile distribuite de un user
+    Route::post('share/{course}', 'UserController@shareAdd'); // adaugare distribuire curs
+    Route::delete('share/{id}', 'UserController@shareRemove'); // stargere distribuire curs
+    Route::post('{id?}', 'UserController@user'); // luare date user => todo refactor
 });
 
 Route::prefix('course')->group(function () {

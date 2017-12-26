@@ -24,6 +24,7 @@ class Course extends Model
         '_tags',
         '_joined',
         '_user',
+        '_shares',
         '_lessons',
     ];
     public function getImageAttribute(){
@@ -34,6 +35,9 @@ class Course extends Model
     }
     public function getUserAttribute(){
         return User::find($this->user_id);
+    }
+    public function getSharesAttribute(){
+        return $this->usersShared()->count();
     }
     public function getJoinedAttribute(){
         if($this->isUserJoined(Auth::user())){
@@ -89,5 +93,8 @@ class Course extends Model
     }
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+    public function usersShared() {
+        return $this->belongsToMany(Course::class,'course_user_shares')->withTimestamps();
     }
 }

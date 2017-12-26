@@ -65,7 +65,6 @@ class PlaylistController extends Controller
         $playlist->title = $request->title;
         $playlist->description = $request->description;
         $playlist->color = $request->color;
-
         $playlist->save();
 
         return response()->json(['success' => true]);
@@ -83,7 +82,10 @@ class PlaylistController extends Controller
     public function addCourse(Playlist $playlist, Course $course) {
         if($playlist->user->id !== Auth::id()) abort(401);
         $playlist->courses()->attach($course->id);
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'course' => $course,
+        ]);
     }
     public function deleteCourse(Playlist $playlist, Course $course) {
         if($playlist->user->id !== Auth::id()) abort(401);

@@ -39,11 +39,14 @@
         },
         methods: {
             togglePlaylist(playlistIndex) {
-                this.fetching = true;
-                const shouldDelete = this.playlists[playlistIndex]._courses.find(e => e.id === this.course.id);
-                this.$store.dispatch(shouldDelete ? 'deleteCoursePlaylist' : 'addCoursePlaylist', { playlistIndex, courseId: this.course.id })
-                    .then(() => {
-                        this.$store.dispatch('getAllPlaylists').then(() => {
+                if (!this.fetching) {
+                    this.fetching = true;
+                    const shouldDelete = this.playlists[playlistIndex]._courses.find(e => e.id === this.course.id);
+                    this.$store.dispatch(shouldDelete ? 'deleteCoursePlaylist' : 'addCoursePlaylist', {
+                        playlistIndex,
+                        courseId: this.course.id,
+                    })
+                        .then(() => {
                             this.fetching = false;
                             if (shouldDelete) {
                                 this.$toast.open({
@@ -57,7 +60,7 @@
                                 });
                             }
                         });
-                    });
+                }
             },
         },
     };

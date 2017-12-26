@@ -16,6 +16,7 @@
         </router-link>
 
         <playlist-dropdown-button :course="course"></playlist-dropdown-button>
+        <share-button :course="course"></share-button>
 
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
@@ -34,6 +35,7 @@
     import ImageContainer from '../../includes/dumb/ImageContainer.vue';
     import UserBox from '../../includes/dumb/UserBox.vue';
     import PlaylistDropdownButton from './PlaylistDropdownButton.vue';
+    import ShareButton from './ShareButton.vue';
     export default {
         props: {
             course: {
@@ -59,6 +61,7 @@
         components: {
             ImageContainer,
             UserBox,
+            ShareButton,
             PlaylistDropdownButton,
         },
     };

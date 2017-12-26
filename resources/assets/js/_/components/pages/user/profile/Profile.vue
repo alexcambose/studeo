@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="column is-6">
-                    <router-view></router-view>
+                    <router-view :user="user"></router-view>
                 </div>
                 <div class="column is-3">
                     <achievements :achievements="user._achievements"></achievements>
@@ -80,6 +80,9 @@
     import moment from 'moment';
 
     export default {
+        data() {
+            return {};
+        },
         computed: {
             ...mapState({
                 user: state => state.user.user,

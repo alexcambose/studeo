@@ -39,7 +39,35 @@ class PostController extends Controller
         ]);
     }
 
-    public function delete(Post $post) {
+    public function update(Post $post, Request $request) {
+        $validation = Validator::make($request->all(), [
+            'content' => Post::$rules['content'],
+            'isPrivate' => Post::$rules['is_private'],
+        ]);
+        if ($validation->fails() ) return response()->json([ 'success' => false ]);
+        $post->content = $request->content;
+        $post->is_private = $request->isPrivate;
+        $post->save();
+        return response()->json([
+            'success' => true,
+            'post' => $post,
+        ]);
+    }
 
+    public function delete(Post $post) {
+        $post->delete();
+        return response()->json([ 'success' => true ]);
+    }
+
+    public function toggleLike(Post $post) {
+        if($post->isLikedBy(User::find(Auth::user()->id))) {
+            Auth::user()->postsLiked()->detach($post->id);
+        } else {
+            Auth::user()->postsLiked()->attach($post->id);
+        }
+        return response()->json([
+            'success' => true,
+            'liked' => $post->isLikedBy(User::find(Auth::user()->id)),
+        ]);
     }
 }

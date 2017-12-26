@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+use App\Course;
 use App\Media;
 use App\Notifications\PasswordChanged;
 use App\Notifications\BecameMentor;
 use App\User;
-use Illuminate\Support\Facades\Log;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,7 +89,7 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
-    function updateData(Request $request) {
+    public function updateData(Request $request) {
         $user = Auth::user();
         $validation = Validator::make($request->all(), [
             'first_name' => User::$rules['first_name'],
@@ -108,7 +108,7 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
-    function updatePassword(Request $request) {
+    public function updatePassword(Request $request) {
         $user = Auth::user();
         if(Hash::check($request->current_password, $user->password)) {
             $validation = Validator::make($request->all(), [
@@ -123,6 +123,25 @@ class UserController extends Controller
         return response()->json([
             'success' => false,
             'message' => trans('auth.failed'),
+        ]);
+    }
+
+    public function shareAll(User $user) {
+        return response()->json([
+            'success' => true,
+            'courses' => $user->sharedCourses()->orderBy('created_at', 'DESC')->get(),
+        ]);
+    }
+    public function shareAdd(Course $course) {
+        Auth::user()->sharedCourses()->attach($course->id);
+        return response()->json([ 'success' => true ]);
+    }
+
+    public function shareRemove($pivotId) {
+        Auth::user()->sharedCourses()->wherePivot('id', $pivotId)->detach();
+        return response()->json([
+            'success' => true,
+            'courses' => Auth::user()->sharedCourses()->orderBy('created_at', 'DESC')->get(),
         ]);
     }
 }

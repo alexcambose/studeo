@@ -63,7 +63,7 @@ const actions = {
             axios.put(config.url.PLAYLIST_ADD_COURSE(state.playlists[playlistIndex].id, courseId))
                 .then(({ data }) => {
                     if (data.success) {
-                        commit(PLAYLIST_ADD_COURSE, { playlistIndex, courseId });
+                        commit(PLAYLIST_ADD_COURSE, { playlistIndex, course: data.course });
                         resolve();
                     } else reject();
                 })
@@ -99,9 +99,11 @@ const mutations = {
     [PLAYLIST_DELETE](state, { playlistIndex }) {
         state.playlists.splice(playlistIndex, 1);
     },
-    [PLAYLIST_ADD_COURSE](state, { playlistIndex, courseId }) {},
+    [PLAYLIST_ADD_COURSE](state, { playlistIndex, course }) {
+        state.playlists[playlistIndex]._courses.push(course);
+    },
     [PLAYLIST_DELETE_COURSE](state, { playlistIndex, courseId }) {
-        let courseIndex = state.playlists[playlistIndex]._courses.findIndex(x => x.id == courseId);
+        let courseIndex = state.playlists[playlistIndex]._courses.findIndex(x => x.id === courseId);
         state.playlists[playlistIndex]._courses.splice(courseIndex, 1);
     },
 };

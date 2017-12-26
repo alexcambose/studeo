@@ -114,7 +114,7 @@
             return {
                 content: this.value,
                 hovered: true,
-                automaticPreview: false,
+                automaticPreview: localStorage.getItem('automaticPreview') === 'true',
                 isHelpModalActive: false,
             };
         },
@@ -135,6 +135,7 @@
             },
             toggleAutomaticPreview(value) {
                 this.automaticPreview = value;
+                localStorage.setItem('automaticPreview', value);
                 this.hovered = !this.automaticPreview;
             },
             onEnter() {

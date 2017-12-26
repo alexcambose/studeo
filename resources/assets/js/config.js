@@ -11,8 +11,14 @@ export default {
         USER_MENTOR: SERVER + 'user/mentor/register/',
         USER_UPDATE_PROFILE: SERVER + 'user/update/profile/',
         USER_UPDATE_PROFILE_IMAGE: SERVER + 'user/update/profileImage/',
-        POST_ALL: 'user/post/', // get
-        POST_ADD: 'user/post/', // post
+        USER_SHARE_COURSE_ALL: SERVER + 'user/share/',
+        USER_SHARE_COURSE_ADD: SERVER + 'user/share/',
+        USER_SHARE_COURSE_DELETE: SERVER + 'user/share/',
+        POST_ALL: SERVER + 'user/post/', // get
+        POST_ADD: SERVER + 'user/post/', // post
+        POST_UPDATE: SERVER + 'user/post/', // put
+        POST_DELETE: SERVER + 'user/post/', // delete
+        POST_TOGGLE_LIKE: postId => SERVER + `user/post/${postId}/like/`, // post
         ACHIEVEMENTS: SERVER + 'achievement/',
         NOTIFICATION: SERVER + 'notification/',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',

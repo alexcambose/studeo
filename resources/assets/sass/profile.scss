@@ -6,6 +6,7 @@
     }
     .profile-nav {
       position: relative;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
       .profile-image {
         position: absolute !important;
         width: $profile-image-width;
@@ -73,15 +74,23 @@
       .card-content { overflow-x: auto }
       .achievements-container{
         display: inline-flex;
-
       }
     }
   }
+  .deleted {
+     text-align: center;
+     padding: 20px;
+     color: $danger;
+   }
   .box.post-box {
     &:hover .meta {
       color: lighten($dark, 10);
       border-top: 1px solid darken(whitesmoke, 5);
     }
+    &:hover .meta .meta-section .field.has-addons {
+      opacity: 1;
+    }
+
     .meta {
       transition: all .3s;
       margin-top: 10px;
@@ -90,35 +99,44 @@
       font-size: .8em;
       color: lighten($dark, 30);
       display: flex;
-      .date {
-      }
-      .is-private {
+      justify-content: space-between;
+      .meta-section {
+        display: flex;
         flex: 1;
+        align-items: center;
+        justify-content: center;
+        &.like {
+          cursor: pointer;
+          span {
+            display: flex;
+            align-items: center;
+            margin: 0 2px;
+          }
+        }
+        @keyframes pop {
+          0% { transform: scale(1) }
+          50% { transform: scale(1.2) }
+          100% { transform: scale(1) }
+        }
+        .like-active {
+          color: $danger;
+          animation: pop .5s;
+        };
+        .control { margin: 0 !important; }
+        .meta-date {
+          flex: 1;
+          justify-content: center;
+          display: flex;
+        }
+        .field.has-addons {
+          opacity: 0;
+        }
       }
+
     }
   }
 }
 
-
-/* region Recompense */
-.customBox {
-  margin: 5px;
-  position: relative;
-  width: 94px;
-  height: 92px;
-  border-radius: 2px;
-  background: #FFFFFF;
-  box-shadow: 0 2px 2px 0 rgba(26, 24, 29, 0.15), 0 1px 4px 0 rgba(26, 24, 29, 0.1);
-  border: 1px solid transparent;
-
-  &:hover {
-    box-shadow: 0 4px 4px 0 rgba(26, 24, 29, 0.16), 0 1px 8px 0 rgba(26, 24, 29, 0.12);
-    border-color: $primary;
-  }
-
-
-}
-/* endregion */
 
 /* region Tooltip Recompense */
 .tooltipCustom {
@@ -155,13 +173,3 @@
 }
 
 /* endregion */
-
-
-/* region Navbar Secundar */
-.navbar {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
-  box-sizing: border-box;
-
-}
-/* endregion */
-

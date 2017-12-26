@@ -73,10 +73,15 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class);
     }
+    public function postsLiked() {
+        return $this->belongsToMany(Post::class, 'post_user_likes');
+    }
     public function joinedLessons() {
         return $this->belongsToMany(Lesson::class)->withTimestamps();
     }
-
+    public function sharedCourses () {
+        return $this->belongsToMany(Course::class,'course_user_shares')->withTimestamps()->withPivot('id');
+    }
     public function achievements() {
         return $this->belongsToMany(Achievement::class)->withTimestamps();
     }

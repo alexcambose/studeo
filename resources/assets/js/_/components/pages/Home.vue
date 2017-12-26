@@ -1,11 +1,7 @@
 <template>
     <div>
         <card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">
-            <b-field label="Just testing things">
-                <markdown-textarea
-                v-model="text"></markdown-textarea>
-            </b-field>
-            <hr>
+
             Tu:
            <pre>{{$store.state.user.user}}</pre>
         </card>
@@ -50,12 +46,6 @@
     import MarkdownTextarea from '../includes/dumb/MarkdownTextarea';
 
     export default {
-        data() {
-            return {
-                text: '',
-
-            };
-        },
         components: {
             MarkdownTextarea,
             Card,

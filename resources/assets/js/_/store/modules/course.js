@@ -63,8 +63,8 @@ const actions = {
             axios.post(config.url.COURSE_LESSON_WATCHED + lesson.id)
                 .then(({ data }) => {
                     if (data.success) {
-                        resolve();
                         commit(COURSE_LESSON_WATCHED);
+                        resolve();
                     } else reject();
                 })
                 .catch(err => reject(err));
@@ -92,7 +92,6 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post(config.url.COURSE_UPDATE_NOTE + state.notes[noteIndex].id, { title, content })
                 .then(({ data }) => {
-
                     if (data.success) {
                         commit(COURSE_UPDATE_NOTE, { noteIndex, data });
                         resolve(data);

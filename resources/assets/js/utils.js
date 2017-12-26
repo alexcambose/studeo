@@ -132,12 +132,6 @@ export const level = theXp => { // ce level are in functie de xp, nu merge frumo
     while(xp(level) <= theXp) level++;
     return level;
 };
-// export const level = xp => { // ce level are in functie de xp
-//     // https://math.stackexchange.com/a/447670
-//     if(xp < 100) return 1;
-//     return Math.floor((Math.log(xp) - Math.log(100))/Math.log(1.1)) + 2; // primul nivel deja exista deci + 2
-//     //daca nu, cu while
-// };
 export const levelColor = level => {
     const colorIndex = Object.keys(config.xpLevelColors).find(e => e >= level);
     return color(config.xpLevelColors[colorIndex]).darken(level%10 / 10 / 2);
