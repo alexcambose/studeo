@@ -82,16 +82,17 @@
             </div>
 
         </div>
-        <div v-for="(courseGroup, index) in chunkArray(courses, 4)" v-if="displayVertical" :key="index" class="columns">
-            <div class="column is-3" v-for="(course, index) in courseGroup" :key="index">
+        <div v-if="displayVertical" v-for="(courseGroup, index) in chunkArray(courses, 4)"  :key="index" class="columns">
+            <div class="column is-3" v-for="course in courseGroup" :key="course.id">
                 <course-box-vertical :course="course"></course-box-vertical>
             </div>
         </div>
-        <div v-for="(course, index) in courses" v-else :key="index">
+        <div v-else v-for="course in courses"  :key="course.id">
             <course-box-horizontal :course="course"></course-box-horizontal>
         </div>
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-            <span slot="no-more">Nu mai sunt cursuri de încărcat! :)</span>
+        <infinite-loading @triggered="infiniteHandler" ref="infiniteLoading">
+            <slot slot="fetching">Se accesează cursurile</slot>
+            <slot slot="completed">Nu mai sunt cursuri</slot>
         </infinite-loading>
     </div>
 </template>
@@ -102,29 +103,24 @@
     import CourseBoxVertical from './CourseBoxVertical.vue';
     import CourseBoxHorizontal from './CourseBoxHorizontal.vue';
     import Dropdown from '../dumb/Dropdown.vue';
-    import InfiniteLoading from 'vue-infinite-loading';
+    import InfiniteLoading from '../../includes/dumb/InfiniteLoading.vue';
     import CourseTagInput from '../../includes/course/CourseTagInput.vue';
 
     export default {
         props: {
-            search: {
-                type: String,
-            },
+            search: String,
+            user: Object,
         },
         mounted() {
             this.updateFilters();
-
-            this.getCourses();
         },
         data: function() {
-            let displayVertical = true;
-            if (localStorage.getItem('displayVertical')) displayVertical = localStorage.getItem('displayVertical') === 'true';
             return {
-                firstTimeLoading: true,
+                filtersLoaded: false,
                 courses: [],
-                loadIndex: 0,
+                startIndex: 0,
                 moreFilters: false,
-                displayVertical,
+                displayVertical: localStorage.getItem('displayVertical') === 'true',
                 filters: {
                     author: null,
                     tags: [],
@@ -142,41 +138,25 @@
         methods: {
             chunkArray,
             infiniteHandler($state) {
-                if (this.firstTimeLoading) this.courses = [];
-                this.getCourses()
-                    .then(courses => {
-                        if (courses.length) {
-                            $state.loaded();
-                        } else {
-                            $state.complete();
-                        }
-                    });
-            },
-            getCourses() {
-                return new Promise((resolve, reject) => {
-                    axios.get(config.url.COURSE_ALL + this.$store.state.user.user.id, {
-                        params: {
-                            start: this.loadIndex,
-                            end: config.course.loadAmount,
-                            sort: this.filters.sorting,
-                            onlyRegistered: this.filters.onlyRegistered,
-                            author: this.filters.author,
-                            difficulty: this.filters.difficulty,
-                            tags: this.filters.tags,
-                        },
-                    }).then(({ data }) => {
-                        if (data.courses.length) {
-                            this.firstTimeLoading = false;
-                            this.loadIndex += config.course.loadAmount;
-                            data.courses.forEach(course => {
-                                // push only if the course doesn't exist in array, not good and byggy :<
-                                if (!this.courses.find(e => e.id === course.id)) this.courses.push(course);
-                            });
-                            resolve(data.courses);
-                        } else {
-                            resolve(data.courses);
-                        }
-                    });
+                if (!this.filtersLoaded) return false;
+                axios.get(config.url.COURSE_ALL + (this.user ? this.user.id : ''), {
+                    params: {
+                        start: this.startIndex,
+                        amount: config.course.loadAmount,
+                        sort: this.filters.sorting,
+                        onlyRegistered: this.filters.onlyRegistered,
+                        author: this.filters.author,
+                        difficulty: this.filters.difficulty,
+                        tags: this.filters.tags,
+                    },
+                }).then(({ data }) => {
+                    if (data.courses.length) {
+                        this.startIndex += config.course.loadAmount;
+                        this.courses = [...this.courses, ...data.courses];
+                        $state.fetched();
+                    } else {
+                        $state.completed();
+                    }
                 });
             },
             resetCourses: _.debounce(function() {
@@ -190,28 +170,25 @@
                 if (this.$router.query !== queryObject) {
                     this.$router.push({ query: queryObject });
                 }
-
-
-                this.$nextTick(() => {
-                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-                });
-                this.courses = [];
-                this.loadIndex = 0;
             }, 350),
             updateFilters() {
                 const queryFilters = this.$route.query;
                 let sorting = queryFilters['sortare'] || '';
                 if (sorting !== 'alph-asc' && sorting !== 'alph-desc' && sorting !== 'date-asc' && sorting !== 'date-desc') sorting = 'date-asc';
                 this.filters.author = queryFilters['autor'] || null;
-                this.filters.tags = queryFilters['etichete'] || [];
+                this.filters.tags = (typeof queryFilters['eticheta'] !== 'object' ? [queryFilters['eticheta']] : queryFilters['eticheta']) || [];
                 this.filters.difficulty = [...queryFilters['dificultate'] || []];
                 this.filters.sorting = sorting;
                 this.filters.onlyRegistered = !!queryFilters['inregistrat'] || false;
-                this.moreFilters = (queryFilters['inregistrat'] || queryFilters['autor'] || queryFilters['etichete'] || (queryFilters['dificultate'] && queryFilters['dificultate'].length));
+                this.moreFilters = (queryFilters['inregistrat'] || queryFilters['autor'] || queryFilters['eticheta'] || (queryFilters['dificultate'] && queryFilters['dificultate'].length));
+                this.courses = [];
+                this.startIndex = 0;
+                this.filtersLoaded = true;
+                this.$refs.infiniteLoading.trigger();
             },
             setDisplay(isVertical) {
                 localStorage.setItem('displayVertical', isVertical);
-                this.displayVertical=isVertical;
+                this.displayVertical = isVertical;
             },
         },
         components: {

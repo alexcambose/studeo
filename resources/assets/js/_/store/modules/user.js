@@ -6,6 +6,7 @@ import {
 const state = {
     user: {},
     logged: false,
+    fetched: false,
 };
 
 const getters = {
@@ -143,7 +144,7 @@ const actions = {
                     reject(err);
                 });
         });
-    }
+    },
 };
 
 const mutations = {
@@ -153,16 +154,18 @@ const mutations = {
     [USER_AUTH_LOGIN](state, { user }) {
         state.user = user;
         state.logged = true;
+        state.fetched = true;
     },
     [USER_AUTH_LOGOUT](state) {
-        state.logged = false;
         state.user = {};
+        state.logged = false;
+        state.fetched = true;
     },
     [USER_AUTH_REGISTER] () {},
     [USER_AUTH_UPDATE_PASSWORD] () {},
     [USER_AUTH_UPDATE_PROFILE] () {},
     [USER_REGISTER_MENTOR] (state) {
-        state.user.role = 2; //mentor
+        state.user.role = 2; // mentor
     },
 };
 

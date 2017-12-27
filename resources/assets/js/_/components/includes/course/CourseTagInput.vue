@@ -18,21 +18,29 @@
     import config from '../../../../config';
 
     export default {
-        props: {},
+        props: {
+            value: Array,
+        },
         mounted() {
             axios.get(config.url.COURSE_TAGS)
                 .then(({ data }) => {
                     this.availableTags = data.tags;
+                    // this.tags = value.filter(tag => !!this.value.find(e => tag.id === parseInt(e)));
                     this.filteredTags = data.tags;
                 });
         },
         data() {
             return {
-                tags: [],
+                tags: this.value,
                 availableTags: [],
                 filteredTags: [],
             };
         },
+        // watch: {
+        //     value(value) {
+        //         this.tags = value.map(tag => this.availableTags.filter(e => parseInt(tag) === e.id));
+        //     },
+        // },
         methods: {
             changedTags(value) {
                 this.tags = value;

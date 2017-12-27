@@ -5,7 +5,8 @@ export default {
         LOGIN: SERVER + 'login/',
         LOGOUT: SERVER + 'logout/',
         REGISTER: SERVER + 'register/',
-        USER: SERVER + 'user/',
+        USER: SERVER + 'user/get/',
+        USER_BY_USERNAME: SERVER + 'user/get/username/',
         USER_UPDATE: SERVER + 'user/update/',
         USER_UPDATE_PASSWORD: SERVER + 'user/update/password/',
         USER_MENTOR: SERVER + 'user/mentor/register/',
@@ -19,7 +20,8 @@ export default {
         POST_UPDATE: SERVER + 'user/post/', // put
         POST_DELETE: SERVER + 'user/post/', // delete
         POST_TOGGLE_LIKE: postId => SERVER + `user/post/${postId}/like/`, // post
-        ACHIEVEMENTS: SERVER + 'achievement/',
+        ACHIEVEMENTS: SERVER + 'achievement/all',
+        ACHIEVEMENTS_USER: SERVER + 'achievement/user/',
         NOTIFICATION: SERVER + 'notification/',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll/',
@@ -69,7 +71,7 @@ export default {
         loadAmount: 10,
     },
     profile: {
-        postsLoadAmount: 10,
+        postsLoadAmount: 2,
     },
     xpLevelColors: {
         10: '#dfdbff',

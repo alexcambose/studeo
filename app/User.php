@@ -45,16 +45,13 @@ class User extends Authenticatable
         'city' => 'numeric',
     ];
     protected $appends = [
-        '_achievements',
         '_image'
     ];
 
     public function getSocialAttribute($value) {
         return json_decode($value); // convert "{}" to {}
     }
-    public function getAchievementsAttribute() {
-        return $this->achievements()->orderBy('created_at', 'DESC')->get();
-    }
+
     public function getImageAttribute() {
         return $this->image();
     }

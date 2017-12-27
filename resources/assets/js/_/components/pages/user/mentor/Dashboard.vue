@@ -11,7 +11,7 @@
             </div>
         </section>
         <div class="container content-lower">
-            <courses></courses>
+            <courses :user="$store.state.user.user"></courses>
         </div>
     </div>
 

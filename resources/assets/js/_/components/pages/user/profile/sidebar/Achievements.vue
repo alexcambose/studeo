@@ -43,19 +43,21 @@
 
     export default {
         props: {
-            achievements: {
-                type: Array,
-                required: true,
-            },
+            user: Object,
         },
         mounted() {
             axios.get(config.url.ACHIEVEMENTS)
                 .then(({ data }) => {
                     this.allAchievements = data.achievements;
                 });
+            axios.get(config.url.ACHIEVEMENTS_USER + this.user.id)
+                .then(({ data }) => {
+                    this.achievements = data.achievements;
+                });
         },
         data() {
             return {
+                achievements: [],
                 allAchievements: [],
                 isAchievementsModalActive: false,
             };

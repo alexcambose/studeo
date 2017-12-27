@@ -61,7 +61,6 @@ router.beforeEach((to, from, next) => {
     const user = store.state.user;
     if (user.logged) store.dispatch('getNotification');
     if (!store.state.playlist.playlists.length) store.dispatch('getAllPlaylists');
-    // if (playlists)
     const check = () => {
         if (to.matched.some(record => record.meta.onlyAuth)) {
             if (!user.logged) next({ name: 'welcome' });
@@ -80,11 +79,10 @@ router.beforeEach((to, from, next) => {
     if (user.logged) {
         check();
     } else {
-        axios.post(config.url.USER).then(({ data }) => {
+        axios.get(config.url.USER).then(({ data }) => {
             if (data.success) {
                 store.dispatch('setUser', data);
-                // the user {}, has a notifications[] property
-                store.dispatch('setNotification', data.user);
+                store.dispatch('getNotification');
             }
             else store.dispatch('logout');
             check();

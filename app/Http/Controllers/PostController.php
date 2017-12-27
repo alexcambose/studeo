@@ -16,7 +16,7 @@ class PostController extends Controller
 
         $posts = $user->posts();
         if($user->id !== Auth::id()) $posts->where('is_private', '0');
-        if($request->start !== null && $request->end !== null) $posts->skip((int)$request->start)->take((int)$request->end);
+        if($request->start !== null && $request->amount !== null) $posts->skip((int)$request->start)->take((int)$request->amount);
         return response()->json([
             'success' => false,
             'post' => $posts->orderBy('created_at', 'DESC')->get(),

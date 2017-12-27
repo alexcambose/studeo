@@ -1,18 +1,26 @@
 <template>
     <div class="afterApp">
-        <navbar v-if="hideNavbar"></navbar>
-        <transition name="fade">
-            <router-view></router-view>
-        </transition>
-        <_footer></_footer>
+        <b-loading :active="!userFetched" animation="zoom"></b-loading>
+        <div v-if="userFetched">
+            <navbar v-if="hideNavbar"></navbar>
+            <transition name="fade">
+                <router-view></router-view>
+            </transition>
+            <_footer></_footer>
+        </div>
+
     </div>
 </template>
 <script>
     import Navbar from './components/includes/Navbar';
     import Footer from './components/includes/Footer';
+    import { mapState } from 'vuex';
 
     export default {
         computed: {
+            ...mapState({
+                userFetched: ({ user }) => user.fetched,
+            }),
             hideNavbar() {
                 const hideNavbar = this.$route.meta.hideNavbar;
                 if (hideNavbar) {

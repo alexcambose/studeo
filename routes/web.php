@@ -13,6 +13,8 @@ Route::prefix('notification')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
+    Route::get('get/{userId?}', 'UserController@user'); // luare date user, daca username este specificat atunci datele user-ului cu username-ul
+    Route::get('get/username/{username}', 'UserController@userByUsername'); // luare date user, daca username este specificat atunci datele user-ului cu username-ul
     Route::post('update', 'UserController@updateData'); // actualizare informatii cont
     Route::post('update/password', 'UserController@updatePassword'); // actualizare  parola
     Route::post('update/profile', 'UserController@updateProfile'); // actualizare  informatii profil
@@ -26,7 +28,6 @@ Route::prefix('user')->group(function () {
     Route::get('share/{user}', 'UserController@shareAll'); // luate toate cursurile distribuite de un user
     Route::post('share/{course}', 'UserController@shareAdd'); // adaugare distribuire curs
     Route::delete('share/{id}', 'UserController@shareRemove'); // stargere distribuire curs
-    Route::post('{id?}', 'UserController@user'); // luare date user => todo refactor
 });
 
 Route::prefix('course')->group(function () {
@@ -54,7 +55,8 @@ Route::prefix('playlist')->group(function () {
     Route::delete('{playlist}/addCourse/{course}', 'PlaylistController@deleteCourse'); // stergere curs din playlist
 });
 Route::prefix('achievement')->group(function () {
-    Route::get('', 'AchievementController@all');  // luare achievement-uri disponibile
+    Route::get('/all', 'AchievementController@all');  // luare achievement-uri disponibile
+    Route::get('user/{user}', 'AchievementController@user');  // luare achievement-urile unui user
 });
 
 Route::get('/', function(){

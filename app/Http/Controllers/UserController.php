@@ -25,16 +25,21 @@ class UserController extends Controller
             'success' => true,
         ]);
     }
-    function user($id = null) {
+    function user($userId = null) {
         $user = Auth::user();
-        if($id) $user = User::find($id);
-        $user->notifications;
+        if($userId) $user = User::find($userId);
         return response()->json([
             'success' => !!$user,
             'user' => $user,
         ]);
     }
-
+    function userByUsername($username) {
+        $user = User::where('username', $username)->first();
+        return response()->json([
+            'success' => !!$user,
+            'user' => $user,
+        ]);
+    }
     public function updateProfileImage(Request $request) {
         $user = Auth::user();
         $validation = Validator::make($request->all(), [

@@ -41,7 +41,7 @@ class CourseController extends Controller
         }
         if($request->search) $courses->where('title', 'LIKE', '%'.$request->search.'%');
         if($userId) $courses = $courses->where('user_id', $userId);
-        if($request->start !== null && $request->end !== null) $courses->skip((int)$request->start)->take((int)$request->end);
+        if($request->start !== null && $request->amount !== null) $courses->skip((int)$request->start)->take((int)$request->amount);
         if($request->difficulty) $courses = $courses->whereIn('difficulty', $request->difficulty);
         $coursesArray = $courses->get();
 
@@ -55,7 +55,8 @@ class CourseController extends Controller
 
         if($request->tags) {
             $coursesArray = $coursesArray->filter(function($course)use($request){
-                foreach ($request->tags as $tag){
+                $tags = is_array($request->tags) ? $request->tags : [$request->tags];
+                foreach ($tags as $tag){
                     if($course->hasTag(Tag::find($tag))) return true;
                 }
                 return false;

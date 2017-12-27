@@ -78,7 +78,7 @@
                             <nav class="level">
                                 <div class="level-item has-text-centered">
                                     <div>
-                                        <p class="heading">Utilizatori înscriși</p>
+                                        <p class="heading">Utilizatori</p>
                                         <p class="title">{{course._joined.users || 0}}</p>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                             loadingComponent.close();
                             this.fetched = true;
                         } else { // if the course was found
-                            return axios.post(config.url.USER + data.course.user_id)
+                            return axios.get(config.url.USER + data.course.user_id)
                                 .then(({ data }) => { // get course user data
                                     this.user = data.user;
                                     loadingComponent.close();

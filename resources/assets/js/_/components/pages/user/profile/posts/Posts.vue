@@ -3,9 +3,9 @@
         <add-post v-model="posts"></add-post>
         <hr>
         <post v-for="post in posts" :post="post" :user="user" :key="post.id"></post>
-        <infinite-loading @infinite="infiniteHandler">
-            <slot slot="no-results">Nu sunt postări</slot>
-            <slot slot="no-more">Nu mai sunt postări</slot>
+        <infinite-loading @triggered="infiniteHandler">
+            <slot slot="fetching">Se accesează postările</slot>
+            <slot slot="completed">Nu mai sunt postări</slot>
         </infinite-loading>
     </div>
 </template>
@@ -14,7 +14,7 @@
     import AddPost from './AddPost.vue';
     import Post from './Post.vue';
     import config from '../../../../../../config';
-    import InfiniteLoading from 'vue-infinite-loading';
+    import InfiniteLoading from '../../../../includes/dumb/InfiniteLoading';
 
     export default {
         props: {
@@ -23,7 +23,6 @@
         data() {
             return {
                 start: 0,
-                end: config.profile.postsLoadAmount,
                 posts: [],
             };
         },
@@ -31,16 +30,15 @@
             infiniteHandler($state) {
                 axios.get(config.url.POST_ALL + this.$route.params.username, { params: {
                     start: this.start,
-                    end: this.end,
+                    amount: config.profile.postsLoadAmount,
                 } })
                     .then(({ data }) => {
                         if (data.post.length) {
                             this.start += config.profile.postsLoadAmount;
-                            this.end += config.profile.postsLoadAmount;
                             this.posts = [...this.posts, ...data.post];
-                            $state.loaded();
+                            $state.fetched();
                         } else {
-                            $state.complete();
+                            $state.completed();
                         }
                     });
             },

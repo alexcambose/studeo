@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-page">
+    <div v-if="userLoaded" class="profile-page">
         <div class="header">
             <div class="banner" :style="{backgroundColor: user.cover_color}"></div>
             <nav class="navbar profile-nav">
@@ -44,25 +44,7 @@
                     <router-view :user="user"></router-view>
                 </div>
                 <div class="column is-3">
-                    <achievements :achievements="user._achievements"></achievements>
-                    <!--<div class="card">-->
-                        <!--<header class="card-header">-->
-                            <!--<p class="card-header-title">-->
-                                <!--Recompense-->
-                            <!--</p>-->
-                            <!--<a href="#" class="card-header-icon">-->
-                          <!--<span class="icon">-->
-                            <!--<i class="fa fa-trophy" aria-hidden="true"></i>-->
-                          <!--</span>-->
-                            <!--</a>-->
-                        <!--</header>-->
-                        <!--<div class="card-content">-->
-                            <!--<item></item>-->
-                            <!--<item></item>-->
-                            <!--<item></item>-->
-                            <!--<item></item>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                    <achievements :user="user"></achievements>
                 </div>
             </div>
         </div>
@@ -74,19 +56,27 @@
     import ImageContainer from '../../../includes/dumb/ImageContainer.vue';
     import LevelBox from '../../../includes/dumb/LevelBox.vue';
     import Achievements from './sidebar/Achievements.vue';
-    import { mapState } from 'vuex';
     import { cities, xp, level, displayDate } from '../../../../../utils';
     import { markdown } from 'markdown';
     import moment from 'moment';
-
+    import config from '../../../../../config';
     export default {
+        mounted() {
+            this.getUser();
+        },
         data() {
-            return {};
+            return {
+                user: {},
+                achievements: [],
+                userLoaded: false,
+            };
+        },
+        watch: {
+            '$route.params'() {
+                this.getUser();
+            },
         },
         computed: {
-            ...mapState({
-                user: state => state.user.user,
-            }),
             fullname() {
                 return this.user.first_name + ' ' + this.user.last_name;
             },
@@ -111,6 +101,16 @@
                     { 'name': 'school', 'icon': 'fa fa-graduation-cap fa-lg', 'content': school },
                     { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat cu ${moment(created_at).fromNow()}` },
                 ];
+            },
+        },
+        methods: {
+            getUser() {
+                this.userLoaded = false;
+                axios.get(config.url.USER_BY_USERNAME + this.$route.params.username)
+                    .then(({ data }) => {
+                        this.user = data.user;
+                        this.userLoaded = true;
+                    });
             },
         },
         components: {
