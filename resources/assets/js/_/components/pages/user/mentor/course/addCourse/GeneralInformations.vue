@@ -21,6 +21,14 @@
                 ></b-input>
         </b-field>
         <course-tag-input v-model="tags" placeholder="Adaugă câteva etichete pentru a face cursul mai ușor de găsit"></course-tag-input>
+        <b-field label="Categorie">
+            <b-select expanded
+                      placeholder="Alege o categorie"
+                      :value="newCourse.category"
+                      @blur="setData('category', $event.target.value)">
+                <option v-for="category in classes" :value="category.id">{{ category.name }}</option>
+            </b-select>
+        </b-field>
         <b-field label="Scurtă descriere">
             <b-input
                     maxlength="240"
@@ -65,11 +73,13 @@
     import MultipleFields from '../../../../../../components/includes/dumb/MultipleFields.vue';
     import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
     import CourseTagInput from '../../../../../includes/course/CourseTagInput.vue';
+    import { MATERII } from '../../../../../../../utils';
 
     export default {
         data() {
             return {
                 fetchingSlug: false,
+                classes: MATERII,
             };
         },
         computed: {

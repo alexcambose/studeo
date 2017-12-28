@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string('slug')->unique();
             $table->text('short_description');
             $table->text('description');
+            $table->string('category');
             $table->text('target_class_level')->comment("0 - altceva, 1 - generala, 2 - gimnaziu, 3 - liceu, 4 - facultate");;
             $table->text('purpose');
             $table->text('purpose_what_will_learn');
@@ -27,7 +28,7 @@ class CreateCoursesTable extends Migration
             $table->boolean('is_private')->default(0);
             $table->integer('image_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('views')->default(0); // posibil sa fie scos
+            $table->integer('views')->default(0);
             $table->timestamps();
 
             $table->foreign('image_id')->references('id')->on('media');

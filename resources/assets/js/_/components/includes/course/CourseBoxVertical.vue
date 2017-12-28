@@ -20,9 +20,9 @@
 
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
-                <span class="course-title">{{course.id}} | {{course.title}}</span>
+                <span :class="{ 'course-title': true, 'course-home': inHome }">{{course.id}} | {{course.title}}</span>
 
-                <div class="course-content">
+                <div v-if="!inHome" class="course-content">
                     {{course.short_description}}
                 </div>
                 <user-box :user="course._user" size="is-small"></user-box>
@@ -41,6 +41,10 @@
             course: {
                 type: Object,
                 required: true,
+            },
+            inHome: {
+                type: Boolean,
+                required: false,
             },
         },
         computed: {

@@ -3,36 +3,51 @@ import color from 'color';
 
 export const MATERII = [
     {
+        id: '1',
         name: 'Matematică',
         slug: 'mate',
+        icon: 'fa-plus-square-o',
     },
     {
-        name: 'Informatica',
+        id: '2',
+        name: 'Informatică',
         slug: 'info',
+        icon: 'fa-code',
     },
     {
-        name: 'Romana',
+        id: '3',
+        name: 'Limba și literatura română',
         slug: 'ro',
+        icon: 'fa-address-card-o '
     },
     {
+        id: '4',
         name: 'Biologie',
         slug: 'bio',
+        icon: 'fa-male'
     },
     {
-        name: 'Fizica',
+        id: '5',
+        name: 'Fizică',
         slug: 'fiz',
+        icon: 'fa-bomb'
     },
     {
         name: 'Chimie',
         slug: 'chim',
+        icon: 'fa-thermometer-full'
     },
     {
+        id: '6',
         name: 'Geografie',
         slug: 'geogra',
+        icon: 'fa-street-view '
     },
     {
-        name: 'Limbi straine',
+        id: '7',
+        name: 'Limbi străine',
         slug: 'lbs',
+        icon: 'fa-language'
     },
 ];
 

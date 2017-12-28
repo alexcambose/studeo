@@ -105,7 +105,6 @@
     import Dropdown from '../dumb/Dropdown.vue';
     import InfiniteLoading from '../../includes/dumb/InfiniteLoading.vue';
     import CourseTagInput from '../../includes/course/CourseTagInput.vue';
-
     export default {
         props: {
             search: String,
@@ -176,7 +175,7 @@
                 let sorting = queryFilters['sortare'] || '';
                 if (sorting !== 'alph-asc' && sorting !== 'alph-desc' && sorting !== 'date-asc' && sorting !== 'date-desc') sorting = 'date-asc';
                 this.filters.author = queryFilters['autor'] || null;
-                this.filters.tags = (typeof queryFilters['eticheta'] !== 'object' ? [queryFilters['eticheta']] : queryFilters['eticheta']) || [];
+                // this.filters.tags = (typeof queryFilters['eticheta'] !== 'object' ? [queryFilters['eticheta']] : queryFilters['eticheta']) || [];
                 this.filters.difficulty = [...queryFilters['dificultate'] || []];
                 this.filters.sorting = sorting;
                 this.filters.onlyRegistered = !!queryFilters['inregistrat'] || false;

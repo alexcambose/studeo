@@ -1,8 +1,8 @@
 <template>
     <div class="school-classes">
         <ul>
-            <li v-for="mat in classes">
-                <router-link :to="`/materie/${mat.slug}`">{{mat.name}}</router-link>
+            <li v-for="category in classes">
+                <router-link :to="{ name: 'category', params: { category: category.slug }}">{{ category.name }}</router-link>
             </li>
         </ul>
     </div>

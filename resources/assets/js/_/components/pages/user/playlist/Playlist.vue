@@ -166,7 +166,7 @@
                             }
                         });
                         return course.slug;
-                    } else {
+                    } else if ( this.playlistProgress == '100%' ) {
                         this.$toast.open('Ai terminat toate cursurile din acest playlist.');
                         return this.playlist._courses[0].slug;
                     }

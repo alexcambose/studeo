@@ -159,6 +159,7 @@ class CourseController extends Controller
             'short_description' => Course::$rules['short_description'],
             'description' => Course::$rules['description'],
             'difficulty' => Course::$rules['difficulty'],
+            'category' => Course::$rules['category'],
             'prerequisites' => Course::$rules['prerequisites'],
             'purpose' => Course::$rules['purpose'],
             'purposeWhatWillLearn' => Course::$rules['purpose_what_will_learn'],
@@ -234,6 +235,7 @@ class CourseController extends Controller
         $newCourse->short_description = $course['short_description'];
         $newCourse->description = $course['description'];
         $newCourse->difficulty = $course['difficulty'];
+        $newCourse->category = $course['category'];
         $newCourse->prerequisites = json_encode($course['prerequisites']);
         $newCourse->purpose = $course['purpose'];
         $newCourse->purpose_what_will_learn = json_encode($course['purposeWhatWillLearn']);

@@ -1,5 +1,6 @@
 import Home from '../components/pages/Home.vue';
 import Notifications from '../components/pages/user/Notifications.vue';
+import Category from '../components/pages/user/Category.vue';
 import Help from '../components/pages/Help.vue';
 import NotFound404 from '../components/pages/404.vue';
 import guestRoutes from './guest';
@@ -13,13 +14,25 @@ import config from '../../config';
 import VueRouter from 'vue-router';
 
 const router = new VueRouter({
-    linkExactActiveClass: 'is-active',
+    linkExactActiveClass: 'is-exact-active',
     linkActiveClass: 'is-active',
     routes: [
         {
             path: '/',
             component: Home,
             name: 'root',
+            meta: { onlyAuth: true },
+        },
+        {
+            path: '/:category',
+            component: Home,
+            name: 'category_preview',
+            meta: { onlyAuth: true },
+        },
+        {
+            path: '/categorie/:category',
+            component: Category,
+            name: 'category',
             meta: { onlyAuth: true },
         },
         {
