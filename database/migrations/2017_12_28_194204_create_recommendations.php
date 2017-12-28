@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PostUserLikes extends Migration
+class CreateRecommendations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class PostUserLikes extends Migration
      */
     public function up()
     {
-        Schema::create('post_user_likes', function (Blueprint $table ) {
+        Schema::create('recommendations', function (Blueprint $table ) {
             $table->integer('user_id')->unsigned();
-            $table->integer('post_id')->unsigned();
-            $table->primary(['user_id','post_id']);
-            $table->timestamps();
+            $table->integer('category');
+            $table->integer('count')->default(1);
+            $table->primary(['user_id','category']);
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');;
         });
     }
 
@@ -30,6 +29,6 @@ class PostUserLikes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_user_likes');
+        Schema::dropIfExists('recommendations');
     }
 }

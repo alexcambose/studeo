@@ -149,4 +149,11 @@ class UserController extends Controller
             'courses' => Auth::user()->sharedCourses()->orderBy('created_at', 'DESC')->get(),
         ]);
     }
+
+    public function recommended($amount = 8) {
+        return response()->json([
+            'success' => true,
+            'courses' => Auth::user()->recommendations($amount),
+        ]);
+    }
 }

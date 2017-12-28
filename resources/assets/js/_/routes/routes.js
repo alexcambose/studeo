@@ -23,12 +23,12 @@ const router = new VueRouter({
             name: 'root',
             meta: { onlyAuth: true },
         },
-        {
-            path: '/:category',
-            component: Home,
-            name: 'category_preview',
-            meta: { onlyAuth: true },
-        },
+        // {
+        //     path: '/:category',
+        //     component: Home,
+        //     name: 'category_preview',
+        //     meta: { onlyAuth: true },
+        // },
         {
             path: '/categorie/:category',
             component: Category,

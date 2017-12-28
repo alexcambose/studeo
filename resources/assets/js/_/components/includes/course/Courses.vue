@@ -20,7 +20,6 @@
 
                 </div>
             </div>
-
             <div class="course-filter-sorting">
                 <dropdown :values="[
                         {
@@ -48,15 +47,29 @@
                         ]" v-model="filters.sorting" :changed="resetCourses" label="Sortează după: ">
 
                 </dropdown>
+
             </div>
+
         </div>
         <div class="course-more-filters">
             <div :class="['show-more-content', moreFilters ? 'expanded' : '']">
-                <b-field class="field ml-5 mt-5">
+                <b-field class="field">
                     <b-switch v-model="filters.onlyRegistered" @click.native="resetCourses" type="is-info">
                         Înregistrat
                     </b-switch>
                 </b-field>
+
+                <b-field label="Categorie">
+                    <b-select v-model="filters.category" @input="resetCourses" placeholder="Selectează o categorie" expanded>
+                        <option
+                                v-for="option in MATERII"
+                                :value="option.slug"
+                                :key="option.id">
+                            {{ option.name }}
+                        </option>
+                    </b-select>
+                </b-field>
+
                 <course-tag-input v-model="filters.tags" @input="resetCourses" placeholder="Găsește doar cursurile care au conținutul comun"></course-tag-input>
                 <b-field label="Autor">
                     <b-input v-model="filters.author" @input.native="resetCourses" placeholder="Numele autorului pe care vrei să îl cauți" expanded></b-input>
@@ -87,7 +100,7 @@
                 <course-box-vertical :course="course"></course-box-vertical>
             </div>
         </div>
-        <div v-else v-for="course in courses"  :key="course.id">
+        <div v-else v-for="course in courses" :key="course.id">
             <course-box-horizontal :course="course"></course-box-horizontal>
         </div>
         <infinite-loading @triggered="infiniteHandler" ref="infiniteLoading">
@@ -99,7 +112,7 @@
 <script>
     import config from '../../../../config';
     import _ from 'lodash';
-    import { chunkArray } from '../../../../utils';
+    import { chunkArray, MATERII } from '../../../../utils';
     import CourseBoxVertical from './CourseBoxVertical.vue';
     import CourseBoxHorizontal from './CourseBoxHorizontal.vue';
     import Dropdown from '../dumb/Dropdown.vue';
@@ -115,13 +128,15 @@
         },
         data: function() {
             return {
-                filtersLoaded: false,
+                MATERII,
                 courses: [],
                 startIndex: 0,
                 moreFilters: false,
+                initialFetch: true,
                 displayVertical: localStorage.getItem('displayVertical') === 'true',
                 filters: {
                     author: null,
+                    category: null,
                     tags: [],
                     difficulty: [],
                     sorting: 'date-asc',
@@ -137,7 +152,7 @@
         methods: {
             chunkArray,
             infiniteHandler($state) {
-                if (!this.filtersLoaded) return false;
+                if (this.initialFetch) return;
                 axios.get(config.url.COURSE_ALL + (this.user ? this.user.id : ''), {
                     params: {
                         start: this.startIndex,
@@ -164,6 +179,7 @@
                 if (filters.sorting !== 'date-asc') queryObject['sortare'] = filters.sorting;
                 if (filters.onlyRegistered) queryObject['inregistrat'] = '1';
                 if (filters.author) queryObject['autor'] = filters.author;
+                if (filters.category) queryObject['categorie'] = filters.category;
                 if (filters.difficulty) queryObject['dificultate'] = filters.difficulty;
                 if (filters.tags) queryObject['eticheta'] = filters.tags;
                 if (this.$router.query !== queryObject) {
@@ -175,14 +191,22 @@
                 let sorting = queryFilters['sortare'] || '';
                 if (sorting !== 'alph-asc' && sorting !== 'alph-desc' && sorting !== 'date-asc' && sorting !== 'date-desc') sorting = 'date-asc';
                 this.filters.author = queryFilters['autor'] || null;
-                // this.filters.tags = (typeof queryFilters['eticheta'] !== 'object' ? [queryFilters['eticheta']] : queryFilters['eticheta']) || [];
+                this.filters.category = queryFilters['categorie'] || null;
+                this.filters.tags = (() => {
+                    if (!queryFilters['eticheta']) return [];
+                    if (typeof queryFilters['eticheta'] === 'object') {
+                        return queryFilters['eticheta'];
+                    } else {
+                        return [queryFilters['eticheta']];
+                    }
+                })();
                 this.filters.difficulty = [...queryFilters['dificultate'] || []];
                 this.filters.sorting = sorting;
                 this.filters.onlyRegistered = !!queryFilters['inregistrat'] || false;
-                this.moreFilters = (queryFilters['inregistrat'] || queryFilters['autor'] || queryFilters['eticheta'] || (queryFilters['dificultate'] && queryFilters['dificultate'].length));
+                this.moreFilters = (queryFilters['inregistrat'] || queryFilters['categorie'] || queryFilters['autor'] || (queryFilters['eticheta'] && queryFilters['eticheta'].length) || (queryFilters['dificultate'] && queryFilters['dificultate'].length));
                 this.courses = [];
                 this.startIndex = 0;
-                this.filtersLoaded = true;
+                this.initialFetch = false;
                 this.$refs.infiniteLoading.trigger();
             },
             setDisplay(isVertical) {

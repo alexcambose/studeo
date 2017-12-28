@@ -10,6 +10,18 @@
     // also looks ugly
     box-shadow: 0 2px 3px rgba(35, 209, 96, 0.5), 0 0 0 1px rgba(35, 209, 96, 0.5);
   }
+  &.course-small {
+    .course-title {
+      height: 124px;
+      font-size: 1rem;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .course-content {
+      height: 0;
+    }
+  }
   &:hover {
     box-shadow: 0 2px 8px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1);
   }
@@ -22,7 +34,7 @@
     align-items: center;
     .difficulty-tag {}
     .length-tag {
-      align-self:flex-end;
+      align-self: flex-end;
     }
     .progress-container {
       flex: 1;
@@ -43,16 +55,14 @@
     height: $course-box-user-image-height;
   }
   .course-title {
-    @include clampText(4);
+    //@include clampText(4);
+    overflow: hidden;
     font-size: 1.1em;
     font-weight: bold;
-    height: 98px;
+    height: 102px;
     margin-bottom: 2px;
-  }
-  .course-home {
-    font-size: 16px !important;
-    color: #29303b !important;
-    font-weight: 600 !important;
+    color: #333b48;
+    display: block;
   }
   .course-content {
     height: 102px;
@@ -159,7 +169,7 @@
   position: relative;
   .show-more-content {
     margin: 10px 0;
-    transition: all .3s;
+    padding: 0 4px;
     overflow: hidden;
     height: 0;
     &.expanded {

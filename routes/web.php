@@ -15,6 +15,7 @@ Route::prefix('notification')->group(function () {
 Route::prefix('user')->group(function () {
     Route::get('get/{userId?}', 'UserController@user'); // luare date user, daca username este specificat atunci datele user-ului cu username-ul
     Route::get('get/username/{username}', 'UserController@userByUsername'); // luare date user, daca username este specificat atunci datele user-ului cu username-ul
+    Route::get('recommended/{amount?}', 'UserController@recommended'); // luare date user, daca username este specificat atunci datele user-ului cu username-ul
     Route::post('update', 'UserController@updateData'); // actualizare informatii cont
     Route::post('update/password', 'UserController@updatePassword'); // actualizare  parola
     Route::post('update/profile', 'UserController@updateProfile'); // actualizare  informatii profil

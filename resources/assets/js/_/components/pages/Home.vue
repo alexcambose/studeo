@@ -15,14 +15,14 @@
 
         <nav class="nav-home is-centered" role="navigation" aria-label="dropdown navigation">
             <ul>
-                <li class="nav-home-item"><router-link :to="{ path: '/'}"><i class="fa fa-globe"></i> Toate categoriile</router-link></li>
-                <li class="nav-home-item" v-for="(item, index) in classes"><router-link :to="{ name: 'category_preview', params: { category: item.slug } }"><i :class="'fa ' + item.icon"></i> {{ item.name }}</router-link></li>
+                <li class="nav-home-item"><router-link :to="{ path: '/'}"><b-icon pack="fa" icon="globe" size="is-small"></b-icon> Toate categoriile</router-link></li>
+                <li class="nav-home-item" v-for="(item, index) in classes"><router-link :to="{ name: 'category_preview', params: { category: item.slug } }"><b-icon pack="fa" :icon="item.icon" size="is-small"></b-icon> {{ item.name }}</router-link></li>
             </ul>
         </nav>
         <div class="container">
             <div class="columns is-multiline">
                 <div v-for="(course, index) in courses" :key="index" class="column is-one-fifth mt-15">
-                    <course-box-vertical :course="course" :inHome="true"></course-box-vertical>
+                    <course-box-vertical :course="course" small></course-box-vertical>
                 </div>
             </div>
             <div class="more-home" v-if="!fetching">
@@ -65,7 +65,7 @@
             '$route.params.category'() {
                 this.fetching = true;
                 this.courses = [];
-                const loadingComponent = this.$loading.open()
+                const loadingComponent = this.$loading.open();
                 this.category = this.$route.params.category;
                 this.getCourses(this.category).then(() => { this.fetching = false; loadingComponent.close(); });
             },

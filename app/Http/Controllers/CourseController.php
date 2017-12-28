@@ -9,6 +9,7 @@ use App\Media;
 use App\Notifications\FirstCourseJoined;
 use App\Notifications\FirstCoursePosted;
 use App\Question;
+use App\Recommendations;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class CourseController extends Controller
             $course->views++;
             $course->save();
         }
+        Recommendations::add($course->category);
 
         return response()->json([
             'success' => true,
@@ -195,7 +197,7 @@ class CourseController extends Controller
             }
             // endregion
         }
-        //afiseaza errorile daca sunt
+        // afiseaza errorile daca sunt
         if(count($errors)) return response()->json([
             'success' => false,
             'messages' => $errors,

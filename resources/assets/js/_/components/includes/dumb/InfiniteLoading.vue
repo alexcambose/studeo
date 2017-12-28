@@ -25,9 +25,9 @@
         },
         mounted() {
             this.check();
-            window.addEventListener('scroll', () => {
+            setInterval(() => {
                 this.check();
-            });
+            }, 1000);
         },
         data() {
             return {
@@ -41,7 +41,7 @@
             check() {
                 const container = document.getElementById(this.containerId);
                 if (!container || this.completed) return false;
-                if (container.getBoundingClientRect().top - this.offset < window.innerHeight && !this.triggered) {
+                if (container.getBoundingClientRect().top - this.offset < window.innerHeight && !this.fetching) {
                     this.trigger();
                 }
                 if (container.getBoundingClientRect().top - this.offset > window.innerHeight) {

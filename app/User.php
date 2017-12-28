@@ -47,15 +47,23 @@ class User extends Authenticatable
     protected $appends = [
         '_image'
     ];
-
     public function getSocialAttribute($value) {
         return json_decode($value); // convert "{}" to {}
     }
-
     public function getImageAttribute() {
         return $this->image();
     }
 
+    //methods
+    public function recommendations($amount = 8) {
+        return Recommendations::where('user_id', Auth::id())
+            ->orderBy('count', 'DESC') // cu cele mai multe categorii vizualizate
+            ->get()
+            ->take($amount)
+            ->map(function($e) {
+                return Course::where('category', $e->category)->orderBy('views', 'DESC')->first(); // cursul cu cele mai multe vizualizari
+            });
+    }
     // Relationships
     public function image() {
         // has one

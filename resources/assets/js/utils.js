@@ -6,48 +6,48 @@ export const MATERII = [
         id: '1',
         name: 'Matematică',
         slug: 'mate',
-        icon: 'fa-plus-square-o',
+        icon: 'plus-square-o',
     },
     {
         id: '2',
         name: 'Informatică',
         slug: 'info',
-        icon: 'fa-code',
+        icon: 'code',
     },
     {
         id: '3',
         name: 'Limba și literatura română',
         slug: 'ro',
-        icon: 'fa-address-card-o '
+        icon: 'address-card-o '
     },
     {
         id: '4',
         name: 'Biologie',
         slug: 'bio',
-        icon: 'fa-male'
+        icon: 'male'
     },
     {
         id: '5',
         name: 'Fizică',
         slug: 'fiz',
-        icon: 'fa-bomb'
+        icon: 'bomb'
     },
     {
         name: 'Chimie',
         slug: 'chim',
-        icon: 'fa-thermometer-full'
+        icon: 'thermometer-full'
     },
     {
         id: '6',
         name: 'Geografie',
         slug: 'geogra',
-        icon: 'fa-street-view '
+        icon: 'street-view '
     },
     {
         id: '7',
         name: 'Limbi străine',
         slug: 'lbs',
-        icon: 'fa-language'
+        icon: 'language'
     },
 ];
 

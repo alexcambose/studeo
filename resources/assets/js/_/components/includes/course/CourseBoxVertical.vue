@@ -1,5 +1,5 @@
 <template>
-    <div :class="['card', 'course-box', course._joined ? 'course-joined' : '']">
+    <div :class="['card', 'course-box', course._joined ? 'course-joined' : '', small ? 'course-small' : '']">
         <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
             <!--todo refactor-->
             <div class="card-image">
@@ -20,9 +20,9 @@
 
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
-                <span :class="{ 'course-title': true, 'course-home': inHome }">{{course.id}} | {{course.title}}</span>
+                <span class="course-title">{{course.id}} | {{course.title}}</span>
 
-                <div v-if="!inHome" class="course-content">
+                <div class="course-content">
                     {{course.short_description}}
                 </div>
                 <user-box :user="course._user" size="is-small"></user-box>
@@ -42,7 +42,7 @@
                 type: Object,
                 required: true,
             },
-            inHome: {
+            small: {
                 type: Boolean,
                 required: false,
             },
