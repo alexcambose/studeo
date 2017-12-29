@@ -17,7 +17,6 @@
 
         <playlist-dropdown-button :course="course"></playlist-dropdown-button>
         <share-button :course="course"></share-button>
-
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
                 <span class="course-title">{{course.id}} | {{course.title}}</span>

@@ -27,6 +27,7 @@ class Course extends Model
         '_user',
         '_shares',
         '_lessons',
+        '_xp',
     ];
     public function getImageAttribute(){
         return Media::find($this->image_id);
@@ -58,7 +59,10 @@ class Course extends Model
     public function getLessonsAttribute(){
         return $this->lessons()->get();
     }
-
+    public function getXpAttribute(){
+        return $this->xp();
+    }
+    //methods
     public function joinedUsersArray() {
         $lessons = $this->lessons()->get();
         $users = [];
@@ -78,6 +82,11 @@ class Course extends Model
 
     public function hasTag(Tag $tag) {
         return $tag->inCourse($this);
+    }
+    public function xp(){
+        return $this->difficulty * 10
+            + 5 * $this->lessons()->count()
+            + 2 * $this->lessons()->get()->reduce(function($carry, $lesson) { return $carry + $lesson->questions()->count(); });
     }
     // Relationships
     public function user(){

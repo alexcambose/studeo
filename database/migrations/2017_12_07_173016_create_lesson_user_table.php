@@ -25,8 +25,8 @@ class CreateLessonUserTable extends Migration
             $table->integer('lesson_id')->unsigned(); // daca am id-ul lectiei la care este am toate
             $table->timestamps();
             $table->primary(['user_id', 'lesson_id']);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('lesson_id')->references('id')->on('lessons');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
         });
     }
 

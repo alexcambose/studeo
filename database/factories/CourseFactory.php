@@ -16,7 +16,7 @@ $factory->define(App\Course::class, function (Faker $faker) {
         'purpose' => $faker->text($maxNbChars = 2000),
         'purpose_what_will_learn' => json_encode($faker->sentences($nb = 6, $asText = false)),
         'target_class_level' => $faker->numberBetween(0,4),
-        'views' => $faker->numberBetween(500,4000),
+        'views' => $faker->numberBetween(100,500),
         'image_id' => function() {
             return factory(App\Media::class)->create()->id;
         },

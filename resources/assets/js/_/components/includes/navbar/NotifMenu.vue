@@ -7,10 +7,10 @@
             <refresh @click.native="refresh" size="is-small" :fetching="refreshing" class="is-rounded is-pulled-right"/>
         </div>
         <div v-if="!notifications.length" class="notification-item">
-            Nicio notificare
+            Nici o notificare
         </div>
         <div class="notification-container" v-else>
-            <notifications :notifications="notifications"></notifications>
+            <notifications/>
         </div>
     </div>
 </template>

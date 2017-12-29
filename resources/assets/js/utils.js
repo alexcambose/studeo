@@ -142,7 +142,7 @@ export const xp = level => { // cat xp are un level
     return xp(level - 1) + Math.floor(100 * (1.1 ** (level - 1)));
 };
 
-export const level = theXp => { // ce level are in functie de xp, nu merge frumos recursiv :c
+export const level = theXp => { // ce level are in functie de xp
     let level = 0;
     while(xp(level) <= theXp) level++;
     return level;

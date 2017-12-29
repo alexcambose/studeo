@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\AwardedXp;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,14 +56,18 @@ class User extends Authenticatable
     }
 
     //methods
-    public function recommendations($amount = 8) {
-        return Recommendations::where('user_id', Auth::id())
+    public function recommendations($maxAmount = 8) {
+        return Recommendations::where('user_id', $this->id)
             ->orderBy('count', 'DESC') // cu cele mai multe categorii vizualizate
             ->get()
-            ->take($amount)
+            ->take($maxAmount)
             ->map(function($e) {
                 return Course::where('category', $e->category)->orderBy('views', 'DESC')->first(); // cursul cu cele mai multe vizualizari
             });
+    }
+    public function addXp($amount) {
+        $this->increment('xp', $amount);
+        $this->notify(new AwardedXp($amount)); // baga si notificare dupa ce adauga xp in db
     }
     // Relationships
     public function image() {

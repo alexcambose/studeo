@@ -37,6 +37,9 @@
         <div class="container mt-20">
             <div class="columns">
                 <div class="column is-8">
+                    <div v-if="!course._lessons.find(e => !e._watched)" class="notification is-success">
+                        <div class="title is-4">Ai terminat acest curs!</div>
+                    </div>
                     <div class="notification is-warning">
                         <div class="title is-4">Cerințe preliminare</div>
                         <div v-for="(skill, index) in course.prerequisites" :key="index">

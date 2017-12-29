@@ -11,12 +11,10 @@
                         {{course.title}}
                     </h1>
                     <h2 class="subtitle mt-4 is-pulled-right">
-                        <b-icon pack="fa" icon="clock-o"></b-icon>
-                        44 minute
-                        <!--todo replace time-->
+                        <b-icon pack="fa" icon="clock-o" size="is-small"></b-icon>
+                        {{length}}
                     </h2>
                     <progress class="progress is-dark" :value="progress" max="100"></progress>
-
                 </div>
             </div>
         </section>
@@ -40,6 +38,7 @@
 </template>
 
 <script>
+    import { timeConvert } from '../../../../../../utils';
     import { mapActions, mapState, mapGetters } from 'vuex';
     import LessonVideo from './LessonVideo.vue';
     import LessonSidebar from './LessonSidebar.vue';
@@ -76,6 +75,10 @@
             lesson() {
                 const { currentLessonIndex } = this.$store.state.course;
                 return this.lessons[currentLessonIndex];
+            },
+            length() {
+                const total = this.course._lessons.reduce((time, lesson) => time + lesson.length, 0);
+                return timeConvert(total);
             },
         },
         methods: {

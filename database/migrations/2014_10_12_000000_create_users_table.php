@@ -42,7 +42,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('image_id')->references('id')->on('media');
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 

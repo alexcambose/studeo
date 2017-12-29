@@ -44,7 +44,7 @@
 }
 .notification-container {
   max-height: 400px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .notification-item {
   padding: 10px 10px;

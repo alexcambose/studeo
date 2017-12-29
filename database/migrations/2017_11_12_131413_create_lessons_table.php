@@ -27,7 +27,7 @@ class CreateLessonsTable extends Migration
 
             $table->foreign('video_id')->references('id')->on('media');
             $table->foreign('thumbnail_id')->references('id')->on('media');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

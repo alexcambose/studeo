@@ -40,15 +40,23 @@ class DatabaseSeeder extends Seeder
         foreach ($defaults as $default) DB::table('tags')->insert($default);
     }
     public function insertAchievements() {
-        DB::table('achievements')->insert([
-            'type' => '1_COURSE_FINISHED',
-            'description' => 'Un curs terminat.'
-        ]);
-        foreach ([5,10,25,50,100,200,250, 500] as $value)
-            DB::table('achievements')->insert([
+        $achievements = [];
+        // in ordine, un fel cronologica
+        $achievements[] = ['type' => '1_COURSE_FINISHED', 'description' => 'Un curs terminat.'];
+        foreach ([5,10,25,50,100,200,250,500] as $value)
+            $achievements[] = [
                 'type' => $value . '_COURSE_FINISHED',
-                'description' => $value . ($value % 100 > 19 ? ' de ' : ' ') . 'cursuri terminate.'
-            ]);
+                'description' => $value . ($value % 100 > 19 ? ' de ' : ' ') . 'cursuri terminate.',
+            ];
+
+        $achievements[] = ['type' => 'BECAME_MENTOR', 'description' => 'Mentor'];
+        $achievements[] = ['type' => '1_COURSE_PUBLISHED', 'description' => 'Un curs publicat'];
+        foreach ([2,6,10,20,30] as $value) // 30 ii ajung disperatului
+            $achievements[] = [
+                'type' => $value . '_COURSE_PUBLISHED',
+                'description' => $value . ($value % 100 > 19 ? ' de ' : ' ') . 'cursuri publicate.',
+            ];
+        DB::table('achievements')->insert($achievements);
     }
     /**
      * Run the database seeds.

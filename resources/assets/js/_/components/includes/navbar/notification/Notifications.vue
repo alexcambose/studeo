@@ -1,9 +1,9 @@
 <template>
     <div>
         <ul>
-            <notification-item v-for="(notification, index) in _notifications" :key="index" :notification="notification"></notification-item>
+            <notification-item v-for="notification in notifications" :key="notification.id" :notification="notification"/>
         </ul>
-        <infinite-loading @infinite="infiniteHandler" v-if="end < notifications.length"></infinite-loading>
+        <infinite-loading @infinite="infiniteHandler" v-if="end < notifications.length"/>
     </div>
 
 </template>
@@ -13,10 +13,9 @@
     import NotificationItem from './NotificationItem';
     import InfiniteLoading from 'vue-infinite-loading';
     export default {
-        props: ['notifications'],
         computed: {
-            _notifications() {
-                return this.notifications.slice(0, this.end);
+            notifications() {
+                return this.$store.getters.notifications.slice(0, this.end);
             },
         },
         data: function() {

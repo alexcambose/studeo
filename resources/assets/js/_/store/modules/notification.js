@@ -12,15 +12,16 @@ const getters = {
 
         // add diffForHumans time
         notifications = notifications.map(e => {
-            e.f_created_at = moment(e.created_at).fromNow();
-            if (e.read_at) e.f_read_at = moment(e.read_at).fromNow();
-            e.data.title = config.notifications[e.data.type].title;
-            e.data.message = config.notifications[e.data.type].message(e);
-            return e;
+            return {
+                id: e.id,
+                _created_at: moment(e.created_at).fromNow(),
+                _read_at: e.read_at ? moment(e.read_at).fromNow() : null,
+                title: config.notifications[e.data.type].title(e),
+                message: config.notifications[e.data.type].message(e),
+            };
         });
 
-        if (state.onlyUnread)
-            notifications = notifications.filter(e => !e.read_at);
+        if (state.onlyUnread) notifications = notifications.filter(e => !e._read_at);
 
         return notifications;
     },
@@ -33,7 +34,7 @@ const getters = {
 };
 
 const actions = {
-    getNotification({ commit }){
+    getNotification({ commit }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.NOTIFICATION)
                 .then(({ data }) => {
@@ -88,7 +89,7 @@ const mutations = {
     [NOTIFICATION_TOGGLE_READ_ALL]() {},
     [NOTIFICATION_TOGGLE_READ](state, { id, data }) {
         state.notifications = state.notifications.map(e => {
-            if(e.id === id) e = data;
+            if (e.id === id) e = data;
             return e;
         });
     },
@@ -99,4 +100,4 @@ export default {
     getters,
     actions,
     mutations,
-}
+};

@@ -100,7 +100,7 @@
                 <course-box-vertical :course="course"></course-box-vertical>
             </div>
         </div>
-        <div v-else v-for="course in courses" :key="course.id">
+        <div v-else v-for="(course, index) in courses" :key="index">
             <course-box-horizontal :course="course"></course-box-horizontal>
         </div>
         <infinite-loading @triggered="infiniteHandler" ref="infiniteLoading">
