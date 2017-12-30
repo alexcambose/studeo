@@ -9,7 +9,8 @@
                     </image-container>
                     <div class="navbar-start">
                         <router-link :to="{name:'profile-posts'}" class="navbar-item is-tab">Postări</router-link>
-                        <router-link :to="{name:'profile-recommended'}" class="navbar-item is-tab">Recomandate</router-link>
+                        <router-link :to="{name:'profile-recommended'}" class="navbar-item is-tab">Recomandate
+                        </router-link>
                     </div>
                     <div class="navbar-end">
                         <div class="navbar-item progress-container">
@@ -28,17 +29,8 @@
         <div class="container user-data-container">
             <div class="columns">
                 <div class="column is-3">
-                    <h3 class="fullname">{{ fullname }}</h3>
-                    <router-link :to="{ name: 'profile', params: {username: user.username}}" class="username-link"> @{{ user.username }}</router-link>
-                    <hr>
-                    <div class="description" v-if="description" v-html="description"></div>
-
-                    <div v-for="item in userInfo" class="user-info-item">
-                        <div>
-                            <i :class="item.icon"></i>
-                            {{ item.content }}
-                        </div>
-                    </div>
+                    <user-info :user="user"></user-info>
+                    <activity :user="user"></activity>
                 </div>
                 <div class="column is-6">
                     <router-view :user="user"></router-view>
@@ -48,18 +40,18 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 <script>
     import Course from '../../../includes/dumb/Course.vue';
     import ImageContainer from '../../../includes/dumb/ImageContainer.vue';
     import LevelBox from '../../../includes/dumb/LevelBox.vue';
-    import Achievements from './sidebar/Achievements.vue';
-    import { cities, xp, level, displayDate } from '../../../../../utils';
-    import { markdown } from 'markdown';
-    import moment from 'moment';
+    import Achievements from './sidebars/Achievements.vue';
+    import { xp, level } from '../../../../../utils';
     import config from '../../../../../config';
+    import UserInfo from './sidebars/UserInfo.vue';
+    import Activity from './sidebars/Activity.vue';
+
     export default {
         mounted() {
             this.getUser();
@@ -77,12 +69,6 @@
             },
         },
         computed: {
-            fullname() {
-                return this.user.first_name + ' ' + this.user.last_name;
-            },
-            description() {
-                return markdown.toHTML(this.user.description);
-            },
             levelXp() {
                 return xp(this.level) - xp(this.level - 1);
             },
@@ -92,15 +78,6 @@
             },
             level() {
                 return level(this.user.xp);
-            },
-            userInfo() {
-                const { city, birthday, school, created_at } = this.user;
-                return [
-                    { 'name': 'city', 'icon': 'fa fa-building fa-lg', 'content': cities[city] },
-                    { 'name': 'birthday', 'icon': 'fa fa-birthday-cake fa-lg', 'content': `Născut la ${displayDate(birthday)}` },
-                    { 'name': 'school', 'icon': 'fa fa-graduation-cap fa-lg', 'content': school },
-                    { 'name': 'created_at', 'icon': 'fa fa-calendar-check-o fa-lg', 'content': ` S-a alăturat cu ${moment(created_at).fromNow()}` },
-                ];
             },
         },
         methods: {
@@ -114,6 +91,8 @@
             },
         },
         components: {
+            UserInfo,
+            Activity,
             Course,
             Achievements,
             LevelBox,

@@ -31,10 +31,11 @@
 </script>
 
 
-<style>
+<style scoped>
     .achievement-box {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         flex-direction: column;
         width: 120px;
         padding: 6px;
@@ -46,17 +47,18 @@
     .achievement-box.highlighted .achievement-image{
         box-shadow: 0 0 10px #00ce00;
     }
-    .achievement-box .achievement-image{
+    .achievement-image{
         height: 50px;
         width: 50px;
         border-radius: 100%;
     }
-    .achievement-box .achievement-description {
+    .achievement-description {
         margin-top: 2px;
         font-size: .9rem;
+        flex: 1;
         text-align: center;
     }
-    .achievement-box .achievement-date {
+    .achievement-date {
         margin-top: 2px;
         padding-top: 2px;
         border-top: 1px solid #ededed;

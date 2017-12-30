@@ -8,10 +8,10 @@
 <script>
     export default {
         props: ['color', 'percentage'],
-    }
+    };
 </script>
 
-<style>
+<style scoped>
     .progress-custom {
         -moz-appearance: none;
         -webkit-appearance: none;

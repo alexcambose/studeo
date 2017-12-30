@@ -1,6 +1,6 @@
 <template>
     <div v-if="fetched" class="course-welcome">
-        <section class="hero course-hero is-medium" :style="{backgroundImage: `url(${course._image.filename})`}">
+        <section ref="courseHeader" class="hero course-hero is-medium" :style="{backgroundImage: `url(${course._image.filename})`}">
             <div class="background-filter"></div>
             <div class="hero-body">
                 <div class="container">
@@ -132,6 +132,15 @@
             },
         },
         methods: {
+            onReady() {
+                this.$nextTick(() => {
+                    const $courseHeader = this.$refs.courseHeader;
+                    window.addEventListener('scroll', () => {
+                        $courseHeader.style.backgroundPositionY = (50 + window.scrollY / 10).toFixed(1) + '%';
+                        $courseHeader.style.backgroundSize = (100 + window.scrollY/80).toFixed(1) + '%';
+                    });
+                });
+            },
             fetchCourse() {
                 this.fetched = false;
                 const loadingComponent = this.$loading.open();
@@ -148,6 +157,7 @@
                                     this.user = data.user;
                                     loadingComponent.close();
                                     this.fetched = true;
+                                    this.onReady();
                                 });
                         }
                     })

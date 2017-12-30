@@ -6,7 +6,7 @@
                     <p class="modal-card-title">Toate realizările disponibile</p>
                 </header>
                 <section class="modal-card-body">
-                    <div class="achievements-container">
+                    <div class="achievements-modal-container">
                         <achievement-box
                                 v-for="(achievement, index) in allAchievements"
                                 :key="index"

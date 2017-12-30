@@ -52,12 +52,22 @@
   .username-link {}
   .description {
     @extend .content;
+    margin-top: 20px;
   }
-  .user-info-item {
-    font-size: 15px !important;
-    color: #657786;
-    margin-top: 5px;
+  .user-info-container {
+    .user-info-item {
+      font-size: 15px !important;
+      color: #657786;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      &:not(:first-of-type) {
+        border-top: 1px solid #ececec;
+      }
+    }
   }
+
+
   .user-data-container {
     margin-top: 30px;
   }
@@ -76,6 +86,9 @@
         display: inline-flex;
       }
     }
+  }
+  .achievements-modal-container{
+    text-align: center;
   }
   .deleted {
      text-align: center;

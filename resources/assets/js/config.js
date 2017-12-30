@@ -6,6 +6,7 @@ export default {
         LOGOUT: SERVER + 'logout/',
         REGISTER: SERVER + 'register/',
         USER: SERVER + 'user/get/',
+        USER_ACTIVITY: SERVER + 'user/activity/',
         USER_BY_USERNAME: SERVER + 'user/get/username/',
         USER_UPDATE: SERVER + 'user/update/',
         USER_UPDATE_PASSWORD: SERVER + 'user/update/password/',
@@ -75,7 +76,7 @@ export default {
         loadAmount: 10,
     },
     profile: {
-        postsLoadAmount: 2,
+        postsLoadAmount: 10,
     },
     xpLevelColors: {
         10: '#dfdbff',

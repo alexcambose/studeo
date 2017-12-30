@@ -1,26 +1,31 @@
 <template>
     <form @submit="updateUser">
-        <b-field label="Nume">
-            <b-input
-                    type="text"
-                    v-model="last_name"
-                    maxlength="30"
-                    icon="face"
-                    :has-counter="true"
-                    required
-            ></b-input>
-        </b-field>
-
-        <b-field label="Prenume">
-            <b-input
-                    type="text"
-                    v-model="first_name"
-                    icon="face"
-                    maxlength="30"
-                    :has-counter="true"
-                    required
-            ></b-input>
-        </b-field>
+        <div class="columns">
+            <div class="column">
+                <b-field label="Nume">
+                    <b-input
+                            type="text"
+                            v-model="last_name"
+                            maxlength="30"
+                            icon="face"
+                            :has-counter="true"
+                            required
+                    ></b-input>
+                </b-field>
+            </div>
+            <div class="column">
+                <b-field label="Prenume">
+                    <b-input
+                            type="text"
+                            v-model="first_name"
+                            icon="face"
+                            maxlength="30"
+                            :has-counter="true"
+                            required
+                    ></b-input>
+                </b-field>
+            </div>
+        </div>
 
         <b-field label="Nume utilizator" :message="`Link-ul profilului tău va fi <em>${profileLink}</em>`">
             <b-input

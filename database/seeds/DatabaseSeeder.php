@@ -105,6 +105,9 @@ class DatabaseSeeder extends Seeder
             'username' => 'sandilica293',
             'email' => 'sandel@sandica.com',
             'role' => 2,
+            'image_id' => function() {
+                return factory(App\Media::class)->create(['filename' => 'userdata/images/11.jpg',])->id;
+            }
         ])->achievements()->sync(App\Achievement::all()->random(5)->pluck('type'));
 
         $courseNumber = 10; //ca sa nu mai modificam peste tot

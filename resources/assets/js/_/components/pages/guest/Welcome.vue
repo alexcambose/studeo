@@ -18,15 +18,14 @@
             </div>
         </div>
 
-        <div class="landing-page">
+        <section class="landing-page">
             <div class="landing-page-filter"></div>
             <div class="container landing-page-content">
                     <h1 class="landing-page-title">
                         Cursuri online petru toată lumea
                     </h1>
-
             </div>
-        </div>
+        </section>
         <section class="about-us">
             <div class="title">Credem în potențialul tău</div>
             <div class="subtitle">

@@ -57,9 +57,9 @@ const actions = {
         });
     },
 
-    updateUserProfile({ commit }, { nickname, sex, description, city, school, school_level, phone, birthday, cover_color }) {
+    updateUserProfile({ commit }, { nickname, sex, description, city, school, school_level, phone, birthday, cover_color, is_teacher }) {
         return new Promise((resolve, reject) => {
-            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, city, school, school_level, phone, birthday, cover_color })
+            axios.post(config.url.USER_UPDATE_PROFILE, { nickname, sex, description, city, school, school_level, phone, birthday, cover_color, is_teacher })
                 .then(({ data }) => {
                     if (data.success) {
                         commit(USER_AUTH_UPDATE_DATA, data);

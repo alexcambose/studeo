@@ -70,7 +70,7 @@
                     </b-select>
                 </b-field>
 
-                <course-tag-input v-model="filters.tags" @input="resetCourses" placeholder="Găsește doar cursurile care au conținutul comun"></course-tag-input>
+                <course-tag-input v-model="filters.tags" @input="resetCourses" placeholder="Găsește doar cursurile care au conținutul comun"/>
                 <b-field label="Autor">
                     <b-input v-model="filters.author" @input.native="resetCourses" placeholder="Numele autorului pe care vrei să îl cauți" expanded></b-input>
                 </b-field>
@@ -93,16 +93,20 @@
                     <b-icon pack="fa" :icon="moreFilters ? 'angle-up' : 'angle-down'"></b-icon>
                 </button>
             </div>
-
         </div>
-        <div v-if="displayVertical" v-for="(courseGroup, index) in chunkArray(courses, 4)"  :key="index" class="columns">
-            <div class="column is-3" v-for="course in courseGroup" :key="course.id">
-                <course-box-vertical :course="course"></course-box-vertical>
+        <div v-if="displayVertical">
+            <div v-for="(courseGroup, index) in chunkArray(courses, 4)"  :key="index" class="columns">
+                <div class="column is-3" v-for="course in courseGroup" :key="course.id">
+                    <course-box-vertical :course="course"/>
+                </div>
             </div>
         </div>
-        <div v-else v-for="(course, index) in courses" :key="index">
-            <course-box-horizontal :course="course"></course-box-horizontal>
+        <div v-else>
+            <div v-for="course in courses" :key="course.id">
+                <course-box-horizontal :course="course"/>
+            </div>
         </div>
+
         <infinite-loading @triggered="infiniteHandler" ref="infiniteLoading">
             <slot slot="fetching">Se accesează cursurile</slot>
             <slot slot="completed">Nu mai sunt cursuri</slot>

@@ -64,7 +64,7 @@ class UserController extends Controller
             //enjoy
             return response()->json(['success' => true, 'user'=>$user]);
         }
-        return response()->json(['success' => false]); // :c
+        return response()->json(['success' => false]);
     }
 
     public function updateProfile(Request $request) {
@@ -77,8 +77,9 @@ class UserController extends Controller
             'school_level' => User::$rules['school_level'],
             'phone' => User::$rules['phone'],
             'city' => User::$rules['city'],
+            'is_teacher' => User::$rules['is_teacher'],
         ]);
-        if ($validation->fails()) return response()->json(['success' => false]);
+        if ($validation->fails()) return response()->json([ 'success' => false,'a' => $validation->errors()]);
         $user->nickname = $request->nickname;
         $user->sex = $request->sex;
         $user->description = $request->description;
@@ -88,6 +89,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->cover_color = $request->cover_color;
         $user->city = $request->city;
+        $user->is_teacher = $request->is_teacher;
         $user->save();
         return response()->json([
             'success' => true,
@@ -154,6 +156,13 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'courses' => Auth::user()->recommendations($amount),
+        ]);
+    }
+
+    public function activity(User $user) {
+        return response()->json([
+            'success' => true,
+            'activity' => $user->joinedLessons()->get()->pluck('pivot')->map(function ($e) { return $e['updated_at']->toDateTimeString(); }),
         ]);
     }
 }
