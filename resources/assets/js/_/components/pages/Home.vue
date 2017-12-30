@@ -2,21 +2,21 @@
     <div>
         <!-- TODO: Modal/Dialog cu SALUTARE DOMNULE SANDEL -->
         <!--<div>-->
-            <!--<card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">-->
-                <!--<b-field label="Just testing things">-->
-                    <!--<markdown-textarea-->
-                    <!--v-model="text"></markdown-textarea>-->
-                <!--</b-field>-->
-                <!--<hr>-->
-                <!--Tu:-->
-               <!--<pre>{{$store.state.user.user}}</pre>-->
-            <!--</card>-->
+        <!--<card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">-->
+        <!--<b-field label="Just testing things">-->
+        <!--<markdown-textarea-->
+        <!--v-model="text"></markdown-textarea>-->
+        <!--</b-field>-->
+        <!--<hr>-->
+        <!--Tu:-->
+        <!--<pre>{{$store.state.user.user}}</pre>-->
+        <!--</card>-->
         <!--</div>-->
 
         <nav class="nav-home is-centered" role="navigation" aria-label="dropdown navigation">
             <ul>
                 <li class="nav-home-item"><router-link :to="{ path: '/'}"><b-icon pack="fa" icon="globe" size="is-small"></b-icon> Toate categoriile</router-link></li>
-                <li class="nav-home-item" v-for="(item, index) in classes"><router-link :to="{ name: 'category_preview', params: { category: item.slug } }"><b-icon pack="fa" :icon="item.icon" size="is-small"></b-icon> {{ item.name }}</router-link></li>
+                <li class="nav-home-item" v-for="(item, index) in classes"><router-link :to="{ name: 'category', params: { category: item.slug } }"><b-icon pack="fa" :icon="item.icon" size="is-small"></b-icon> {{ item.name }}</router-link></li>
             </ul>
         </nav>
         <div class="container">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="more-home" v-if="!fetching">
-                <router-link v-if="this.$route.params.category" :to="{ name: 'category', params: { category: this.$route.params.category } }" class="button is-primary is-outlined">Vezi mai mult &nbsp; <i class="fa fa-arrow-right"></i></router-link>
+                <router-link v-if="this.$route.params.category" :to="{ name: 'courses', query: { categorie: this.$route.params.category } }" class="button is-primary is-outlined">Vezi mai mult &nbsp; <i class="fa fa-arrow-right"></i></router-link>
                 <router-link v-else :to="{ name: 'courses'}" class="button is-primary is-outlined">Vezi mai mult &nbsp; <i class="fa fa-arrow-right"></i></router-link>
             </div>
         </div>
@@ -42,7 +42,6 @@
     import { MATERII } from '../../../utils';
     import config from '../../../config';
     import CourseBoxVertical from '../includes/course/CourseBoxVertical';
-
     export default {
         mounted() {
             const loadingComponent = this.$loading.open();
@@ -81,7 +80,7 @@
                                     let category = this.classes.find(e => e.slug == categorySlug);
                                     data.courses.forEach(course => {
                                         if (this.courses.length < 5) {
-                                            if (!this.courses.find(e => e.id === course.id) && course.category === category.id) this.courses.push(course);
+                                            if (!this.courses.find(e => e.id === course.id) && course.category == category.id) {this.courses.push(course); console.log('dsada')}
                                         }
                                     });
                                 } else {
@@ -91,10 +90,9 @@
                                         }
                                     });
                                 }
-
                                 resolve(data.courses);
                             } else {
-                                resolve(data.courses);
+                                reject();
                             }
                         });
                 });

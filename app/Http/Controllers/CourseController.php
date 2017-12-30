@@ -54,6 +54,15 @@ class CourseController extends Controller
                 return stristr($name, $search);
             });
         }
+        if($request->category) {
+            $coursesArray = $coursesArray->filter(function($course)use($request){
+               $category = $course->category;
+               $search = $request->category;
+                if ($category == $search) {
+                    return $category;
+                }
+            });
+        }
 
         if($request->tags) {
             $coursesArray = $coursesArray->filter(function($course)use($request){

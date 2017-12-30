@@ -13,7 +13,7 @@ class Course extends Model
         'short_description' => 'required|string|max:240',
         'description' => 'required|string|max:4000',
         'difficulty' => 'required|numeric',
-        'category' => 'required|numeric',
+        'category' => 'required|string',
         'prerequisites' => 'array',
         'purpose' => 'required|string|max:2000',
         'purpose_what_will_learn' => 'array',
