@@ -69,7 +69,7 @@
                             v-model="birthday"
                             :max-date="new Date(2009, 0, 0)"
                             :month-names="monthNames"
-                            :day-names="['Lu','Ma','Mi','Jo','Vi','Sb','D']"
+                            :day-names="dayNames"
                             placeholder="Apasă pentru a selecta ziua de naștere"
                             icon="calendar-today"
                     >
@@ -127,7 +127,7 @@
     import Submit from '../../../../components/includes/dumb/Submit.vue';
     import UploadImageModal from '../../../../components/includes/dumb/UploadImageModal.vue';
     import config from '../../../../../config';
-    import { cities, monthNames } from '../../../../../utils';
+    import { cities, monthNames, dayNames } from '../../../../../utils';
     import MarkdownTextarea from '../../../includes/dumb/MarkdownTextarea';
 
     export default {
@@ -153,7 +153,7 @@
                 cover_color: user.cover_color,
                 success: '',
                 classLevels: config.classLevels,
-                monthNames,
+                monthNames, dayNames,
             };
         },
         methods: {

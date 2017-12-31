@@ -15,6 +15,8 @@
                                 :min-date="new Date(user.created_at)"
                                 :max-date="new Date()"
                                 :events="activity"
+                                :month-names="monthNames"
+                                :day-names="dayNames"
                                 indicators="dots"
                         >
                         </b-datepicker>
@@ -31,6 +33,7 @@
 
 <script>
     import config from '../../../../../../config';
+    import { monthNames, dayNames } from '../../../../../../utils';
 
     export default {
         props: {
@@ -53,6 +56,7 @@
                 isActivityModalActive: false,
                 activity: [],
                 date: new Date(),
+                monthNames, dayNames,
             };
         },
     };

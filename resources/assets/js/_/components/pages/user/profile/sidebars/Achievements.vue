@@ -46,7 +46,7 @@
             user: Object,
         },
         mounted() {
-            axios.get(config.url.ACHIEVEMENTS)
+            axios.get(config.url.ACHIEVEMENT_ALL)
                 .then(({ data }) => {
                     this.allAchievements = data.achievements;
                 });

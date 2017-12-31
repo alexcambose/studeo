@@ -47,7 +47,8 @@ class User extends Authenticatable
         'is_teacher' => 'boolean',
     ];
     protected $appends = [
-        '_image'
+        '_image',
+        '_avatar',
     ];
     public function getSocialAttribute($value) {
         return json_decode($value); // convert "{}" to {}
@@ -55,7 +56,13 @@ class User extends Authenticatable
     public function getImageAttribute() {
         return $this->image();
     }
-
+    public function getAvatarAttribute() {
+        $avatar = $this->avatars()->where('active', 1)->first(); // avatarul care este selectat
+        if($avatar) return $avatar;
+        // daca nu este selectat nici unul inseamna ca nu exista nici un avatar pentru user
+        $this->avatars()->attach(Avatar::find('DEFAULT')->type, [ 'active' => 1 ]);
+        return Avatar::find('DEFAULT');
+    }
     //methods
     public function recommendations($maxAmount = 8) {
         return Recommendations::where('user_id', $this->id)
@@ -95,6 +102,9 @@ class User extends Authenticatable
     }
     public function achievements() {
         return $this->belongsToMany(Achievement::class)->withTimestamps();
+    }
+    public function avatars() {
+        return $this->belongsToMany(Avatar::class)->withTimestamps();
     }
     public function joinedCourses() {
         return collect($this->joinedLessons->map(function($lesson){

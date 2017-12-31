@@ -25,7 +25,7 @@
             <b-select expanded
                       placeholder="Alege o categorie"
                       :value="newCourse.category"
-                      @blur="setData('category', $event.target.value)">
+                      @blur="setData('category', parseInt($event.target.value))">
                 <option v-for="category in classes" :value="category.id">{{ category.name }}</option>
             </b-select>
         </b-field>
@@ -91,7 +91,7 @@
                     return this.newCourse.tags;
                 },
                 set(value) {
-                    this.setData('tags', value.map(e => e.id));
+                    this.setData('tags', value);
                 },
             },
             image: {

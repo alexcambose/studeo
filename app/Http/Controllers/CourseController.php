@@ -45,24 +45,14 @@ class CourseController extends Controller
         if($userId) $courses = $courses->where('user_id', $userId);
         if($request->start !== null && $request->amount !== null) $courses->skip((int)$request->start)->take((int)$request->amount);
         if($request->difficulty) $courses = $courses->whereIn('difficulty', $request->difficulty);
-        $coursesArray = $courses->get();
-
+        if($request->category) $courses = $courses->where('category', $request->category);
         if($request->author) {
-            $coursesArray = $coursesArray->filter(function($course)use($request){
-                $name = strtolower($course->user->first_name . $course->user->last_name);
-                $search = strtolower($request->author);
-                return stristr($name, $search);
+            $courses->whereHas('user', function ($query) use ($request) {
+                $query->where('first_name', 'LIKE', '%' . $request->author . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $request->author . '%');
             });
         }
-        if($request->category) {
-            $coursesArray = $coursesArray->filter(function($course)use($request){
-               $category = $course->category;
-               $search = $request->category;
-                if ($category == $search) {
-                    return $category;
-                }
-            });
-        }
+        $coursesArray = $courses->get();
 
         if($request->tags) {
             $coursesArray = $coursesArray->filter(function($course)use($request){
@@ -80,7 +70,7 @@ class CourseController extends Controller
         }
         return response()->json([
             'success' => true,
-            'courses' => $coursesArray->values(),
+            'courses' => $coursesArray,
         ]);
     }
     public function bestSlug($currentSlug){

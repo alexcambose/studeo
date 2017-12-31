@@ -45,8 +45,6 @@
     import LessonQuestions from './LessonQuestions.vue';
     import LessonFooter from './LessonFooter.vue';
     import LessonNotes from './notes/CourseNotes.vue';
-    // import CourseBox from '../../../../../components/includes/dumb/UserBox';
-    // import CourseCard from '../../../../../components/includes/dumb/UserCard';
     export default {
         mounted() {
             const loadingComponent = this.$loading.open();

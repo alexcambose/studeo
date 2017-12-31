@@ -74,6 +74,8 @@ export const cities = ['Abrud', 'Adjud', 'Agnita', 'Aiud', 'Alba Iulia', 'Aleșd
     'Urlați', 'Urziceni', 'Valea lui Mihai', 'Vălenii de Munte', 'Vânju Mare', 'Vașcău', 'Vaslui', 'Vatra Dornei', 'Vicovu de Sus', 'Victoria', 'Videle', 'Vișeu de Sus', 'Vlăhița', 'Voluntari',
     'Vulcan', 'Zalău', 'Zărnești', 'Zimnicea', 'Zlatna',
 ];
+export const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
+export const dayNames = ['Lu','Ma','Mi','Jo','Vi','Sb','Du'];
 
 export const convertFileSizeToHuman = size => {
     if (size >= 1000000000) return '1 GB';
@@ -105,7 +107,6 @@ export const chunkArray = (array, length) => {
     }
 };
 
-export const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
 export const displayDate = e => {
     let date = new Date(e);
     return date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();

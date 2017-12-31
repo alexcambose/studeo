@@ -13,7 +13,7 @@ class Course extends Model
         'short_description' => 'required|string|max:240',
         'description' => 'required|string|max:4000',
         'difficulty' => 'required|numeric',
-        'category' => 'required|string',
+        'category' => 'required|numeric',
         'prerequisites' => 'array',
         'purpose' => 'required|string|max:2000',
         'purpose_what_will_learn' => 'array',
@@ -73,11 +73,7 @@ class Course extends Model
         return $users;
     }
     public function isUserJoined(User $user) {
-        $usersJoined = $this->joinedUsersArray();
-        foreach ($usersJoined as $userJoined) {
-            if($userJoined['id'] === $user->id) return true;
-        }
-        return false;
+        return in_array($this->id, $user->joinedCourses()->pluck('id')->toArray());
     }
 
     public function hasTag(Tag $tag) {

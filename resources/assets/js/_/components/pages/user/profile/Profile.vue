@@ -5,7 +5,7 @@
             <nav class="navbar profile-nav">
                 <div class="container">
                     <image-container class="profile-image" :src="user._image.filename">
-                        <image-container class="profile-avatar-image" src="https://lh3.googleusercontent.com/QdPWD0J-qsqJ64d2GtZEHPk4BnO0ryDQlnA6P0UGiB1zpfdAhC3PKetkzjDmy6NVRXGpenuU5kTFF7AKMgumiWU=s400"></image-container>
+                        <image-container @click.native="user.id === loggedUser.id ? isAvatarModalActive = true : null" :class="['profile-avatar-image', user.id === loggedUser.id ? 'cp' :'']" :src="user._avatar._image._filename"></image-container>
                     </image-container>
                     <div class="navbar-start">
                         <router-link :to="{name:'profile-posts'}" class="navbar-item is-tab">Postări</router-link>
@@ -25,7 +25,9 @@
                 </div>
             </nav>
         </div>
-
+        <b-modal :active.sync="isAvatarModalActive">
+            <avatars :user="user" @reloadUser="getUser"></avatars>
+        </b-modal>
         <div class="container user-data-container">
             <div class="columns">
                 <div class="column is-3">
@@ -51,7 +53,8 @@
     import config from '../../../../../config';
     import UserInfo from './sidebars/UserInfo.vue';
     import Activity from './sidebars/Activity.vue';
-
+    import Avatars from './avatars/Avatars.vue';
+    import { mapState } from 'vuex';
     export default {
         mounted() {
             this.getUser();
@@ -61,6 +64,7 @@
                 user: {},
                 achievements: [],
                 userLoaded: false,
+                isAvatarModalActive: false,
             };
         },
         watch: {
@@ -69,6 +73,9 @@
             },
         },
         computed: {
+            ...mapState({
+                loggedUser: ({ user }) => user.user,
+            }),
             levelXp() {
                 return xp(this.level) - xp(this.level - 1);
             },
@@ -91,6 +98,7 @@
             },
         },
         components: {
+            Avatars,
             UserInfo,
             Activity,
             Course,

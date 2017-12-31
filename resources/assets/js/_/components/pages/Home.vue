@@ -3,10 +3,6 @@
         <!-- TODO: Modal/Dialog cu SALUTARE DOMNULE SANDEL -->
         <!--<div>-->
         <!--<card :title="'SALUTARE DOMNULE, ' + $store.state.user.user.first_name">-->
-        <!--<b-field label="Just testing things">-->
-        <!--<markdown-textarea-->
-        <!--v-model="text"></markdown-textarea>-->
-        <!--</b-field>-->
         <!--<hr>-->
         <!--Tu:-->
         <!--<pre>{{$store.state.user.user}}</pre>-->

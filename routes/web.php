@@ -37,13 +37,14 @@ Route::prefix('course')->group(function () {
     Route::get('tag', 'TagController@all');  // luare taguri disponibile
     Route::get('all/{userId?}', 'CourseController@all'); //toate cursurile unui user, daca userId nu e specificat, toate cursurile
     Route::get('slug/{slug}', 'CourseController@one'); // luare curs dupa slug
-    Route::get('slug/best/{slug}', 'CourseController@bestSlug'); // determinare cel mai bun slug pentru curs, luindu-ne dupa un slug existent (un pic bullshit si useless)
+    Route::get('slug/best/{slug}', 'CourseController@bestSlug'); // determinare cel mai bun slug pentru curs, luandu-ne dupa un slug existent (un pic bullshit si useless)
     Route::post('user/join/', 'CourseController@userJoin'); // course user join
     Route::post('user/note/add/{course}', 'NoteController@add'); // adaugare notita curs
     Route::post('user/note/update/{note}', 'NoteController@update'); // actulizare notita curs
     Route::delete('user/note/delete/{note}', 'NoteController@delete'); // stergere notita curs
     Route::post('user/lesson/watched/{lesson}', 'LessonController@watched'); // marcare lectie ca vazuta
 });
+
 Route::prefix('lesson')->group(function () {
     Route::get('all/{course}', 'LessonController@all'); // luare toate lectiile de la un curs
 });
@@ -56,9 +57,17 @@ Route::prefix('playlist')->group(function () {
     Route::put('{playlist}/addCourse/{course}', 'PlaylistController@addCourse'); // adaugare curs in playlist
     Route::delete('{playlist}/addCourse/{course}', 'PlaylistController@deleteCourse'); // stergere curs din playlist
 });
+
 Route::prefix('achievement')->group(function () {
     Route::get('/all', 'AchievementController@all');  // luare achievement-uri disponibile
     Route::get('user/{user}', 'AchievementController@user');  // luare achievement-urile unui user
+});
+
+Route::prefix('avatar')->group(function () {
+    Route::get('/all', 'AvatarController@all');  // luare avatar-uri disponibile
+//    Route::get('user/{user}', 'AvatarController@user');  // luare avatar-urile unui user
+    Route::post('buy/{avatar}', 'AvatarController@buy');  // cumparare avatar
+    Route::post('activate/{avatar}', 'AvatarController@activate');  // activare avatar
 });
 
 Route::get('/', function(){

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="this.$route.query.categorie">
+        <div v-if="$route.query.categorie">
             <section class="hero is-primary is-bold">
                 <div class="hero-body">
                     <div class="container">
@@ -30,7 +30,7 @@
         computed: {
             category() {
                 let slug = this.$route.query.categorie;
-                return this.categories.find(e => e.slug == slug);
+                return this.categories.find(e => e.slug === slug);
             },
         },
         components: {

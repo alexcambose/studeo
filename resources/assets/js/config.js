@@ -21,8 +21,11 @@ export default {
         POST_UPDATE: SERVER + 'user/post/', // put
         POST_DELETE: SERVER + 'user/post/', // delete
         POST_TOGGLE_LIKE: postId => SERVER + `user/post/${postId}/like/`, // post
-        ACHIEVEMENTS: SERVER + 'achievement/all',
+        ACHIEVEMENT_ALL: SERVER + 'achievement/all/',
         ACHIEVEMENTS_USER: SERVER + 'achievement/user/',
+        AVATAR_ALL: SERVER + 'avatar/all/',
+        AVATAR_BUY: SERVER + 'avatar/buy/',
+        AVATAR_ACTIVATE: SERVER + 'avatar/activate/',
         NOTIFICATION: SERVER + 'notification/',
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll/',

@@ -1,16 +1,5 @@
 <template>
     <div>
-        <div v-if="$route.params.categorie" class="banner">
-            <section class="hero is-primary is-bold">
-                <div class="hero-body">
-                    <div class="container">
-                        <h1 class="title">
-                            {{ category.name }} <i :class="[ 'fa', category.icon ]"></i>
-                        </h1>
-                    </div>
-                </div>
-            </section>
-        </div>
         <div class="course-filters">
             <div class="course-display">
                 <div class="field has-addons">
@@ -178,7 +167,7 @@
                         author: this.filters.author,
                         difficulty: this.filters.difficulty,
                         tags: this.filters.tags,
-                        category: this.getCategory(this.filters.category),
+                        category: this.getCategoryId(this.filters.category),
                     },
                 }).then(({ data }) => {
                     if (data.courses.length) {
@@ -230,13 +219,9 @@
                 localStorage.setItem('displayVertical', isVertical);
                 this.displayVertical = isVertical;
             },
-            getCategory(slug) {
-                if (slug != '' && slug != undefined && slug != 0) {
-                    let category = this.MATERII.find(e => e.slug === slug);
-                    return category.id;
-                } else {
-                    return this.filters.category;
-                }
+            getCategoryId(slug) {
+                let category = this.MATERII.find(e => e.slug === slug);
+                if (category) return category.id;
             },
         },
         components: {

@@ -1,6 +1,5 @@
 <template>
-    <!-- sugi pula -->
-    <div class="box mt-10" style="max-height: 400px; overflow-y: scroll">
+    <div class="box mt-10" style="max-height: 400px; overflow-y: auto">
         <button @click="modalActive = true" class="button is-primary is-pulled-right is-small">
             <b-icon pack="fa" icon="plus"></b-icon>
             <span>Adaugă notiță</span>
@@ -39,7 +38,7 @@
         </b-modal>
         <p class="title is-4"><b-icon pack="fa" icon="sticky-note" size="is-small"></b-icon> Notițe - {{notes.length}}</p>
         <hr>
-        <course-note-item v-for="(note, index) in notes" :note-index="index" :key="index"></course-note-item>
+        <course-note-item v-for="(note, index) in notes" :note-index="index" :key="note.id"></course-note-item>
     </div>
 </template>
 
