@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\PasswordChanged;
+use App\Logins;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -23,6 +23,25 @@ class AuthenticationController extends Controller
             ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $ipInfo = json_decode(file_get_contents('http://ip-api.com/json/' . $_SERVER['REMOTE_ADDR']));
+            if ($ipInfo->status === 'success') {
+                $login = new Logins();
+                $login->user_agent = $_SERVER['HTTP_USER_AGENT'];
+                $login->ip = $_SERVER['REMOTE_ADDR'];
+
+                $login->city = $ipInfo->city;
+                $login->country = $ipInfo->country;
+                $login->country_code = $ipInfo->countryCode;
+                $login->zip = $ipInfo->zip;
+                $login->timezone = $ipInfo->timezone;
+                $login->lat = $ipInfo->lat;
+                $login->lon = $ipInfo->lon;
+                $login->as = $ipInfo->as;
+                $login->isp = $ipInfo->isp;
+                $login->org = $ipInfo->org;
+                Auth::user()->logins()->save($login);
+            }
+
             return response()->json([
                 'success' => true,
                 'user' => Auth::user(),

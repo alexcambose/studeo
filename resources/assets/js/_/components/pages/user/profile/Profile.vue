@@ -5,7 +5,12 @@
             <nav class="navbar profile-nav">
                 <div class="container">
                     <image-container class="profile-image" :src="user._image.filename">
-                        <image-container @click.native="user.id === loggedUser.id ? isAvatarModalActive = true : null" :class="['profile-avatar-image', user.id === loggedUser.id ? 'cp' :'']" :src="user._avatar._image._filename"></image-container>
+                        <image-container
+                                @click.native="user.id === loggedUser.id ? isAvatarModalActive = true : null"
+                                :class="['profile-avatar-image', user.id === loggedUser.id ? 'cp' :'']"
+                                :src="user._avatar._image._filename"
+                        >
+                        </image-container>
                     </image-container>
                     <div class="navbar-start">
                         <router-link :to="{name:'profile-posts'}" class="navbar-item is-tab">Postări</router-link>
@@ -26,13 +31,13 @@
             </nav>
         </div>
         <b-modal :active.sync="isAvatarModalActive">
-            <avatars :user="user" @reloadUser="getUser"></avatars>
+            <avatars :user="user"></avatars>
         </b-modal>
         <div class="container user-data-container">
             <div class="columns">
                 <div class="column is-3">
                     <user-info :user="user"></user-info>
-                    <activity :user="user"></activity>
+                    <activity v-if="user.id === loggedUser.id" :user="user"></activity>
                 </div>
                 <div class="column is-6">
                     <router-view :user="user"></router-view>
@@ -61,7 +66,7 @@
         },
         data() {
             return {
-                user: {},
+                currentUser: {},
                 achievements: [],
                 userLoaded: false,
                 isAvatarModalActive: false,
@@ -76,6 +81,10 @@
             ...mapState({
                 loggedUser: ({ user }) => user.user,
             }),
+            user() {
+                if (this.currentUser.id === this.loggedUser.id) return this.loggedUser;
+                return this.currentUser;
+            },
             levelXp() {
                 return xp(this.level) - xp(this.level - 1);
             },
@@ -92,7 +101,7 @@
                 this.userLoaded = false;
                 axios.get(config.url.USER_BY_USERNAME + this.$route.params.username)
                     .then(({ data }) => {
-                        this.user = data.user;
+                        this.currentUser = data.user;
                         this.userLoaded = true;
                     });
             },

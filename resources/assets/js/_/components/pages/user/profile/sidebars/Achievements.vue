@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="achievements.length">
         <b-modal :active.sync="isAchievementsModalActive" has-modal-card>
             <div class="modal-card">
                 <header class="modal-card-head">

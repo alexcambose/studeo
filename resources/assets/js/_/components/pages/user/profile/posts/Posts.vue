@@ -1,7 +1,10 @@
 <template>
     <div>
-        <add-post v-model="posts"></add-post>
-        <hr>
+        <div v-if="user.id === $store.state.user.user.id">
+            <add-post v-model="posts"></add-post>
+            <hr>
+        </div>
+
         <post v-for="post in posts" :post="post" :user="user" :key="post.id"></post>
         <infinite-loading @triggered="infiniteHandler">
             <slot slot="fetching">Se accesează postările</slot>

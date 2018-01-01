@@ -34,6 +34,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         },
         'is_teacher' => 0,
         'xp' => $faker->numberBetween(100, 1000),
+        'coins' => 500,
         'password' => $password ?: $password = bcrypt('123456'),
         'remember_token' => str_random(10),
     ];

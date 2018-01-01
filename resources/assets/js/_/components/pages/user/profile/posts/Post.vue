@@ -13,8 +13,8 @@
                     {{thePost._likes.length}}
                 </span>
             </div>
-            <div v-if="thePost.user_id === user.id" class="meta-section">
-                <div class="field has-addons">
+            <div class="meta-section">
+                <div v-if="user.id === $store.state.user.user.id" class="field has-addons">
                     <p class="control">
                         <button @click="editMode = true" class="button is-link is-small">
                             <b-icon pack="fa" icon="pencil" size="is-small"></b-icon>

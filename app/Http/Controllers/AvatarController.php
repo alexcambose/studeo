@@ -32,7 +32,7 @@ class AvatarController extends Controller
         Auth::user()->avatars()->updateExistingPivot($avatar->type, ['active' => 1]);
         return response()->json([
             'success' => true,
-            'avatars' => Avatar::orderBy('price', 'ASC')->get(),
+            'avatar' => $avatar,
         ]);
     }
 }

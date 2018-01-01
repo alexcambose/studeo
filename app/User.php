@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\AwardedXp;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,7 +66,7 @@ class User extends Authenticatable
     }
     //methods
     public function recommendations($maxAmount = 8) {
-        return Recommendations::where('user_id', $this->id)
+        return Recommendation::where('user_id', $this->id)
             ->orderBy('count', 'DESC') // cu cele mai multe categorii vizualizate
             ->get()
             ->take($maxAmount)
@@ -110,5 +111,8 @@ class User extends Authenticatable
         return collect($this->joinedLessons->map(function($lesson){
             return $lesson->course;
         }));
+    }
+    public function logins() {
+        return $this->hasMany(Logins::class);
     }
 }

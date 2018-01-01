@@ -54,15 +54,11 @@
                 this.selectedAvatarType = type;
             },
             handleBuy(avatarType) {
-                axios.post(config.url.AVATAR_BUY + avatarType)
-                    .then(({ data }) => this.avatars = data.avatars);
+                this.$store.dispatch('buyAvatar', { avatarType })
+                    .then(avatars => this.avatars = avatars);
             },
             handleActivate(avatarType) {
-                axios.post(config.url.AVATAR_ACTIVATE + avatarType)
-                    .then(({ data }) => {
-                        this.avatars = data.avatars;
-                        this.$emit('reloadUser');
-                    });
+                this.$store.dispatch('activateAvatar', { avatarType });
             },
         },
         components: {

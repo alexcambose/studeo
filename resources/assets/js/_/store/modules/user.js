@@ -1,7 +1,7 @@
 import config from '../../../config';
 import {
     USER_AUTH_UPDATE_DATA, USER_REGISTER_MENTOR, NOTIFICATION_SET, USER_AUTH_LOGIN, USER_AUTH_LOGOUT, USER_AUTH_REGISTER,
-    USER_AUTH_UPDATE_PASSWORD, USER_AUTH_UPDATE_PROFILE,
+    USER_AUTH_UPDATE_PASSWORD, USER_AUTH_UPDATE_PROFILE, USER_ACTIVATE_AVATAR, USER_BUY_AVATAR,
 } from '../mutators-types';
 const state = {
     user: {},
@@ -100,6 +100,36 @@ const actions = {
                 });
         });
     },
+    activateAvatar({ commit }, { avatarType }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.AVATAR_ACTIVATE + avatarType)
+                .then(({ data }) => {
+                    if (data.success) {
+                        commit(USER_ACTIVATE_AVATAR, data.avatar);
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                }).catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    buyAvatar({ commit }, { avatarType }) {
+        return new Promise((resolve, reject) => {
+            axios.post(config.url.AVATAR_BUY + avatarType)
+                .then(({ data }) => {
+                    if (data.success) {
+                        commit(USER_BUY_AVATAR, data.avatars.find(e => e.type === avatarType));
+                        resolve(data.avatars);
+                    } else {
+                        reject();
+                    }
+                }).catch(err => {
+                    reject(err);
+                });
+        });
+    },
     login({ commit }, { email, password }) {
         return new Promise((resolve, reject) => {
             axios.post(config.url.LOGIN, { email, password })
@@ -167,11 +197,17 @@ const mutations = {
     [USER_REGISTER_MENTOR] (state) {
         state.user.role = 2; // mentor
     },
+    [USER_ACTIVATE_AVATAR] (state, avatar) {
+        state.user._avatar = avatar;
+    },
+    [USER_BUY_AVATAR] (state, avatar) {
+        state.user.coins -= avatar.price;
+    },
 };
 
 export default {
     state,
     getters,
     actions,
-    mutations
+    mutations,
 };

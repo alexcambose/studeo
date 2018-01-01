@@ -7,14 +7,6 @@ use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
 {
     public function run() {
-        /*
-         * Ca sa nu trebuiasca de fiecare data sa stergem tabelele cand testam un seeder,
-         * e suficient doar
-         *  ~ php artisan db:seed
-         *
-         * iar varianta veche era
-         *  ~ php artisan migrate:rollback && php artisan migrate && php artisan db:seed
-        */
         $this->command->alert('Tabelarele tabeloase o sâ fii goliti :>');
 
         DB::statement("SET foreign_key_checks=0");
@@ -38,7 +30,7 @@ class DatabaseSeeder extends Seeder
         DB::statement("SET foreign_key_checks=1");
 
         $this->call(UsersTableSeeder::class); // chestii care tin de user
-        $this->call(CoursesTableSeeder::class); // chestii care tin de coursuri
+        $this->call(CoursesTableSeeder::class); // chestii care tin de cursuri
 
         $this->command->alert('Gata boss, am terminat, '.random_int(20, 99999).' de lei o sa fie!');
     }

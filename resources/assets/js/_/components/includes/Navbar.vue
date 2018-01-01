@@ -51,6 +51,10 @@
                 <div class="navbar-item is-hoverable has-dropdown">
                     <a href="#" class="navbar-link">Salut, {{user.first_name}}</a>
                     <div class="navbar-dropdown">
+                        <div class="navbar-item flex-center has-text-weight-bold">
+                            <span>{{user.coins}} <b-icon pack="fa" icon="graduation-cap" size="is-small"></b-icon></span>
+                        </div>
+                        <div class="navbar-divider"></div>
                         <router-link :to="{name: 'profile', params: {username: user.username}}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon>&nbsp; Profil</router-link>
                         <router-link :to="{name: 'notifications'}" class="navbar-item"><b-icon pack="fa" icon="comment"></b-icon>&nbsp; Notificări</router-link>
                         <router-link :to="{name: 'playlists'}" class="navbar-item"><b-icon pack="fa" icon="book"></b-icon>&nbsp; Bibliotecă</router-link>
@@ -58,11 +62,11 @@
 
                         <!--<router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon>&nbsp; Panou admin</router-link>-->
 
-                        <hr class="navbar-divider">
+                        <div class="navbar-divider"></div>
 
                         <router-link :to="{name: 'help'}" class="navbar-item"><b-icon pack="fa" icon="question-circle"></b-icon>&nbsp; Ajutor</router-link>
 
-                        <hr class="navbar-divider">
+                        <div class="navbar-divider"></div>
 
                         <a class="navbar-item" @click="logout">
                             <b-icon pack="fa" icon="sign-out"></b-icon>&nbsp; Deconectare

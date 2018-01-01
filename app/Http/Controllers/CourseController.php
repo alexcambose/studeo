@@ -9,7 +9,7 @@ use App\Media;
 use App\Notifications\FirstCourseJoined;
 use App\Notifications\FirstCoursePosted;
 use App\Question;
-use App\Recommendations;
+use App\Recommendation;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +26,7 @@ class CourseController extends Controller
             $course->views++;
             $course->save();
         }
-        Recommendations::add($course->category);
+        Recommendation::add($course->category);
 
         return response()->json([
             'success' => true,
@@ -70,7 +70,7 @@ class CourseController extends Controller
         }
         return response()->json([
             'success' => true,
-            'courses' => $coursesArray,
+            'courses' => $coursesArray->values(),
         ]);
     }
     public function bestSlug($currentSlug){
