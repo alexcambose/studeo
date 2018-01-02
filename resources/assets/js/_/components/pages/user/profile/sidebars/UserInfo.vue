@@ -11,9 +11,7 @@
                 {{ item.content }}
             </div>
         </div>
-        <div v-if="this.user.id === $store.state.user.user.id">
-            <hr>
-        </div>
+        <hr v-if="this.user.id === $store.state.user.user.id">
     </div>
 </template>
 

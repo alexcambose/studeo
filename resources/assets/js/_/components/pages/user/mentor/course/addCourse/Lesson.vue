@@ -18,13 +18,13 @@
             ></b-input>
         </b-field>
         <b-field label="Conținut">
-            <b-input
+            <markdown-textarea
                     maxlength="4000"
                     required
                     type="textarea"
                     :value="lesson.content"
                     @blur="setContent"
-            ></b-input>
+            ></markdown-textarea>
         </b-field>
         <questions :lesson_id="this.lesson_id"></questions>
         <div class="columns">
@@ -43,6 +43,7 @@
     import UploadVideo from '../../../../../includes/dumb/UploadVideo.vue';
     import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
     import Questions from './components/questions/Questions.vue';
+    import MarkdownTextarea from '../../../../../includes/dumb/MarkdownTextarea';
 
     export default {
         computed: {
@@ -86,6 +87,7 @@
             },
         },
         components: {
+            MarkdownTextarea,
             UploadVideo,
             UploadImage,
             Questions,

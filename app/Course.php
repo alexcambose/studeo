@@ -18,7 +18,7 @@ class Course extends Model
         'purpose' => 'required|string|max:2000',
         'purpose_what_will_learn' => 'array',
         'target_class_level' => 'required|numeric',
-        'image' => 'image|mimes:jpeg,png,jpg|max:10000000',
+        'image' => 'image|mimes:jpeg,png,jpg|max:10000',
     ];
     protected $appends = [
         '_image',

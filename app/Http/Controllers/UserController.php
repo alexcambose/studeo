@@ -90,6 +90,7 @@ class UserController extends Controller
         $user->cover_color = $request->cover_color;
         $user->city = $request->city;
         $user->is_teacher = $request->is_teacher;
+        $user->social = json_encode($request->social);
         $user->save();
         return response()->json([
             'success' => true,

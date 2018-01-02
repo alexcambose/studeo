@@ -73,14 +73,16 @@ class CourseController extends Controller
             'courses' => $coursesArray->values(),
         ]);
     }
-    public function bestSlug($currentSlug){
+    public function bestSlug($title){
+        $title = strtolower($title);
+        $slug = str_replace(' ', '-', $title);
         $someNumber = 0;
-        while(Course::where('slug', $currentSlug)->count()){ //while there is a database course with the same slug
-            $currentSlug .= ++$someNumber;
+        while(Course::where('slug', $slug)->count()){ //while there is a database course with the same slug
+            $slug .= ++$someNumber;
         }
         return response()->json([
             'success' => true,
-            'slug' => $currentSlug,
+            'slug' => $slug,
         ]);
     }
 
@@ -125,35 +127,32 @@ class CourseController extends Controller
 
         // endregion
         // region Miniaturi si Videoclipuri
-        if (!$request->file('thumbnails') || !$request->file('videos')) {
-            $errors[] = 'Nu există imagini sau videoclipuri pentru toate lecțiile!';
+        if (count($request->file('thumbnails')) < count($course['lessons'])) {
+            $errors[] = 'Nu există miniaturi pentru toate lecțiile!';
+        } else if (count($request->file('videos')) < count($course['lessons'])) {
+            $errors[] = 'Nu există videoclipuri pentru toate lecțiile!';
         } else {
             foreach ($request->file('thumbnails') as $key => $thumbnail) {
-                if ($thumbnail) {
-                    $validation = Validator::make([
-                        'thumbnail' => $thumbnail,
-                    ], [
-                        'thumbnail' => Lesson::$rules['thumbnail'],
-                    ]);
-                    if ($validation->fails()) $errors[] = 'Miniatura de la lecția <b>' . $course['lessons'][$key]['title'] . '</b> nu este validă!';
-                } else $errors[] = 'Lectia numărul ' . $key . 'nu conține miniatură!';
+                $validation = Validator::make([
+                    'thumbnail' => $thumbnail,
+                ], [
+                    'thumbnail' => Lesson::$rules['thumbnail'],
+                ]);
+                if ($validation->fails()) $errors[] = 'Miniatura de la lecția <b>' . $course['lessons'][$key]['title'] . '</b> nu este validă!';
             }
             foreach ($request->file('videos') as $key => $video) {
-                if($video) {
-                    $validation = Validator::make([
-                        'video' => $video,
-                    ], [
-                        'video' => Lesson::$rules['video'],
-                    ]);
-                    if ($validation->fails()) $errors[] = 'Videoclipul de la lectia <b>' . $course['lessons'][$key]['title'] . '</b> nu este valid!';
-                } else $errors[] = 'Lectia numărul ' . $key . 'nu conține videoclip!';
+                $validation = Validator::make([
+                    'video' => $video,
+                ], [
+                    'video' => Lesson::$rules['video'],
+                ]);
+                if ($validation->fails()) $errors[] = 'Videoclipul de la lectia <b>' . $course['lessons'][$key]['title'] . '</b> nu este valid!' . $validation->errors()->first('video');
             }
         }
 
         // endregion
         // region Continut curs
-        if(Course::where('slug', Course::$rules['slug'])->count()) $errors[] = 'Legătura permanentă a cursului există deja!';
-
+        if(Course::where('slug', $course['slug'])->count()) $errors[] = 'Legătura permanentă <b>' . $course['slug'] . '</b> există deja!';
         $validation = Validator::make($course, [
             'title' => Course::$rules['title'],
             'slug' => Course::$rules['slug'],
@@ -166,32 +165,36 @@ class CourseController extends Controller
             'purposeWhatWillLearn' => Course::$rules['purpose_what_will_learn'],
             'targetClassLevel' => Course::$rules['target_class_level'],
         ]);
-        if ($validation->fails()) $errors[] = 'Cursul conține date invalide!';
+        if ($validation->fails()) $errors[] = 'Cursul conține date invalide sau câmpuri necompletate!';
         // endregion
+
         // region Continut course->lessons
         foreach ($course['lessons'] as $key => $lesson) {
-            $validation = Validator::make($course['lessons'][$key], [
+            $validation = Validator::make($lesson, [
                 'title' => Lesson::$rules['title'],
                 'short_description' => Lesson::$rules['short_description'],
                 'content' => Lesson::$rules['content'],
                 'order_index' => Lesson::$rules['order_index'],
             ]);
-            if ($validation->fails()) $errors[] = 'Lecția <b><em>' . $lesson['title'] . '</em></b> conține date invalide!';
+            if ($validation->fails()) $errors[] = 'Lecția <b><em>' . $lesson['title'] . '</em></b> conține date invalide sau câmpuri necompletate!';
             // region Continut course->lessons->questions
             foreach($course['lessons'][$key]['questions'] as $questionKey => $question) {
-                $validation = Validator::make($course['lessons'][$key]['questions'][$questionKey], [
+                $validation = Validator::make($question, [
                     'content' => Question::$rules['content'],
                 ]);
                 if ($validation->fails()) $errors[] = 'Întrebarea <b><em>' . $question['content'] . '</em></b> de la lecția <b><em>' . $lesson['title'] . '</em></b> conține date invalide!';
 
+                $questionHasAnswer = false;
                 // region Continut course->lessons->questions->answers
                 foreach($course['lessons'][$key]['questions'][$questionKey]['answers'] as $answerKey => $answer) {
-                    $validation = Validator::make($course['lessons'][$key]['questions'][$questionKey]['answers'][$answerKey], [
+                    if ($answer['is_true']) $questionHasAnswer = true;
+                    $validation = Validator::make($answer, [
                         'content' => Answer::$rules['content'],
                         'is_true' => Answer::$rules['is_true'],
                     ]);
-                    if ($validation->fails()) $errors[] = 'Răspunsul la întrebarea <b><em>' . $question['content'] . '</em></b> de la lecția <b><em>' . $lesson['title'] . '</em></b> conține date invalide!';
+                    if ($validation->fails()) $errors[] = 'Răspunsul la întrebarea <b><em>' . $question['content'] . '</em></b> de la lecția <b><em>' . $lesson['title'] . '</em></b> conține date invalide sau câmpuri necompletate!';
                 }
+                if(!$questionHasAnswer) $errors[] = 'Lecția <b>' . $lesson['title'] . '</b> conține o întrebare care nu are răspuns!';
                 // endregion
             }
             // endregion

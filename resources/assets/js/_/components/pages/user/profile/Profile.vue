@@ -44,6 +44,7 @@
                 </div>
                 <div class="column is-3">
                     <achievements :user="user"></achievements>
+                    <items :user="user"></items>
                 </div>
             </div>
         </div>
@@ -54,12 +55,14 @@
     import ImageContainer from '../../../includes/dumb/ImageContainer.vue';
     import LevelBox from '../../../includes/dumb/LevelBox.vue';
     import Achievements from './sidebars/Achievements.vue';
+    import Items from './sidebars/Items.vue';
     import { xp, level } from '../../../../../utils';
     import config from '../../../../../config';
     import UserInfo from './sidebars/UserInfo.vue';
     import Activity from './sidebars/Activity.vue';
     import Avatars from './avatars/Avatars.vue';
     import { mapState } from 'vuex';
+
     export default {
         mounted() {
             this.getUser();
@@ -109,6 +112,7 @@
         components: {
             Avatars,
             UserInfo,
+            Items,
             Activity,
             Course,
             Achievements,

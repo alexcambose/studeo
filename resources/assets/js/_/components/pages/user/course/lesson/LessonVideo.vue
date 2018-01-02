@@ -7,14 +7,14 @@
                 :thumbnail="lesson._thumbnail.filename"
                 class="video"
         ></video-player>
-        <div class="box">
-            {{lesson.content}}
-        </div>
+        <div v-html="lessonContent" class="box content"></div>
     </div>
 </template>
 
 <script>
     import VideoPlayer from '../../../../includes/dumb/VideoPlayer.vue';
+    import { markdown } from 'markdown';
+
     export default {
         props: {
             onEnded: {
@@ -26,6 +26,9 @@
                 const state = this.$store.state;
                 const { currentLessonIndex } = state.course;
                 return state.course.lessons[currentLessonIndex];
+            },
+            lessonContent() {
+                return markdown.toHTML(this.lesson.content);
             },
         },
         components: {

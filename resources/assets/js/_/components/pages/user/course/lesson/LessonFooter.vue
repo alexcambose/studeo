@@ -3,11 +3,5 @@
 </template>
 
 <script>
-    export default {
-        name: "lesson-footer"
-    }
+    export default {};
 </script>
-
-<style scoped>
-
-</style>

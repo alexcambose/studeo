@@ -118,6 +118,15 @@
                     icon="address-book-o"
             ></b-input>
         </b-field>
+        <b-field label="Social">
+            <b-field>
+                <p class="control">
+                    <span class="button is-static">facebook.com/</span>
+                </p>
+                <b-input v-model="social.facebook" expanded></b-input>
+            </b-field>
+
+        </b-field>
         <submit :fetching="fetching" :success="success">Salvează</submit>
     </form>
 </template>
@@ -153,6 +162,9 @@
                 cover_color: user.cover_color,
                 success: '',
                 classLevels: config.classLevels,
+                social: {
+                    facebook: user.social.facebook,
+                },
                 monthNames, dayNames,
             };
         },
@@ -168,7 +180,6 @@
                     .catch(() => this.fetching = false);
             },
             updateImage(file) {
-                // this.$refs.updateImageModal.setProgress(12);
                 this.$store.dispatch('updateUserProfileImage', { file, progressCallback: value => this.$refs.updateImageModal.setProgress(value) })
                     .then(() => {
                         this.$refs.updateImageModal.hide();

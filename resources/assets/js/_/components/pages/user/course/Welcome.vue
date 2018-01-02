@@ -48,7 +48,7 @@
                     </div>
                     <div class="title is-2">Descriere</div>
                     <hr>
-                    {{course.description}}
+                    <div v-html="courseDescription" class="content"></div>
                     <hr>
                     <div class="title is-2">Lecții - {{lessons.length}}</div>
                     <lesson-box v-for="(lesson, index) in lessons" :key="index" :lesson="lesson"></lesson-box>
@@ -113,6 +113,7 @@
     import UserCard from '../../../../components/includes/dumb/UserCard.vue';
     import LessonBox from '../../../../components/includes/dumb/LessonBox.vue';
     import VideoPlayer from '../../../../components/includes/dumb/VideoPlayer.vue';
+    import { markdown } from 'markdown';
 
     export default {
         mounted () {
@@ -125,6 +126,11 @@
                 lessons: [],
                 fetched: false,
             };
+        },
+        computed: {
+            courseDescription() {
+                return markdown.toHTML(this.course.description);
+            },
         },
         watch: {
             '$route.params.slug'() {

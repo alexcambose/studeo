@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AwardedXp extends Notification
+class UnlockedAchievement extends Notification
 {
     use Queueable;
 

@@ -61,12 +61,12 @@
       padding: 4px 0;
       display: flex;
       align-items: center;
+      .icon { margin-right: 4px }
       &:not(:first-of-type) {
         border-top: 1px solid #ececec;
       }
     }
   }
-
 
   .user-data-container {
     margin-top: 30px;
@@ -103,7 +103,9 @@
     &:hover .meta .meta-section .field.has-addons {
       opacity: 1;
     }
-
+    &.post-box-private {
+      border: 1px solid #d3d3d3;
+    }
     .meta {
       transition: all .3s;
       margin-top: 10px;
@@ -187,6 +189,24 @@
   }
 }
 
+
+
+
+.customBox {
+  margin: 5px;
+  position: relative;
+  width: 94px;
+  height: 92px;
+  border-radius: 2px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 2px 0 rgba(26, 24, 29, 0.15), 0 1px 4px 0 rgba(26, 24, 29, 0.1);
+  border: 1px solid transparent;
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 rgba(26, 24, 29, 0.16), 0 1px 8px 0 rgba(26, 24, 29, 0.12);
+    border-color: $primary;
+  }
+}
 /* region Tooltip Recompense */
 .tooltipCustom {
   position: relative;

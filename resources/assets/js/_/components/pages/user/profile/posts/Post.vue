@@ -3,7 +3,7 @@
         Postare ștearsă
     </div>
     <div v-else-if="deleted && hideDeleted"></div>
-    <div v-else-if="!editMode" class="box post-box">
+    <div v-else-if="!editMode" :class="['box', 'post-box', thePost.is_private ? 'post-box-private' : '']">
         <div class="content" v-html="markdownHtml(thePost.content)"></div>
         <div class="meta">
             <div @click="toggleLike" class="meta-section like">

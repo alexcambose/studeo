@@ -40,7 +40,7 @@
                         <div>
                             <UpDownArrows :lesson_id="lesson.id" class="mr-5"></UpDownArrows>
                         </div>
-                       <button @click="deleteLesson($event, lesson.id)" class="button is-small is-danger"><b-icon pack="fa" icon="trash"></b-icon></button>
+                        <button @click="deleteLesson($event, lesson.id)" class="button is-small is-danger"><b-icon pack="fa" icon="trash"></b-icon></button>
                     </router-link>
                     <div class="panel-block">
                         <form @submit="addNewLesson" class="is-fullwidth">
@@ -69,7 +69,6 @@
 <script>
     import { mapGetters } from 'vuex';
     import UpDownArrows from './components/UpDownArrows';
-
     export default {
         computed: {
             ...mapGetters(['newLessons']),

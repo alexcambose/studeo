@@ -19,8 +19,8 @@ class Lesson extends Model
             ],
         ],
         'order_index' => 'required|numeric',
-        'thumbnail' => 'image|mimes:jpeg,png,jpg|max:10000000',
-        'video' => 'mimes:mp4|max:100000000',
+        'thumbnail' => 'image|mimes:jpeg,png,jpg|max:10000',
+        'video' => 'mimes:mp4|max:500000',
     ];
     protected $appends = [
         '_questions',

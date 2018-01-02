@@ -25,6 +25,7 @@
                 <b-input
                         :value="content"
                         @input="onChange"
+                        @blur="onBlur"
                         v-bind="$attrs"
                         type="textarea"
                 ></b-input>
@@ -129,6 +130,9 @@
             },
         },
         methods: {
+            onBlur(value) {
+                this.$emit('blur', value);
+            },
             onChange(value) {
                 this.content = value;
                 this.$emit('input', this.content);

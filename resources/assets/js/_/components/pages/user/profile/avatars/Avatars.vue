@@ -55,7 +55,13 @@
             },
             handleBuy(avatarType) {
                 this.$store.dispatch('buyAvatar', { avatarType })
-                    .then(avatars => this.avatars = avatars);
+                    .then(avatars => {
+                        this.avatars = avatars;
+                        this.$toast.open({
+                            message: 'Ai cumpărat un avatar!',
+                            type: 'is-success',
+                        });
+                    });
             },
             handleActivate(avatarType) {
                 this.$store.dispatch('activateAvatar', { avatarType });

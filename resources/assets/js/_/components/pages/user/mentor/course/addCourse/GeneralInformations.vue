@@ -39,13 +39,13 @@
             ></b-input>
         </b-field>
         <b-field label="Descriere completă">
-            <b-input
+            <markdown-textarea
                     maxlength="4000"
                     required
                     type="textarea"
                     :value="newCourse.description"
                     @blur="setData('description', $event.target.value)"
-            ></b-input>
+            ></markdown-textarea>
         </b-field>
         <hr>
         <b-field label="Dificultate">
@@ -74,6 +74,7 @@
     import UploadImage from '../../../../../includes/dumb/UploadImage.vue';
     import CourseTagInput from '../../../../../includes/course/CourseTagInput.vue';
     import { MATERII } from '../../../../../../../utils';
+    import MarkdownTextarea from '../../../../../includes/dumb/MarkdownTextarea';
 
     export default {
         data() {
@@ -108,7 +109,7 @@
         },
         methods: {
             ...mapActions(['updateNewCourseData']),
-            setData(key, value) { console.log(key, value);
+            setData(key, value) {
                 this.updateNewCourseData({ [key]: value });
             },
             setTitle(e) {
@@ -119,14 +120,16 @@
             },
             fetchBestSlug() {
                 this.fetchingSlug = true;
-                axios.get(config.url.COURSE_BEST_SLUG + this.newCourse.slug)
+                axios.get(config.url.COURSE_BEST_SLUG + this.newCourse.title)
                     .then(({ data }) => {
                         this.fetchingSlug = false;
-                        this.updateNewCourseData('slug', encodeURIComponent(data.slug));
+                        this.setData('slug', encodeURIComponent(data.slug));
+                        console.log(this.newCourse.slug);
                     });
             },
         },
         components: {
+            MarkdownTextarea,
             CourseTagInput,
             MultipleFields,
             UploadImage,
