@@ -9,6 +9,7 @@ import settingsRoutes from './settings';
 import playlistsRoutes from './playlists';
 import profileRoutes from './profile';
 import courseRoutes from './course';
+import pathRoutes from './path';
 import store from '../store/index';
 import config from '../../config';
 import VueRouter from 'vue-router';
@@ -52,6 +53,7 @@ const router = new VueRouter({
         ...playlistsRoutes,
         ...courseRoutes,
         ...profileRoutes,
+        ...pathRoutes,
         {
             path: '/404',
             component: NotFound404,

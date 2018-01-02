@@ -70,6 +70,10 @@ Route::prefix('avatar')->group(function () {
     Route::post('activate/{avatar}', 'AvatarController@activate');  // activare avatar
 });
 
+Route::prefix('path')->group(function () {
+   Route::get('/all', 'PathController@all'); //luare toate path-urile
+});
+
 Route::get('/', function(){
     return view('index');
 });

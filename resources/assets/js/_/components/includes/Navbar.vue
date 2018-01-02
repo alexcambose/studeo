@@ -58,6 +58,7 @@
                         <router-link :to="{name: 'profile', params: {username: user.username}}" class="navbar-item"><b-icon pack="fa" icon="user"></b-icon>&nbsp; Profil</router-link>
                         <router-link :to="{name: 'notifications'}" class="navbar-item"><b-icon pack="fa" icon="comment"></b-icon>&nbsp; Notificări</router-link>
                         <router-link :to="{name: 'playlists'}" class="navbar-item"><b-icon pack="fa" icon="book"></b-icon>&nbsp; Bibliotecă</router-link>
+                        <router-link :to="{name: 'paths'}" class="navbar-item"><b-icon pack="fa" icon="road"></b-icon>&nbsp; Paths</router-link><!-- doar momentan aici -->
                         <router-link :to="{name: 'settings'}" class="navbar-item"><b-icon pack="fa" icon="cog"></b-icon>&nbsp; Setări</router-link>
 
                         <!--<router-link to="/admin" class="navbar-item"><b-icon pack="fa" icon="lock"></b-icon>&nbsp; Panou admin</router-link>-->

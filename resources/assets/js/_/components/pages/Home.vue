@@ -21,13 +21,29 @@
                     <course-box-vertical :course="course" small></course-box-vertical>
                 </div>
             </div>
-            <div class="more-home" v-if="!fetching">
-                <router-link v-if="this.$route.params.category" :to="{ name: 'courses', query: { categorie: this.$route.params.category } }" class="button is-primary is-outlined">Vezi mai mult &nbsp; <i class="fa fa-arrow-right"></i></router-link>
+            <div  v-if="!fetching" class="more-home">
+                <router-link v-if="$route.params.category" :to="{ name: 'courses', query: { categorie: $route.params.category } }" class="button is-primary is-outlined">Vezi mai mult &nbsp; <i class="fa fa-arrow-right"></i></router-link>
                 <router-link v-else :to="{ name: 'courses'}" class="button is-primary is-outlined">Vezi mai mult &nbsp; <i class="fa fa-arrow-right"></i></router-link>
             </div>
+            <div v-if="!fetching" class="columns mt-10">
+                <div class="column">
+                    <a @click="moveLeft" class="button is-rounded"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="column" style="text-align: center">
+                    <div class="recommended-title">Recomandate pentru tine</div>
+                </div>
+                <div class="column">
+                    <a @click="moveRight" class="button is-rounded" style="float: right"><i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div v-if="!fetching" class="columns" id="recomandate" style="overflow-x: auto;">
+                <div v-for="(course, index) in recommended" class="column is-3">
+                    <course-box-vertical :course="course" id="course" small></course-box-vertical>
+                </div>
+            </div>
         </div>
-
     </div>
+
 </template>
 
 <script>
@@ -47,6 +63,7 @@
                 loadingComponent.close();
                 this.fetching = false;
             });
+            this.getRecommendations();
         },
         data: function() {
             return {
@@ -54,6 +71,7 @@
                 courses: [],
                 fetching: false,
                 category: '',
+                recommended: [],
             };
         },
         watch: {
@@ -76,7 +94,7 @@
                                     let category = this.classes.find(e => e.slug == categorySlug);
                                     data.courses.forEach(course => {
                                         if (this.courses.length < 5) {
-                                            if (!this.courses.find(e => e.id === course.id) && course.category == category.id) {this.courses.push(course); console.log('dsada')}
+                                            if (!this.courses.find(e => e.id === course.id) && course.category == category.id) this.courses.push(course);
                                         }
                                     });
                                 } else {
@@ -90,8 +108,36 @@
                             } else {
                                 reject();
                             }
-                        });
+                        }).catch(err => reject(err));
                 });
+            },
+            getRecommendations() {
+                return new Promise( (resolve, reject) => {
+                    axios.get(config.url.USER_RECOMMENDED)
+                        .then(({ data }) => {
+                            this.recommended = data.courses;
+                            if (data.courses.length < 4) {
+                                this.recommended = [...this.recommended, ...this.courses];
+                            }
+                            resolve(data.courses);
+                        })
+                        .catch(err => reject(err));
+                });
+            },
+            moveLeft() {
+                let width = document.getElementById('course').offsetWidth * 3;
+                document.getElementById('recomandate').scrollBy({
+                    left: -width,
+                    behavior: 'smooth',
+                });
+            },
+            moveRight() {
+                let width = document.getElementById('course').offsetWidth * 3;
+                document.getElementById('recomandate').scrollBy({
+                    left: width,
+                    behavior: 'smooth',
+                });
+
             },
         },
         components: {
@@ -107,5 +153,10 @@
 <style scoped>
     .is-exact-active {
         color: #00d1b2 !important;
+    }
+    .recommended-title {
+        font-size: 20px;
+        color: #505763;
+        font-width: 50;
     }
 </style>

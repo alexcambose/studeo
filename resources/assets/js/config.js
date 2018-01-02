@@ -16,6 +16,7 @@ export default {
         USER_SHARE_COURSE_ALL: SERVER + 'user/share/',
         USER_SHARE_COURSE_ADD: SERVER + 'user/share/',
         USER_SHARE_COURSE_DELETE: SERVER + 'user/share/',
+        USER_RECOMMENDED: SERVER + 'user/recommended',
         POST_ALL: SERVER + 'user/post/', // get
         POST_ADD: SERVER + 'user/post/', // post
         POST_UPDATE: SERVER + 'user/post/', // put
@@ -47,6 +48,7 @@ export default {
         PLAYLIST_EDIT: SERVER + 'playlist/update/',
         PLAYLIST_ADD_COURSE: (playlistId, courseId) => SERVER + `playlist/${playlistId}/addCourse/${courseId}`,
         PLAYLIST_DELETE_COURSE: (playlistId, courseId) => SERVER + `playlist/${playlistId}/addCourse/${courseId}`,
+        PATH_ALL: SERVER + 'path/all/',
     },
     notifications: {
         PASSWORD_CHANGED: {

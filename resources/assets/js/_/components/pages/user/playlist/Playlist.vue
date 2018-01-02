@@ -73,7 +73,7 @@
                     </div>
                     <div class="addPlaylistBoxContainer" v-else>
                         <b-tooltip
-                                label="Adaugă un curs"
+                                label="Adaugă un playlist"
                                 :animated="true"
                         >
                             <div class="box addPlaylistBox" @click="isComponentModalActive = true">
@@ -208,3 +208,9 @@
         },
     };
 </script>
+
+<style scoped>
+    .is-exact-active {
+        color: #00d1b2 !important;
+    }
+</style>

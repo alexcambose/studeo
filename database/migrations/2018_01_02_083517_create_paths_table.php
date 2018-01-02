@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseUserSharesTable extends Migration
+class CreatePathsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateCourseUserSharesTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_user_shares', function (Blueprint $table ) {
+        Schema::create('paths', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('course_id')->unsigned();
+            $table->integer('image_id');
+            $table->integer('category_id');
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('course_id')->references('id')->on('courses');
-
         });
     }
 
@@ -31,6 +30,6 @@ class CreateCourseUserSharesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_user_shares');
+        Schema::dropIfExists('paths');
     }
 }

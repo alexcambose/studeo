@@ -28,7 +28,7 @@ class PlaylistController extends Controller
         ]);
     }
 
-    public function createPlaylist(Request $request) { // dafuq validation
+    public function createPlaylist(Request $request) {
         $playlist = new Playlist();
         $user = Auth::user();
 

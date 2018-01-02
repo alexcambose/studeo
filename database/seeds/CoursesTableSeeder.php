@@ -53,6 +53,10 @@ class CoursesTableSeeder extends Seeder
             $playlist->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
         });
 
+        factory(\App\Path::class, 50)->create()->each(function($path)use($courseNumber) {
+            $path->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
+        });
+
         factory(\App\Lesson::class, $courseNumber*4)->create();
 
         factory(\App\Question::class, 30)->create();

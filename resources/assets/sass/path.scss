@@ -1,0 +1,34 @@
+.path-page-has-bg-img {
+  background: linear-gradient(141deg, rgba(0,158,108,.3) 0%, rgba(0,209,178,.35) 71%, rgba(0,231,235,.3) 100%), url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/4ZrVLdVKeijzurndz/people-education-and-learning-concept-student-girl-with-notebook-and-calculator-doing-math-at-home-at-night_bslkswtoog_thumbnail-full01.png') center center !important;
+  background-size:cover !important;
+}
+.white {
+  color: white !important;
+}
+
+.path-title {
+  font-size: 22px !important;
+  color: white;
+}
+.path {
+  min-height: 100px;
+  -webkit-background-size: 100% 100% !important;
+  background-position: 50% 50% !important;
+  background-size: 100% !important;
+  -webkit-filter: brightness(40%);
+  -webkit-transition: all .4s ease;
+  -moz-transition: all .4s  ease;
+  -o-transition: all .4s  ease;
+  -ms-transition: all .4s ease;
+  transition: all .4s  ease;
+  &:hover {
+    -webkit-filter: brightness(90%);
+    color: black !important;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s  ease;
+    -o-transition: all .4s  ease;
+    -ms-transition: all .4s ease;
+    transition: all .4s  ease;
+
+  }
+}
