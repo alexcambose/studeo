@@ -1,7 +1,7 @@
 import Account from '../components/pages/user/settings/Account';
 import ProfileSettings from '../components/pages/user/settings/Profile';
 import Security from '../components/pages/user/settings/Security';
-import Settings from '../components/pages/user/settings/_index.vue';
+import Settings from '../components/pages/user/settings/Settings.vue';
 
 export default [
     {

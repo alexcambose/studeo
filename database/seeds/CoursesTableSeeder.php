@@ -43,7 +43,7 @@ class CoursesTableSeeder extends Seeder
     {
         $this->insertTags();
 
-        $courseNumber = 10;
+        $courseNumber = 20;
 
         factory(\App\Course::class, $courseNumber)->create()->each(function($course)use($courseNumber) {
             $course->tags()->sync( \App\Tag::all()->random(floor($courseNumber/2))->pluck('id') );

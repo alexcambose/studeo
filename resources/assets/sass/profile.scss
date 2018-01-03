@@ -158,8 +158,10 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  border: 1px solid transparent;
   &:hover {
-    background-color: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    background-color: #f6f6f6;
   }
   .avatar-card-title {
     font-size: 1.1rem;

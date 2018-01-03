@@ -6,7 +6,7 @@
         </div>
 
         <post v-for="post in posts" :post="post" :user="user" :key="post.id"></post>
-        <infinite-loading @triggered="infiniteHandler">
+        <infinite-loading ref="a" @triggered="infiniteHandler">
             <slot slot="fetching">Se accesează postările</slot>
             <slot slot="completed">Nu mai sunt postări</slot>
         </infinite-loading>

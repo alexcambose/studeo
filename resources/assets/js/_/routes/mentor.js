@@ -1,6 +1,6 @@
 import BecomeMentor from '../components/pages/user/mentor/BecomeMentor';
 import Dashboard from '../components/pages/user/mentor/Dashboard';
-import AddCourse from '../components/pages/user/mentor/course/addCourse/_index';
+import AddCourse from '../components/pages/user/mentor/course/addCourse/AddCourse';
 import GeneralInformations from '../components/pages/user/mentor/course/addCourse/GeneralInformations';
 import Purpose from '../components/pages/user/mentor/course/addCourse/Purpose';
 import TargetAudience from '../components/pages/user/mentor/course/addCourse/TargetAudience';

@@ -30,6 +30,7 @@ Route::prefix('user')->group(function () {
     Route::get('share/{user}', 'UserController@shareAll'); // luate toate cursurile distribuite de un user
     Route::post('share/{course}', 'UserController@shareAdd'); // adaugare distribuire curs
     Route::delete('share/{id}', 'UserController@shareRemove'); // stargere distribuire curs
+    Route::put('report', 'UserController@report'); // adaugare raport user
 });
 
 Route::prefix('course')->group(function () {
@@ -71,7 +72,7 @@ Route::prefix('avatar')->group(function () {
 });
 
 Route::prefix('path')->group(function () {
-   Route::get('/all', 'PathController@all'); //luare toate path-urile
+   Route::get('/all', 'PathController@all'); // luare toate path-urile
 });
 
 Route::get('/', function(){

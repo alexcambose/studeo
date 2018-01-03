@@ -115,4 +115,7 @@ class User extends Authenticatable
     public function logins() {
         return $this->hasMany(Logins::class);
     }
+    public function reports() {
+        return $this->hasMany(Report::class);
+    }
 }

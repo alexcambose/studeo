@@ -52,16 +52,14 @@
             content: 'Uitarea şi mersul mai departe sunt cea mai mare înţelepciune.',
         },
         {
-            author: 'Helen Keller',
-            content: 'Cele mai bune şi mai frumoase lucruri din lume nu pot fi văzute sau atinse. Ele trebuie simţite în inimă.',
-        },
-        {
             author: 'Anatole France',
             content: 'Educația nu e cât de mult ai memorat sau cât știi. E capacitatea de a face diferența între ce știi și ce nu știi.',
         },
         {
             author: 'Bertolt Brecht',
             content: 'Inteligenţa nu înseamnă să nu faci greşeli, ci să vezi repede cum poţi să le îndrepţi.',
+        },
+        {
             author: 'Helen Keller',
             content: 'Cele mai bune şi mai frumoase lucruri din lume nu pot fi văzute sau atinse. Ele trebuie simţite în inimă.',
         },
@@ -69,7 +67,6 @@
             author: 'Lil Pump',
             content: 'ma bitch luv do cocain',
         },
-
         // ...more
     ];
     export default {

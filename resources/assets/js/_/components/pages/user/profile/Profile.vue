@@ -4,11 +4,11 @@
             <div class="banner" :style="{backgroundColor: user.cover_color}"></div>
             <nav class="navbar profile-nav">
                 <div class="container">
-                    <image-container class="profile-image" :src="user._image.filename">
+                    <image-container class="profile-image" :src="user._image.filename"  :level="level">
                         <image-container
                                 @click.native="user.id === loggedUser.id ? isAvatarModalActive = true : null"
                                 :class="['profile-avatar-image', user.id === loggedUser.id ? 'cp' :'']"
-                                :src="user._avatar._image._filename"
+                                :src="user._avatar._image._filename"  :level="level"
                         >
                         </image-container>
                     </image-container>

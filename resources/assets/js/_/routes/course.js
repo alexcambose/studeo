@@ -1,5 +1,5 @@
 import Welcome from '../components/pages/user/course/Welcome.vue';
-import Lesson from '../components/pages/user/course/lesson/_index.vue';
+import Lesson from '../components/pages/user/course/lesson/Lesson.vue';
 import All from '../components/pages/user/course/All.vue';
 
 export default [

@@ -24,10 +24,10 @@
             },
         },
         mounted() {
-            this.check();
-            setInterval(() => {
+            this.trigger();
+            window.addEventListener('scroll', () => {
                 this.check();
-            }, 1000);
+            });
         },
         data() {
             return {

@@ -1,7 +1,6 @@
-import Home from '../components/pages/Home.vue';
+import Home from '../components/pages/user/Home.vue';
 import Notifications from '../components/pages/user/Notifications.vue';
 import Category from '../components/pages/user/Category.vue';
-import Help from '../components/pages/Help.vue';
 import NotFound404 from '../components/pages/404.vue';
 import guestRoutes from './guest';
 import mentorRoutes from './mentor';
@@ -10,6 +9,7 @@ import playlistsRoutes from './playlists';
 import profileRoutes from './profile';
 import courseRoutes from './course';
 import pathRoutes from './path';
+import helpRoutes from './help';
 import store from '../store/index';
 import config from '../../config';
 import VueRouter from 'vue-router';
@@ -37,12 +37,6 @@ const router = new VueRouter({
             meta: { onlyAuth: true },
         },
         {
-            path: '/ajutor',
-            component: Help,
-            name: 'help',
-            meta: { onlyAuth: true },
-        },
-        {
             path: '/legal',
             // component: Legal, il facem cand terminam
             name: 'legal',
@@ -54,6 +48,7 @@ const router = new VueRouter({
         ...courseRoutes,
         ...profileRoutes,
         ...pathRoutes,
+        ...helpRoutes,
         {
             path: '/404',
             component: NotFound404,

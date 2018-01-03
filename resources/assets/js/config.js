@@ -2,21 +2,22 @@ const SERVER = 'http://localhost:8000/';
 export default {
     url: {
         SERVER,
-        LOGIN: SERVER + 'login/',
-        LOGOUT: SERVER + 'logout/',
-        REGISTER: SERVER + 'register/',
-        USER: SERVER + 'user/get/',
-        USER_ACTIVITY: SERVER + 'user/activity/',
-        USER_BY_USERNAME: SERVER + 'user/get/username/',
-        USER_UPDATE: SERVER + 'user/update/',
-        USER_UPDATE_PASSWORD: SERVER + 'user/update/password/',
-        USER_MENTOR: SERVER + 'user/mentor/register/',
-        USER_UPDATE_PROFILE: SERVER + 'user/update/profile/',
-        USER_UPDATE_PROFILE_IMAGE: SERVER + 'user/update/profileImage/',
-        USER_SHARE_COURSE_ALL: SERVER + 'user/share/',
-        USER_SHARE_COURSE_ADD: SERVER + 'user/share/',
-        USER_SHARE_COURSE_DELETE: SERVER + 'user/share/',
-        USER_RECOMMENDED: SERVER + 'user/recommended',
+        LOGIN: SERVER + 'login/', // post
+        LOGOUT: SERVER + 'logout/', // post
+        REGISTER: SERVER + 'register/', // post
+        USER: SERVER + 'user/get/', // get
+        USER_ACTIVITY: SERVER + 'user/activity/', // get
+        USER_BY_USERNAME: SERVER + 'user/get/username/', // get
+        USER_UPDATE: SERVER + 'user/update/', // post
+        USER_UPDATE_PASSWORD: SERVER + 'user/update/password/', // post
+        USER_MENTOR: SERVER + 'user/mentor/register/', // post
+        USER_UPDATE_PROFILE: SERVER + 'user/update/profile/', // post
+        USER_UPDATE_PROFILE_IMAGE: SERVER + 'user/update/profileImage/', // post
+        USER_SHARE_COURSE_ALL: SERVER + 'user/share/', // get
+        USER_SHARE_COURSE_ADD: SERVER + 'user/share/', // post
+        USER_SHARE_COURSE_DELETE: SERVER + 'user/share/', // delete
+        USER_RECOMMENDED: SERVER + 'user/recommended', // post
+        USER_REPORT: SERVER + 'user/report', // put
         POST_ALL: SERVER + 'user/post/', // get
         POST_ADD: SERVER + 'user/post/', // post
         POST_UPDATE: SERVER + 'user/post/', // put

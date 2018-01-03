@@ -47,13 +47,13 @@
 </template>
 
 <script>
-    import HomeCard from '../includes/dumb/HomeCard.vue';
-    import Card from '../includes/dumb/Card.vue';
-    import UploadImage from '../includes/dumb/UploadImage.vue';
-    import MarkdownTextarea from '../includes/dumb/MarkdownTextarea';
-    import { MATERII } from '../../../utils';
-    import config from '../../../config';
-    import CourseBoxVertical from '../includes/course/CourseBoxVertical';
+    import HomeCard from '../../includes/dumb/HomeCard.vue';
+    import Card from '../../includes/dumb/Card.vue';
+    import UploadImage from '../../includes/dumb/UploadImage.vue';
+    import MarkdownTextarea from '../../includes/dumb/MarkdownTextarea';
+    import { MATERII } from '../../../../utils';
+    import config from '../../../../config';
+    import CourseBoxVertical from '../../includes/course/CourseBoxVertical';
     export default {
         mounted() {
             const loadingComponent = this.$loading.open();

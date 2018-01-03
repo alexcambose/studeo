@@ -4,6 +4,7 @@ use App\Course;
 use App\Media;
 use App\Notifications\PasswordChanged;
 use App\Notifications\BecameMentor;
+use App\Report;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -165,5 +166,22 @@ class UserController extends Controller
             'success' => true,
             'activity' => $user->joinedLessons()->get()->pluck('pivot')->map(function ($e) { return $e['updated_at']->toDateTimeString(); }),
         ]);
+    }
+
+    public function report(Request $request) {
+        $validation = Validator::make($request->all(), [
+            'email' => Report::$rules['email'],
+            'type' => Report::$rules['type'],
+            'title' => Report::$rules['title'],
+            'content' => Report::$rules['content'],
+        ]);
+        if($validation->fails()) return response()->json([ 'success' => false,'a' => $validation->errors() ]);
+        $report = new Report();
+        $report->email = $request->email;
+        $report->type = $request->type;
+        $report->title = $request->title;
+        $report->content = $request->content;
+        Auth::user()->reports()->save($report);
+        return response()->json([ 'success' => true ]);
     }
 }
