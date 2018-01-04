@@ -6,36 +6,10 @@ use Illuminate\Support\Facades\DB;
 class CoursesTableSeeder extends Seeder
 {
     public function insertTags() {
-        $tags = [
-            ['label' => 'matematică'],
-            ['label' => 'algebră'],
-            ['label' => 'geometrie'],
-            ['label' => 'fracție'],
-            ['label' => 'numere complexe'],
-            ['label' => 'vectori'],
-            ['label' => 'grupuri'],
-            ['label' => 'ecuații'],
-            ['label' => 'inecuații'],
-            ['label' => 'intervale'],
-            ['label' => 'șiruri'],
-            ['label' => 'monotonie'],
-            ['label' => 'adunare'],
-            ['label' => 'scădere'],
-            ['label' => 'înmultire'],
-            ['label' => 'împărțire'],
-            ['label' => 'romana'],
-            ['label' => 'cultura'],
-            ['label' => 'istorie'],
-            ['label' => 'arheologie'],
-            ['label' => 'geografie'],
-            ['label' => 'politică'],
-            ['label' => 'castravete'],
-            ['label' => 'informatica'],
-            ['label' => 'programare'],
-            ['label' => 'it'],
-            ['label' => 'calculator'],
-            ['label' => 'calculatoare'],
-        ];
+        $tags = array_map(function ($tag) {
+            return ['label' => $tag];
+        }, config('studeo.tags'));
+
         DB::table('tags')->insert($tags);
     }
 
@@ -59,10 +33,10 @@ class CoursesTableSeeder extends Seeder
 
         factory(\App\Lesson::class, $courseNumber*4)->create();
 
-        factory(\App\Question::class, 30)->create();
+        factory(\App\Question::class, $courseNumber * 2)->create();
 
-        factory(\App\Answer::class, 40)->create();
+        factory(\App\Answer::class, $courseNumber * 4)->create();
 
-        factory(\App\Note::class, $courseNumber*10)->create();
+        factory(\App\Note::class, $courseNumber*3)->create();
     }
 }

@@ -4,7 +4,7 @@
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         position: 'relative',
-        boxShadow: '0 0 4px 0 ' + colorLevel,
+        boxShadow: '0 0 3px 1px ' + colorLevel,
     }" >
         <slot></slot>
     </div>

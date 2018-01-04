@@ -6,34 +6,16 @@ use Illuminate\Support\Facades\DB;
 class UsersTableSeeder extends Seeder
 {
     public function insertAchievements() {
-        $achievements = [];
-        // in ordine, un fel cronologica
-        $achievements[] = ['type' => '1_COURSE_FINISHED', 'description' => 'Un curs terminat.'];
-        foreach ([5,10,25,50,100,200,250,500] as $value)
-            $achievements[] = [
-                'type' => $value . '_COURSE_FINISHED',
-                'description' => $value . ($value % 100 > 19 ? ' de ' : ' ') . 'cursuri terminate.',
-            ];
-
-        $achievements[] = ['type' => 'BECAME_MENTOR', 'description' => 'Mentor'];
-
-        $achievements[] = ['type' => '1_COURSE_PUBLISHED', 'description' => 'Un curs publicat'];
-        foreach ([2,6,10,20,30] as $value) // 30 ii ajung disperatului
-            $achievements[] = [
-                'type' => $value . '_COURSE_PUBLISHED',
-                'description' => $value . ($value % 100 > 19 ? ' de ' : ' ') . 'cursuri publicate.',
-            ];
+        $achievements = array_map(function ($achievement) {
+            return ['type' => $achievement[0], 'description' => $achievement[1]];
+        }, config('studeo.achievements'));
         DB::table('achievements')->insert($achievements);
     }
 
     public function insertAvatars() {
-        $avatars = [
-            [ 'type'=> 'DEFAULT', 'title' => 'Caracterul standard', 'description' => '', 'price' => 0 ],
-            [ 'type'=> 'CAMEL', 'title' => 'Camil Cămila', 'description' => 'Camil Cămila este un personaj antic in istoria Africii. Se spune ca acesta se plimbă noaptea prin deșet și manancă nisip.', 'price' => 10 ],
-            [ 'type'=> 'PONY', 'title' => 'Poneiul Fericit', 'description' => 'Descriere. Descriere. Descriere. Descriere. Descriere. Descriere. Descriere. ', 'price' => 40 ],
-            [ 'type'=> 'WIZARD', 'title' => 'Vrăjitorul de Fier', 'description' => 'Descriere. Descriere. Descriere. Descriere. Descriere. Descriere. Descriere. ', 'price' => 60 ],
-            [ 'type'=> 'SABIN', 'title' => 'Sabin Butoi', 'description' => 'Sabin Butoi face laba in noroi', 'price' => 300 ],
-        ];
+        $avatars = array_map(function ($avatar) {
+            return ['type' => $avatar[0], 'title' => $avatar[1], 'description' => $avatar[2], 'price' => $avatar[3]];
+        }, config('studeo.avatars'));
         DB::table('avatars')->insert($avatars);
     }
 

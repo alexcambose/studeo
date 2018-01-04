@@ -1,7 +1,7 @@
 <template>
     <div @click="$emit('select', avatar.type)" class="avatar-card">
         <image-container :src="avatar._image._filename" class="avatar-card-image"></image-container>
-        <span class="avatar-card-title">{{avatar.title}}</span>
+        <span :class="['avatar-card-title', user._avatar.type === avatar.type ? 'has-text-weight-bold' : '']">{{avatar.title}}</span>
         <span class="avatar-card-price">
             {{avatar.price}} &nbsp;<b-icon pack="fa" icon="graduation-cap" size="is-small"></b-icon>
         </span>

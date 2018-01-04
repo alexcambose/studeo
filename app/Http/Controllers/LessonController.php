@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Events\CourseFinished;
 use App\Lesson;
 use App\Notifications\AwardedXp;
-use App\Notifications\CourseFinished;
+use App\Notifications\CourseIsFinished;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,12 +26,12 @@ class LessonController extends Controller
         if($lesson->userWatched(Auth::user()))
             return response()->json([ 'success' => true ]);
         if($lesson->course->isUserJoined(Auth::user())){
-            // check if this lessons is the last one
-            if($lesson->id === $lesson->course->lessons->last()->id){
-                Auth::user()->notify(new CourseFinished());
-                Auth::user()->addXp($lesson->course->xp());
-            }
+            // check if this lesson is the last one
             $lesson->joinedUsers()->attach(Auth::id());
+
+            if($lesson->id === $lesson->course->lessons->last()->id){
+                event(new CourseFinished($lesson->course));
+            }
             return response()->json([ 'success' => true ]);
         }
         return response()->json([ 'success' => false ]);

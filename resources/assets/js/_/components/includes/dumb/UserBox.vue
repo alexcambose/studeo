@@ -33,29 +33,29 @@
     };
 </script>
 
-<style>
+<style scoped>
     .user-box{
         display: flex;
     }
-    .user-box .user-image{
+    .user-image{
         height: 36px;
         width: 36px;
         align-self: center;
         border-radius: 100%;
     }
-    .user-box .user-info{
+    .user-info{
         display: flex;
         flex:1;
         align-items: center;
     }
-    .user-box .user-info .user-name{
+    .user-name{
         margin-left: 10px;
     }
-    .user-box.is-small .user-image{
+    .user-image{
         height: 24px;
         width: 24px;
     }
-    .user-box.is-small .user-info .user-name{
+    .user-name{
         font-size: .9em;
     }
 </style>

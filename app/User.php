@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\AwardedXp;
+use App\Notifications\UnlockedAchievement;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -78,7 +79,31 @@ class User extends Authenticatable
         $this->increment('xp', $amount);
         $this->notify(new AwardedXp($amount)); // baga si notificare dupa ce adauga xp in db
     }
+
+    public function unlockAchievement(Achievement $achievement) {
+        $this->achievements()->attach($achievement->type);
+        $this->notify(new UnlockedAchievement($achievement));
+    }
     // Relationships
+    public function joinedCourses() {
+        return collect($this->joinedLessons->map(function($lesson){
+            return $lesson->course;
+        })->unique());
+    }
+
+    public function finishedCourses() {
+        $joinedCourses = $this->joinedCourses();
+        $finishedCourses = [];
+        foreach ($joinedCourses as $joinedCourse) {
+            $lessons = $joinedCourse->lessons;
+            $isCourseFinished = true; // must be a better way
+            foreach ($lessons as $lesson) {
+                if(!$lesson->userWatched($this)) $isCourseFinished = false;
+            }
+            if($isCourseFinished) $finishedCourses[] = $joinedCourse;
+        }
+        return collect($finishedCourses);
+    }
     public function image() {
         // has one
         return Media::where('id', $this->image_id)->first();
@@ -106,11 +131,6 @@ class User extends Authenticatable
     }
     public function avatars() {
         return $this->belongsToMany(Avatar::class)->withTimestamps();
-    }
-    public function joinedCourses() {
-        return collect($this->joinedLessons->map(function($lesson){
-            return $lesson->course;
-        }));
     }
     public function logins() {
         return $this->hasMany(Logins::class);

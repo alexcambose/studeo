@@ -75,7 +75,11 @@ export default {
         },
         AWARDED_XP: {
             title: () => 'Ai primit XP!',
-            message: (e) => `Ai primit ${e.data.data} xp!`,
+            message: e => `Ai primit ${e.data.data} xp!`,
+        },
+        UNLOCKED_ACHIEVEMENT: {
+            title: () => 'Ai realizat on nouă realizare!',
+            message: e => `${e.data.data}!`,
         },
     },
     classLevels: ['Altceva', 'Școala generală', 'Gimnaziu', 'Liceu', 'Facultate'],

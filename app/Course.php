@@ -81,7 +81,7 @@ class Course extends Model
     }
     public function xp(){
         return $this->difficulty * 10
-            + 5 * $this->lessons()->count()
+            + 6 * $this->lessons()->count()
             + 2 * $this->lessons()->get()->reduce(function($carry, $lesson) { return $carry + $lesson->questions()->count(); });
     }
     // Relationships

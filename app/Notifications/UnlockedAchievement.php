@@ -38,7 +38,7 @@ class UnlockedAchievement extends Notification
     {
         return [
             'type' => 'UNLOCKED_ACHIEVEMENT',
-            'data' => $this->achievement,
+            'data' => $this->achievement->description,
         ];
     }
 }
