@@ -2,7 +2,7 @@ import config from '../../../config';
 import {  } from '../mutators-types';
 import Vue from 'vue';
 const state = {
-    playlists: {},
+    paths: {},
 };
 
 const getters = {

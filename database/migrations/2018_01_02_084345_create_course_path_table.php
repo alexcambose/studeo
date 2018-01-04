@@ -15,10 +15,13 @@ class CreateCoursePathTable extends Migration
     {
         Schema::create('course_path', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('course_id');
-            $table->integer('path_id');
+            $table->integer('course_id')->unsigned();
+            $table->integer('path_id')->unsigned();
             $table->integer('order_index')->default(1);
             $table->timestamps();
+
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('path_id')->references('id')->on('paths');
         });
     }
 

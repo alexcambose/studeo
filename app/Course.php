@@ -98,7 +98,7 @@ class Course extends Model
         return $this->belongsToMany(Playlist::class);
     }
     public function paths() {
-        return $this->belongsToMany(Playlist::class);
+        return $this->belongsToMany(Path::class);
     }
     public function tags() {
         return $this->belongsToMany(Tag::class);

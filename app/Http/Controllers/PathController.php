@@ -14,4 +14,10 @@ class PathController extends Controller
             'paths' => Path::all(),
         ]);
     }
+    public function pathById($id) {
+        return response()->json([
+           'success' => true,
+           'path' => Path::find($id),
+        ]);
+    }
 }

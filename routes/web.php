@@ -72,7 +72,8 @@ Route::prefix('avatar')->group(function () {
 });
 
 Route::prefix('path')->group(function () {
-   Route::get('/all', 'PathController@all'); // luare toate path-urile
+   Route::get('/all', 'PathController@all'); //luare toate path-urile
+   Route::get('/get/{path}', 'PathController@pathById'); //luare date unui singur path
 });
 
 Route::get('/', function(){

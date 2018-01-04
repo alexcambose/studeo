@@ -50,6 +50,7 @@ export default {
         PLAYLIST_ADD_COURSE: (playlistId, courseId) => SERVER + `playlist/${playlistId}/addCourse/${courseId}`,
         PLAYLIST_DELETE_COURSE: (playlistId, courseId) => SERVER + `playlist/${playlistId}/addCourse/${courseId}`,
         PATH_ALL: SERVER + 'path/all/',
+        PATH_BY_ID: SERVER + 'path/get/',
     },
     notifications: {
         PASSWORD_CHANGED: {

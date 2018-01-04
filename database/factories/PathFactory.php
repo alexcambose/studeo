@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(\App\Path::class, function (Faker $faker) {
     return [
         'title' => $faker->word,
-        'description' => $faker->text($maxNbChars = 200),
+        'description' => $faker->text($maxNbChars = 800),
         'category_id' => $faker->numberBetween(1, 9),
         'image_id' => function () {
             return App\Media::all()->random()->id;

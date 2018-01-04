@@ -1,6 +1,18 @@
-.path-page-has-bg-img {
+.paths-page-has-bg-img {
   background: linear-gradient(141deg, rgba(0,158,108,.3) 0%, rgba(0,209,178,.35) 71%, rgba(0,231,235,.3) 100%), url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/4ZrVLdVKeijzurndz/people-education-and-learning-concept-student-girl-with-notebook-and-calculator-doing-math-at-home-at-night_bslkswtoog_thumbnail-full01.png') center center !important;
   background-size:cover !important;
+}
+.path-has-bg-img {
+  background-size: cover !important;
+  background-position: center;
+  min-height: 100%;
+  min-height: 100vh;
+
+  min-height: calc(100% - 60px);
+  min-height: calc(100vh - 60px);
+
+  display: flex;
+  align-items: center;
 }
 .white {
   color: white !important;
@@ -9,26 +21,63 @@
 .path-title {
   font-size: 22px !important;
   color: white;
+  text-shadow: 0 0 13px #000;
 }
 .path {
   min-height: 100px;
-  -webkit-background-size: 100% 100% !important;
-  background-position: 50% 50% !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
   background-size: 100% !important;
-  -webkit-filter: brightness(40%);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   -webkit-transition: all .4s ease;
   -moz-transition: all .4s  ease;
   -o-transition: all .4s  ease;
   -ms-transition: all .4s ease;
-  transition: all .4s  ease;
+  .visible {
+    visibility: hidden !important;
+  }
+  .inline {
+    display: inline-block;
+  }
   &:hover {
     -webkit-filter: brightness(90%);
     color: black !important;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
     -webkit-transition: all .4s ease;
     -moz-transition: all .4s  ease;
     -o-transition: all .4s  ease;
     -ms-transition: all .4s ease;
     transition: all .4s  ease;
-
+    .visible {
+      font-weight: 400;
+      margin: 0 !important;
+      padding: 0 !important;
+      visibility: visible !important;
+    }
   }
+}
+
+.timeline {
+  z-index: -1 !important;
+  order: 1;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    margin-left: 15px;
+    height: 100%;
+    width: 4px;
+    background: #d7e4ed;
+    z-index: 0;
+    order: 1;
+  }
+}
+
+.path-bottom {
+  height: 10vh !important;
+  width: 100% !important;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
 }
