@@ -51,7 +51,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover {
+  &:not(.no-hover):hover {
     background-color: $dropdown-item-hover-background-color;
   }
   .data {

@@ -15,8 +15,12 @@
             </div>
         </router-link>
 
-        <playlist-dropdown-button :course="course"></playlist-dropdown-button>
-        <share-button :course="course"></share-button>
+        <div class="course-box-header-buttons">
+            <playlist-dropdown-button :course="course"></playlist-dropdown-button>
+            <share-button v-if="!asShared" :course="course"></share-button>
+            <!--<delete-button v-else :course="course"></delete-button>-->
+        </div>
+
         <div class="card-content cp">
             <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }" >
                 <span class="course-title">{{course.id}} | {{course.title}}</span>
@@ -35,6 +39,7 @@
     import UserBox from '../../includes/dumb/UserBox.vue';
     import PlaylistDropdownButton from './PlaylistDropdownButton.vue';
     import ShareButton from './ShareButton.vue';
+    import DeleteButton from './DeleteButton';
     export default {
         props: {
             course: {
@@ -44,6 +49,10 @@
             small: {
                 type: Boolean,
                 required: false,
+            },
+            asShared: {
+                type: Boolean,
+                default: false,
             },
         },
         computed: {
@@ -62,6 +71,7 @@
             },
         },
         components: {
+            DeleteButton,
             ImageContainer,
             UserBox,
             ShareButton,

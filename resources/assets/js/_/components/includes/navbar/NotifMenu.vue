@@ -6,11 +6,14 @@
             </b-switch>
             <refresh @click.native="refresh" size="is-small" :fetching="refreshing" class="is-rounded is-pulled-right"/>
         </div>
-        <div v-if="!notifications.length" class="notification-item">
+        <div v-if="!notifications.length" class="notification-item no-hover">
             Nici o notificare
         </div>
         <div class="notification-container" v-else>
-            <notifications/>
+            <notifications :infinite="false"/>
+            <div class="notification-item no-hover">
+                <router-link :to="{name: 'notifications'}" >Vezi toate notificările</router-link>
+            </div>
         </div>
     </div>
 </template>

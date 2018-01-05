@@ -95,7 +95,9 @@
                 logged: state => state.user.logged,
                 isMentor: state => state.user.logged && state.user.user.role === 2,
             }),
-            ...mapGetters(['unreadNotificationsCount']),
+            unreadNotificationsCount() {
+                return this.$store.state.notification.unreadNotificationsCount;
+            },
         },
         methods: {
             logout() {

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <ul>
-            <notification-item v-for="notification in notifications" :key="notification.id" :notification="notification"/>
-        </ul>
-        <infinite-loading @infinite="infiniteHandler" v-if="end < notifications.length"/>
+        <notification-item v-for="notification in notifications" :key="notification.id" :notification="notification"/>
+        <infinite-loading v-if="infinite" @infinite="infiniteHandler">
+            <span slot="no-more">Nu mai sunt notificări</span>
+        </infinite-loading>
     </div>
 
 </template>
@@ -13,19 +13,24 @@
     import NotificationItem from './NotificationItem';
     import InfiniteLoading from 'vue-infinite-loading';
     export default {
-        computed: {
-            notifications() {
-                return this.$store.getters.notifications.slice(0, this.end);
+        props: {
+            infinite: {
+                type: Boolean,
+                default: true,
             },
         },
-        data: function() {
-            return {
-                end: 10,
-            };
+        computed: {
+            notifications() {
+                return this.$store.getters.notifications;
+            },
         },
         methods: {
-            infiniteHandler() {
-                this.end += 10;
+            infiniteHandler($state) {
+                this.$store.dispatch('getNotification', true)
+                    .then(() => {
+                        if (this.notifications.length < this.$store.state.notification.notificationsCount) $state.loaded();
+                        else $state.complete();
+                    });
             },
         },
         components: {

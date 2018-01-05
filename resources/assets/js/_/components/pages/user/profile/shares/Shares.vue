@@ -1,23 +1,19 @@
 <template>
     <div>
-        <div v-for="course in courses" :key="course.id" >
-            <router-link :to="{ name: 'courseWelcome', params: { slug: course.slug } }">
-                {{course.title}}
-            </router-link>
-            <div class="is-clearfix mt-10">
-                <button @click="deleteShare(course.pivot.id)" class="button is-danger is-small is-pulled-left">
-                    <b-icon pack="fa" icon="trash"></b-icon>
-                </button>
-                <span :title="course.pivot.created_at" class="is-pulled-right">{{moment(course.pivot.created_at).fromNow()}}</span>
+        <div v-for="(courseGroup, index) in chunk(courses, 2)" :key="index" class="columns is-centered">
+            <div v-for="course in courseGroup" :key="course.id" class="column is-6">
+                <course-box-vertical :course="course" small :as-shared="user.id === $store.state.user.user.id"></course-box-vertical>
             </div>
-            <hr>
         </div>
     </div>
+
 </template>
 
 <script>
     import config from '../../../../../../config';
     import moment from 'moment';
+    import _ from 'lodash';
+    import CourseBoxVertical from '../../../../includes/course/CourseBoxVertical.vue';
     export default {
         props: {
             user: Object,
@@ -34,23 +30,11 @@
             };
         },
         methods: {
-            deleteShare(pivotId) {
-                this.$dialog.confirm({
-                    title: 'Ștergere',
-                    message: 'Ești sigur ca vrei sa ștergi acestă distribuire ?',
-                    confirmText: 'Da',
-                    cancelText: 'Nu',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    onConfirm: () => {
-                        axios.delete(config.url.USER_SHARE_COURSE_DELETE + pivotId)
-                            .then(({ data }) => {
-                                this.courses = data.courses;
-                            });
-                    },
-                });
-            },
             moment,
+            chunk: _.chunk,
+        },
+        components: {
+            CourseBoxVertical,
         },
     };
 </script>

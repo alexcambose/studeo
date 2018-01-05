@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    function notifications(){
+    function notifications(Request $request){
+        $notifications = Auth::user()->notifications();
+        if($request->start !== null && $request->amount !== null) $notifications->skip((int)$request->start)->take((int)$request->amount);
         return response()->json([
             'success' => true,
-            'notifications' => Auth::user()->notifications,
+            'notifications' => $notifications->get(),
+            'notificationsCount' => Auth::user()->notifications()->count(),
+            'unreadNotificationsCount' => Auth::user()->notifications()->where('read_at', null)->count(),
         ]);
     }
     function toggle(Request $request){
@@ -23,7 +27,11 @@ class NotificationController extends Controller
         }
         $notification->save();
 
-        return response()->json($notification);
+        return response()->json([
+            'success' => true,
+            'notification' => $notification,
+            'unreadNotificationsCount' => Auth::user()->notifications()->where('read_at', null)->count(),
+        ]);
     }
     function toggleReadAll(){
         $notifications = Auth::user()->notifications;
@@ -40,7 +48,7 @@ class NotificationController extends Controller
         }
         return response()->json([
             'success' => true,
-            'readall' => !!$shouldMarkAsRead,
+            'readAll' => !!$shouldMarkAsRead,
         ]);
     }
 }

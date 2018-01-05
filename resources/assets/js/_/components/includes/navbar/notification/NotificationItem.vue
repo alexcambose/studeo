@@ -1,5 +1,5 @@
 <template>
-    <li class="notification-item">
+    <div class="notification-item">
         <div class="data">
             <div class="title">
                 {{notification.title}}
@@ -21,7 +21,7 @@
                 </span>
             </div>
         </div>
-    </li>
+    </div>
 </template>
 
 <script>
