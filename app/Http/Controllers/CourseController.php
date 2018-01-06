@@ -44,7 +44,12 @@ class CourseController extends Controller
         if($request->sort) {
             $field = explode('-', $request->sort)[0];
             $order = explode('-', $request->sort)[1];
-            $courses = Course::orderBy(($field === 'date' ? 'created_at' : 'title'), ($order === 'desc' ? 'DESC' : 'ASC'));
+
+            if($field === 'alph') $field = 'title';
+            else if($field === 'date') $field = 'created_at';
+            else if($field === 'views') $field = 'views';
+
+            $courses = Course::orderBy($field, ($order === 'desc' ? 'DESC' : 'ASC'));
         } else {
             $courses = Course::orderBy('created_at', 'DESC');
         }

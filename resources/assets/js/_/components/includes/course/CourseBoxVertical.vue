@@ -16,9 +16,9 @@
         </router-link>
 
         <div class="course-box-header-buttons">
-            <playlist-dropdown-button :course="course"></playlist-dropdown-button>
-            <share-button v-if="!asShared" :course="course"></share-button>
-            <!--<delete-button v-else :course="course"></delete-button>-->
+            <playlist-dropdown-button v-if="playlistDropdownButton" :course="course"></playlist-dropdown-button>
+            <share-button v-if="shareButton" :course="course"></share-button>
+            <slot name="header-buttons"></slot>
         </div>
 
         <div class="card-content cp">
@@ -39,20 +39,20 @@
     import UserBox from '../../includes/dumb/UserBox.vue';
     import PlaylistDropdownButton from './PlaylistDropdownButton.vue';
     import ShareButton from './ShareButton.vue';
-    import DeleteButton from './DeleteButton';
     export default {
         props: {
             course: {
                 type: Object,
                 required: true,
             },
-            small: {
+            small: Boolean,
+            playlistDropdownButton: {
                 type: Boolean,
-                required: false,
+                default: true,
             },
-            asShared: {
+            shareButton: {
                 type: Boolean,
-                default: false,
+                default: true,
             },
         },
         computed: {
@@ -71,7 +71,6 @@
             },
         },
         components: {
-            DeleteButton,
             ImageContainer,
             UserBox,
             ShareButton,

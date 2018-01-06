@@ -92,6 +92,7 @@ export default {
     },
     profile: {
         postsLoadAmount: 10,
+        sharesLoadAmount: 10,
     },
     xpLevelColors: {
         10: '#dfdbff',

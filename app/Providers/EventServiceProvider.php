@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CourseFinished' => [
             'App\Listeners\UnlockAchievement',
         ],
+        'App\Events\UserBecameMentor' => [
+            'App\Listeners\UnlockAchievement',
+        ],
         // ...more
     ];
 

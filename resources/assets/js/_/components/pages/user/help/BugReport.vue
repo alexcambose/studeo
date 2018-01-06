@@ -29,7 +29,7 @@
             <b-input
                     required
                     type="textarea"
-                    v-model="content"
+                    v-model="body"
                     minlength="50"
                     maxlength="2000"
                     placeholder="Te rugăm sa detaliezi cât mai bine problema"
@@ -49,7 +49,7 @@
             return {
                 email: this.$store.state.user.user.email,
                 title: '',
-                content: '',
+                body: '',
                 type: 1,
                 fetching: false,
                 success: '',
@@ -57,9 +57,9 @@
         },
         methods: {
             submit() {
-                const { email, title, content, type } = this;
+                const { email, title, body, type } = this;
                 this.fetching = true;
-                axios.put(config.url.USER_REPORT, { email, title, content, type })
+                axios.put(config.url.USER_REPORT, { email, title, body, type })
                     .then(({ data }) => {
                         if (data.success) this.success = 'Formularul a fost trimis. Mulțumim!';
                         this.fetching = false;

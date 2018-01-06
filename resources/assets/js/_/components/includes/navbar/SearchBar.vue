@@ -12,17 +12,24 @@
                 :loading="loading"
                 @select="onSelected">
             <template slot-scope="props">
-                <div class="media">
-                    <div class="media-left">
-                        <image-container :src="props.option._image.filename" style="width: 64px;height: 64px;"></image-container>
+                <div class="columns">
+                    <div :class="['column', props.option._joined ? 'is-11' : 'is-12']">
+                        <div class="media">
+                            <div class="media-left">
+                                <image-container :src="props.option._image.filename" style="width: 64px;height: 64px;"></image-container>
+                            </div>
+                            <div class="media-content">
+                                <strong class="title is-6" >{{ props.option.title }}</strong>
+                                <br>
+                                <p class="course-description">{{ props.option.short_description }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="media-content">
-                        <b-tag v-if="props.option._joined" type="is-success" class="is-pulled-right">Înscris</b-tag>
-                        <strong class="title is-6">{{ props.option.title }}</strong>
-                        <br>
-                        <p style="white-space: normal; font-size: .9em;">{{ props.option.short_description }}</p>
+                    <div v-if="props.option._joined" class="column is-1 flex-center">
+                        <b-tag type="is-success" class="is-pulled-right">Înscris</b-tag>
                     </div>
                 </div>
+
             </template>
         </b-autocomplete>
     </b-field>
@@ -60,5 +67,16 @@
 </script>
 
 <style scoped>
-
+    .columns {
+        width: 700px;
+    }
+    .media-content {
+        white-space: normal;
+    }
+    .course-description {
+        font-size: .8rem;
+    }
+    .dropdown-item {
+        padding: 0;
+    }
 </style>

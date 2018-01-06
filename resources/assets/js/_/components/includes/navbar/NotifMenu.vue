@@ -11,7 +11,7 @@
         </div>
         <div class="notification-container" v-else>
             <notifications :infinite="false"/>
-            <div class="notification-item no-hover">
+            <div v-if="notifications.length > 5" class="notification-item no-hover">
                 <router-link :to="{name: 'notifications'}" >Vezi toate notificările</router-link>
             </div>
         </div>

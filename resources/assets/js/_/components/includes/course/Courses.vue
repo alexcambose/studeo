@@ -43,8 +43,20 @@
                           subtitle: 'Ordine alfabetică descrescătoare',
                           icon: 'sort-alpha-desc',
                           value: 'alph-desc'
+                        },{
+                          title: 'Vizualizări crescător',
+                          subtitle: 'Numărul de vizualizări crescătoar',
+                          icon: 'eye',
+                          pack: 'mdi',
+                          value: 'views-asc'
+                        },{
+                          title: 'Vizualizări descrescător',
+                          subtitle: 'Numărul de vizualizări descrescătoar',
+                          icon: 'eye-outline',
+                          pack: 'mdi',
+                          value: 'views-desc'
                         }
-                        ]" v-model="filters.sorting" :changed="resetCourses" label="Sortează după: ">
+                        ]" v-model="filters.sorting" @changed="resetCourses" label="Sortează după: ">
 
                 </dropdown>
 
@@ -151,13 +163,16 @@
         },
         watch: {
             '$route.query'() {
+                console.log('cahnged')
                 this.updateFilters();
             },
         },
         methods: {
             chunkArray,
             infiniteHandler($state) {
-                if (this.initialFetch) return;
+                if (Object.keys(this.$route.query).length && this.initialFetch) return;
+
+                console.log('FETCH', this.initialFetch)
                 axios.get(config.url.COURSE_ALL + (this.user ? this.user.id : ''), {
                     params: {
                         start: this.startIndex,
@@ -189,13 +204,14 @@
                 if (filters.difficulty) queryObject['dificultate'] = filters.difficulty;
                 if (filters.tags) queryObject['eticheta'] = filters.tags;
                 if (this.$router.query !== queryObject) {
+                    console.log('push')
                     this.$router.push({ query: queryObject });
                 }
             }, 350),
             updateFilters() {
                 const queryFilters = this.$route.query;
                 let sorting = queryFilters['sortare'] || '';
-                if (sorting !== 'alph-asc' && sorting !== 'alph-desc' && sorting !== 'date-asc' && sorting !== 'date-desc') sorting = 'date-asc';
+                if (sorting !== 'alph-asc' && sorting !== 'alph-desc' && sorting !== 'date-asc' && sorting !== 'date-desc' && sorting !== 'views-asc' && sorting !== 'views-desc') sorting = 'date-asc';
                 this.filters.author = queryFilters['autor'] || null;
                 this.filters.category = queryFilters['categorie'] || null;
                 this.filters.tags = (() => {
@@ -210,10 +226,12 @@
                 this.filters.sorting = sorting;
                 this.filters.onlyRegistered = !!queryFilters['inregistrat'] || false;
                 this.moreFilters = (queryFilters['inregistrat'] || queryFilters['categorie'] || queryFilters['autor'] || (queryFilters['eticheta'] && queryFilters['eticheta'].length) || (queryFilters['dificultate'] && queryFilters['dificultate'].length));
-                this.courses = [];
-                this.startIndex = 0;
-                this.initialFetch = false;
-                this.$refs.infiniteLoading.trigger();
+                if (Object.keys(queryFilters).length !== 0){
+                    this.courses = [];
+                    this.startIndex = 0;
+                    this.initialFetch = false; console.log('from trigger')
+                    this.$refs.infiniteLoading.trigger();
+                }
             },
             setDisplay(isVertical) {
                 localStorage.setItem('displayVertical', isVertical);

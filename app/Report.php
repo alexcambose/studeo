@@ -10,6 +10,6 @@ class Report extends Model
         'email' => 'required|string|email',
         'type' => 'required|numeric',
         'title' => 'required|string|max:200',
-        'content' => 'required|string|max:2000|min:50',
+        'body' => 'required|string|max:2000|min:50',
     ];
 }

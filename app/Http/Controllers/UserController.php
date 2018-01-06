@@ -80,7 +80,7 @@ class UserController extends Controller
             'city' => User::$rules['city'],
             'is_teacher' => User::$rules['is_teacher'],
         ]);
-        if ($validation->fails()) return response()->json([ 'success' => false,'a' => $validation->errors()]);
+        if ($validation->fails()) return response()->json([ 'success' => false ]);
         $user->nickname = $request->nickname;
         $user->sex = $request->sex;
         $user->description = $request->description;
@@ -135,10 +135,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function shareAll(User $user) {
+    public function shareAll(User $user, Request $request) {
+        $shares = $user->sharedCourses()->orderBy('created_at', 'DESC');
+        if($request->start !== null && $request->amount !== null) $shares->skip((int)$request->start)->take((int)$request->amount);
+
         return response()->json([
             'success' => true,
-            'courses' => $user->sharedCourses()->orderBy('created_at', 'DESC')->get(),
+            'courses' => $shares->get(),
         ]);
     }
     public function shareAdd(Course $course) {
@@ -173,14 +176,14 @@ class UserController extends Controller
             'email' => Report::$rules['email'],
             'type' => Report::$rules['type'],
             'title' => Report::$rules['title'],
-            'content' => Report::$rules['content'],
+            'body' => Report::$rules['body'],
         ]);
-        if($validation->fails()) return response()->json([ 'success' => false,'a' => $validation->errors() ]);
+        if($validation->fails()) return response()->json([ 'success' => false ]);
         $report = new Report();
         $report->email = $request->email;
         $report->type = $request->type;
         $report->title = $request->title;
-        $report->content = $request->content;
+        $report->body = $request->body;
         Auth::user()->reports()->save($report);
         return response()->json([ 'success' => true ]);
     }

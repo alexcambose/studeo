@@ -26,17 +26,10 @@ class UnlockAchievement
         return isset($match[1]) ? $match[1] : false;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  CourseFinished  $event
-     * @return void
-     */
-    public function handle(CourseFinished $event)
+    public function handle($event)
     {
         $achievements = config('studeo.achievements');
         $user = $event->user;
-Log::info($user->finishedCourses()->pluck('id'));
         foreach ($achievements as $achievement) {
             $achievement = $achievement[0];
             if(!$user->achievements()->find($achievement)) { // daca nu exista deja

@@ -18,7 +18,7 @@ class CreateReportsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('email');
             $table->string('title');
-            $table->text('content');
+            $table->text('body');
             $table->integer('type')->comment("1 - Eroare, 2 - Sugestie, 3 - Reclamatie");
             $table->timestamps();
 
