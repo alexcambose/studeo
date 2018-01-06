@@ -32,6 +32,7 @@ export default {
         NOTIFICATION_TOGGLE_READ: SERVER + 'notification/toggle/',
         NOTIFICATION_TOGGLE_READ_ALL: SERVER + 'notification/toggleReadAll/',
         COURSE: SERVER + 'course/slug/',
+        COURSE_BY_ID: SERVER + 'course/id/',
         COURSE_FIND: SERVER + 'course/find/',
         COURSE_TAGS: SERVER + 'course/tag/',
         COURSE_ALL: SERVER + 'course/all/',
@@ -100,4 +101,14 @@ export default {
         50: '#ff4d00',
         60: '#4d7edc',
     },
+    paths: [
+        {
+            id: '1',
+            title: 'Expert in mancat șervețele',
+            description: 'Mancatul servetelelor este o arta. Incepi prin a invata lucruri simple, precum mancatul unui servetel de bucatarie, dar cu timpul vei ajunge se mananci servetele indiferent de forma structura sau marime, vei putea manca si o CARAMIDA facuta din servetele sau chiar si invers.',
+            category_id: 1,
+            courses: [4, 1, 2, 3],
+            image: 'userdata/images/4.jpg',
+        },
+    ],
 };

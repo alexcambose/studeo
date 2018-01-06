@@ -33,6 +33,13 @@ class CourseController extends Controller
             'course' => $course,
         ])->cookie('viewed-'.$course->id);
     }
+    public function oneById($id) {
+        $course = Course::find($id);
+        return response()->json([
+            'success' => true,
+            'course' => $course,
+        ]);
+    }
     function all($userId = null, Request $request) {
         if($request->sort) {
             $field = explode('-', $request->sort)[0];

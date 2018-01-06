@@ -24,11 +24,10 @@
                         <div class="columns is-multiline">
                             <div v-for="path in pathsByCategory(category.id)" class="column is-one-quarter">
                                 <router-link :to="{ name: 'path', params: { path: path.id } }">
-                                    <div class="path box thumbnail" :style="{ background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),' + 'url(' + path._image.filename + ')' }">
+                                    <div class="path box thumbnail" :style="{ background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),' + 'url(' + path.image + ')' }">
                                         <div class="has-text-centered white">
                                             <div class="title path-title" style="margin: 0">{{ path.title }}</div>
-                                            <span class="duration inline visible">{{ totalDuration(path) }} &blacksquare; </span>
-                                            <span class="nr-courses inline visible">{{ path._courses.length }} cursuri</span>
+                                            <span class="nr-courses inline visible">{{ path.courses.length }} cursuri</span>
                                         </div>
                                     </div>
                                 </router-link>
@@ -43,48 +42,23 @@
 
 <script>
     import { MATERII, timeConvert } from '../../../../../utils';
-    import config from '../../../../../config';
+    import config from '../../../../../config'
 
     export default {
-        mounted() {
-            const loadingComponent = this.$loading.open();
-            this.fetching = true;
-            this.getAllPaths().then(() => {
-                this.fetching = false;
-                loadingComponent.close();
-            });
-        },
         data() {
             return {
                 categories: MATERII,
-                fetching: false,
-                paths: [],
+                isAddModalActive: false,
+                paths: config.paths,
             };
         },
         methods: {
-            getAllPaths() {
-                // TODO: move to path.js
-                return new Promise((resolve, reject) => {
-                    axios.get(config.url.PATH_ALL)
-                        .then(({ data }) => {
-                            this.paths = data.paths;
-                            resolve(data.paths);
-                        })
-                        .catch(err => reject(err) );
-                });
-            },
             pathsByCategory(category) {
                 return this.paths.filter(e => {
                     return e.category_id == category;
                 });
             },
-            totalDuration(path) {
-                let totalDuration = path._courses
-                    .reduce((total, path) => {
-                        return total + path._lessons.reduce((seconds, lesson) => seconds + lesson.length, 0);
-                    }, 0);
-                return timeConvert(totalDuration);
-            },
+
         },
-    }
+    };
 </script>

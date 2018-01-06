@@ -2,7 +2,7 @@
     <div class="school-classes">
         <ul>
             <li v-for="category in classes">
-                <router-link :to="{ name: 'category', params: { category: category.slug }}">{{ category.name }}</router-link>
+                <router-link :to="{ name: 'courses', query: { categorie: category.slug }}">{{ category.name }}</router-link>
             </li>
         </ul>
     </div>

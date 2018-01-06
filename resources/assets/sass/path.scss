@@ -75,8 +75,17 @@
   }
 }
 
+.columns-vcentered {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  .column-path-vcentered {
+    margin-top: 1% !important;
+  }
+}
+
 .path-bottom {
-  height: 10vh !important;
+  min-height: 14vh !important;
   width: 100% !important;
   background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);

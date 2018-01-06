@@ -1,6 +1,6 @@
 <template>
-    <div v-if="!fetching">
-        <section class="hero is-bold path-has-bg-img" :style="{ background: 'linear-gradient(42deg,#fff 27%,rgba(255,255,255,.7) 37%,rgba(0,139,201,.45) 74%,rgba(0,157,165,.5) 100%),' + 'url(' + path._image.filename + ') no-repeat center' }">
+    <div>
+        <section class="hero is-bold path-has-bg-img" :style="{ background: 'linear-gradient(42deg,#fff 27%,rgba(255,255,255,.7) 37%,rgba(0,139,201,.45) 74%,rgba(0,157,165,.5) 100%),' + 'url(' + path.image + ') no-repeat center' }">
             <div class="hero-body">
                 <div class="container">
                     <div class="columns">
@@ -18,32 +18,30 @@
             </div>
             <div class="path-bottom bottom">
                 <div class="container">
-                    <div class="columns has-text-centered">
-                        <div class="column is-vcentered">
-                            <div class="is-vcentered">
-                                asdasdasda
-                            </div>
+                    <div class="columns columns-vcentered">
+                        <div class="column has-text-centered column-path-vcentered">
+                            <b-icon icon="play" size="is-medium"></b-icon>&nbsp;<strong>{{ totalDuration(courses) }}</strong>&nbsp;de Lorem ipsum.
                         </div>
-                        <div class="column">
-                            asdasdad
+                        <div class="column has-text-centered column-path-vcentered">
+                            <b-icon icon="certificate" size="is-medium"></b-icon>&nbsp;<strong>Invata</strong>&nbsp;lucruri noi.
                         </div>
-                        <div class="column">
-                            asdasdada
+                        <div class="column has-text-centered column-path-vcentered">
+                            <b-icon icon="check-all" size="is-medium"></b-icon>&nbsp;Pune in&nbsp;<strong>practica</strong>&nbsp;ce-ai invatat.
                         </div>
-                        <div class="column">
-                            dasdsadadsada
+                        <div class="column has-text-centered column-path-vcentered">
+                            <b-icon icon="weather-night" size="is-medium"></b-icon>&nbsp;<strong>Avanseaza</strong>&nbsp;in cariera.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <div class="container">
-            <div v-for="course in path._courses">
+            <div v-for="(course, index) in courses">
                 <div class="columns is-centered is-vcentered">
                     <div class="column is-3 has-text-centered">
                         <div class="timeline">
                             <router-link to="" :class="['button', 'is-rounded', checkCourse(course)]" style="z-index: 1">
-                                {{ course.pivot.order_index }}
+                                {{ index + 1 }}
                             </router-link>
                         </div>
                     </div>
@@ -57,35 +55,50 @@
 </template>
 <script>
     import config from '../../../../../config';
-    import CourseBoxHorizontal from '../../../../components/includes/course/CourseBoxHorizontal'
+    import CourseBoxHorizontal from '../../../../components/includes/course/CourseBoxHorizontal';
+    import { timeConvert } from '../../../../../utils';
     export default {
         mounted() {
-            this.fetching = true;
-            const loadingComponent = this.$loading.open();
-            this.pathById().then(() => {
-                this.fetching = false;
-                loadingComponent.close();
+            this.pathById();
+            this.path.courses.forEach(e => {
+                this.getCourse(e).then(() => {
+                    this.courses.push(this.course);
+                });
             });
         },
         data() {
             return {
                 path: '',
                 fetching: false,
+                paths: config.paths,
+                course: '',
+                courses: [],
             };
         },
         methods: {
-            // TODO move to path.js
+            getCourse(id) {
+                return new Promise((resolve, reject) => {
+                    axios.get(config.url.COURSE_BY_ID + id)
+                        .then(({ data }) => {
+                            if (data.success) {
+                                this.course = data.course;
+                                resolve(data.course);
+                            } else {
+                                reject();
+                            }
+                        }).catch(err => reject(err));
+                });
+            },
+            totalDuration(courses) {
+                let totalDuration = courses
+                    .reduce((total, path) => {
+                        return total + path._lessons.reduce((seconds, lesson) => seconds + lesson.length, 0);
+                    }, 0);
+                return timeConvert(totalDuration);
+            },
             pathById() {
                 let id = this.$route.params.path;
-                return new Promise((resolve, reject) => {
-                    axios.get(config.url.PATH_BY_ID + id)
-                        .then(({ data }) => {
-                            this.path = data.path;
-                            console.log(this.path);
-                            resolve(data.paths);
-                        })
-                        .catch(err => reject(err) );
-                });
+                this.path = this.paths.find(e => e.id === id);
             },
             checkCourse(course) {
                 let lessons = course._lessons;
