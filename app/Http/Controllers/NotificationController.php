@@ -34,9 +34,11 @@ class NotificationController extends Controller
         ]);
     }
     function toggleReadAll(){
-        $notifications = Auth::user()->notifications;
 
         $shouldMarkAsRead = Auth::user()->notifications()->where('read_at', null)->count();
+
+        $notifications = Auth::user()->notifications;
+        if($shouldMarkAsRead) $notifications = Auth::user()->notifications()->where('read_at', null)->get();
 
         foreach ($notifications as $notification) {
             if($shouldMarkAsRead) {

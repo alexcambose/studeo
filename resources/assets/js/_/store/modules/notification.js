@@ -93,7 +93,7 @@ const mutations = {
         if (readAll) state.unreadNotificationsCount = 0;
         else state.unreadNotificationsCount = state.notificationsCount;
         state.notifications = state.notifications.map(e => {
-            if (readAll) e.read_at = new Date();
+            if (readAll) e.read_at = e.read_at ? e.read_at : new Date();
             else e.read_at = null;
             return e;
         });

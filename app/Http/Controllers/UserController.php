@@ -136,7 +136,7 @@ class UserController extends Controller
     }
 
     public function shareAll(User $user, Request $request) {
-        $shares = $user->sharedCourses()->orderBy('created_at', 'DESC');
+        $shares = $user->sharedCourses()->orderBy('course_user_shares.created_at', 'DESC');
         if($request->start !== null && $request->amount !== null) $shares->skip((int)$request->start)->take((int)$request->amount);
 
         return response()->json([

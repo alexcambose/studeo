@@ -1,10 +1,29 @@
 <?php
 //Auth::routes();
-
+//==================
+use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
+Route::get('test', function() {
+    $start = microtime(true);
+    FFMpeg::fromDisk('public_web')->open('userdata/courses/videos/test.mp4')
+        ->addFilter(function ($filters) {
+            $filters->watermark(public_path('images/watermark.png'), array(
+                'position' => 'relative',
+                'bottom' => 30,
+                'right' => 30,
+            ));
+        })
+        ->export()
+        ->toDisk('public_web')
+        ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
+        ->save('_.mp4');
+    return 'mers, ' . (string)(microtime(true) - $start) . ' sec';
+});
+//==================
 
 Route::post('login', 'AuthenticationController@login');
 Route::post('register', 'AuthenticationController@register');
 Route::post('logout', 'AuthenticationController@logout');
+
 
 Route::prefix('notification')->group(function () {
     Route::post('/', 'NotificationController@notifications'); // luate toate notificarile

@@ -6,14 +6,14 @@
         <div class="dropdown-container">
             <b-dropdown v-model="sorting" @change="changed">
                 <button class="button is-primary" type="button" slot="trigger">
-                    <b-icon :pack="selectedItem.pack || 'fa'" :icon="selectedItem.icon"></b-icon>
+                    <b-icon pack="fa" :icon="selectedItem.icon"></b-icon>
                     <span>{{selectedItem.title}}</span>
                     <b-icon icon="menu-down"></b-icon>
                 </button>
 
                 <b-dropdown-item v-for="(item, index) in values" :key="index" :value="item.value">
                     <div class="media">
-                        <b-icon class="media-left" :pack="item.pack || 'fa'" :icon="item.icon"></b-icon>
+                        <b-icon class="media-left" pack="fa" :icon="item.icon"></b-icon>
                         <div class="media-content">
                             <h3>{{item.title}}</h3>
                             <small v-if="item.subtitle">{{item.subtitle}}</small>
@@ -37,7 +37,6 @@
                         title: '',
                         subtitle: '', (optional)
                         value: '',
-                        iconPack: '', (optional, default: 'fa')
                         icon: '',
                     }
                  */

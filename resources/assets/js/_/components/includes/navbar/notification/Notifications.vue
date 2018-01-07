@@ -3,6 +3,7 @@
         <notification-item v-for="notification in notifications" :key="notification.id" :notification="notification"/>
         <infinite-loading v-if="infinite" @infinite="infiniteHandler">
             <span slot="no-more">Nu mai sunt notificări</span>
+            <span slot="no-results">Nu sunt notificări</span>
         </infinite-loading>
     </div>
 

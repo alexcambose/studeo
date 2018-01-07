@@ -46,14 +46,12 @@
                         },{
                           title: 'Vizualizări crescător',
                           subtitle: 'Numărul de vizualizări crescătoar',
-                          icon: 'eye',
-                          pack: 'mdi',
+                          icon: 'eye-slash',
                           value: 'views-asc'
                         },{
                           title: 'Vizualizări descrescător',
                           subtitle: 'Numărul de vizualizări descrescătoar',
-                          icon: 'eye-outline',
-                          pack: 'mdi',
+                          icon: 'eye',
                           value: 'views-desc'
                         }
                         ]" v-model="filters.sorting" @changed="resetCourses" label="Sortează după: ">
@@ -163,7 +161,6 @@
         },
         watch: {
             '$route.query'() {
-                console.log('cahnged')
                 this.updateFilters();
             },
         },
@@ -172,7 +169,6 @@
             infiniteHandler($state) {
                 if (Object.keys(this.$route.query).length && this.initialFetch) return;
 
-                console.log('FETCH', this.initialFetch)
                 axios.get(config.url.COURSE_ALL + (this.user ? this.user.id : ''), {
                     params: {
                         start: this.startIndex,
@@ -204,7 +200,6 @@
                 if (filters.difficulty) queryObject['dificultate'] = filters.difficulty;
                 if (filters.tags) queryObject['eticheta'] = filters.tags;
                 if (this.$router.query !== queryObject) {
-                    console.log('push')
                     this.$router.push({ query: queryObject });
                 }
             }, 350),
@@ -229,7 +224,7 @@
                 if (Object.keys(queryFilters).length !== 0){
                     this.courses = [];
                     this.startIndex = 0;
-                    this.initialFetch = false; console.log('from trigger')
+                    this.initialFetch = false;
                     this.$refs.infiniteLoading.trigger();
                 }
             },
