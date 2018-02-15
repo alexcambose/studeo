@@ -49,10 +49,10 @@
         },
         computed: {
             url() {
-                return (this.notFromServer ? '' : config.url.SERVER) + this.src;
+                return (this.notFromServer ? '' : config.url.ROOT) + this.src;
             },
             thumbnailUrl() {
-                return (this.notFromServer ? '' : config.url.SERVER) + this.thumbnail;
+                return (this.notFromServer ? '' : config.url.ROOT) + this.thumbnail;
             },
         },
     };

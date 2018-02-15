@@ -31,7 +31,7 @@
             },
             url() {
                 if (this.src.indexOf('http') !== -1) return this.src;
-                return config.url.SERVER + this.src;
+                return config.url.ROOT + this.src;
             },
         },
     };

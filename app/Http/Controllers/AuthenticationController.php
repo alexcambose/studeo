@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Logins;
+use App\Media;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -12,8 +13,8 @@ class AuthenticationController extends Controller
 {
     function login(Request $request) {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string', //username-ul
-            'password' => 'required|string',
+            'email' => User::$rules['email'], //username-ul
+            'password' => User::$rules['password'],
         ]);
 
         if ($validator->fails())
@@ -55,7 +56,13 @@ class AuthenticationController extends Controller
     }
 
     function register(Request $request) {
-        $validator = Validator::make($request->all(), User::$rules);
+        $validator = Validator::make($request->all(), [
+            'first_name' => User::$rules['first_name'],
+            'last_name' => User::$rules['last_name'],
+            'username' => User::$rules['username'],
+            'email' => User::$rules['email'],
+            'password' => User::$rules['password'],
+        ]);
         if ($validator->fails())
             return response()->json([
                 'success' => false,
@@ -67,8 +74,10 @@ class AuthenticationController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
+        $user->image_id = Media::add('images/defaultProfile.png');
         $user->save();
 
+        $this->login($request);
         return response()->json([
             'success' => true,
             'user' => User::find($user->id),

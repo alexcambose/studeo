@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('birthday')->nullable();
             $table->text('description')->nullable();
             $table->string('email')->unique();
-            $table->integer('image_id')->unsigned();;
+            $table->integer('image_id')->unsigned();
             $table->boolean('is_teacher')->default(false);
             $table->integer('role')->default(1)->comment("1 - user, 2 - mentor, 3 - administrator");
             $table->string('cover_color')->default("#6f7ecc");

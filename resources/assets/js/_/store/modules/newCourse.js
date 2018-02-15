@@ -144,7 +144,6 @@ const actions = {
                     if (data.success) {
                         resolve();
                     } else reject(data.messages);
-                    console.log(data);
                 })
                 .catch(err => reject(err));
         });

@@ -1,6 +1,8 @@
-const SERVER = 'http://localhost:8000/';
+const ROOT = 'http://localhost:8000/';
+const SERVER = ROOT + 'index.php/';
 export default {
     url: {
+        ROOT,
         SERVER,
         LOGIN: SERVER + 'login/', // post
         LOGOUT: SERVER + 'logout/', // post

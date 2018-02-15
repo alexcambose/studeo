@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Validator;
+use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
 
 
 class CourseController extends Controller
@@ -223,8 +224,7 @@ class CourseController extends Controller
 
         // punem id-ul din baza de date aici ca o sa trebuiasca mai tarziu, cand adaugam lectia
         $thumbnailsId = [];
-        $videosId = [];
-        $courseImageId = -1;
+        $videosInfo = [];
         // region Upload
         foreach ($request->file('thumbnails') as $key => $thumbnail) { // miniaturile de la lectii
             $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
@@ -235,7 +235,8 @@ class CourseController extends Controller
         foreach ($request->file('videos') as $key => $video) { // videoclipuri de la lectii
             $filename = time() . '.' . $video->getClientOriginalExtension();
             $video->move(public_path('userdata/courses/videos'), $filename);
-            $videosId[$key] = Media::add('userdata/courses/videos/' . $filename, 1);
+            $videosInfo[$key]['id'] = Media::add('userdata/courses/videos/' . $filename, 1);
+            $videosInfo[$key]['filename'] = 'userdata/courses/videos/' . $filename;
         }
 
         //imaginea cursului
@@ -267,7 +268,8 @@ class CourseController extends Controller
             $newLesson->content = $lesson['content'];
             $newLesson->order_index = $lesson['order_index'];
             $newLesson->thumbnail_id = $thumbnailsId[$key];
-            $newLesson->video_id = $videosId[$key];
+            $newLesson->video_id = $videosInfo[$key]['id'];
+            $newLesson->length = FFMpeg::fromDisk('public_web')->open($videosInfo[$key]['filename'])->getStreams()->first()->get('duration');
             $newLesson->course_id = $newCourse->id;
             $newLesson->save();
 

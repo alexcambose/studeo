@@ -27,7 +27,7 @@ return [
         ['CAMEL', 'Camil Cămila', 'Camil Cămila este un personaj antic in istoria Africii. Se spune ca acesta se plimbă noaptea prin deșet și manancă nisip.', 10],
         ['PONY', 'Poneiul Fericit', 'Descriere. Descriere. Descriere. Descriere. Descriere. Descriere. Descriere.', 40],
         ['WIZARD', 'Vrăjitorul de Fier', 'Descriere. Descriere. Descriere. Descriere. Descriere. Descriere. Descriere.', 60],
-        ['SABIN', 'Sabin Butoi', 'Sabin Butoi face laba in noroi', 300],
+        ['SABIN', 'Sabin Butoi', 'Sabin Butoi face treaba in noroi', 300], // laba
     ],
     'tags' => [
         'matematică',

@@ -23,20 +23,20 @@ class CoursesTableSeeder extends Seeder
             $course->tags()->sync( \App\Tag::all()->random(floor($courseNumber/2))->pluck('id') );
         });
 
-        factory(\App\Playlist::class, 50)->create()->each(function($playlist)use($courseNumber) {
+        factory(\App\Playlist::class, 10)->create()->each(function($playlist)use($courseNumber) {
             $playlist->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
         });
 
-        factory(\App\Path::class, 50)->create()->each(function($path)use($courseNumber) {
-            $path->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
-        });
+//        factory(\App\Path::class, 50)->create()->each(function($path)use($courseNumber) {
+//            $path->courses()->sync( \App\Course::all()->random(floor($courseNumber/2))->pluck('id') );
+//        });
 
-        factory(\App\Lesson::class, $courseNumber*4)->create();
+        factory(\App\Lesson::class, $courseNumber * 4)->create();
 
         factory(\App\Question::class, $courseNumber * 2)->create();
 
         factory(\App\Answer::class, $courseNumber * 4)->create();
 
-        factory(\App\Note::class, $courseNumber*3)->create();
+        factory(\App\Note::class, $courseNumber * 3)->create();
     }
 }

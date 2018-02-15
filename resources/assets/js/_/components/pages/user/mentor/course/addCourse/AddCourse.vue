@@ -88,7 +88,6 @@
             deleteLesson(e, id) {
                 e.preventDefault();
                 const index = this.newLessons.findIndex(e => e.id === id);
-                console.log(this.newLessons[index - 1]);
                 if (this.newLessons[index - 1]) {
                     this.$router.push({
                         name: 'dashboard-add-course-lesson',

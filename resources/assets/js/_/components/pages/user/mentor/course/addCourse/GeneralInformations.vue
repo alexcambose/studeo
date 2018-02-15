@@ -124,7 +124,6 @@
                     .then(({ data }) => {
                         this.fetchingSlug = false;
                         this.setData('slug', encodeURIComponent(data.slug));
-                        console.log(this.newCourse.slug);
                     });
             },
         },

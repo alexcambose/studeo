@@ -90,12 +90,12 @@
     export default {
         data: function(){
             return {
-                first_name: 'Prenume',
-                last_name: 'Nume',
-                username: 'pre.nume',
-                email: 'email@email.com',
-                password:'123456',
-                rpassword:'123456',
+                first_name: '',
+                last_name: '',
+                username: '',
+                email: '',
+                password: '',
+                rpassword:'',
                 error: '',
                 fetching: false,
             };
@@ -107,13 +107,13 @@
                 this.$store.dispatch('register', this)
                     .then(() => {
                         this.fetching = false;
-                        this.$router.push({name: 'home'});
+                        this.$router.push({ name: 'root' });
                     })
                     .catch(err => {
                         this.error = err;
                         this.fetching = false;
                     });
-            }
+            },
         },
         components: {
             'card': Card,

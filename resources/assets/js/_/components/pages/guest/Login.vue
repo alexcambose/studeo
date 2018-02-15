@@ -33,38 +33,38 @@
 
 <script>
 //    import { mapActions } from 'vuex';
-    import Card from '../../includes/dumb/Card';
+import Card from '../../includes/dumb/Card';
     import Submit from '../../includes/dumb/Submit';
 
-    export default {
-        data: function(){
-            return {
-                email: 'sandel@sandica.com',
-                password:'123456',
-                remember: '',
-                fetching: false,
-                error: '',
-            };
-        },
-        methods: {
-            makeLogin(e){
-                this.fetching = true;
-                e.preventDefault();
-                this.$store.dispatch('login', {email:this.email, password: this.password})
-                    .then(() => {
-                        this.$router.push({name:'root'});
+export default {
+    data: function(){
+        return {
+            email: '',
+            password:'',
+            remember: '',
+            fetching: false,
+            error: '',
+        };
+    },
+    methods: {
+        makeLogin(e){
+            this.fetching = true;
+            e.preventDefault();
+            this.$store.dispatch('login', {email:this.email, password: this.password})
+                .then(() => {
+                    this.$router.push({name:'root'});
 
-                        this.fetching = false;
-                    })
-                    .catch(err => {
-                        this.error = err;
-                        this.fetching = false;
-                    });
-            }
-        },
-        components:{
-            'card': Card,
-            'submit': Submit,
-        },
-    }
+                    this.fetching = false;
+                })
+                .catch(err => {
+                    this.error = err;
+                    this.fetching = false;
+                });
+        }
+    },
+    components:{
+        'card': Card,
+        'submit': Submit,
+    },
+}
 </script>

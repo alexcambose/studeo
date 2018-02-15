@@ -28,7 +28,7 @@
                 return this.user.first_name + ' ' + this.user.last_name;
             },
             description() {
-                return markdown.toHTML(this.user.description);
+                if (this.user.description) return markdown.toHTML(this.user.description);
             },
             userInfo() {
                 const { city, birthday, school, created_at } = this.user;
