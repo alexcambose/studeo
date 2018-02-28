@@ -4699,7 +4699,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var ROOT = 'http://localhost:8000/';
+var ROOT = 'http://studeo.ddns.net/';
 var SERVER = ROOT + 'index.php/';
 /* harmony default export */ __webpack_exports__["a"] = ({
     url: {
@@ -72215,9 +72215,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "container landing-page-content" }, [
         _c("h1", { staticClass: "landing-page-title" }, [
-          _vm._v(
-            "\n                    Cursuri online petru toată lumea\n                "
-          )
+          _vm._v("\n                    Studeo\n                ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "landing-page-motto" }, [
+          _vm._v("Fiecare moment este o oportunitate de învățare")
         ])
       ])
     ])
@@ -72235,7 +72237,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "columns is-centered" }, [
           _c("div", { staticClass: "column is-8" }, [
             _vm._v(
-              "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam autem culpa fugit nisi\n                    officiis placeat quibusdam? A ab aliquid amet atque aut cupiditate dicta dolore dolorem\n                    doloribus ex fugit incidunt laboriosam, modi nisi qui quisquam rerum sapiente similique tempora\n                    voluptatibus.\n\n                "
+              "\n                    Trăim în secolul vitezei si timpul nu este niciodată suficient. Dorința de a te reorienta sau de a acumula noi cunoștințe in domeniul in care activezi deja se lovește de imposibilitatea de a-ti împarți mai bine timpul astfel incat sa poti participa efectiv la diverse cursuri de pregătire si perfecționare.\n                    Misiunea: îmbunatățirea rezultatelor la examene si dezvoltarea aptitudinilor utilizatorilor. Aceasta este deschisa oricarui doritor iar informațiile oferite sunt gratis.\n                    Astfel nu trebuie sa va mai faceti griji in legătura cu plata pentru meditatii sau profesori particulari.\n                "
             )
           ])
         ])
@@ -72264,7 +72266,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "content" }, [
               _vm._v(
-                "\n                        Administratorii platformei vegează non-stop conținutul acesteia și se asigură ca toate cursurile indeplinesc cele mai inalte standarde de calitate pentru ca tu să inveți ușor și repede. [...]\n                    "
+                "\n                        Neavând un grup țintă, trainingul bazat pecursuri online poate oferi utilizatorilor cu diverse nivele de cunoștințe informații din orice domenii.\n                        Administratorii platformei vegează non-stop conținutul acesteia și se asigură ca toate cursurile indeplinesc cele mai inalte standarde de calitate pentru ca tu să inveți ușor și repede.\n                    "
               )
             ])
           ]),
@@ -72278,7 +72280,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "content" }, [
               _vm._v(
-                "\n                        Ai acces la cursurile tale favorite oriunde si oricand. Progresul cursurilot este salvat automat. [...]\n                    "
+                "\n                        Trăim într-o eră a tehnologiei ceea ce ne permite să fim mereu în contact cu Internetul și cu ce ne poate oferi. Cursurile disponibile într-un mediu online reprezintă astfel o sursă accesibilă oricând și pentru oricine dorește să învețe.\n                    "
               )
             ])
           ]),

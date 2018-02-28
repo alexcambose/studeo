@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);@import url(https://fonts.googleapis.com/css?family=Muli);/*!
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);@import url(https://fonts.googleapis.com/css?family=Muli);@import url(https://fonts.googleapis.com/css?family=Allura);/*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
@@ -26962,8 +26962,15 @@ html {
 
 .welcome .landing-page .landing-page-content .landing-page-title {
   text-align: center;
-  font-size: 4em;
+  font-size: 5em;
   color: whitesmoke !important;
+}
+
+.welcome .landing-page .landing-page-content .landing-page-motto {
+  font-family: 'Allura', cursive;
+  text-align: center;
+  font-size: 2em;
+  color: whitesmoke;
 }
 
 .welcome .title,

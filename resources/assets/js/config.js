@@ -1,4 +1,4 @@
-const ROOT = 'http://localhost:8000/';
+const ROOT = 'http://studeo.ddns.net/';
 const SERVER = ROOT + 'index.php/';
 export default {
     url: {

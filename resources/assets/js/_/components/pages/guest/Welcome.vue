@@ -22,8 +22,9 @@
             <div class="landing-page-filter"></div>
             <div class="container landing-page-content">
                     <h1 class="landing-page-title">
-                        Cursuri online petru toată lumea
+                        Studeo
                     </h1>
+                    <div class="landing-page-motto">Fiecare moment este o oportunitate de învățare</div>
             </div>
         </section>
         <section class="about-us">
@@ -31,11 +32,9 @@
             <div class="subtitle">
                 <div class="columns is-centered">
                     <div class="column is-8">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam autem culpa fugit nisi
-                        officiis placeat quibusdam? A ab aliquid amet atque aut cupiditate dicta dolore dolorem
-                        doloribus ex fugit incidunt laboriosam, modi nisi qui quisquam rerum sapiente similique tempora
-                        voluptatibus.
-
+                        Trăim în secolul vitezei si timpul nu este niciodată suficient. Dorința de a te reorienta sau de a acumula noi cunoștințe in domeniul in care activezi deja se lovește de imposibilitatea de a-ti împarți mai bine timpul astfel incat sa poti participa efectiv la diverse cursuri de pregătire si perfecționare.
+                        Misiunea: îmbunatățirea rezultatelor la examene si dezvoltarea aptitudinilor utilizatorilor. Aceasta este deschisa oricarui doritor iar informațiile oferite sunt gratis.
+                        Astfel nu trebuie sa va mai faceti griji in legătura cu plata pentru meditatii sau profesori particulari.
                     </div>
                 </div>
             </div>
@@ -51,7 +50,8 @@
                         </div>
                         <div class="column-title">Cursuri de calitate</div>
                         <div class="content">
-                            Administratorii platformei vegează non-stop conținutul acesteia și se asigură ca toate cursurile indeplinesc cele mai inalte standarde de calitate pentru ca tu să inveți ușor și repede. [...]
+                            Neavând un grup țintă, trainingul bazat pecursuri online poate oferi utilizatorilor cu diverse nivele de cunoștințe informații din orice domenii.
+                            Administratorii platformei vegează non-stop conținutul acesteia și se asigură ca toate cursurile indeplinesc cele mai inalte standarde de calitate pentru ca tu să inveți ușor și repede.
                         </div>
                     </div>
                     <div class="column">
@@ -60,7 +60,7 @@
                         </div>
                         <div class="column-title">Mobilitate</div>
                         <div class="content">
-                            Ai acces la cursurile tale favorite oriunde si oricand. Progresul cursurilot este salvat automat. [...]
+                            Trăim într-o eră a tehnologiei ceea ce ne permite să fim mereu în contact cu Internetul și cu ce ne poate oferi. Cursurile disponibile într-un mediu online reprezintă astfel o sursă accesibilă oricând și pentru oricine dorește să învețe.
                         </div>
                     </div>
                     <div class="column">

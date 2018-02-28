@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
+@import url('https://fonts.googleapis.com/css?family=Allura');
 $landing-navbar-height: $navbar-height + 20;
 $landing-navbar-height-compressed: $landing-navbar-height - 30;
 $section-padding: 40px 0;
@@ -64,8 +65,14 @@ $section-padding: 40px 0;
       z-index: 2;
       .landing-page-title {
         text-align: center;
-        font-size: 4em;
+        font-size: 5em;
         color: $light !important;
+      }
+      .landing-page-motto {
+        font-family: 'Allura', cursive;
+        text-align: center;
+        font-size: 2em;
+        color: $light;
       }
     }
   }
