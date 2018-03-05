@@ -4699,7 +4699,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var ROOT = 'http://studeo.ddns.net/';
+var ROOT = 'http://localhost:8000/';
 var SERVER = ROOT + 'index.php/';
 /* harmony default export */ __webpack_exports__["a"] = ({
     url: {
@@ -69557,7 +69557,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             startIndex: 0,
             moreFilters: false,
             initialFetch: true,
-            displayVertical: localStorage.getItem('displayVertical') === 'true',
+            displayVertical: localStorage.getItem('displayVertical') === null || localStorage.getItem('displayVertical') === 'true',
             filters: {
                 author: null,
                 category: null,
@@ -72023,30 +72023,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             testimonials: [{
-                image: 'https://cdn.pixabay.com/photo/2017/01/25/19/57/raptor-2008891__180.jpg',
-                name: 'Vladut Cap De Vultur',
+                image: 'images/boy1.png',
+                name: 'Tudor Silvestru',
+                title: 'Interesant',
+                content: 'Proiectul este o platforma educationala in care utilizatorii pot lua parte la cursuri din diferite domenii. Mesajul este clar formulat. Nu am intampinat nici o problema. In schimb, cred ca ar trebui creat un playlist default (gen "watch later") sau ceva buton cu inima pe pagina cursului. De asemenea, ar trebui incluse review-uri pentru fiecare curs. Pagina cu toate categoriile sa aiba sectiuni pe langa cea cu recomandate, cu trending, new, most viewed, whatever... Usor de navigat, design placut, contine toate functiile necesare unei platforme educationale.'
+            }, {
+                image: 'images/girl1.jpeg',
+                name: 'Andreea Bostan',
                 title: 'Excelent',
-                content: 'De cand am inceput sa folosesc aceasta platforma rezultatele la scoala s-au imbunatatit si nu mai mananc frigiderul parintilor.'
+                content: 'Proiectul este un site in care poti gasi resurse in domenii diverse Imi place designul, iar interfata este foarte intuitiva. Sunt convinsa ca aceasta platforma are un mare potential. Nu am intampinat nici o problema. Dar ar mai putea fi adaugate cateva lucruri precum recomandare in functie de rating, views etc..'
             }, {
-                image: 'https://i.ytimg.com/vi/ARH5YzT7lqw/hqdefault.jpg',
-                name: 'Martinel Isoscel',
-                title: 'Excelent',
-                content: 'Am inceput sa imi bat degetele in cuie fara sa simt nici o durere. Le sunt recunoscator tuturor profesorilor pentru efortul depus!'
-            }, {
-                image: 'http://www.crestereagainilor.info/wp-content/uploads/2012/07/Gaina-rasa-Sussex.jpg',
-                name: 'Mirabela Găină',
-                title: 'Excelent',
-                content: 'Viata mea s-a schimbat complet. Multumesc iBac pentru faptul ca m-a ajutat sa ma sinucid.'
-            }, {
-                image: 'http://www.i-medic.ro/sites/default/files/plante-medicinale/pastarnac.jpg',
-                name: 'Păstârnac Costel',
-                title: 'Recomand',
-                content: 'Cea mai buna modalitate de a petrece timpul invatand eficient. De cand folosesc aceasta platforma am inceput sa folosesc aceasta platforma.'
-            }, {
-                image: 'https://upload.wikimedia.org/wikipedia/commons/0/01/What_is_your_problem%2C_graffiti_rock_-_Flickr_-_daveynin.jpg',
-                name: 'Bolovan Claudiu',
-                title: 'De viitor',
-                content: 'Cu autorul acestei platforme am reusit sa iau nota mare la bac. Acum sunt spalator de vase. Voi avea un viitor stralucit.'
+                image: 'images/boy2.jpeg',
+                name: 'Dorian Popovici',
+                title: 'Are potential',
+                content: 'E vorba despre ajutarea studentilor sa invete pentru bac, sau doar pentru distractie. Unele pasaje de text au diacritice lipsa. Imi place site-ul din punct de vedere estetic, si mi se pare usor de folosit.'
             }]
         };
     },
@@ -72117,7 +72107,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "container" },
-        _vm._l(_vm.chunkArray(_vm.testimonials, 3), function(
+        _vm._l(_vm.chunkArray(_vm.testimonials, 2), function(
           someTestimonials,
           index
         ) {

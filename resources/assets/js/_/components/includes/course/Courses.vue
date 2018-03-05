@@ -148,7 +148,7 @@
                 startIndex: 0,
                 moreFilters: false,
                 initialFetch: true,
-                displayVertical: localStorage.getItem('displayVertical') === 'true',
+                displayVertical: localStorage.getItem('displayVertical') === null|| localStorage.getItem('displayVertical') === 'true',
                 filters: {
                     author: null,
                     category: null,
