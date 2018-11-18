@@ -17,7 +17,7 @@ post_max_size = 32M
 You will also need to restart apache after that.
 
 ## Database seeding
-After you have `php atisan migrate`d the database run the database seed command
+After you have `php artisan migrate`d the database, run the database seed command
 ```bash
 ~ php artisan db:seed
 ```
